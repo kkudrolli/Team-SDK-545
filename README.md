@@ -4,3 +4,6 @@ An FPGA design project by Kais Kudrolli, Sohil Shah, and DongJoon Park for 18-54
 Our objective is to design a cool system using an FPGA.
 
 DEEP LEARNING IS COOL
+
+DJ
+
