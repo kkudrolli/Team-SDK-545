@@ -28,4 +28,11 @@ Setup:
   make -j4
   sudo make install
 
-Source for setup: http://www.pyimagesearch.com/2015/06/15/install-opencv-3-0-and-python-2-7-on-osx/
+Source for setup: 
+- http://www.pyimagesearch.com/2015/06/15/install-opencv-3-0-and-python-2-7-on-osx/
+
+Sources for code:
+- https://realpython.com/blog/python/face-detection-in-python-using-a-webcam/
+- https://extr3metech.wordpress.com/2012/09/23/convert-photo-to-grayscale-with-python-opencv/
+- http://codeplasma.com/2012/12/03/getting-webcam-images-with-python-and-opencv-2-for-real-this-time/
+
