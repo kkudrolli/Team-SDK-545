@@ -1,8 +1,14 @@
 README for OpenCV/Camera unit code
 
-Software:
-- OpenCV 3.0
-- Python 2.7
+Description:
+This directory contains code for video feed and taking pictures.
+
+Usage:
+python video.py
+
+Tested using:
+- OpenCV 3.0.0
+- Python 2.7.10
 
 Setup:
 - Get OpenCV 3.0 and Python 2.7 (varies based on your OS)
