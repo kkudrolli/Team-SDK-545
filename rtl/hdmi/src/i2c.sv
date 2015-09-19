@@ -1,6 +1,6 @@
 /**************************************************************************
- *	"I2C.sv"
- *	GameBoy SystemVerilog reverse engineering project.
+ *      "I2C.sv"
+ *      GameBoy SystemVerilog reverse engineering project.
  *   Copyright (C) 2014 Sohil Shah
  *
  *   This program is free software: you can redistribute it and/or modify
@@ -15,27 +15,27 @@
  *
  *   You should have received a copy of the GNU General Public License
  *   along with this program.
- *	
- *	Contact Sohil Shah at sohils@cmu.edu with all questions. 
+ *      
+ *      Contact Sohil Shah at sohils@cmu.edu with all questions. 
  **************************************************************************/
 
 `include "constants.sv"
 
 module i2c
-  (input logic 		    clk,
-   input logic 		    rst,
-   output logic        	SCL,
-   output logic	       	ACK,
-   inout tri 	       	SDA,
-   output logic [7:0] 	outA,
-   output logic	       	stop);
+  (input logic              clk,
+   input logic              rst,
+   output logic         SCL,
+   output logic         ACK,
+   inout tri            SDA,
+   output logic [7:0]   outA,
+   output logic         stop);
 
    // State enumeration
-   enum        		logic [1:0] {s_stsp = 2'b10, s_negedge = 2'b11, s_data = 2'b00, s_posedge = 2'b01} curr, next;
+   enum                 logic [1:0] {s_stsp = 2'b10, s_negedge = 2'b11, s_data = 2'b00, s_posedge = 2'b01} curr, next;
    
    // Program counter and micro-code instruction store
-   reg [8:0] 		PC;
-   reg [3:0] 		IS [290:0];
+   reg [8:0]            PC;
+   reg [3:0]            IS [290:0];
    initial
      $readmemh("i2c.hex", IS);
    
@@ -56,20 +56,20 @@ module i2c
    // Next state logic
    always_comb begin
       case (curr)
-	s_stsp: next = s_negedge;
-	s_negedge: next = s_data;
-	s_data: next = s_posedge;
-	s_posedge: next = s_stsp;
+        s_stsp: next = s_negedge;
+        s_negedge: next = s_data;
+        s_data: next = s_posedge;
+        s_posedge: next = s_stsp;
       endcase
    end
    
    // SCL logic
    always_comb begin
       case (curr)
-	s_stsp: SCL = 1'b1;
-	s_negedge: SCL = 1'b1;
-	s_data: SCL = 1'b0;
-	s_posedge: SCL = 1'b0;
+        s_stsp: SCL = 1'b1;
+        s_negedge: SCL = 1'b1;
+        s_data: SCL = 1'b0;
+        s_posedge: SCL = 1'b0;
       endcase
    end
    
@@ -78,49 +78,49 @@ module i2c
    reg RW; // Read high write low
    always @(posedge clk, posedge rst) begin
       if (rst)
-	curr_data <= 1'b1;
+        curr_data <= 1'b1;
       else begin
-	 case (IS[PC][3:1]) 
-	   
-	   i2c_START: begin
-	      if (curr == s_stsp || curr == s_negedge) begin
-		 RW <= 1'b0;
-		 curr_data <= 1'b0;
-	      end else begin
-		 RW <= 1'b0;
-		 curr_data <= 1'b1;
-	      end
-	   end
-	   
-	   i2c_STOP: begin
-	      if (curr == s_stsp || curr == s_negedge) begin
-		 RW <= 1'b0;
-		 curr_data <= 1'b1;
-	      end else begin
-		 RW <= 1'b0;
-		 curr_data <= 1'b0;
-	      end
-	   end
-	   
-	   i2c_READ: begin
-	      RW <= 1'b1;
-	      if (curr == s_negedge)
-		curr_data <= SDA;
-	      else
-		curr_data <= curr_data;
-	   end
-	   
-	   i2c_WRITE: begin
-	      RW <= 1'b0;
-	      curr_data <= IS[PC][0];
-	   end
-	   
-	   default: begin
-	      RW <= RW;
-	      curr_data <= curr_data;
-	   end
-	   
-	 endcase
+         case (IS[PC][3:1]) 
+           
+           i2c_START: begin
+              if (curr == s_stsp || curr == s_negedge) begin
+                 RW <= 1'b0;
+                 curr_data <= 1'b0;
+              end else begin
+                 RW <= 1'b0;
+                 curr_data <= 1'b1;
+              end
+           end
+           
+           i2c_STOP: begin
+              if (curr == s_stsp || curr == s_negedge) begin
+                 RW <= 1'b0;
+                 curr_data <= 1'b1;
+              end else begin
+                 RW <= 1'b0;
+                 curr_data <= 1'b0;
+              end
+           end
+           
+           i2c_READ: begin
+              RW <= 1'b1;
+              if (curr == s_negedge)
+                curr_data <= SDA;
+              else
+                curr_data <= curr_data;
+           end
+           
+           i2c_WRITE: begin
+              RW <= 1'b0;
+              curr_data <= IS[PC][0];
+           end
+           
+           default: begin
+              RW <= RW;
+              curr_data <= curr_data;
+           end
+           
+         endcase
       end
    end
    
@@ -134,19 +134,19 @@ module i2c
    assign ack = (IS[PC-1][3:1] == i2c_READ && IS[PC-1][0] == 1'b1 && curr == s_data) ? ~curr_data : ACK;
    always @(posedge clk, posedge rst)
      if (rst) begin
-	outA <= 8'b0;
-	ACK <= 1'b1;
+        outA <= 8'b0;
+        ACK <= 1'b1;
      end else begin
-	outA <= (shift) ? {outA[6:0], curr_data} : outA;
-	ACK <= ack;
+        outA <= (shift) ? {outA[6:0], curr_data} : outA;
+        ACK <= ack;
      end
 
    always @(posedge clk, posedge rst) begin
       if (rst)
-	stop <= 1'b0;
+        stop <= 1'b0;
       else if (IS[PC][3:1] == i2c_HALT) begin
-	 stop <= 1'b1;
+         stop <= 1'b1;
       end else
-	stop <= 1'b0;
+        stop <= 1'b0;
    end
 endmodule: i2c

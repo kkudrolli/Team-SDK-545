@@ -1,6 +1,6 @@
 /**************************************************************************
- *	"HDMI.sv"
- *	GameBoy SystemVerilog reverse engineering project.
+ *      "HDMI.sv"
+ *      GameBoy SystemVerilog reverse engineering project.
  *   Copyright (C) 2014 Sohil Shah
  *
  *   This program is free software: you can redistribute it and/or modify
@@ -15,22 +15,22 @@
  *
  *   You should have received a copy of the GNU General Public License
  *   along with this program.
- *	
- *	Contact Sohil Shah at sohils@cmu.edu with all questions. 
+ *      
+ *      Contact Sohil Shah at sohils@cmu.edu with all questions. 
  **************************************************************************/
 
 module hdmi
-  (input logic	clk,
-   input logic 	rst,
+  (input logic  clk,
+   input logic  rst,
    output logic hsync,
    output logic vsync,
-   output logic [35:0] data,
+   output logic [] addr,
    output logic de);
    
    // 10'd000 to 10'd858 (exclusive)
-   reg [9:0] 	horiz_count;
+   reg [9:0]    horiz_count;
    // 10'd000 to 10'd525 (exclusive)
-   reg [9:0] 	vert_count;
+   reg [9:0]    vert_count;
    
    always @(posedge clk, posedge rst) begin
       if (rst) begin
@@ -44,9 +44,9 @@ module hdmi
    
    always_comb begin
       if (horiz_count < 10'd138 || vert_count < 10'd045) 
-	   de = 1'b0;
+           de = 1'b0;
       else
-	   de = 1'b1;
+           de = 1'b1;
    end
    
    always_comb begin

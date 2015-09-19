@@ -1,6 +1,6 @@
 /**************************************************************************
- *	"chipinterface.sv"
- *	GameBoy SystemVerilog reverse engineering project.
+ *      "chipinterface.sv"
+ *      GameBoy SystemVerilog reverse engineering project.
  *   Copyright (C) 2014 Sohil Shah
  *
  *   This program is free software: you can redistribute it and/or modify
@@ -15,13 +15,13 @@
  *
  *   You should have received a copy of the GNU General Public License
  *   along with this program.
- *	
- *	Contact Sohil Shah at sohils@cmu.edu with all questions. 
+ *      
+ *      Contact Sohil Shah at sohils@cmu.edu with all questions. 
  **************************************************************************/
 
-/* Module ChipInterface: Connects Cyclone V board ports to datapath
+/* Module ChipInterface: 
  *
- *	WIP
+ *      
  *
  */
 module ChipInterface
@@ -29,51 +29,57 @@ module ChipInterface
   /***  CHIP PORT DECLARATIONS ***/
   /* ------------------------------------------------------------*/
   (
-   // clocks
-   input logic	       	SYSCLK_P, SYSCLK_N,
-   input logic          rst,
-   
-   // hdmi
-   output logic		    I2C_SCL,
-   inout tri 	       	I2C_SDA,
-   output logic [35:0]  HDMI_TX_D,
-   output logic        	HDMI_TX_CLK,
-   output logic        	HDMI_TX_DE,
-   output logic        	HDMI_TX_HS,
-   output logic        	HDMI_TX_VS
+   // Differential clocks
+   input logic         SYSCLK_P, SYSCLK_N,
+   // Full system reset button
+   input logic         rst,
+  
+   // I2C signals
+   output logic        I2C_SCL,
+   inout tri           I2C_SDA,
+
+   // HDMI signals
+   output logic [35:0] HDMI_TX_D,
+   output logic        HDMI_TX_CLK,
+   output logic        HDMI_TX_DE,
+   output logic        HDMI_TX_HS,
+   output logic        HDMI_TX_VS
    );
+
    
    /* ------------------------------------------------------------*/
    /***  Xilinx PLL CLOCKS ***/
    /* ------------------------------------------------------------*/
-
-   logic clk, sysclk;  
-   logic rst;
-
+   logic               clk, sysclk;
+   
    IBUFDS #(.DIFF_TERM("TRUE"), .IBUF_LOW_PWR("TRUE"), .IOSTANDARD("DEFAULT"))
-            clk_ibufds (.O(sysclk), .I(SYSCLK_P), .IB(SYSCLK_N));
-            
+   clk_ibufds (.O(sysclk), .I(SYSCLK_P), .IB(SYSCLK_N));
+   
    clock ck (.clk_in1 (sysclk), .clk_out1 (HDMI_TX_CLK), .clk_out2 (clk), .reset (rst));
-    
+   
 
+   /* ------------------------------------------------------------*/
+   /***  HDMI ENCODER INSTANTIATION ***/
+   /* ------------------------------------------------------------*/
    hdmi encoder (.clk (HDMI_TX_CLK), .rst (rst), .hsync (HDMI_TX_HS), .vsync (HDMI_TX_VS), 
                  .data (HDMI_TX_D), .de (HDMI_TX_DE));
    
    /* ------------------------------------------------------------*/
    /***  HDMI I2C INSTANTIATION ***/
    /* ------------------------------------------------------------*/
-   reg [7:0] outA;
-   reg 	     stop;
+   reg [7:0]           outA;
+   reg                 stop;
 
-   reg [4:0] counter;
-   reg 	     clk_reduced;
-   reg 	     ack;
+   reg [4:0]           counter;
+   reg                 clk_reduced;
+   reg                 ack;
    // Divide 5 MHz clk by 20 to give 250 kHz I2C logic driver. 
    always @(posedge clk) begin
       counter = (counter == 5'd19) ? 4'h0 : counter + 4'h1;
       clk_reduced = (stop) ? 1'b0 : ((counter == 4'h0) ? ~clk_reduced : clk_reduced);
    end
    
-   i2c bus(.stop (stop), .clk (clk_reduced), .rst (rst), .outA (outA), .SDA (I2C_SDA), .SCL (I2C_SCL), .ACK (ack));
+   i2c bus(.stop (stop), .clk (clk_reduced), .rst (rst), .outA (outA), .SDA (I2C_SDA), 
+           .SCL (I2C_SCL), .ACK (ack));
 
 endmodule: ChipInterface
