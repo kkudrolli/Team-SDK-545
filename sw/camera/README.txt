@@ -41,4 +41,4 @@ Sources for code:
 - https://realpython.com/blog/python/face-detection-in-python-using-a-webcam/
 - https://extr3metech.wordpress.com/2012/09/23/convert-photo-to-grayscale-with-python-opencv/
 - http://codeplasma.com/2012/12/03/getting-webcam-images-with-python-and-opencv-2-for-real-this-time/
-
+- OpenCV Docs
