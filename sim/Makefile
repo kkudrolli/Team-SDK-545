@@ -1,10 +1,10 @@
 ###################################################################
 ### Variables
 ###################################################################
-SOURCES := $(wildcard src/*.cpp)
-OBJS := $(SOURCES:.cpp=.o)
-CC = g++
-CFLAGS = -Wall
+SOURCES := $(wildcard src/*.c)
+OBJS := $(SOURCES:.c=.o)
+CC = gcc
+CFLAGS = -Wall -Wextra -Werror
 
 
 ###################################################################
@@ -15,7 +15,7 @@ all: deep_sim
 deep_sim: $(OBJS)
 	$(CC) $(CFLAGS) -o deep_sim $(subst src/,, $(OBJS))
 
-.cpp.o:
+.c.o:
 	$(CC) $(CFLAGS) -c $<
 
 clean:
