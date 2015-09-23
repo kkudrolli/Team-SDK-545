@@ -1,4 +1,6 @@
 #include <stdio.h> 
+#include <stdint.h>
+#include <stdlib.h>
 
 /*
  * Authors: Kais Kudrolli, DJ Park, Sohil Shah
