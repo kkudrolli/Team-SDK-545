@@ -4,7 +4,7 @@
 SOURCES := $(wildcard src/*.c)
 OBJS := $(SOURCES:.c=.o)
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -std=c99
 
 
 ###################################################################

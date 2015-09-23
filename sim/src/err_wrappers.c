@@ -8,9 +8,9 @@
 
 #include "err_wrappers.h"
 
-/********************
- * Helper Functions *
- ********************/
+/*********************
+ * Library Functions *
+ *********************/
 
 /*
  * error_print: Prints an error to stderr.
@@ -23,10 +23,6 @@ void error_print(char *err_msg)
     fprintf(stderr, "%s: %s\n", err_msg, strerror(errno));
     exit(0);
 }
-
-/*********************
- * Library Functions *
- *********************/
 
 /*
  * Fopen: Error wrapper function for fopen.
@@ -148,5 +144,65 @@ void Free(void *ptr)
     free(ptr);
 }
 
+/*
+ * Opendir: Error wrapper for opendir.
+ *
+ * Parameter:
+ *  - filename: string name of directory...oddly enough
+ *
+ * Return value:
+ *  - Pointer to opened directory
+ */
+DIR *Opendir(const char *filename)
+{
+    DIR *dirp;
+
+    if ((dirp = opendir(filename)) == NULL) {
+        error_print("Opendir error");
+    }
+
+    return dirp;
+}
+
+/*
+ * Readdir: Error wrapper for readdir.
+ *
+ * Parameter: 
+ *  - dirp: pointer to directory
+ *
+ * Return value:
+ *  - pointer to struct of directory entry
+ */
+struct dirent *Readdir(DIR *dirp)
+{
+    struct dirent *ep;
+
+    if ((ep = readdir(dirp)) == NULL) {
+        error_print("Readdir error");
+    }
+
+    return ep;
+}
+
+/*
+ * Closedir: Error wrapper for closedir.
+ *
+ * Parameter:
+ *  - dirp: pointer to directory
+ *
+ * Return value:
+ *  - 0 on success
+ *  - -1 on failure, and errno is set
+ */
+int Closedir(DIR *dirp)
+{
+    int n;
+
+    if ((n = closedir(dirp)) == -1) {
+        error_print("Closedir error");
+    }
+
+    return n;
+}
 
 
