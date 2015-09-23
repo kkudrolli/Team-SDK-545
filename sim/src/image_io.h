@@ -12,8 +12,11 @@
 #include <stdint.h>
 #include "err_wrappers.h"
 
+#define IMAGE_IO_DBG
 #define FILE_MODE "rb"
 #define BMP_HEADER_SIZE 54
+#define WIDTH_OFFSET 18
+#define HEIGHT_OFFSET 22
 
 uint8_t *read_bitmap(char *filename);
 
