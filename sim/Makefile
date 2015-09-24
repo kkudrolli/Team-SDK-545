@@ -5,7 +5,7 @@ SRC := src
 SOURCES := $(wildcard src/*.c)
 OBJS := $(patsubst src/%,build/%,$(SOURCES:.c=.o))
 CC = gcc
-CFLAGS = -Wall -Wextra -std=c99
+CFLAGS = -Wall -Wextra -O2 -std=c99
 
 
 ###################################################################

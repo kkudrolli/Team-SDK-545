@@ -53,7 +53,9 @@ typedef struct tile* tile_t;
  */
 tile_t Tile(uint32_t num_neurons, uint32_t num_inputs, uint32_t num_outputs, 
 	    uint32_t (*activation_fn)(uint32_t));
+vector_t evaluate_tile(tile_t tile, vector_t input, vector_t weights);
 void tile_destroy(tile_t tile);
+
 
 /**
  * Constructor and destructor for a neuron. Allocates space for neuron and sets

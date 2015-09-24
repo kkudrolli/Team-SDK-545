@@ -16,6 +16,10 @@
 #include <stdlib.h>
 #include "image_io.h"
 #include "err_wrappers.h"
+#include "tile.h"
+#include "activation_fns.h"
+
+#define NEURONS_PER_TILE (12340)
 
 #define DEBUG
 // TODO: is directory name correct
@@ -23,71 +27,112 @@
  
 int main() 
 {
-    /*
-     * Some pseudocode:
-     *
-     * init I/O
-     * init memory
-     * init T1, T2
-     * get all test image file names
-     *
-     * while (there are test images in the test directory) {
-     *    read in an image using I/O
-     *    send the image into the nn (T1, T2, memory)
-     *    classify the output
-     * }
-     *
-     * free all the things
-     */
+  /*
+   * Some pseudocode:
+   *
+   * init I/O
+   * init memory
+   * init T1, T2
+   * get all test image file names
+   *
+   * while (there are test images in the test directory) {
+   *    read in an image using I/O
+   *    send the image into the nn (T1, T2, memory)
+   *    classify the output
+   * }
+   *
+   * free all the things
+   */
 
-    DIR *dir_ptr;
-    struct dirent *entry_ptr = NULL;
+  DIR *dir_ptr;
+  struct dirent *entry_ptr = NULL;
 
-    /* Open directory */
-    dir_ptr = Opendir(TEST_PICS_DIR);
-    if (!dir_ptr) {
-        error_print("Directory error");
-    }
+  /* Open directory */
+  dir_ptr = Opendir(TEST_PICS_DIR);
+  if (!dir_ptr) {
+    error_print("Directory error");
+  }
 
-    /* 
-     * Loop over entries in directory, read each bitmap file,  and 
-     * launch a neural network call for each bitmap image.
-     */
+  /* 
+   * Loop over entries in directory, read each bitmap file,  and 
+   * launch a neural network call for each bitmap image.
+   */
 #ifdef DEBUG
-    printf("Before while loop\n");
+  printf("Before while loop\n");
 #endif
-    while ((entry_ptr = readdir(dir_ptr))) {
-        /* Get name of file and append it to directory name */
+  while ((entry_ptr = readdir(dir_ptr))) {
+    /* Get name of file and append it to directory name */
 #ifdef DEBUG
-        printf("In while loop\n");
+    printf("In while loop\n");
 #endif
-        char *filename = entry_ptr->d_name;
-        printf("Filename: %s\n", filename);
+    char *filename = entry_ptr->d_name;
+    printf("Filename: %s\n", filename);
 #ifdef DEBUG
-        if (filename[0] != '.') {
-            printf("After setting filename\n");
+    if (filename[0] != '.') {
+      printf("After setting filename\n");
 #endif
-            size_t path_len = strlen(filename) + strlen(TEST_PICS_DIR) + 1;
-            printf("Path Length: %zu\n", path_len);
+      size_t path_len = strlen(filename) + strlen(TEST_PICS_DIR) + 1;
+      printf("Path Length: %zu\n", path_len);
 #ifdef DEBUG
-            printf("After set path len\n");
+      printf("After set path len\n");
 #endif
-            char full_path[path_len];
+      char full_path[path_len];
 #ifdef DEBUG
-            printf("After initialize full path\n");
+      printf("After initialize full path\n");
 #endif
-            snprintf(full_path, path_len, "%s%s", TEST_PICS_DIR, filename);
+      snprintf(full_path, path_len, "%s%s", TEST_PICS_DIR, filename);
 #ifdef DEBUG 
-            printf("Full path: %s\n", full_path);
+      printf("Full path: %s\n", full_path);
 #endif
 
-            /* Read bitmap data */
-            uint8_t *image_data = read_bitmap(full_path);
-            // TODO: call network here...
-            Free(image_data);
-        }
+      /* Read bitmap data */
+      uint8_t *image_data = read_bitmap(full_path);
+      // TODO: call network here...
+      Free(image_data);
     }
+  }
 
-    Closedir(dir_ptr);
-    return 0;
+  Closedir(dir_ptr);
+
+
+  tile_t tile_in = Tile(NEURONS_PER_TILE, NEURONS_PER_TILE, NEURONS_PER_TILE, &linear_interpolation);
+  tile_t tile_h1 = Tile(NEURONS_PER_TILE, NEURONS_PER_TILE, NEURONS_PER_TILE, &linear_interpolation);
+  tile_t tile_h2 = Tile(NEURONS_PER_TILE, NEURONS_PER_TILE, NEURONS_PER_TILE, &linear_interpolation);
+  tile_t tile_out = Tile(NEURONS_PER_TILE, NEURONS_PER_TILE, NEURONS_PER_TILE, &linear_interpolation);
+
+  vector_t input = Vector(NEURONS_PER_TILE);
+  vector_t weights = Vector(NEURONS_PER_TILE);
+  vector_t weights1 = Vector(NEURONS_PER_TILE);
+  vector_t weights2 = Vector(NEURONS_PER_TILE);
+  vector_t weights3 = Vector(NEURONS_PER_TILE);
+
+  for (uint32_t i = 0; i < NEURONS_PER_TILE; ++i) {
+    input->data[i] = i;
+    weights->data[i] = NEURONS_PER_TILE - i;
+  }
+
+
+  vector_t data = evaluate_tile(tile_in, input, weights);
+  vector_t data1 = evaluate_tile(tile_h1, data, weights);
+  vector_t data2 = evaluate_tile(tile_h2, data1, weights);
+  vector_t data3 = evaluate_tile(tile_out, data2, weights);
+
+  for (uint32_t i = 0; i < data3->length; i++) {
+    printf("Output[%d] -> 0x%x\n", i, data3->data[i]);
+  }
+    
+  vector_destroy(data);
+  vector_destroy(data1);
+  vector_destroy(data2);
+  vector_destroy(data3);
+  vector_destroy(input);
+  vector_destroy(weights);
+  vector_destroy(weights1);
+  vector_destroy(weights2);
+  vector_destroy(weights3);
+  tile_destroy(tile_in);
+  tile_destroy(tile_h1);
+  tile_destroy(tile_h2);
+  tile_destroy(tile_out);
+  return 0;
 }

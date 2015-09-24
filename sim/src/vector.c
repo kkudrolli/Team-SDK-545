@@ -14,6 +14,7 @@
 vector_t Vector(size_t length) {
   vector_t v = Malloc(sizeof(struct vector));  
   v->data = Calloc(length, sizeof(uint32_t));
+  v->length = length;
 
   for (size_t i = 0; i < length; ++i) {
     v->data[i] = 0;

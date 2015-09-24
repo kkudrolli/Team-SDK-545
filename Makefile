@@ -52,7 +52,7 @@ sim:
 	@echo -e "\n$bDone! Simulator can be found as: ./deep_sim$n\n"
 
 .PHONY: rtl
-rtl: 
+verilog: 
 	@echo -e "$gCompiling verilog rtl simulator: deep_sim$n"
 	$(MAKE) -C rtl/
 	@echo -e "\n$bDone! Simulator can be found as: ./simv$n\n"
