@@ -8,6 +8,22 @@
 
 #include "vector.h"
 
+/**
+ * Basic structure of a neuron. Contains the following parameters:
+ *     -> input_len: size of the vector being input to this particular neuron. 
+ *     -> activation_fn: the function that defines how a particular input
+ *                       value is mapped to a particular output value by 
+ *                       this neuron
+ *     
+ * The neuron sub unit represents an individual neuron in a tile. This unit is
+ * responsible for computing an activation dependent on the input vector and
+ * a weight file. 
+ */
+struct neuron {
+  uint32_t input_len;
+  uint32_t (*activation_fn)(uint32_t);
+};
+typedef struct neuron* neuron_t;
 
 /**
  * Basic structure of a tile. Contains the following parameters:
@@ -28,23 +44,6 @@ struct tile {
   neuron_t *neurons;
 };
 typedef struct tile* tile_t;
-
-/**
- * Basic structure of a neuron. Contains the following parameters:
- *     -> input_len: size of the vector being input to this particular neuron. 
- *     -> activation_fn: the function that defines how a particular input
- *                       value is mapped to a particular output value by 
- *                       this neuron
- *     
- * The neuron sub unit represents an individual neuron in a tile. This unit is
- * responsible for computing an activation dependent on the input vector and
- * a weight file. 
- */
-struct neuron {
-  uint32_t input_len;
-  uint32_t (*activation_fn)(uint32_t);
-};
-typedef struct neuron* neuron_t;
 
 
 /**

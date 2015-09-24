@@ -10,6 +10,11 @@
 #ifndef _VECTOR_H
 #define _VECTOR_H
 
+#include <stdint.h>
+#include <stdlib.h>
+#include <assert.h>
+#include "err_wrappers.h"
+
 /**
  * Basic structure of a vector. Contains the following parameters:
  *     -> length: number of elements in vector
@@ -35,7 +40,9 @@ void vector_destroy(vector_t vector);
 /**
  * Basic operations with vectors. 
  */
+/** Vector dot product */
 vector_t vmult(vector_t v1, vector_t v2);
-vector_t vadd(vector_t v1, vector_t v2);
+/** Vector multiply-add: dot product then sum values */
+uint32_t vmad(vector_t v1, vector_t v2);
 
 #endif

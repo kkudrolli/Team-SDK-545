@@ -6,18 +6,55 @@
  *
  */
 
+#include "vector.h"
 
-vector_t Vector(size_t length, size_t elem_size) {
+/**
+ * Constructor for a vector. 
+ */
+vector_t Vector(size_t length) {
+  vector_t v = Malloc(sizeof(struct vector));  
+  v->data = Calloc(length, sizeof(uint32_t));
 
+  for (size_t i = 0; i < length; ++i) {
+    v->data[i] = 0;
+  }
+
+  return v;
 }
 
-vector_t vmult(vector_t v1, vector_t v2) {
-
-}
-
-vector_t vadd(vector_t v1, vector_t v2) {
-
-}
+/**
+ * destructor for a vector. 
+ */
 void vector_destroy(vector_t vector) {
+  Free(vector->data);
+  Free(vector);
+}
 
+/**
+ * Dot product of two vectors. 
+ * NOTE: Remember to free returned vector. 
+ */
+vector_t vmult(vector_t v1, vector_t v2) {
+  assert(v1->length == v2->length);
+  vector_t v = Vector(v1->length);
+  
+  for (size_t i = 0; i < v->length; ++i) {
+    v->data[i] = v1->data[i] * v2->data[i];
+  }
+  
+  return v;
+}
+
+/**
+ * Sum of elements of dot product of two vectors. 
+ */
+uint32_t vmad(vector_t v1, vector_t v2) {
+  assert(v1->length == v2->length);
+  uint32_t sum = 0;
+  
+  for (size_t i = 0; i < v1->length; ++i) {
+    sum += v1->data[i] * v2->data[i];
+  }
+  
+  return sum;
 }
