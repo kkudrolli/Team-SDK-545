@@ -21,7 +21,7 @@
 // TODO: is directory name correct
 #define TEST_PICS_DIR "../sw/camera/pics/"
  
-int main(int argc, char **argv) 
+int main() 
 {
     /*
      * Some pseudocode:

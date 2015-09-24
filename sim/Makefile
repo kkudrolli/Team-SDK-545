@@ -1,8 +1,9 @@
 ###################################################################
 ### Variables
 ###################################################################
+SRC := src
 SOURCES := $(wildcard src/*.c)
-OBJS := $(SOURCES:.c=.o)
+OBJS := $(patsubst src/%,build/%,$(SOURCES:.c=.o))
 CC = gcc
 CFLAGS = -Wall -Wextra -std=c99
 
@@ -13,10 +14,13 @@ CFLAGS = -Wall -Wextra -std=c99
 all: deep_sim
 
 deep_sim: $(OBJS)
-	$(CC) $(CFLAGS) -o deep_sim $(subst src/,, $(OBJS))
+	$(CC) $(CFLAGS) -o deep_sim $(OBJS)
 
-.c.o:
-	$(CC) $(CFLAGS) -c $<
+build/%.o: $(SRC)/%.c build
+	$(CC) $(CFLAGS) -c $< -o $@
+
+build: 
+	mkdir -p $@
 
 clean:
-	rm -rf deep_sim *.o *~ src/*~
+	rm -rf deep_sim *.o *~ src/*~ build

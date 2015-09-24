@@ -6,37 +6,64 @@
  *
  */
 
+#include "vector.h"
 
-struct vector {
-  size_t length;
-  size_t elem_size;
-  void *data;
-};
-typedef struct vector* vector_t;
-
-struct tile {
-  uint32_t num_neurons;
-  uint32_t num_inputs;
-  uint32_t num_outputs;
-  vector_t neurons;
-};
-typedef struct tile* tile_t;
-
+/**
+ * Basic structure of a neuron. Contains the following parameters:
+ *     -> input_len: size of the vector being input to this particular neuron. 
+ *     -> activation_fn: the function that defines how a particular input
+ *                       value is mapped to a particular output value by 
+ *                       this neuron
+ *     
+ * The neuron sub unit represents an individual neuron in a tile. This unit is
+ * responsible for computing an activation dependent on the input vector and
+ * a weight file. 
+ */
 struct neuron {
   uint32_t input_len;
   uint32_t (*activation_fn)(uint32_t);
 };
 typedef struct neuron* neuron_t;
 
+/**
+ * Basic structure of a tile. Contains the following parameters:
+ *     -> num_neurons: number of neurons associated with this layer
+ *     -> num_inputs: number of inputs from previous tile to this layer
+ *     -> num_outputs: number of outputs from this layer to next tile
+ *     -> neurons: array of neuron objects that perform the computation
+ *                 for this layer
+ * 
+ * The tile major unit represents a computational layer in the neural network. 
+ * A tile contains neurons fully connected to the inputs and outputs a 
+ * vector of every neuron's evaluated activation function. 
+ */
+struct tile {
+  uint32_t num_neurons;
+  uint32_t num_inputs;
+  uint32_t num_outputs;
+  neuron_t *neurons;
+};
+typedef struct tile* tile_t;
+
+
+/**
+ * Constructor and destructor for a tile. Allocates space for neurons and sets
+ * parameters. tile_destroy is used to free allocated space and destroy 
+ * tile and its neurons. 
+ */
 tile_t Tile(uint32_t num_neurons, uint32_t num_inputs, uint32_t num_outputs, 
 	    uint32_t (*activation_fn)(uint32_t));
 void tile_destroy(tile_t tile);
 
+/**
+ * Constructor and destructor for a neuron. Allocates space for neuron and sets
+ * parameters. neuron_destroy is used to free allocated space of neuron. 
+ */
 neuron_t Neuron(uint32_t input_len, uint32_t (*activation_fn)(uint32_t));
-uint32_t evaluate_neuron(neuron_t neuron, vector_t input, vector_t weights);
 void neuron_destroy(neuron_t neuron);
 
-vector_t Vector(size_t length, size_t elem_size);
-vector_t vmult(vector_t v1, vector_t v2);
-vector_t vadd(vector_t v1, vector_t v2);
-void vector_destroy(vector_t vector);
+/**
+ * Evaluates the activation function for a neuron on the weighted sum of 
+ * its given inputs. 
+ */
+uint32_t evaluate_neuron(neuron_t neuron, vector_t input, vector_t weights);
