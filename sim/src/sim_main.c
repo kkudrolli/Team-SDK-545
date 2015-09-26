@@ -19,7 +19,7 @@
 #include "tile.h"
 #include "activation_fns.h"
 
-#define NEURONS_PER_TILE (12340)
+#define NEURONS_PER_TILE (1<<12)
 
 #define DEBUG
 // TODO: is directory name correct
@@ -31,7 +31,7 @@ int main()
    * Some pseudocode:
    *
    * init I/O
-   * init memory
+   * init clear memory
    * init T1, T2
    * get all test image file names
    *
