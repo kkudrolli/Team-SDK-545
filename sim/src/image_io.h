@@ -11,6 +11,7 @@
 
 #include <stdint.h>
 #include "err_wrappers.h"
+#include "tile.h"
 
 #define IMAGE_IO_DBG
 #define FILE_MODE "rb"
@@ -18,8 +19,11 @@
 #define DATA_SIZE_OFFSET 34
 #define BYTE_SIZE 8
 #define WORD_BYTES 4
+#define NUM_BYTES_IN_PIX 3
+#define HEIGHT_OFFSET 18
+#define WIDTH_OFFSET 22
 
-uint8_t *read_bitmap(char *filename);
+read_bitmap(char *filename);
 
 
 #endif

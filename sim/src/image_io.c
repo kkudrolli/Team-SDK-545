@@ -14,7 +14,8 @@
 
 /*
  * read_word: Read a data word (4 bytes) from a byte array starting
- *            at a given offset.
+ *            at a given offset. The word is in little endian and must
+ *            be flipped.
  * 
  * Parameters:
  *  - arr: byte array
@@ -23,11 +24,11 @@
  * Return value:
  *  - data word
  */
-uint32_t read_word(uint8_t *arr, uint32_t offset)
+uint32_t read_word_le(uint8_t *arr, uint32_t offset)
 {
-    uint32_t word = (uint32_t) arr[offset];
+    uint32_t word = (uint32_t) arr[offset + WORD_BYTES - 1];
 
-    for (int i = 1; i < WORD_BYTES; i++) { 
+    for (int i = WORD_BYTES - 2; i >= 0; i--) { 
         word = (word << BYTE_SIZE) + arr[offset + i]; 
     }
 
@@ -70,29 +71,64 @@ uint8_t *read_bitmap(char *filename)
 #endif
    
     /* Extract width, height from header */
-    // TODO: data size = 0
-    uint32_t data_size = read_word(header, DATA_SIZE_OFFSET);
+    uint32_t height = read_word_le(header, HEIGHT_OFFSET);
+    uint32_t width = read_word_le(header, WIDTH_OFFSET);
+    uint32_t num_pix = height * width;
+    uint32_t num_bytes = num_pix * NUM_BYTES_IN_PIX;
 
 #ifdef IMAGE_IO_DBG
-    printf("Data size: %d\n", data_size);
+    printf("Height: %d\n", height);
+    printf("Width: %d\n", width);
+    printf("Number of pixels: %d\n", num_pix);
+    printf("Number of bytes in image: %d\n", num_bytes);
 #endif
 
     /* Read the image data */
-    uint8_t *image_data = (uint8_t*) Calloc(data_size, sizeof(uint8_t)); 
-    if (fread(image_data, data_size, sizeof(uint32_t), image) < data_size) {
+    uint8_t *image_data = (uint8_t*) Calloc(num_bytes, sizeof(uint8_t)); 
+    uint32_t actual_size;
+    if ((actual_size = fread(image_data, 1, num_bytes, image)) < num_bytes) {
 #ifdef IMAGE_IO_DBG
-        printf("Error: Couldn't read image data\n");
+        printf("Error: Couldn't read image data, actual_size: %d\n", actual_size);
 #endif
         Free(image_data);
         Fclose(image);
+#ifdef IMAGE_IO_DBG
+        printf("Before null return\n");
+#endif
         return NULL;
     }
 
-    // TODO: remove 3/4 of bits
+#ifdef IMAGE_IO_DBG
+    printf("DATA: \n[ ");
+    for (uint32_t i = 0; i < num_bytes; i++) {
+        printf("%x ", image_data[i]);
+    }
+    printf("]\n");
+#endif
+
+    // TODO: put this in a function
+    uint8_t *reduced_image = (uint8_t*) Calloc(num_bytes / NUM_BYTES_IN_PIX, sizeof(uint8_t)); 
+    uint32_t reduced_count = 0;
+    for (uint32_t i = 0; i < num_bytes; i++) {
+        if (i % NUM_BYTES_IN_PIX == 0) {
+            reduced_image[reduced_count] = image_data[i];
+            reduced_count++;
+        } 
+    }
+
+#ifdef IMAGE_IO_DBG
+    printf("REDUCED DATA: \n[ ");
+    for (uint32_t i = 0; i < num_bytes / NUM_BYTES_IN_PIX; i++) {
+        printf("%x ", reduced_image[i]);
+    }
+    printf("]\n");
+#endif
+    // TODO: remove every 10th byte
     // TODO: typedef output or change to vector?
     
     Fclose(image);
-    return image_data;
+    Free(image_data); 
+    return reduced_image;
 }
 
 
