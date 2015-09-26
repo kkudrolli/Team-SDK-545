@@ -22,7 +22,7 @@ CAPTURE_KEY = ' '
 QUIT_KEY = 'q'
 NORM_MIN = 0
 NORM_MAX = 255
-DOWN_AMOUNT = 4
+DOWN_AMOUNT = 5 # Manually tuned 
 
 """
 get_video: Reads a frame of video input from the camera and returns it.
@@ -133,16 +133,6 @@ def get_key(original, cap_dir):
     else:
         return False
       
-    """
-    if (cv2.waitKey(WAIT_KEY_TIME) & 0xFF == ord(CAPTURE_KEY)):
-        capture(original, cap_dir)
-        return False
-    elif (cv2.waitKey(WAIT_KEY_TIME) & 0xFF == ord(QUIT_KEY)):
-        return True
-    else:
-        return False
-
-    """
 """
 feed: Function that runs a feed loop to continuously capture and display
       video frames.

@@ -4,7 +4,6 @@
  * Description: Implements a function that initialize 3-d weight array.
  */
 #include "weights.h"
-#include "err_wrappers.c"
 
 /**
  * NOTE: Remember to free returned array.

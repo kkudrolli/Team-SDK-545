@@ -5,9 +5,13 @@
  *
  */
 
+#ifndef _WEIGHTS_H_
+#define _WEIGHTS_H_
+
 #include <stdarg.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include "err_wrappers.h"
 
 /**
  * Initialize 3-d weight array when given the number of layers and
@@ -32,3 +36,4 @@
  *
  */
 int*** initWeights (int numLayers, ...);
+#endif

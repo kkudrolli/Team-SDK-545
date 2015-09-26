@@ -88,13 +88,16 @@ int main()
       /* Read bitmap data */
       uint8_t *image_data = read_bitmap(full_path);
       // TODO: call network here...
+#ifdef DEBUG 
+      printf("After read bitmap\n");
+#endif
       Free(image_data);
     }
   }
 
   Closedir(dir_ptr);
 
-
+/*
   tile_t tile_in = Tile(NEURONS_PER_TILE, NEURONS_PER_TILE, NEURONS_PER_TILE, &linear_interpolation);
   tile_t tile_h1 = Tile(NEURONS_PER_TILE, NEURONS_PER_TILE, NEURONS_PER_TILE, &linear_interpolation);
   tile_t tile_h2 = Tile(NEURONS_PER_TILE, NEURONS_PER_TILE, NEURONS_PER_TILE, &linear_interpolation);
@@ -134,5 +137,6 @@ int main()
   tile_destroy(tile_h1);
   tile_destroy(tile_h2);
   tile_destroy(tile_out);
+  */
   return 0;
 }

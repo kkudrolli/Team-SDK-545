@@ -5,15 +5,15 @@
  *
  */
 
+#ifndef _ERR_WRAPPERS_H_
+#define _ERR_WRAPPERS_H_
+
 #include <stdio.h>
 #include <string.h>
 #include <errno.h>
 #include <stdlib.h>
 #include <sys/types.h>
 #include <dirent.h>
-
-#ifndef _ERR_WRAPPERS_H
-#define _ERR_WRAPPERS_H
 
 /* Function defintions */
 void error_print(char *err_msg);
