@@ -11,9 +11,10 @@
 
 #include <stdint.h>
 #include "err_wrappers.h"
-#include "tile.h"
+#include "vector.h"
+#include "assert.h"
 
-#define IMAGE_IO_DBG
+//#define IMAGE_IO_DBG
 #define FILE_MODE "rb"
 #define BMP_HEADER_SIZE 54
 #define DATA_SIZE_OFFSET 34
@@ -23,7 +24,7 @@
 #define HEIGHT_OFFSET 18
 #define WIDTH_OFFSET 22
 
-read_bitmap(char *filename);
+vector_t read_bitmap(char *filename);
 
 
 #endif
