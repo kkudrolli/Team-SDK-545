@@ -41,7 +41,7 @@ int*** initWeights (int numLayers, ... ){
  */
 void freeWeightsArray(int*** array, int numLayers, ...){
     va_list arguments;
-    int i,j,k,numNeurons_prevLayer,numNeurons_currLayer;
+    int i,j,numNeurons_prevLayer,numNeurons_currLayer;
 
     va_start (arguments, numLayers);
     for (i=0; i < numLayers; i++){
