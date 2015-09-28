@@ -19,9 +19,9 @@
 #include "tile.h"
 #include "activation_fns.h"
 
-#define NEURONS_PER_TILE (1<<12)
+#define NEURONS_PER_TILE (1<<10)
 
-#define DEBUG
+//#define DEBUG
 // TODO: is directory name correct
 #define TEST_PICS_DIR "../sw/camera/pics/"
  
@@ -67,8 +67,8 @@ int main()
 #endif
     char *filename = entry_ptr->d_name;
     printf("Filename: %s\n", filename);
-#ifdef DEBUG
     if (filename[0] != '.') {
+#ifdef DEBUG
       printf("After setting filename\n");
 #endif
       size_t path_len = strlen(filename) + strlen(TEST_PICS_DIR) + 1;
@@ -97,7 +97,12 @@ int main()
 
   Closedir(dir_ptr);
 
-/*
+
+  return 0;
+}
+
+
+vector_t evaluate_image (vector_t image) {
   tile_t tile_in = Tile(NEURONS_PER_TILE, NEURONS_PER_TILE, NEURONS_PER_TILE, &linear_interpolation);
   tile_t tile_h1 = Tile(NEURONS_PER_TILE, NEURONS_PER_TILE, NEURONS_PER_TILE, &linear_interpolation);
   tile_t tile_h2 = Tile(NEURONS_PER_TILE, NEURONS_PER_TILE, NEURONS_PER_TILE, &linear_interpolation);
@@ -114,16 +119,11 @@ int main()
     weights->data[i] = NEURONS_PER_TILE - i;
   }
 
-
   vector_t data = evaluate_tile(tile_in, input, weights);
   vector_t data1 = evaluate_tile(tile_h1, data, weights);
   vector_t data2 = evaluate_tile(tile_h2, data1, weights);
   vector_t data3 = evaluate_tile(tile_out, data2, weights);
 
-  for (uint32_t i = 0; i < data3->length; i++) {
-    printf("Output[%d] -> 0x%x\n", i, data3->data[i]);
-  }
-    
   vector_destroy(data);
   vector_destroy(data1);
   vector_destroy(data2);
@@ -137,6 +137,4 @@ int main()
   tile_destroy(tile_h1);
   tile_destroy(tile_h2);
   tile_destroy(tile_out);
-  */
-  return 0;
 }
