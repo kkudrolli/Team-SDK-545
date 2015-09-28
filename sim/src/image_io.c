@@ -46,9 +46,9 @@ uint32_t read_word_le(uint8_t *arr, uint32_t offset)
  *  - filename: string name of bitmap file to be read
  *
  * Return value:
- *  - byte array of bitmap data
+ *  - byte vector of bitmap data
  */
-uint8_t *read_bitmap(char *filename)
+vector_t read_bitmap(char *filename)
 {
 #ifdef IMAGE_IO_DBG
     printf("In read_bitmap, filename: %s\n", filename);
@@ -124,11 +124,30 @@ uint8_t *read_bitmap(char *filename)
     printf("]\n");
 #endif
     // TODO: remove every 10th byte
-    // TODO: typedef output or change to vector?
     
+    vector_t vec = Vector((size_t) (num_bytes / NUM_BYTES_IN_PIX));
+    uint32_t *vector_data = (uint32_t*) Calloc(num_bytes / NUM_BYTES_IN_PIX, 
+                                              sizeof(uint32_t));
+    /* Copy over image data into vectro data and set the vector's data */
+    for (uint32_t i = 0; i < num_bytes / NUM_BYTES_IN_PIX; i++) {
+        vector_data[i] = (uint32_t) reduced_image[i];
+    }
+    assert(vec);
+    vec->data = vector_data;
+    
+#ifdef IMAGE_IO_DBG
+    printf("VECTOR DATA: Length: %zu\n[ ", vec->length);
+    assert(vec->data);
+    for (uint32_t i = 0; i < num_bytes / NUM_BYTES_IN_PIX; i++) {
+        printf("%x ", vec->data[i]);
+    }
+    printf("]\n");
+#endif
+
     Fclose(image);
     Free(image_data); 
-    return reduced_image;
+    Free(reduced_image); 
+    return vec;
 }
 
 

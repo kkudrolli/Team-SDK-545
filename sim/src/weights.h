@@ -36,4 +36,11 @@
  *
  */
 int*** initWeights (int numLayers, ...);
+
+/**
+ * This function frees the weight array.
+ * freeWeightsArray(weightsArray,3,2,4,3)
+ * would free the memory allocated for weightsArray.
+ */
+void freeWeightsArray(int*** array, int numLayers, ...);
 #endif

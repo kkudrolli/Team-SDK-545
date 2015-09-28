@@ -22,7 +22,6 @@
 #define NEURONS_PER_TILE (1<<10)
 
 //#define DEBUG
-// TODO: is directory name correct
 #define TEST_PICS_DIR "../sw/camera/pics/"
  
 int main() 
@@ -31,7 +30,7 @@ int main()
    * Some pseudocode:
    *
    * init I/O
-   * init clear memory
+   * init memory
    * init T1, T2
    * get all test image file names
    *
@@ -66,14 +65,14 @@ int main()
     printf("In while loop\n");
 #endif
     char *filename = entry_ptr->d_name;
-    printf("Filename: %s\n", filename);
     if (filename[0] != '.') {
 #ifdef DEBUG
+      printf("Filename: %s\n", filename);
       printf("After setting filename\n");
 #endif
       size_t path_len = strlen(filename) + strlen(TEST_PICS_DIR) + 1;
-      printf("Path Length: %zu\n", path_len);
 #ifdef DEBUG
+      printf("Path Length: %zu\n", path_len);
       printf("After set path len\n");
 #endif
       char full_path[path_len];
@@ -86,12 +85,12 @@ int main()
 #endif
 
       /* Read bitmap data */
-      uint8_t *image_data = read_bitmap(full_path);
+      vector_t image_data = read_bitmap(full_path);
       // TODO: call network here...
 #ifdef DEBUG 
       printf("After read bitmap\n");
 #endif
-      Free(image_data);
+      vector_destroy(image_data);
     }
   }
 
