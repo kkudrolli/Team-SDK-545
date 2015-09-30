@@ -13,6 +13,9 @@
 #include <stdlib.h>
 #include "err_wrappers.h"
 
+
+typedef vector_t** weightfile_t;
+
 /**
  * Initialize 3-d weight array when given the number of layers and
  * the number of neurons for each layer. The first argument is the
@@ -35,12 +38,15 @@
  *   - - - ]
  *
  */
-int*** initWeights (int numLayers, ...);
+weightfile_t initWeights (uint32_t numLayers, ...);
+
+vector_t getWeights(weightfile_t weightfile, uint32_t layer, uint32_t dest_neuron);
+void setWeights(weightfile_t weightfile, uint32_t layer, uint32_t dest_neuron, vector_t weights);
 
 /**
  * This function frees the weight array.
  * freeWeightsArray(weightsArray,3,2,4,3)
  * would free the memory allocated for weightsArray.
  */
-void freeWeightsArray(int*** array, int numLayers, ...);
+void freeWeightsArray(weightfile_t weightfile, uint32_t numLayers, ...);
 #endif
