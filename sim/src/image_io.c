@@ -92,9 +92,6 @@ vector_t read_bitmap(char *filename)
 #endif
         Free(image_data);
         Fclose(image);
-#ifdef IMAGE_IO_DBG
-        printf("Before null return\n");
-#endif
         return NULL;
     }
 
