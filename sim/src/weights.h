@@ -12,35 +12,39 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "err_wrappers.h"
+#include "vector.h"
+
+typedef vector_t** weightfile_t;
 
 /**
- * Initialize 3-d weight array when given the number of layers and
+ * Initializes weightfile when given the number of layers and
  * the number of neurons for each layer. The first argument is the
  * number of layers, and the rest of the arguments are the number of 
  * neurons for each layer. For instance, when there are
  * three layers and each has 2,4,3 neurons respectively, the command
  * for this function would be
- * int*** weightsArray = initWeights(3,2,4,3).
+ * weightfile_t weightfile = initWeights(3,2,4,3).
  *
- * weightsArray[1][0][2] accesses the 1st layer's 0th neuron's weight 
- * value to next layer's 2nd neuron.
- *
- * 0th layer to 1st layer, 2x4 array
- * [ - - - -   
- *   - - - - ] 
- * 1st layer to 2nd layer, 4x3 array
- * [ - - *
- *   - - -
- *   - - -
- *   - - - ]
+ * getWeights(weightfile,1,0)->data accesses all the weight values to the 1st layer's 0th neuron.
+ * getWeights(weightfile,1,0)->length should be same as the number of neurons in 0th layer
  *
  */
-int*** initWeights (int numLayers, ...);
+weightfile_t initWeights(uint32_t numLayers, ...);
 
 /**
- * This function frees the weight array.
- * freeWeightsArray(weightsArray,3,2,4,3)
- * would free the memory allocated for weightsArray.
+ * Returns wegiht vector for dest_neuron.
  */
-void freeWeightsArray(int*** array, int numLayers, ...);
+vector_t getWeights(weightfile_t weightfile, uint32_t layer, uint32_t dest_neuron);
+
+/**
+ * Sets weights for dest_neuron.
+ */
+void setWeights(weightfile_t weightfile, uint32_t layer, uint32_t dest_neuron, vector_t weights);
+
+/**
+ * This function frees the weightfile.
+ * freeWeightfile(weightfile,3,2,4,3)
+ * would free the memory allocated for weightfile.
+ */
+void freeWeightfile(weightfile_t weightfile, uint32_t numLayers, ...);
 #endif
