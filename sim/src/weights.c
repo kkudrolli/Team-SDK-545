@@ -76,7 +76,7 @@ void freeWeightfile(weightfile_t weightfile, uint32_t numLayers, ...){
 }
 
 
-int main(){
+/*int main(){
     weightfile_t weightfile = initWeights(3,2,4,3);
     vector_t weights = Vector(2);
     weights->data[0] = 1;
@@ -91,4 +91,4 @@ int main(){
     vector_destroy(weights);
  
     return 0;
-}
+}*/

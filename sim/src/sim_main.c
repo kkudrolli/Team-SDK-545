@@ -14,6 +14,7 @@
 #include <stdio.h>
 #include <stdint.h>
 #include <stdlib.h>
+#include "mnist.h"
 #include "image_io.h"
 #include "err_wrappers.h"
 #include "tile.h"
@@ -21,7 +22,7 @@
 
 #define NEURONS_PER_TILE (1<<10)
 
-//#define DEBUG
+#define DEBUG
 #define TEST_PICS_DIR "../sw/camera/pics/"
 
 int main() 
@@ -42,6 +43,25 @@ int main()
      *
      * free all the things
      */
+
+    vector_t *mnist_data = read_images(0);
+#ifdef DEBUG
+    printf("MNIST IMAGE:\n[ ");
+    for (size_t i = 0; i < mnist_data[0]->length; i++) {
+        printf("%x ", mnist_data[0]->data[i]);
+    }
+    printf("]\n");
+#endif
+
+    vector_t mnist_labels = read_labels(0);
+#ifdef DEBUG
+    printf("MNIST LABEL:\n[ ");
+    for (size_t i = 0; i < mnist_labels->length; i++) {
+        printf("%x ", mnist_labels->data[i]);
+    }
+    printf("]\n");
+#endif
+
 
     DIR *dir_ptr;
     struct dirent *entry_ptr = NULL;
@@ -76,7 +96,7 @@ int main()
 }
 
 
-vector_t evaluate_image (vector_t image) {
+/*vector_t evaluate_image (vector_t image) {
   tile_t tile_in = Tile(NEURONS_PER_TILE, NEURONS_PER_TILE, NEURONS_PER_TILE, &linear_interpolation);
   tile_t tile_h1 = Tile(NEURONS_PER_TILE, NEURONS_PER_TILE, NEURONS_PER_TILE, &linear_interpolation);
   tile_t tile_h2 = Tile(NEURONS_PER_TILE, NEURONS_PER_TILE, NEURONS_PER_TILE, &linear_interpolation);
@@ -111,4 +131,4 @@ vector_t evaluate_image (vector_t image) {
   tile_destroy(tile_h1);
   tile_destroy(tile_h2);
   tile_destroy(tile_out);
-}
+}*/
