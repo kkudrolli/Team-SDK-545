@@ -1,4 +1,5 @@
 *.o
 *.bmp
 deep_sim
+*.swp
 

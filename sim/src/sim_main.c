@@ -44,20 +44,20 @@ int main()
      * free all the things
      */
 
-    vector_t *mnist_data = read_images(0);
+    mnist_images_t mnist_data = read_images(0);
 #ifdef DEBUG
     printf("MNIST IMAGE:\n[ ");
-    for (size_t i = 0; i < mnist_data[0]->length; i++) {
-        printf("%x ", mnist_data[0]->data[i]);
+    for (size_t i = 0; i < mnist_data->imgs[0]->length; i++) {
+        printf("%x ", mnist_data->imgs[0]->data[i]);
     }
     printf("]\n");
 #endif
 
-    vector_t mnist_labels = read_labels(0);
+    mnist_labels_t mnist_labels = read_labels(0);
 #ifdef DEBUG
     printf("MNIST LABEL:\n[ ");
-    for (size_t i = 0; i < mnist_labels->length; i++) {
-        printf("%x ", mnist_labels->data[i]);
+    for (size_t i = 0; i < mnist_labels->labels->length; i++) {
+        printf("%x ", mnist_labels->labels->data[i]);
     }
     printf("]\n");
 #endif
