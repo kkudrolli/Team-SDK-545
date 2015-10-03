@@ -47,7 +47,6 @@ void setWeights(weightfile_t weightfile, uint32_t layer, uint32_t dest_neuron, v
     assert(layer>0);
     assert(sizeof(weightfile[layer-1][dest_neuron])==sizeof(weights));
 
-    //weightfile[layer-1][dest_neuron] = weights;
     for(size_t i = 0; i < weights->length; i++){
         weightfile[layer-1][dest_neuron]->data[i] = weights->data[i];
     }
@@ -75,25 +74,4 @@ void freeWeightfile(weightfile_t weightfile, uint32_t numLayers, ...){
     }
     va_end (arguments);
     Free(weightfile); // free node
-}
-
-
-int main(){
-    weightfile_t weightfile = initWeights(3,2,4,3);
-    vector_t weights = Vector(2);
-    weights->data[0] = 1;
-    weights->data[1] = 2;
-    //weightfile[0][0]->data[0]=2;
-    //weightfile[0][0]->data[1]=3;
-
-
-    setWeights(weightfile,1,0,weights);
-    printf("getWeights(weightfile, 1, 0)->data[0]=%d\n",getWeights(weightfile, 1, 0)->data[0]);
-    printf("getWeights(weightfile, 1, 0)->data[1]=%d\n",getWeights(weightfile, 1, 0)->data[1]);
-
-    freeWeightfile(weightfile,3,2,4,3);
-
-    vector_destroy(weights);
- 
-    return 0;
 }
