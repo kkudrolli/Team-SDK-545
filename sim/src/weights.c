@@ -47,8 +47,9 @@ void setWeights(weightfile_t weightfile, uint32_t layer, uint32_t dest_neuron, v
     assert(layer>0);
     assert(sizeof(weightfile[layer-1][dest_neuron])==sizeof(weights));
 
-    //weightfile[layer-1][dest_neuron] = weights;
-    weightfile[layer-1][dest_neuron]->data = weights->data;
+    for(size_t i = 0; weights->length; i++){
+        weightfile[layer-1][dest_neuron]->data[i] = weights->data[i];
+    }
     weightfile[layer-1][dest_neuron]->length = weights->length;
 }
 
