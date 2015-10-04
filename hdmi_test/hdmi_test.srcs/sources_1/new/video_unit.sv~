@@ -1,0 +1,35 @@
+`timescale 1ns / 1ps
+//////////////////////////////////////////////////////////////////////////////////
+// Company: 
+// Engineer: 
+// 
+// Create Date: 09/21/2015 11:34:45 AM
+// Design Name: 
+// Module Name: video_unit
+// Project Name: 
+// Target Devices: 
+// Tool Versions: 
+// Description: 
+// 
+// Dependencies: 
+// 
+// Revision:
+// Revision 0.01 - File Created
+// Additional Comments:
+// 
+//////////////////////////////////////////////////////////////////////////////////
+
+
+module video_unit(
+    input logic clk, 
+    input logic de,
+    input logic [18:0] addr,
+    output logic [35:0] data
+    );
+    
+    logic [31:0] dout;
+    framebuffer_wrapper fb(.addra (), .addrb (addr), .clka (), .clkb (clk), .dina (), .doutb (dout), .ena (), .enb (de));
+    
+    assign data = {{4'b0, dout[23:16]}, {4'b0, dout[15:8]}, {4'b0, dout[7:0]}};
+    
+endmodule

@@ -1,0 +1,69 @@
+Copyright 1986-2015 Xilinx, Inc. All Rights Reserved.
+----------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2015.2 (lin64) Build 1266856 Fri Jun 26 16:35:25 MDT 2015
+| Date         : Sun Oct  4 15:45:16 2015
+| Host         : graces.andrew.local.cmu.edu running 64-bit Red Hat Enterprise Linux Server release 7.1 (Maipo)
+| Command      : report_control_sets -verbose -file ChipInterface_control_sets_placed.rpt
+| Design       : ChipInterface
+| Device       : xc7vx485t
+----------------------------------------------------------------------------------------------------------------
+
+Control Set Information
+
+Table of Contents
+-----------------
+1. Summary
+2. Flip-Flop Distribution
+3. Detailed Control Set Information
+
+1. Summary
+----------
+
++-------------------------------------------------------------------+-------+
+|                               Status                              | Count |
++-------------------------------------------------------------------+-------+
+| Number of unique control sets                                     |    16 |
+| Minimum Number of register sites lost to control set restrictions |    79 |
++-------------------------------------------------------------------+-------+
+
+
+2. Flip-Flop Distribution
+-------------------------
+
++--------------+-----------------------+------------------------+-----------------+--------------+
+| Clock Enable | Synchronous Set/Reset | Asynchronous Set/Reset | Total Registers | Total Slices |
++--------------+-----------------------+------------------------+-----------------+--------------+
+| No           | No                    | No                     |               2 |            2 |
+| No           | No                    | Yes                    |              29 |           13 |
+| No           | Yes                   | No                     |               5 |            1 |
+| Yes          | No                    | No                     |              40 |           12 |
+| Yes          | No                    | Yes                    |              59 |           19 |
+| Yes          | Yes                   | No                     |              18 |            5 |
++--------------+-----------------------+------------------------+-----------------+--------------+
+
+
+3. Detailed Control Set Information
+-----------------------------------
+
++-------------------------------------+--------------------------+--------------------+------------------+----------------+
+|             Clock Signal            |       Enable Signal      |  Set/Reset Signal  | Slice Load Count | Bel Load Count |
++-------------------------------------+--------------------------+--------------------+------------------+----------------+
+|  ck/clock_i/clk_wiz_0/inst/clk_out2 |                          |                    |                1 |              1 |
+|  clk_reduced                        |                          |                    |                1 |              1 |
+|  uart_sampling_clk_BUFG             |                          | rst_IBUF           |                1 |              3 |
+|  uart_sampling_clk_BUFG             | sample_count[3]_i_1_n_0  | rst_IBUF           |                1 |              4 |
+|  uart_sampling_clk_BUFG             | bit_count[3]_i_1_n_0     |                    |                1 |              4 |
+|  clk_reduced                        |                          | rst_IBUF           |                3 |              4 |
+|  ck/clock_i/clk_wiz_0/inst/clk_out2 |                          | counter[4]_i_1_n_0 |                1 |              5 |
+|  uart_sampling_clk_BUFG             | uart_byte[7]_i_1_n_0     | rst_IBUF           |                1 |              8 |
+|  uart_sampling_clk_BUFG             | addr_w[0]_i_1_n_0        |                    |                3 |              9 |
+|  ck/clock_i/clk_wiz_0/inst/clk_out1 |                          | rst_IBUF           |                5 |             10 |
+|  ck/clock_i/clk_wiz_0/inst/clk_out1 | encoder/vert_count0      | rst_IBUF           |                6 |             10 |
+|  sysclk_BUFG                        |                          | rst_IBUF           |                4 |             12 |
+|  uart_sampling_clk_BUFG             | addr_w[0]_i_1_n_0        | addr_w[18]_i_1_n_0 |                5 |             18 |
+|  clk_reduced                        | bus/curr_data            | rst_IBUF           |                7 |             18 |
+|  ck/clock_i/clk_wiz_0/inst/clk_out1 | encoder/addr[18]_i_1_n_0 | rst_IBUF           |                4 |             19 |
+|  ck/clock_i/clk_wiz_0/inst/clk_out1 | encoder/HDMI_TX_DE_OBUF  |                    |                8 |             27 |
++-------------------------------------+--------------------------+--------------------+------------------+----------------+
+
+

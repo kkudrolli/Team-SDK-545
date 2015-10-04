@@ -1,0 +1,495 @@
+#-----------------------------------------------------------
+# Vivado v2015.2 (64-bit)
+# SW Build 1266856 on Fri Jun 26 16:35:25 MDT 2015
+# IP Build 1264090 on Wed Jun 24 14:22:01 MDT 2015
+# Start of session at: Mon Sep 21 10:57:35 2015
+# Process ID: 4920
+# Log file: /afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/vivado.log
+# Journal file: /afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/vivado.jou
+#-----------------------------------------------------------
+start_gui
+open_project hdmi_test.xpr
+Scanning sources...
+Finished scanning sources
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1704] No user IP repositories specified
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository '/afs/ece/support/xilinx/xilinx.release/Vivado/data/ip'.
+open_project: Time (s): cpu = 00:00:14 ; elapsed = 00:00:06 . Memory (MB): peak = 5937.555 ; gain = 99.922 ; free physical = 5405 ; free virtual = 19020
+open_hw
+connect_hw_server -url localhost:3121
+INFO: [Labtools 27-2285] Connecting to hw_server url TCP:localhost:3121
+INFO: [Labtools 27-2222] Launching hw_server...
+INFO: [Labtools 27-2221] Launch Output:
+
+****** Xilinx hw_server v2015.2
+  **** Build date : Jun 26 2015-16:42:45
+    ** Copyright 1986-1999, 2001-2015 Xilinx, Inc. All Rights Reserved.
+
+
+current_hw_target [get_hw_targets */xilinx_tcf/Xilinx/000010ef936801]
+set_property PARAM.FREQUENCY 6000000 [get_hw_targets */xilinx_tcf/Xilinx/000010ef936801]
+open_hw_target
+INFO: [Labtoolstcl 44-466] Opening hw_target localhost:3121/xilinx_tcf/Xilinx/000010ef936801
+set_property PROGRAM.FILE {/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.runs/impl_1/ChipInterface.bit} [lindex [get_hw_devices] 0]
+set_property PROBES.FILE {/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.runs/impl_1/debug_nets.ltx} [lindex [get_hw_devices] 0]
+current_hw_device [lindex [get_hw_devices] 0]
+refresh_hw_device [lindex [get_hw_devices] 0]
+INFO: [Labtools 27-1434] Device xc7vx485t (JTAG device index = 0) is programmed with a design that has no supported debug core(s) in it.
+WARNING: [Labtools 27-3123] The debug hub core was not detected at User Scan Chain 1 or 3.
+Resolution: 
+1. Make sure the clock connected to the debug hub (dbg_hub) core is a free running clock and is active OR
+2. Manually launch hw_server with -e "set xsdb-user-bscan <C_USER_SCAN_CHAIN scan_chain_number>" to detect the debug hub at User Scan Chain of 2 or 4. To determine the user scan chain setting, open the implemented design and use: get_property C_USER_SCAN_CHAIN [get_debug_cores dbg_hub].
+WARNING: [Labtools 27-1974] Mismatch between the design programmed into the device xc7vx485t_0 and the probes file /afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.runs/impl_1/debug_nets.ltx.
+The device design has 0 ILA core(s) and 0 VIO core(s). The probes file has 1 ILA core(s) and 0 VIO core(s).
+Resolution: 
+1. Reprogram device with the correct programming file and associated probes file OR
+2. Goto device properties and associate the correct probes file with the programming file already programmed in the device.
+set_property PROBES.FILE {/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.runs/impl_1/debug_nets.ltx} [lindex [get_hw_devices] 0]
+set_property PROGRAM.FILE {/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.runs/impl_1/ChipInterface.bit} [lindex [get_hw_devices] 0]
+program_hw_devices [lindex [get_hw_devices] 0]
+INFO: [Labtools 27-3164] End of startup status: HIGH
+program_hw_devices: Time (s): cpu = 00:00:46 ; elapsed = 00:00:43 . Memory (MB): peak = 6037.309 ; gain = 0.000 ; free physical = 5381 ; free virtual = 18996
+refresh_hw_device [lindex [get_hw_devices] 0]
+INFO: [Labtools 27-2302] Device xc7vx485t (JTAG device index = 0) is programmed with a design that has 1 ILA core(s).
+display_hw_ila_data [ get_hw_ila_data hw_ila_data_1]
+set_property CONTROL.TRIGGER_MODE TRIG_IN_ONLY [get_hw_ilas hw_ila_1]
+set_property CONTROL.TRIGGER_MODE BASIC_ONLY [get_hw_ilas hw_ila_1]
+run_hw_ila hw_ila_1
+INFO: [Labtools 27-1964] The ILA core 'hw_ila_1' trigger was armed at 2015-Sep-21 11:01:26
+run_hw_ila hw_ila_1 -trigger_now
+INFO: [Labtools 27-1964] The ILA core 'hw_ila_1' trigger was armed at 2015-Sep-21 11:01:28
+set_property CONTROL.DATA_DEPTH 4 [get_hw_ilas hw_ila_1]
+set_property CONTROL.DATA_DEPTH 2 [get_hw_ilas hw_ila_1]
+run_hw_ila hw_ila_1
+INFO: [Labtools 27-1964] The ILA core 'hw_ila_1' trigger was armed at 2015-Sep-21 11:07:50
+write_hw_ila_data my_hw_ila_data_file.ila [upload_hw_ila_data hw_ila_1]
+WARNING: [Labtools 27-157] hw_ila [hw_ila_1] stopped. No data to upload.
+/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/my_hw_ila_data_file.ila
+run_hw_ila hw_ila_1 -trigger_now
+INFO: [Labtools 27-1964] The ILA core 'hw_ila_1' trigger was armed at 2015-Sep-21 11:09:16
+run_hw_ila hw_ila_1
+INFO: [Labtools 27-1964] The ILA core 'hw_ila_1' trigger was armed at 2015-Sep-21 11:09:19
+set_property CONTROL.TRIGGER_MODE BASIC_OR_TRIG_IN [get_hw_ilas hw_ila_1]
+run_hw_ila hw_ila_1
+INFO: [Labtools 27-1964] The ILA core 'hw_ila_1' trigger was armed at 2015-Sep-21 11:09:49
+run_hw_ila hw_ila_1 -trigger_now
+INFO: [Labtools 27-1964] The ILA core 'hw_ila_1' trigger was armed at 2015-Sep-21 11:09:50
+run_hw_ila hw_ila_1 -trigger_now
+INFO: [Labtools 27-1964] The ILA core 'hw_ila_1' trigger was armed at 2015-Sep-21 11:09:51
+run_hw_ila hw_ila_1
+INFO: [Labtools 27-1964] The ILA core 'hw_ila_1' trigger was armed at 2015-Sep-21 11:09:58
+run_hw_ila hw_ila_1 -trigger_now
+INFO: [Labtools 27-1964] The ILA core 'hw_ila_1' trigger was armed at 2015-Sep-21 11:10:00
+run_hw_ila hw_ila_1 -trigger_now
+INFO: [Labtools 27-1964] The ILA core 'hw_ila_1' trigger was armed at 2015-Sep-21 11:10:02
+run_hw_ila hw_ila_1 -trigger_now
+INFO: [Labtools 27-1964] The ILA core 'hw_ila_1' trigger was armed at 2015-Sep-21 11:11:38
+open_bd_design {/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/ILA/ILA.bd}
+Adding component instance block -- xilinx.com:ip:ila:5.1 - ila_0
+Successfully read diagram <ILA> from BD file </afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/ILA/ILA.bd>
+ERROR: [Labtools 27-3175] Target jsn-DLC9LP-000010ef936801 is no longer available.
+Please use disconnect_hw_server to close the current server connection. Check cable connectivity and that the target board is powered up.
+Restart the hw_server application running on host localhost, port 3121 and then use connect_hw_server to re-establish connection to target.
+close_hw_target
+INFO: [Labtoolstcl 44-464] Closing hw_target localhost:3121/xilinx_tcf/Xilinx/000010ef936801
+open_run synth_1 -name synth_1
+Design is defaulting to impl run constrset: constrs_1
+Design is defaulting to synth run part: xc7vx485tffg1761-2
+INFO: [Netlist 29-17] Analyzing 56 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [Project 1-479] Netlist was created with Vivado 2015.2
+INFO: [Device 21-403] Loading part xc7vx485tffg1761-2
+INFO: [Project 1-570] Preparing netlist for logic optimization
+Parsing XDC File [/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/ILA/ip/ILA_ila_0_0/ila_v5_1/constraints/ila.xdc] for cell 'ila/ILA_i/ila_0'
+Finished Parsing XDC File [/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/ILA/ip/ILA_ila_0_0/ila_v5_1/constraints/ila.xdc] for cell 'ila/ILA_i/ila_0'
+Parsing XDC File [/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/clock/ip/clock_clk_wiz_0_0/clock_clk_wiz_0_0_board.xdc] for cell 'ck/clock_i/clk_wiz_0/inst'
+Finished Parsing XDC File [/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/clock/ip/clock_clk_wiz_0_0/clock_clk_wiz_0_0_board.xdc] for cell 'ck/clock_i/clk_wiz_0/inst'
+Parsing XDC File [/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/clock/ip/clock_clk_wiz_0_0/clock_clk_wiz_0_0.xdc] for cell 'ck/clock_i/clk_wiz_0/inst'
+INFO: [Timing 38-35] Done setting XDC timing constraints. [/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/clock/ip/clock_clk_wiz_0_0/clock_clk_wiz_0_0.xdc:56]
+INFO: [Timing 38-2] Deriving generated clocks [/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/clock/ip/clock_clk_wiz_0_0/clock_clk_wiz_0_0.xdc:56]
+get_clocks: Time (s): cpu = 00:00:12 ; elapsed = 00:00:12 . Memory (MB): peak = 7061.090 ; gain = 592.773 ; free physical = 4528 ; free virtual = 18155
+Finished Parsing XDC File [/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/clock/ip/clock_clk_wiz_0_0/clock_clk_wiz_0_0.xdc] for cell 'ck/clock_i/clk_wiz_0/inst'
+Parsing XDC File [/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/constrs_1/new/pin.xdc]
+Finished Parsing XDC File [/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/constrs_1/new/pin.xdc]
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+INFO: [Project 1-111] Unisim Transformation Summary:
+  A total of 37 instances were transformed.
+  CFGLUT5 => CFGLUT5 (SRLC32E, SRL16E): 36 instances
+  IOBUF => IOBUF (IBUF, OBUFT): 1 instances
+
+open_run: Time (s): cpu = 00:00:36 ; elapsed = 00:00:26 . Memory (MB): peak = 7160.617 ; gain = 1066.098 ; free physical = 4334 ; free virtual = 17954
+disconnect_hw_server localhost:3121
+connect_hw_server -url localhost:3121
+INFO: [Labtools 27-2285] Connecting to hw_server url TCP:localhost:3121
+ERROR: [Labtoolstcl 44-494] There is no active target available for server at localhost:3121.
+ Targets(s) "jsn-DLC9LP-000010ef936801" may be locked by another hw_server.
+open_bd_design {/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/ILA/ILA.bd}
+remove_files /afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/ILA/hdl/ILA_wrapper.v
+file delete -force /afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/ILA/hdl/ILA_wrapper.v
+update_compile_order -fileset sources_1
+open_bd_design {/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/framebuffer/framebuffer.bd}
+Adding component instance block -- xilinx.com:ip:blk_mem_gen:8.2 - blk_mem_gen_0
+Successfully read diagram <framebuffer> from BD file </afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/framebuffer/framebuffer.bd>
+startgroup
+create_bd_port -dir I -from 12 -to 0 addra
+connect_bd_net [get_bd_pins /blk_mem_gen_0/addra] [get_bd_ports addra]
+WARNING: [BD 41-1306] The connection to interface pin /blk_mem_gen_0/addra is being overridden by the user. This pin will not be connected as a part of interface connection BRAM_PORTA
+endgroup
+startgroup
+create_bd_port -dir I clka
+connect_bd_net [get_bd_pins /blk_mem_gen_0/clka] [get_bd_ports clka]
+WARNING: [BD 41-1306] The connection to interface pin /blk_mem_gen_0/clka is being overridden by the user. This pin will not be connected as a part of interface connection BRAM_PORTA
+endgroup
+startgroup
+create_bd_port -dir I -from 31 -to 0 dina
+connect_bd_net [get_bd_pins /blk_mem_gen_0/dina] [get_bd_ports dina]
+WARNING: [BD 41-1306] The connection to interface pin /blk_mem_gen_0/dina is being overridden by the user. This pin will not be connected as a part of interface connection BRAM_PORTA
+endgroup
+startgroup
+create_bd_port -dir I ena
+connect_bd_net [get_bd_pins /blk_mem_gen_0/ena] [get_bd_ports ena]
+WARNING: [BD 41-1306] The connection to interface pin /blk_mem_gen_0/ena is being overridden by the user. This pin will not be connected as a part of interface connection BRAM_PORTA
+endgroup
+startgroup
+create_bd_port -dir I -from 0 -to 0 wea
+connect_bd_net [get_bd_pins /blk_mem_gen_0/wea] [get_bd_ports wea]
+WARNING: [BD 41-1306] The connection to interface pin /blk_mem_gen_0/wea is being overridden by the user. This pin will not be connected as a part of interface connection BRAM_PORTA
+endgroup
+startgroup
+create_bd_port -dir I -from 12 -to 0 addrb
+connect_bd_net [get_bd_pins /blk_mem_gen_0/addrb] [get_bd_ports addrb]
+WARNING: [BD 41-1306] The connection to interface pin /blk_mem_gen_0/addrb is being overridden by the user. This pin will not be connected as a part of interface connection BRAM_PORTB
+endgroup
+startgroup
+create_bd_port -dir I clkb
+connect_bd_net [get_bd_pins /blk_mem_gen_0/clkb] [get_bd_ports clkb]
+WARNING: [BD 41-1306] The connection to interface pin /blk_mem_gen_0/clkb is being overridden by the user. This pin will not be connected as a part of interface connection BRAM_PORTB
+endgroup
+startgroup
+create_bd_port -dir O -from 31 -to 0 doutb
+connect_bd_net [get_bd_pins /blk_mem_gen_0/doutb] [get_bd_ports doutb]
+WARNING: [BD 41-1306] The connection to interface pin /blk_mem_gen_0/doutb is being overridden by the user. This pin will not be connected as a part of interface connection BRAM_PORTB
+endgroup
+startgroup
+create_bd_port -dir I enb
+connect_bd_net [get_bd_pins /blk_mem_gen_0/enb] [get_bd_ports enb]
+WARNING: [BD 41-1306] The connection to interface pin /blk_mem_gen_0/enb is being overridden by the user. This pin will not be connected as a part of interface connection BRAM_PORTB
+endgroup
+set_property location {99 294} [get_bd_ports doutb]
+set_property location {169 374} [get_bd_ports enb]
+set_property location {108 235} [get_bd_ports doutb]
+set_property location {110 261} [get_bd_ports enb]
+set_property location {105 249} [get_bd_ports enb]
+WARNING: [IP_Flow 19-4067] Ignoring invalid widget type specified checkbox.Providing a default widget
+WARNING: [IP_Flow 19-4067] Ignoring invalid widget type specified checkbox.Providing a default widget
+startgroup
+set_property -dict [list CONFIG.Write_Depth_A {262144}] [get_bd_cells blk_mem_gen_0]
+endgroup
+WARNING: [IP_Flow 19-4067] Ignoring invalid widget type specified checkbox.Providing a default widget
+WARNING: [IP_Flow 19-4067] Ignoring invalid widget type specified checkbox.Providing a default widget
+startgroup
+set_property -dict [list CONFIG.Write_Depth_A {262145}] [get_bd_cells blk_mem_gen_0]
+endgroup
+WARNING: [IP_Flow 19-4067] Ignoring invalid widget type specified checkbox.Providing a default widget
+WARNING: [IP_Flow 19-4067] Ignoring invalid widget type specified checkbox.Providing a default widget
+startgroup
+set_property -dict [list CONFIG.Write_Depth_A {262144}] [get_bd_cells blk_mem_gen_0]
+endgroup
+WARNING: [IP_Flow 19-4067] Ignoring invalid widget type specified checkbox.Providing a default widget
+WARNING: [IP_Flow 19-4067] Ignoring invalid widget type specified checkbox.Providing a default widget
+startgroup
+set_property -dict [list CONFIG.Use_Byte_Write_Enable {true} CONFIG.Byte_Size {8} CONFIG.Write_Width_A {16} CONFIG.Read_Width_A {16} CONFIG.Write_Width_B {16} CONFIG.Read_Width_B {16}] [get_bd_cells blk_mem_gen_0]
+endgroup
+WARNING: [IP_Flow 19-4067] Ignoring invalid widget type specified checkbox.Providing a default widget
+WARNING: [IP_Flow 19-4067] Ignoring invalid widget type specified checkbox.Providing a default widget
+startgroup
+set_property -dict [list CONFIG.Write_Width_A {32} CONFIG.Read_Width_A {32} CONFIG.Write_Width_B {32} CONFIG.Read_Width_B {32}] [get_bd_cells blk_mem_gen_0]
+endgroup
+delete_bd_objs [get_bd_nets enb_1] [get_bd_ports enb]
+delete_bd_objs [get_bd_nets blk_mem_gen_0_doutb] [get_bd_ports doutb]
+delete_bd_objs [get_bd_nets clkb_1] [get_bd_ports clkb]
+delete_bd_objs [get_bd_nets addrb_1] [get_bd_ports addrb]
+delete_bd_objs [get_bd_nets wea_1] [get_bd_ports wea]
+delete_bd_objs [get_bd_nets ena_1] [get_bd_ports ena]
+delete_bd_objs [get_bd_nets dina_1] [get_bd_ports dina]
+delete_bd_objs [get_bd_nets clka_1] [get_bd_ports clka]
+delete_bd_objs [get_bd_nets addra_1] [get_bd_ports addra]
+startgroup
+create_bd_port -dir I -from 17 -to 0 addra
+connect_bd_net [get_bd_pins /blk_mem_gen_0/addra] [get_bd_ports addra]
+WARNING: [BD 41-1306] The connection to interface pin /blk_mem_gen_0/addra is being overridden by the user. This pin will not be connected as a part of interface connection BRAM_PORTA
+endgroup
+startgroup
+create_bd_port -dir I -from 31 -to 0 dina
+connect_bd_net [get_bd_pins /blk_mem_gen_0/dina] [get_bd_ports dina]
+WARNING: [BD 41-1306] The connection to interface pin /blk_mem_gen_0/dina is being overridden by the user. This pin will not be connected as a part of interface connection BRAM_PORTA
+endgroup
+startgroup
+create_bd_port -dir I clka
+connect_bd_net [get_bd_pins /blk_mem_gen_0/clka] [get_bd_ports clka]
+WARNING: [BD 41-1306] The connection to interface pin /blk_mem_gen_0/clka is being overridden by the user. This pin will not be connected as a part of interface connection BRAM_PORTA
+endgroup
+startgroup
+create_bd_port -dir I ena
+connect_bd_net [get_bd_pins /blk_mem_gen_0/ena] [get_bd_ports ena]
+WARNING: [BD 41-1306] The connection to interface pin /blk_mem_gen_0/ena is being overridden by the user. This pin will not be connected as a part of interface connection BRAM_PORTA
+endgroup
+startgroup
+create_bd_intf_port -mode Slave -vlnv xilinx.com:interface:bram_rtl:1.0 BRAM_PORTA
+connect_bd_intf_net [get_bd_intf_pins blk_mem_gen_0/BRAM_PORTA] [get_bd_intf_ports BRAM_PORTA]
+endgroup
+undo
+INFO: [Common 17-17] undo 'endgroup'
+INFO: [Common 17-17] undo 'connect_bd_intf_net [get_bd_intf_pins blk_mem_gen_0/BRAM_PORTA] [get_bd_intf_ports BRAM_PORTA]'
+INFO: [Common 17-17] undo 'create_bd_intf_port -mode Slave -vlnv xilinx.com:interface:bram_rtl:1.0 BRAM_PORTA'
+INFO: [Common 17-17] undo 'startgroup'
+startgroup
+create_bd_port -dir I -from 17 -to 0 addrb
+connect_bd_net [get_bd_pins /blk_mem_gen_0/addrb] [get_bd_ports addrb]
+WARNING: [BD 41-1306] The connection to interface pin /blk_mem_gen_0/addrb is being overridden by the user. This pin will not be connected as a part of interface connection BRAM_PORTB
+endgroup
+startgroup
+create_bd_intf_port -mode Slave -vlnv xilinx.com:interface:bram_rtl:1.0 BRAM_PORTB
+connect_bd_intf_net [get_bd_intf_pins blk_mem_gen_0/BRAM_PORTB] [get_bd_intf_ports BRAM_PORTB]
+endgroup
+undo
+INFO: [Common 17-17] undo 'endgroup'
+INFO: [Common 17-17] undo 'connect_bd_intf_net [get_bd_intf_pins blk_mem_gen_0/BRAM_PORTB] [get_bd_intf_ports BRAM_PORTB]'
+INFO: [Common 17-17] undo 'create_bd_intf_port -mode Slave -vlnv xilinx.com:interface:bram_rtl:1.0 BRAM_PORTB'
+INFO: [Common 17-17] undo 'startgroup'
+startgroup
+create_bd_port -dir I clkb
+connect_bd_net [get_bd_pins /blk_mem_gen_0/clkb] [get_bd_ports clkb]
+WARNING: [BD 41-1306] The connection to interface pin /blk_mem_gen_0/clkb is being overridden by the user. This pin will not be connected as a part of interface connection BRAM_PORTB
+endgroup
+startgroup
+create_bd_port -dir O -from 31 -to 0 doutb
+connect_bd_net [get_bd_pins /blk_mem_gen_0/doutb] [get_bd_ports doutb]
+WARNING: [BD 41-1306] The connection to interface pin /blk_mem_gen_0/doutb is being overridden by the user. This pin will not be connected as a part of interface connection BRAM_PORTB
+endgroup
+startgroup
+create_bd_port -dir I enb
+connect_bd_net [get_bd_pins /blk_mem_gen_0/enb] [get_bd_ports enb]
+WARNING: [BD 41-1306] The connection to interface pin /blk_mem_gen_0/enb is being overridden by the user. This pin will not be connected as a part of interface connection BRAM_PORTB
+endgroup
+generate_target all [get_files  /afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/framebuffer/framebuffer.bd]
+Verilog Output written to : /afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/framebuffer/hdl/framebuffer.v
+Verilog Output written to : /afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/framebuffer/hdl/framebuffer_wrapper.v
+Wrote  : </afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/framebuffer/framebuffer.bd> 
+INFO: [IP_Flow 19-1686] Generating 'Instantiation Template' target for IP 'framebuffer_blk_mem_gen_0_1'...
+INFO: [IP_Flow 19-1686] Generating 'Synthesis' target for IP 'framebuffer_blk_mem_gen_0_1'...
+WARNING: [IP_Flow 19-1687] The current project language is set to Verilog. However IP 'framebuffer_blk_mem_gen_0_1' does not support 'Verilog Synthesis' output products, delivering 'VHDL Synthesis' output products instead.
+INFO: [IP_Flow 19-1686] Generating 'Simulation' target for IP 'framebuffer_blk_mem_gen_0_1'...
+INFO: [IP_Flow 19-1686] Generating 'Miscellaneous' target for IP 'framebuffer_blk_mem_gen_0_1'...
+INFO: [IP_Flow 19-1686] Generating 'Change Log' target for IP 'framebuffer_blk_mem_gen_0_1'...
+INFO: [BD 41-1029] Generation completed for the IP Integrator block blk_mem_gen_0 .
+INFO: [BD 41-1379] This design does not contain any processor.
+Exporting to file /afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/framebuffer/hw_handoff/framebuffer.hwh
+Generated Block Design Tcl file /afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/framebuffer/hw_handoff/framebuffer_bd.tcl
+Generated Hardware Definition File /afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/framebuffer/hdl/framebuffer.hwdef
+make_wrapper -files [get_files /afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/framebuffer/framebuffer.bd] -top
+add_files -norecurse /afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/framebuffer/hdl/framebuffer_wrapper.v
+update_compile_order -fileset sources_1
+close [ open /afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/new/video_unit.sv w ]
+add_files /afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/new/video_unit.sv
+update_compile_order -fileset sources_1
+create_bd_design "pcie"
+Wrote  : </afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/pcie/pcie.bd> 
+update_compile_order -fileset sources_1
+startgroup
+create_bd_cell -type ip -vlnv xilinx.com:ip:pcie_7x:3.1 pcie_7x_0
+INFO: [xilinx.com:ip:pcie_7x:3.1-2148] pcie_pcie_7x_0_0: 11 - false 
+INFO: [xilinx.com:ip:pcie_7x:3.1-2148] pcie_pcie_7x_0_0: 11 - false 
+INFO: [xilinx.com:ip:pcie_7x:3.1-2148] pcie_pcie_7x_0_0: 11 - false 
+INFO: [xilinx.com:ip:pcie_7x:3.1-2148] pcie_pcie_7x_0_0: 11 - false 
+INFO: [xilinx.com:ip:pcie_7x:3.1-2148] pcie_pcie_7x_0_0: 11 - false 
+endgroup
+set_property location {1 166 135} [get_bd_cells pcie_7x_0]
+delete_bd_objs [get_bd_cells pcie_7x_0]
+startgroup
+create_bd_cell -type ip -vlnv xilinx.com:ip:axi_pcie:2.6 axi_pcie_0
+endgroup
+set_property location {1 184 59} [get_bd_cells axi_pcie_0]
+delete_bd_objs [get_bd_cells axi_pcie_0]
+close_bd_design [get_bd_designs pcie]
+remove_files /afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/pcie/pcie.bd
+file delete -force /afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/pcie
+remove_files /afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/ILA/ILA.bd
+file delete -force /afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/ILA
+update_compile_order -fileset sources_1
+save_bd_design
+Wrote  : </afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/framebuffer/framebuffer.bd> 
+update_compile_order -fileset sources_1
+open_bd_design {/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/framebuffer/framebuffer.bd}
+WARNING: [IP_Flow 19-4067] Ignoring invalid widget type specified checkbox.Providing a default widget
+WARNING: [IP_Flow 19-4067] Ignoring invalid widget type specified checkbox.Providing a default widget
+startgroup
+set_property -dict [list CONFIG.Write_Depth_A {32768}] [get_bd_cells blk_mem_gen_0]
+endgroup
+startgroup
+create_bd_port -dir I -from 3 -to 0 wea
+connect_bd_net [get_bd_pins /blk_mem_gen_0/wea] [get_bd_ports wea]
+WARNING: [BD 41-1306] The connection to interface pin /blk_mem_gen_0/wea is being overridden by the user. This pin will not be connected as a part of interface connection BRAM_PORTA
+endgroup
+WARNING: [IP_Flow 19-4067] Ignoring invalid widget type specified checkbox.Providing a default widget
+WARNING: [IP_Flow 19-4067] Ignoring invalid widget type specified checkbox.Providing a default widget
+startgroup
+set_property -dict [list CONFIG.Write_Depth_A {524288}] [get_bd_cells blk_mem_gen_0]
+endgroup
+generate_target all [get_files  /afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/framebuffer/framebuffer.bd]
+CRITICAL WARNING: [BD 41-1228] Width mismatch when connecting input pin '/blk_mem_gen_0/addra'(19) to net 'addra_1'(18) - Only lower order bits will be connected, and other input bits of this pin will be left unconnected.
+CRITICAL WARNING: [BD 41-1228] Width mismatch when connecting input pin '/blk_mem_gen_0/addrb'(19) to net 'addrb_1'(18) - Only lower order bits will be connected, and other input bits of this pin will be left unconnected.
+Verilog Output written to : /afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/framebuffer/hdl/framebuffer.v
+Verilog Output written to : /afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/framebuffer/hdl/framebuffer_wrapper.v
+Wrote  : </afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/framebuffer/framebuffer.bd> 
+INFO: [IP_Flow 19-1686] Generating 'Instantiation Template' target for IP 'framebuffer_blk_mem_gen_0_1'...
+INFO: [IP_Flow 19-1686] Generating 'Synthesis' target for IP 'framebuffer_blk_mem_gen_0_1'...
+WARNING: [IP_Flow 19-1687] The current project language is set to Verilog. However IP 'framebuffer_blk_mem_gen_0_1' does not support 'Verilog Synthesis' output products, delivering 'VHDL Synthesis' output products instead.
+INFO: [IP_Flow 19-1686] Generating 'Simulation' target for IP 'framebuffer_blk_mem_gen_0_1'...
+INFO: [IP_Flow 19-1686] Generating 'Miscellaneous' target for IP 'framebuffer_blk_mem_gen_0_1'...
+INFO: [IP_Flow 19-1686] Generating 'Change Log' target for IP 'framebuffer_blk_mem_gen_0_1'...
+INFO: [BD 41-1029] Generation completed for the IP Integrator block blk_mem_gen_0 .
+INFO: [BD 41-1379] This design does not contain any processor.
+Exporting to file /afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/framebuffer/hw_handoff/framebuffer.hwh
+Generated Block Design Tcl file /afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/framebuffer/hw_handoff/framebuffer_bd.tcl
+Generated Hardware Definition File /afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/framebuffer/hdl/framebuffer.hwdef
+remove_files /afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/framebuffer/hdl/framebuffer_wrapper.v
+file delete -force /afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/framebuffer/hdl/framebuffer_wrapper.v
+update_compile_order -fileset sources_1
+make_wrapper -files [get_files /afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/framebuffer/framebuffer.bd] -top
+INFO: [BD 41-1662] The design 'framebuffer.bd' is already validated. Therefore parameter propagation will not be re-run.
+CRITICAL WARNING: [BD 41-1228] Width mismatch when connecting input pin '/blk_mem_gen_0/addra'(19) to net 'addra_1'(18) - Only lower order bits will be connected, and other input bits of this pin will be left unconnected.
+CRITICAL WARNING: [BD 41-1228] Width mismatch when connecting input pin '/blk_mem_gen_0/addrb'(19) to net 'addrb_1'(18) - Only lower order bits will be connected, and other input bits of this pin will be left unconnected.
+Verilog Output written to : /afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/framebuffer/hdl/framebuffer.v
+Verilog Output written to : /afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/framebuffer/hdl/framebuffer_wrapper.v
+Wrote  : </afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/framebuffer/framebuffer.bd> 
+add_files -norecurse /afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/framebuffer/hdl/framebuffer_wrapper.v
+update_compile_order -fileset sources_1
+remove_files /afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/framebuffer/hdl/framebuffer_wrapper.v
+file delete -force /afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/framebuffer/hdl/framebuffer_wrapper.v
+update_compile_order -fileset sources_1
+generate_target all [get_files  /afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/framebuffer/framebuffer.bd]
+INFO: [BD 41-1662] The design 'framebuffer.bd' is already validated. Therefore parameter propagation will not be re-run.
+CRITICAL WARNING: [BD 41-1228] Width mismatch when connecting input pin '/blk_mem_gen_0/addra'(19) to net 'addra_1'(18) - Only lower order bits will be connected, and other input bits of this pin will be left unconnected.
+CRITICAL WARNING: [BD 41-1228] Width mismatch when connecting input pin '/blk_mem_gen_0/addrb'(19) to net 'addrb_1'(18) - Only lower order bits will be connected, and other input bits of this pin will be left unconnected.
+Verilog Output written to : /afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/framebuffer/hdl/framebuffer.v
+Verilog Output written to : /afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/framebuffer/hdl/framebuffer_wrapper.v
+Wrote  : </afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/framebuffer/framebuffer.bd> 
+INFO: [BD 41-1029] Generation completed for the IP Integrator block blk_mem_gen_0 .
+INFO: [BD 41-1379] This design does not contain any processor.
+Exporting to file /afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/framebuffer/hw_handoff/framebuffer.hwh
+Generated Block Design Tcl file /afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/framebuffer/hw_handoff/framebuffer_bd.tcl
+Generated Hardware Definition File /afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/framebuffer/hdl/framebuffer.hwdef
+open_bd_design {/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/framebuffer/framebuffer.bd}
+remove_files /afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/framebuffer/framebuffer.bd
+file delete -force /afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/framebuffer
+create_bd_design "framebuffer"
+Wrote  : </afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/framebuffer/framebuffer.bd> 
+update_compile_order -fileset sources_1
+startgroup
+create_bd_cell -type ip -vlnv xilinx.com:ip:blk_mem_gen:8.2 blk_mem_gen_0
+endgroup
+WARNING: [IP_Flow 19-4067] Ignoring invalid widget type specified checkbox.Providing a default widget
+WARNING: [IP_Flow 19-4067] Ignoring invalid widget type specified checkbox.Providing a default widget
+startgroup
+set_property -dict [list CONFIG.Memory_Type {Simple_Dual_Port_RAM} CONFIG.Use_Byte_Write_Enable {true} CONFIG.Byte_Size {8} CONFIG.Write_Width_A {32} CONFIG.Write_Depth_A {534288} CONFIG.use_bram_block {Stand_Alone} CONFIG.Enable_32bit_Address {false} CONFIG.Read_Width_A {32} CONFIG.Operating_Mode_A {NO_CHANGE} CONFIG.Write_Width_B {32} CONFIG.Read_Width_B {32} CONFIG.Enable_B {Use_ENB_Pin} CONFIG.Register_PortA_Output_of_Memory_Primitives {false} CONFIG.Register_PortB_Output_of_Memory_Primitives {true} CONFIG.Use_RSTA_Pin {false} CONFIG.Port_B_Clock {100} CONFIG.Port_B_Enable_Rate {100}] [get_bd_cells blk_mem_gen_0]
+endgroup
+startgroup
+create_bd_port -dir I -from 19 -to 0 addra
+connect_bd_net [get_bd_pins /blk_mem_gen_0/addra] [get_bd_ports addra]
+WARNING: [BD 41-1306] The connection to interface pin /blk_mem_gen_0/addra is being overridden by the user. This pin will not be connected as a part of interface connection BRAM_PORTA
+endgroup
+startgroup
+create_bd_port -dir I clka
+connect_bd_net [get_bd_pins /blk_mem_gen_0/clka] [get_bd_ports clka]
+WARNING: [BD 41-1306] The connection to interface pin /blk_mem_gen_0/clka is being overridden by the user. This pin will not be connected as a part of interface connection BRAM_PORTA
+endgroup
+startgroup
+create_bd_port -dir I -from 31 -to 0 dina
+connect_bd_net [get_bd_pins /blk_mem_gen_0/dina] [get_bd_ports dina]
+WARNING: [BD 41-1306] The connection to interface pin /blk_mem_gen_0/dina is being overridden by the user. This pin will not be connected as a part of interface connection BRAM_PORTA
+endgroup
+startgroup
+create_bd_port -dir I ena
+connect_bd_net [get_bd_pins /blk_mem_gen_0/ena] [get_bd_ports ena]
+WARNING: [BD 41-1306] The connection to interface pin /blk_mem_gen_0/ena is being overridden by the user. This pin will not be connected as a part of interface connection BRAM_PORTA
+endgroup
+startgroup
+create_bd_port -dir I -from 3 -to 0 wea
+connect_bd_net [get_bd_pins /blk_mem_gen_0/wea] [get_bd_ports wea]
+WARNING: [BD 41-1306] The connection to interface pin /blk_mem_gen_0/wea is being overridden by the user. This pin will not be connected as a part of interface connection BRAM_PORTA
+endgroup
+startgroup
+create_bd_port -dir I -from 19 -to 0 addrb
+connect_bd_net [get_bd_pins /blk_mem_gen_0/addrb] [get_bd_ports addrb]
+WARNING: [BD 41-1306] The connection to interface pin /blk_mem_gen_0/addrb is being overridden by the user. This pin will not be connected as a part of interface connection BRAM_PORTB
+endgroup
+startgroup
+create_bd_port -dir I clkb
+connect_bd_net [get_bd_pins /blk_mem_gen_0/clkb] [get_bd_ports clkb]
+WARNING: [BD 41-1306] The connection to interface pin /blk_mem_gen_0/clkb is being overridden by the user. This pin will not be connected as a part of interface connection BRAM_PORTB
+endgroup
+startgroup
+create_bd_port -dir O -from 31 -to 0 doutb
+connect_bd_net [get_bd_pins /blk_mem_gen_0/doutb] [get_bd_ports doutb]
+WARNING: [BD 41-1306] The connection to interface pin /blk_mem_gen_0/doutb is being overridden by the user. This pin will not be connected as a part of interface connection BRAM_PORTB
+endgroup
+startgroup
+create_bd_port -dir I enb
+connect_bd_net [get_bd_pins /blk_mem_gen_0/enb] [get_bd_ports enb]
+WARNING: [BD 41-1306] The connection to interface pin /blk_mem_gen_0/enb is being overridden by the user. This pin will not be connected as a part of interface connection BRAM_PORTB
+endgroup
+WARNING: [IP_Flow 19-4067] Ignoring invalid widget type specified checkbox.Providing a default widget
+WARNING: [IP_Flow 19-4067] Ignoring invalid widget type specified checkbox.Providing a default widget
+startgroup
+set_property -dict [list CONFIG.Write_Depth_A {524288}] [get_bd_cells blk_mem_gen_0]
+endgroup
+delete_bd_objs [get_bd_nets addra_1] [get_bd_ports addra]
+delete_bd_objs [get_bd_nets addrb_1] [get_bd_ports addrb]
+startgroup
+create_bd_port -dir I -from 18 -to 0 addra
+connect_bd_net [get_bd_pins /blk_mem_gen_0/addra] [get_bd_ports addra]
+WARNING: [BD 41-1306] The connection to interface pin /blk_mem_gen_0/addra is being overridden by the user. This pin will not be connected as a part of interface connection BRAM_PORTA
+endgroup
+startgroup
+create_bd_port -dir I -from 18 -to 0 addrb
+connect_bd_net [get_bd_pins /blk_mem_gen_0/addrb] [get_bd_ports addrb]
+WARNING: [BD 41-1306] The connection to interface pin /blk_mem_gen_0/addrb is being overridden by the user. This pin will not be connected as a part of interface connection BRAM_PORTB
+endgroup
+set_property location {106 199} [get_bd_ports clkb]
+set_property location {110 179} [get_bd_ports addrb]
+set_property location {110 213} [get_bd_ports clkb]
+generate_target all [get_files  /afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/framebuffer/framebuffer.bd]
+Verilog Output written to : /afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/framebuffer/hdl/framebuffer.v
+Verilog Output written to : /afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/framebuffer/hdl/framebuffer_wrapper.v
+Wrote  : </afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/framebuffer/framebuffer.bd> 
+INFO: [IP_Flow 19-1686] Generating 'Instantiation Template' target for IP 'framebuffer_blk_mem_gen_0_0'...
+INFO: [IP_Flow 19-1686] Generating 'Synthesis' target for IP 'framebuffer_blk_mem_gen_0_0'...
+WARNING: [IP_Flow 19-1687] The current project language is set to Verilog. However IP 'framebuffer_blk_mem_gen_0_0' does not support 'Verilog Synthesis' output products, delivering 'VHDL Synthesis' output products instead.
+INFO: [IP_Flow 19-1686] Generating 'Simulation' target for IP 'framebuffer_blk_mem_gen_0_0'...
+INFO: [IP_Flow 19-1686] Generating 'Miscellaneous' target for IP 'framebuffer_blk_mem_gen_0_0'...
+INFO: [IP_Flow 19-1686] Generating 'Change Log' target for IP 'framebuffer_blk_mem_gen_0_0'...
+INFO: [BD 41-1029] Generation completed for the IP Integrator block blk_mem_gen_0 .
+INFO: [BD 41-1379] This design does not contain any processor.
+Exporting to file /afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/framebuffer/hw_handoff/framebuffer.hwh
+Generated Block Design Tcl file /afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/framebuffer/hw_handoff/framebuffer_bd.tcl
+Generated Hardware Definition File /afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/framebuffer/hdl/framebuffer.hwdef
+open_bd_design {/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/framebuffer/framebuffer.bd}
+make_wrapper -files [get_files /afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/framebuffer/framebuffer.bd] -top
+add_files -norecurse /afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/framebuffer/hdl/framebuffer_wrapper.v
+update_compile_order -fileset sources_1
+save_bd_design
+Wrote  : </afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/framebuffer/framebuffer.bd> 
+WARNING: [IP_Flow 19-4067] Ignoring invalid widget type specified checkbox.Providing a default widget
+WARNING: [IP_Flow 19-4067] Ignoring invalid widget type specified checkbox.Providing a default widget
+startgroup
+set_property -dict [list CONFIG.Load_Init_File {false} CONFIG.Fill_Remaining_Memory_Locations {true} CONFIG.Remaining_Memory_Locations {DEADBEEF}] [get_bd_cells blk_mem_gen_0]
+endgroup
+WARNING: [IP_Flow 19-4067] Ignoring invalid widget type specified checkbox.Providing a default widget
+WARNING: [IP_Flow 19-4067] Ignoring invalid widget type specified checkbox.Providing a default widget
+startgroup
+endgroup
+save_bd_design
+Wrote  : </afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/framebuffer/framebuffer.bd> 
+exit
+INFO: [Common 17-206] Exiting Vivado at Mon Sep 21 12:14:41 2015...
