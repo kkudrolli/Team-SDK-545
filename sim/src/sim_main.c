@@ -92,11 +92,55 @@ int main()
 
       vector_destroy(image_data);
       vector_destroy(output);
+#define TEST_PICS_DIR "../sw/camera/pics/"
+
+int main() 
+{
+    /*
+     * Some pseudocode:
+     *
+     * init I/O
+     * init memory
+     * init T1, T2
+     * get all test image file names
+     *
+     * while (there are test images in the test directory) {
+     *    read in an image using I/O
+     *    send the image into the nn (T1, T2, memory)
+     *    classify the output
+     * }
+     *
+     * free all the things
+     */
+
+    DIR *dir_ptr;
+    struct dirent *entry_ptr = NULL;
+
+    /* Open directory */
+    dir_ptr = Opendir(TEST_PICS_DIR);
+    if (!dir_ptr) {
+        error_print("Directory error");
     }
-  }
 
-  Closedir(dir_ptr);
+    /* 
+     * Loop over entries in directory, read each bitmap file,  and 
+     * launch a neural network call for each bitmap image.
+     */
+    while ((entry_ptr = readdir(dir_ptr))) {
+        /* Get name of file and append it to directory name */
+        char *filename = entry_ptr->d_name;
+        if (filename[0] != '.') {
+            size_t path_len = strlen(filename) + strlen(TEST_PICS_DIR) + 1;
+            char full_path[path_len];
+            snprintf(full_path, path_len, "%s%s", TEST_PICS_DIR, filename);
 
+            /* Read bitmap data */
+            vector_t image_data = read_bitmap(full_path);
+            // TODO: call network here...
+            vector_destroy(image_data);
+        }
+    }
 
-  return 0;
+    Closedir(dir_ptr);
+    return 0;
 }
