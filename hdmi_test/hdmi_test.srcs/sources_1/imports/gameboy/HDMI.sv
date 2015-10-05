@@ -65,12 +65,12 @@ module hdmi
    
    always_ff @(posedge clk, posedge rst) begin
       if (rst) begin
-         addr <= 19'b0;
+         addr <= 19'h0;
       end else begin
-         if (vsync) 
-            addr = 19'd0;
+         if (~vsync) 
+            addr <= 19'h0;
          else if (de) begin
-            addr = (addr == 19'd345600) ? 19'b0 : addr + 1;
+            addr <= (addr == 19'd345600) ? 19'h0 : addr + 1; // previously 382400<<2
 	     end
       end
    end

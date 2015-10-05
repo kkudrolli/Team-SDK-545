@@ -20,36 +20,37 @@ create_project -in_memory -part xc7vx485tffg1761-2
 set_param project.compositeFile.enableAutoGeneration 0
 set_param synth.vivado.isSynthRun true
 set_msg_config -id {IP_Flow 19-2162} -severity warning -new_severity info
-set_property webtalk.parent_dir /afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.cache/wt [current_project]
-set_property parent.project_path /afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.xpr [current_project]
+set_property webtalk.parent_dir /afs/ece.cmu.edu/usr/dongjoop/Private/18545/Team-SDK-545/hdmi_test/hdmi_test.cache/wt [current_project]
+set_property parent.project_path /afs/ece.cmu.edu/usr/dongjoop/Private/18545/Team-SDK-545/hdmi_test/hdmi_test.xpr [current_project]
 set_property default_lib xil_defaultlib [current_project]
 set_property target_language Verilog [current_project]
 set_property board_part xilinx.com:vc707:part0:1.2 [current_project]
-add_files /afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/framebuffer/framebuffer.bd
-set_property used_in_implementation false [get_files -all /afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/framebuffer/ip/framebuffer_blk_mem_gen_0_0/framebuffer_blk_mem_gen_0_0_ooc.xdc]
-set_property used_in_implementation false [get_files -all /afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/framebuffer/framebuffer_ooc.xdc]
-set_property is_locked true [get_files /afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/framebuffer/framebuffer.bd]
+add_files /afs/ece.cmu.edu/usr/dongjoop/Private/18545/Team-SDK-545/hdmi_test/random.coe
+add_files /afs/ece.cmu.edu/usr/dongjoop/Private/18545/Team-SDK-545/hdmi_test/hdmi_test.srcs/sources_1/bd/framebuffer/framebuffer.bd
+set_property used_in_implementation false [get_files -all /afs/ece.cmu.edu/usr/dongjoop/Private/18545/Team-SDK-545/hdmi_test/hdmi_test.srcs/sources_1/bd/framebuffer/ip/framebuffer_blk_mem_gen_1_0/framebuffer_blk_mem_gen_1_0_ooc.xdc]
+set_property used_in_implementation false [get_files -all /afs/ece.cmu.edu/usr/dongjoop/Private/18545/Team-SDK-545/hdmi_test/hdmi_test.srcs/sources_1/bd/framebuffer/framebuffer_ooc.xdc]
+set_property is_locked true [get_files /afs/ece.cmu.edu/usr/dongjoop/Private/18545/Team-SDK-545/hdmi_test/hdmi_test.srcs/sources_1/bd/framebuffer/framebuffer.bd]
 
-add_files /afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/clock/clock.bd
-set_property used_in_implementation false [get_files -all /afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/clock/ip/clock_clk_wiz_0_0/clock_clk_wiz_0_0_board.xdc]
-set_property used_in_implementation false [get_files -all /afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/clock/ip/clock_clk_wiz_0_0/clock_clk_wiz_0_0.xdc]
-set_property used_in_implementation false [get_files -all /afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/clock/ip/clock_clk_wiz_0_0/clock_clk_wiz_0_0_ooc.xdc]
-set_property used_in_implementation false [get_files -all /afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/clock/clock_ooc.xdc]
-set_property is_locked true [get_files /afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/clock/clock.bd]
+add_files /afs/ece.cmu.edu/usr/dongjoop/Private/18545/Team-SDK-545/hdmi_test/hdmi_test.srcs/sources_1/bd/clock/clock.bd
+set_property used_in_implementation false [get_files -all /afs/ece.cmu.edu/usr/dongjoop/Private/18545/Team-SDK-545/hdmi_test/hdmi_test.srcs/sources_1/bd/clock/ip/clock_clk_wiz_0_0/clock_clk_wiz_0_0_board.xdc]
+set_property used_in_implementation false [get_files -all /afs/ece.cmu.edu/usr/dongjoop/Private/18545/Team-SDK-545/hdmi_test/hdmi_test.srcs/sources_1/bd/clock/ip/clock_clk_wiz_0_0/clock_clk_wiz_0_0.xdc]
+set_property used_in_implementation false [get_files -all /afs/ece.cmu.edu/usr/dongjoop/Private/18545/Team-SDK-545/hdmi_test/hdmi_test.srcs/sources_1/bd/clock/ip/clock_clk_wiz_0_0/clock_clk_wiz_0_0_ooc.xdc]
+set_property used_in_implementation false [get_files -all /afs/ece.cmu.edu/usr/dongjoop/Private/18545/Team-SDK-545/hdmi_test/hdmi_test.srcs/sources_1/bd/clock/clock_ooc.xdc]
+set_property is_locked true [get_files /afs/ece.cmu.edu/usr/dongjoop/Private/18545/Team-SDK-545/hdmi_test/hdmi_test.srcs/sources_1/bd/clock/clock.bd]
 
 read_verilog -library xil_defaultlib -sv {
-  /afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/new/video_unit.sv
-  /afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/imports/gameboy/HDMI.sv
-  /afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/imports/gameboy/constants.sv
-  /afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/imports/gameboy/I2C.sv
-  /afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/imports/gameboy/chipinterface.sv
+  /afs/ece.cmu.edu/usr/dongjoop/Private/18545/Team-SDK-545/hdmi_test/hdmi_test.srcs/sources_1/new/video_unit.sv
+  /afs/ece.cmu.edu/usr/dongjoop/Private/18545/Team-SDK-545/hdmi_test/hdmi_test.srcs/sources_1/imports/gameboy/HDMI.sv
+  /afs/ece.cmu.edu/usr/dongjoop/Private/18545/Team-SDK-545/hdmi_test/hdmi_test.srcs/sources_1/imports/gameboy/constants.sv
+  /afs/ece.cmu.edu/usr/dongjoop/Private/18545/Team-SDK-545/hdmi_test/hdmi_test.srcs/sources_1/imports/gameboy/I2C.sv
+  /afs/ece.cmu.edu/usr/dongjoop/Private/18545/Team-SDK-545/hdmi_test/hdmi_test.srcs/sources_1/imports/gameboy/chipinterface.sv
 }
 read_verilog -library xil_defaultlib {
-  /afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/framebuffer/hdl/framebuffer_wrapper.v
-  /afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/clock/hdl/clock_wrapper.v
+  /afs/ece.cmu.edu/usr/dongjoop/Private/18545/Team-SDK-545/hdmi_test/hdmi_test.srcs/sources_1/bd/clock/hdl/clock_wrapper.v
+  /afs/ece.cmu.edu/usr/dongjoop/Private/18545/Team-SDK-545/hdmi_test/hdmi_test.srcs/sources_1/bd/framebuffer/hdl/framebuffer_wrapper.v
 }
-read_xdc /afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/constrs_1/new/pin.xdc
-set_property used_in_implementation false [get_files /afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/constrs_1/new/pin.xdc]
+read_xdc /afs/ece.cmu.edu/usr/dongjoop/Private/18545/Team-SDK-545/hdmi_test/hdmi_test.srcs/constrs_1/new/pin.xdc
+set_property used_in_implementation false [get_files /afs/ece.cmu.edu/usr/dongjoop/Private/18545/Team-SDK-545/hdmi_test/hdmi_test.srcs/constrs_1/new/pin.xdc]
 
 read_xdc dont_touch.xdc
 set_property used_in_implementation false [get_files dont_touch.xdc]

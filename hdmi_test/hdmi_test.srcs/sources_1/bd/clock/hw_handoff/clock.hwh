@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
-<EDKSYSTEM EDWVERSION="1.2" TIMESTAMP="Tue Sep 15 14:53:27 2015" VIVADOVERSION="2015.2">
+<EDKSYSTEM EDWVERSION="1.2" TIMESTAMP="Sun Oct  4 17:06:07 2015" VIVADOVERSION="2015.2">
 
   <SYSTEMINFO ARCH="virtex7" BOARD="xilinx.com:vc707:part0:1.2" DEVICE="7vx485t" NAME="clock" PACKAGE="ffg1761" SPEEDGRADE="-2"/>
 

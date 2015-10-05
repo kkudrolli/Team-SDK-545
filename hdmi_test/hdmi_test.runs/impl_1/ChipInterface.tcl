@@ -60,7 +60,7 @@ set rc [catch {
   set_param xicom.use_bs_reader 1
   debug::add_scope template.lib 1
   open_checkpoint ChipInterface_routed.dcp
-  set_property webtalk.parent_dir /afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.cache/wt [current_project]
+  set_property webtalk.parent_dir /afs/ece.cmu.edu/usr/dongjoop/Private/18545/Team-SDK-545/hdmi_test/hdmi_test.cache/wt [current_project]
   write_bitstream -force ChipInterface.bit 
   catch { write_sysdef -hwdef ChipInterface.hwdef -bitfile ChipInterface.bit -meminfo ChipInterface.mmi -ltxfile debug_nets.ltx -file ChipInterface.sysdef }
   close_msg_db -file write_bitstream.pb

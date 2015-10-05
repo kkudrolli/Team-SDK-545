@@ -6,8 +6,8 @@
 # Block Designs: bd/framebuffer/framebuffer.bd
 set_property DONT_TOUCH TRUE [get_cells -hier -filter {REF_NAME==framebuffer || ORIG_REF_NAME==framebuffer}]
 
-# IP: bd/framebuffer/ip/framebuffer_blk_mem_gen_0_0/framebuffer_blk_mem_gen_0_0.xci
-set_property DONT_TOUCH TRUE [get_cells -hier -filter {REF_NAME==framebuffer_blk_mem_gen_0_0 || ORIG_REF_NAME==framebuffer_blk_mem_gen_0_0}]
+# IP: bd/framebuffer/ip/framebuffer_blk_mem_gen_1_0/framebuffer_blk_mem_gen_1_0.xci
+set_property DONT_TOUCH TRUE [get_cells -hier -filter {REF_NAME==framebuffer_blk_mem_gen_1_0 || ORIG_REF_NAME==framebuffer_blk_mem_gen_1_0}]
 
 # Block Designs: bd/clock/clock.bd
 set_property DONT_TOUCH TRUE [get_cells -hier -filter {REF_NAME==clock || ORIG_REF_NAME==clock}]
@@ -15,7 +15,7 @@ set_property DONT_TOUCH TRUE [get_cells -hier -filter {REF_NAME==clock || ORIG_R
 # IP: bd/clock/ip/clock_clk_wiz_0_0/clock_clk_wiz_0_0.xci
 set_property DONT_TOUCH TRUE [get_cells -hier -filter {REF_NAME==clock_clk_wiz_0_0 || ORIG_REF_NAME==clock_clk_wiz_0_0}]
 
-# XDC: bd/framebuffer/ip/framebuffer_blk_mem_gen_0_0/framebuffer_blk_mem_gen_0_0_ooc.xdc
+# XDC: bd/framebuffer/ip/framebuffer_blk_mem_gen_1_0/framebuffer_blk_mem_gen_1_0_ooc.xdc
 
 # XDC: bd/framebuffer/framebuffer_ooc.xdc
 

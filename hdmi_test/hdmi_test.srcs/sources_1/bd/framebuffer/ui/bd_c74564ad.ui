@@ -1,25 +1,23 @@
 {
    guistr: "# # String gsaved with Nlview 6.4.12  2014-12-16 bk=1.3272 VDI=35 GEI=35 GUI=JA:1.8
 #  -string -flagsOSRD
-preplace port ena -pg 1 -y 130 -defaultsOSRD
-preplace port enb -pg 1 -y 230 -defaultsOSRD
-preplace port clka -pg 1 -y 90 -defaultsOSRD
-preplace port clkb -pg 1 -y 210 -defaultsOSRD
+preplace port enb -pg 1 -y 190 -defaultsOSRD
+preplace port clka -pg 1 -y 70 -defaultsOSRD
+preplace port clkb -pg 1 -y 150 -defaultsOSRD
 preplace portBus dina -pg 1 -y 110 -defaultsOSRD
-preplace portBus addra -pg 1 -y 70 -defaultsOSRD
-preplace portBus addrb -pg 1 -y 180 -defaultsOSRD
+preplace portBus addra -pg 1 -y 40 -defaultsOSRD
+preplace portBus addrb -pg 1 -y 170 -defaultsOSRD
 preplace portBus doutb -pg 1 -y 210 -defaultsOSRD
-preplace portBus wea -pg 1 -y 150 -defaultsOSRD
-preplace inst blk_mem_gen_0 -pg 1 -lvl 1 -y 150 -defaultsOSRD
-preplace netloc addrb_1 1 0 1 140
-preplace netloc addra_1 1 0 1 N
-preplace netloc clkb_1 1 0 1 N
+preplace portBus wea -pg 1 -y 130 -defaultsOSRD
+preplace inst blk_mem_gen_1 -pg 1 -lvl 1 -y 140 -defaultsOSRD
+preplace netloc blk_mem_gen_1_doutb 1 0 2 150 280 NJ
+preplace netloc addrb_1 1 0 1 N
+preplace netloc addra_1 1 0 1 150
 preplace netloc dina_1 1 0 1 N
-preplace netloc clka_1 1 0 1 N
+preplace netloc clkb_1 1 0 1 150
+preplace netloc clka_1 1 0 1 140
 preplace netloc enb_1 1 0 1 140
-preplace netloc blk_mem_gen_0_doutb 1 0 2 150 300 NJ
 preplace netloc wea_1 1 0 1 N
-preplace netloc ena_1 1 0 1 N
 levelinfo -pg 1 120 260 390
 ",
 }

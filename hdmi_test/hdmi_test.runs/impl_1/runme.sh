@@ -7,16 +7,16 @@
 # 
 
 if [ -z "$PATH" ]; then
-  PATH=/afs/ece/support/xilinx/xilinx.release/2015.2/ids_lite/ISE/bin/lin64:/afs/ece/support/xilinx/xilinx.release/2015.2/bin
+  PATH=/afs/ece/support/xilinx/xilinx.release/Vivado/ids_lite/ISE/bin/lin64:/afs/ece/support/xilinx/xilinx.release/Vivado/bin
 else
-  PATH=/afs/ece/support/xilinx/xilinx.release/2015.2/ids_lite/ISE/bin/lin64:/afs/ece/support/xilinx/xilinx.release/2015.2/bin:$PATH
+  PATH=/afs/ece/support/xilinx/xilinx.release/Vivado/ids_lite/ISE/bin/lin64:/afs/ece/support/xilinx/xilinx.release/Vivado/bin:$PATH
 fi
 export PATH
 
 if [ -z "$LD_LIBRARY_PATH" ]; then
-  LD_LIBRARY_PATH=/afs/ece/support/xilinx/xilinx.release/2015.2/ids_lite/ISE/lib/lin64
+  LD_LIBRARY_PATH=/afs/ece/support/xilinx/xilinx.release/Vivado/ids_lite/ISE/lib/lin64
 else
-  LD_LIBRARY_PATH=/afs/ece/support/xilinx/xilinx.release/2015.2/ids_lite/ISE/lib/lin64:$LD_LIBRARY_PATH
+  LD_LIBRARY_PATH=/afs/ece/support/xilinx/xilinx.release/Vivado/ids_lite/ISE/lib/lin64:$LD_LIBRARY_PATH
 fi
 export LD_LIBRARY_PATH
 

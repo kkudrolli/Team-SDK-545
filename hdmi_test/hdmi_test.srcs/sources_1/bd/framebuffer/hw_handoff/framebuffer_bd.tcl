@@ -150,35 +150,35 @@ proc create_root_design { parentCell } {
   set addrb [ create_bd_port -dir I -from 18 -to 0 addrb ]
   set clka [ create_bd_port -dir I clka ]
   set clkb [ create_bd_port -dir I clkb ]
-  set dina [ create_bd_port -dir I -from 31 -to 0 dina ]
-  set doutb [ create_bd_port -dir O -from 31 -to 0 doutb ]
+  set dina [ create_bd_port -dir I -from 7 -to 0 dina ]
+  set doutb [ create_bd_port -dir O -from 7 -to 0 doutb ]
   set enb [ create_bd_port -dir I enb ]
-  set wea [ create_bd_port -dir I -from 3 -to 0 wea ]
+  set wea [ create_bd_port -dir I -from 0 -to 0 wea ]
 
-  # Create instance: blk_mem_gen_0, and set properties
-  set blk_mem_gen_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:blk_mem_gen:8.2 blk_mem_gen_0 ]
-  set_property -dict [ list CONFIG.Byte_Size {8} \
-CONFIG.Enable_32bit_Address {false} CONFIG.Enable_A {Always_Enabled} \
-CONFIG.Enable_B {Use_ENB_Pin} CONFIG.Fill_Remaining_Memory_Locations {true} \
-CONFIG.Load_Init_File {false} CONFIG.Memory_Type {Simple_Dual_Port_RAM} \
-CONFIG.Operating_Mode_A {NO_CHANGE} CONFIG.Port_B_Clock {100} \
-CONFIG.Port_B_Enable_Rate {100} CONFIG.Read_Width_A {32} \
-CONFIG.Read_Width_B {32} CONFIG.Register_PortA_Output_of_Memory_Primitives {false} \
-CONFIG.Register_PortB_Output_of_Memory_Primitives {true} CONFIG.Remaining_Memory_Locations {DEADBEEF} \
-CONFIG.Use_Byte_Write_Enable {true} CONFIG.Use_RSTA_Pin {false} \
-CONFIG.Write_Depth_A {524288} CONFIG.Write_Width_A {32} \
-CONFIG.Write_Width_B {32} CONFIG.use_bram_block {Stand_Alone} \
- ] $blk_mem_gen_0
+  # Create instance: blk_mem_gen_1, and set properties
+  set blk_mem_gen_1 [ create_bd_cell -type ip -vlnv xilinx.com:ip:blk_mem_gen:8.2 blk_mem_gen_1 ]
+  set_property -dict [ list CONFIG.Byte_Size {9} \
+CONFIG.Coe_File {../../../../../../random.coe} CONFIG.Enable_32bit_Address {false} \
+CONFIG.Enable_A {Always_Enabled} CONFIG.Enable_B {Use_ENB_Pin} \
+CONFIG.Fill_Remaining_Memory_Locations {true} CONFIG.Load_Init_File {true} \
+CONFIG.Memory_Type {Simple_Dual_Port_RAM} CONFIG.Operating_Mode_A {NO_CHANGE} \
+CONFIG.Port_B_Clock {100} CONFIG.Port_B_Enable_Rate {100} \
+CONFIG.Read_Width_A {8} CONFIG.Read_Width_B {8} \
+CONFIG.Register_PortA_Output_of_Memory_Primitives {false} CONFIG.Register_PortB_Output_of_Memory_Primitives {true} \
+CONFIG.Remaining_Memory_Locations {AB} CONFIG.Use_Byte_Write_Enable {false} \
+CONFIG.Use_RSTA_Pin {false} CONFIG.Write_Depth_A {345600} \
+CONFIG.Write_Width_A {8} CONFIG.Write_Width_B {8} \
+CONFIG.use_bram_block {Stand_Alone}  ] $blk_mem_gen_1
 
   # Create port connections
-  connect_bd_net -net addra_1 [get_bd_ports addra] [get_bd_pins blk_mem_gen_0/addra]
-  connect_bd_net -net addrb_1 [get_bd_ports addrb] [get_bd_pins blk_mem_gen_0/addrb]
-  connect_bd_net -net blk_mem_gen_0_doutb [get_bd_ports doutb] [get_bd_pins blk_mem_gen_0/doutb]
-  connect_bd_net -net clka_1 [get_bd_ports clka] [get_bd_pins blk_mem_gen_0/clka]
-  connect_bd_net -net clkb_1 [get_bd_ports clkb] [get_bd_pins blk_mem_gen_0/clkb]
-  connect_bd_net -net dina_1 [get_bd_ports dina] [get_bd_pins blk_mem_gen_0/dina]
-  connect_bd_net -net enb_1 [get_bd_ports enb] [get_bd_pins blk_mem_gen_0/enb]
-  connect_bd_net -net wea_1 [get_bd_ports wea] [get_bd_pins blk_mem_gen_0/wea]
+  connect_bd_net -net addra_1 [get_bd_ports addra] [get_bd_pins blk_mem_gen_1/addra]
+  connect_bd_net -net addrb_1 [get_bd_ports addrb] [get_bd_pins blk_mem_gen_1/addrb]
+  connect_bd_net -net blk_mem_gen_1_doutb [get_bd_ports doutb] [get_bd_pins blk_mem_gen_1/doutb]
+  connect_bd_net -net clka_1 [get_bd_ports clka] [get_bd_pins blk_mem_gen_1/clka]
+  connect_bd_net -net clkb_1 [get_bd_ports clkb] [get_bd_pins blk_mem_gen_1/clkb]
+  connect_bd_net -net dina_1 [get_bd_ports dina] [get_bd_pins blk_mem_gen_1/dina]
+  connect_bd_net -net enb_1 [get_bd_ports enb] [get_bd_pins blk_mem_gen_1/enb]
+  connect_bd_net -net wea_1 [get_bd_ports wea] [get_bd_pins blk_mem_gen_1/wea]
 
   # Create address segments
   

@@ -3,13 +3,13 @@
 `define BUAD_COUNT(rate) (200000000 / (16*rate))
 
 module ChipInterface
-  /* ------------------------------------------------------------*/
-  /***  CHIP PORT DECLARATIONS ***/
-  /* ------------------------------------------------------------*/
   (
    // clocks
    input logic	       	SYSCLK_P, SYSCLK_N,
    input logic          rst,
+   
+   input logic  [7:0]   SW,
+   output logic [7:0]   LEDS,
    
    output logic         en_bus,
    
@@ -25,7 +25,7 @@ module ChipInterface
    input logic USB_RTS, USB_RX,
    output logic USB_CTS, USB_TX
    );
-             
+                
    logic sysclk;
    
    IBUFDS #(.DIFF_TERM("TRUE"), .IBUF_LOW_PWR("TRUE"), .IOSTANDARD("DEFAULT"))
@@ -38,7 +38,9 @@ module ChipInterface
    
    logic [18:0] addr, addr_w;
    logic [31:0] data_in;
+   logic [7:0] tile_count;
    logic [3:0] we;   
+   logic rx_probe;
 
    logic [10:0] clock_divider;
    logic uart_sampling_clk;
@@ -53,22 +55,27 @@ module ChipInterface
        end
    end
 
-   assign USB_CTS = 1'b0;
+   assign rx_probe = USB_RX;
 
    always_ff @(posedge uart_sampling_clk, posedge rst) begin
        if (rst) begin
            state <= S_IDLE;
            sample_count <= 4'd0;
            uart_byte <= 8'b0;
-           we <= 4'h0;
+           we <= 1'b0;
+           addr_w <= 19'd0;
+           tile_count <= 0;
+           LEDS <= 8'b0;
        end else begin
            case (state)
+
                S_IDLE: begin
                    // Wait until we see a start bit
                    state <= USB_RX ? S_IDLE : S_READ;
                    sample_count <= 4'd8;
                    bit_count <= 4'd0;
-                   we <= 4'h0;
+                   we <= 1'b0;
+                   USB_CTS <= 1'b0;
                end
                
                S_READ: begin
@@ -76,13 +83,27 @@ module ChipInterface
                    state <= (bit_count == 4'd9) ? S_WRITE : S_READ;
                    bit_count <= (sample_count == 4'd0) ? bit_count + 1 : bit_count;
                    uart_byte <= (sample_count == 4'd0) ? {uart_byte[6:0], USB_RX} : uart_byte;
+                   we <= 1'b0;
+                   USB_CTS <= 1'b0;
                end
                
                S_WRITE: begin
-                   state <= S_IDLE;
-                   we <= 4'hf;
-                   data_in <= {uart_byte, uart_byte, uart_byte, uart_byte};
-                   addr_w <= (addr_w == 19'd345600) ? 19'b0 : addr_w + 1;
+                   sample_count <= sample_count + 1;
+                   state <= (sample_count == 4'd0) ? S_IDLE : S_WRITE;
+                   LEDS <= (sample_count == 4'd0) ? ((LEDS == 27) ? 0 : LEDS + 1) : LEDS;
+                   we <= 1'b1;
+                   data_in <= uart_byte;
+                   
+                   if (sample_count == 4'd0) begin
+                        if (addr_w < 344907 + tile_count*28) begin
+                            addr_w <= (LEDS == 27) ? addr_w + 693 : addr_w + 1;
+                        end else begin
+                            addr_w <= (tile_count+1)*28;
+                            tile_count <= tile_count + 1;
+                        end
+                   end
+                   
+                   USB_CTS <= 1'b1;
                end
                
                default: ; // Do nothing
@@ -90,9 +111,6 @@ module ChipInterface
        end
    end
 
-   /* ------------------------------------------------------------*/
-   /***  Xilinx PLL CLOCKS ***/
-   /* ------------------------------------------------------------*/
 
    logic clk;  
             
@@ -104,9 +122,6 @@ module ChipInterface
    video_unit v (.clk (HDMI_TX_CLK), .de (HDMI_TX_DE), .addr_r (addr), .data (HDMI_TX_D), 
                  .we (we), .data_in (data_in), .addr_w (addr_w));
    
-   /* ------------------------------------------------------------*/
-   /***  HDMI I2C INSTANTIATION ***/
-   /* ------------------------------------------------------------*/
    reg [4:0] outA;
    reg 	     stop;
    reg       ack;
@@ -121,5 +136,5 @@ module ChipInterface
    i2c bus(.stop (stop), .clk (clk_reduced), .rst (rst), .outA (outA), .SDA (I2C_SDA), .SCL (I2C_SCL), .ACK (ack));
            
    assign en_bus = 1'b1;
-   
-endmodule: ChipInterface
+      
+endmodule: ChipInterface   

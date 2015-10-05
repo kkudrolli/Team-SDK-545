@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<GenRun Id="synth_1" LaunchPart="xc7vx485tffg1761-2" LaunchTime="1443987333">
+<GenRun Id="synth_1" LaunchPart="xc7vx485tffg1761-2" LaunchTime="1444014603">
   <File Type="VDS-TIMING-PB" Name="ChipInterface_timing_summary_synth.pb"/>
   <File Type="VDS-TIMINGSUMMARY" Name="ChipInterface_timing_summary_synth.rpt"/>
   <File Type="RDS-DCP" Name="ChipInterface.dcp"/>
@@ -14,13 +14,6 @@
   <FileSet Name="sources" Type="DesignSrcs" RelSrcDir="$PSRCDIR/sources_1">
     <Filter Type="Srcs"/>
     <File Path="$PSRCDIR/sources_1/bd/framebuffer/framebuffer.bd">
-      <FileInfo>
-        <Attr Name="UsedIn" Val="synthesis"/>
-        <Attr Name="UsedIn" Val="implementation"/>
-        <Attr Name="UsedIn" Val="simulation"/>
-      </FileInfo>
-    </File>
-    <File Path="$PSRCDIR/sources_1/bd/framebuffer/hdl/framebuffer_wrapper.v">
       <FileInfo>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="implementation"/>
@@ -77,10 +70,23 @@
     </File>
     <File Path="$PSRCDIR/sources_1/imports/gameboy/chipinterface.sv">
       <FileInfo>
-        <Attr Name="ImportPath" Val="$PPRDIR/../../projects/gameboy/chipinterface.sv"/>
-        <Attr Name="ImportTime" Val="1411761516"/>
+        <Attr Name="ImportPath" Val="$PSRCDIR/sim_1/imports/gameboy/chipinterface.sv"/>
+        <Attr Name="ImportTime" Val="1443992897"/>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/bd/framebuffer/hdl/framebuffer_wrapper.v">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/random.coe">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
