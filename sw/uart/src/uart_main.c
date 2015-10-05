@@ -8,6 +8,7 @@
 #include <termios.h>  // POSIX terminal control definitions 
 #include <string.h>
 #include "mnist.h"
+#include "image_io.h"
 
 static const char *serial_port =  "/dev/tty.SLAB_USBtoUART";
 
@@ -45,11 +46,15 @@ int main()
     }
 
     // Now the specs points to the opened port's specifications
-    specs.c_cflag = (CLOCAL | CREAD);// | CS8); //control flags
+
+    specs.c_cflag = (CLOCAL | CREAD); //control flags
+    specs.c_cflag &= ~CSIZE;
+    specs.c_cflag |= CS8;
+    specs.c_cflag |= CSTOPB;
 
     // Output flags
     // CR3 - delay of 150ms after transmitting every line
-    specs.c_oflag = (OPOST | CR3);
+    //specs.c_oflag = (OPOST | CR3);
 
     // Set Baud Rate to 9600bps
     if ((ret = cfsetospeed(&specs, B9600)) == -1){
@@ -69,9 +74,45 @@ int main()
     printf("Press ENTER to send image\n");
     getchar();
 
+    /*n = 20;
+    char buf[20] = {0, 0x10, 0x20, 0x30, 0x40, 0x50, 0x60, 0x70, 
+                    0x80, 0x90, 0xa0, 0xb0, 0xc0, 0xd0, 0xe0, 0xf0, 
+                    0x1, 0x2, 0x3, 0xff};
+    for (int i = 0; 1; i++) {
+        if ((n = write(port, &buf[19], 1)) < 0) { // n = no of bytes written
+            printf("\nError");
+        }
+        usleep(1000); // Sleep for 1 ms
+        printf("Done sleep\n");
+    }*/
+
+    // IMAGE_IO TEST
+    /*
+    vector_t img = read_bitmap("../camera/pics/ezm-testpattern-03.bmp");
+    size_t length = img->length;
+    uint32_t *data = img->data; 
+
+    unsigned char *bytes = (unsigned char*) Calloc(length, sizeof(unsigned char));
+
+    for (size_t j = 0; j < length; j++) {
+        bytes[j] = (unsigned char) data[j];
+
+        printf("%x ", bytes[j]);
+    }
+
+    for (size_t j = 0; j < length; j++) {
+        if ((n = write(port, &(bytes[j]), 1)) < 0) { // n = no of bytes written
+            printf("\nError");
+        }
+        usleep(1000); // Sleep for 1 ms
+    }
+    // END IMAGE_IO TEST
+*/
+    // MNIST TEST BELOW
+
     // Get the mnist data
     mnist_images_t m_imgs = read_images(TRAIN);
-    size_t size = 1; // TODO: m_imgs->size
+    size_t size = 300; // TODO: m_imgs->size
     for (size_t i = 0; i < size; i++) {
         printf("In loop\n");
     
@@ -79,33 +120,27 @@ int main()
         size_t length = img->length;
         uint32_t *data = img->data; 
 
-        /*
-        for (size_t j = 0; j < length; j++) {
-            printf("%x ", data[j]);
-        }*/
+        unsigned char *bytes = (unsigned char*) Calloc(length, sizeof(unsigned char));
         
-        if ((n = write(port, data, length)) < 0) { // n = no of bytes written
-            printf("\nError");
-        }
-        printf("n: %d\n", n);
-        /*
         for (size_t j = 0; j < length; j++) {
-            char buf[1];
-            //printf("Length: %zu\n", length);
-            //printf("DATA: %x\n", data[j]);
-            snprintf(buf, 1, "%x", data[j]);
-            // Execution part
-            if ((n = write(port, buf, 1)) < 0) { // n = no of bytes written
+            bytes[j] = (unsigned char) data[j];
+            
+            //printf("%x ", bytes[j]);
+        }
+        
+        for (size_t j = 0; j < length; j++) {
+            if ((n = write(port, &(bytes[j]), 1)) < 0) { // n = no of bytes written
                 printf("\nError");
             }
-            printf("%c ", buf[0]);
-            //n = 1;
-            //printf("What was written: %s\n", buf);
-            //printf("Number of bytes written: %d\n", n);
-        }*/
+            usleep(1000); // Sleep for 1 ms
+        }
     }
 
+    // MNIST TEST END
+
     // Close the port
+    //usleep(1000); // Sleep for 1 ms
+    tcflush(0, TCIOFLUSH);
     close(port);
     return 0;
 } 

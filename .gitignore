@@ -3,4 +3,5 @@
 deep_sim
 *.swp
 exec_usb
+exec_uart
 

@@ -86,14 +86,17 @@ def manipulate(frame):
     # Downsize the image, using image pyramids, this function has 
     # anti-aliasing built in
     # TODO: resize so that number is recognizable
+    """"
     resized = cv2.pyrDown(gray)
     for i in xrange(0, DOWN_AMOUNT - 1):
         resized = cv2.pyrDown(resized)
         i += 1
         """
+    """
     resized = cv2.resize(gray, (28, 28))   
     """
-    return resized
+    #return resized
+    return gray
 
 """
 capture: Function captures a frame and stores it as an image on disk.
