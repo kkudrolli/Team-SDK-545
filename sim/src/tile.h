@@ -10,6 +10,9 @@
 #define _TILE_H
 
 #include "vector.h"
+#include "err_wrappers.h"
+#include "weights.h"
+
 #define NEURONS_PER_TILE (1<<10)
 
 /**
@@ -45,6 +48,7 @@ struct tile {
   uint32_t num_neurons;
   uint32_t num_inputs;
   uint32_t num_outputs;
+  uint32_t tile_index;
   neuron_t *neurons;
 };
 typedef struct tile* tile_t;
@@ -56,8 +60,8 @@ typedef struct tile* tile_t;
  * tile and its neurons. 
  */
 tile_t Tile(uint32_t num_neurons, uint32_t num_inputs, uint32_t num_outputs, 
-	    uint32_t (*activation_fn)(uint32_t));
-vector_t evaluate_tile(tile_t tile, vector_t input, vector_t weights);
+	    uint32_t (*activation_fn)(uint32_t), uint32_t tile_index);
+vector_t evaluate_tile(tile_t tile, vector_t input, weightfile_t weights);
 void tile_destroy(tile_t tile);
 
 

@@ -14,8 +14,6 @@
 #include "err_wrappers.h"
 #include "vector.h"
 
-typedef vector_t** weightfile_t;
-
 
 typedef vector_t** weightfile_t;
 

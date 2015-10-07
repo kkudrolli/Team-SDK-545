@@ -36,6 +36,8 @@ void vector_destroy(vector_t vector) {
  * NOTE: Remember to free returned vector. 
  */
 vector_t vmult(vector_t v1, vector_t v2) {
+  assert(v1);
+  assert(v2);
   assert(v1->length == v2->length);
   vector_t v = Vector(v1->length);
   
@@ -50,6 +52,8 @@ vector_t vmult(vector_t v1, vector_t v2) {
  * Sum of elements of dot product of two vectors. 
  */
 uint32_t vmad(vector_t v1, vector_t v2) {
+  assert(v1);
+  assert(v2);
   assert(v1->length == v2->length);
   uint32_t sum = 0;
   
