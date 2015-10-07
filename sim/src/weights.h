@@ -16,6 +16,9 @@
 
 typedef vector_t** weightfile_t;
 
+
+typedef vector_t** weightfile_t;
+
 /**
  * Initializes weightfile when given the number of layers and
  * the number of neurons for each layer. The first argument is the

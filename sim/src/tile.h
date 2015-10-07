@@ -6,7 +6,11 @@
  *
  */
 
+#ifndef _TILE_H
+#define _TILE_H
+
 #include "vector.h"
+#define NEURONS_PER_TILE (1<<10)
 
 /**
  * Basic structure of a neuron. Contains the following parameters:
@@ -69,3 +73,6 @@ void neuron_destroy(neuron_t neuron);
  * its given inputs. 
  */
 uint32_t evaluate_neuron(neuron_t neuron, vector_t input, vector_t weights);
+vector_t evaluate_image (vector_t image);
+
+#endif

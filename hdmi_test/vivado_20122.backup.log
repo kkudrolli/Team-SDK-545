@@ -1,0 +1,63 @@
+#-----------------------------------------------------------
+# Vivado v2015.2 (64-bit)
+# SW Build 1266856 on Fri Jun 26 16:35:25 MDT 2015
+# IP Build 1264090 on Wed Jun 24 14:22:01 MDT 2015
+# Start of session at: Sun Oct  4 00:11:07 2015
+# Process ID: 305
+# Log file: /afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/vivado.log
+# Journal file: /afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/vivado.jou
+#-----------------------------------------------------------
+start_gui
+open_project hdmi_test.xpr
+Scanning sources...
+Finished scanning sources
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1704] No user IP repositories specified
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository '/afs/ece/support/xilinx/xilinx.release/2015.2/data/ip'.
+open_project: Time (s): cpu = 00:00:18 ; elapsed = 00:00:09 . Memory (MB): peak = 6179.852 ; gain = 339.598 ; free physical = 10941 ; free virtual = 22078
+open_hw
+connect_hw_server -url localhost:3121
+INFO: [Labtools 27-2285] Connecting to hw_server url TCP:localhost:3121
+INFO: [Labtools 27-2222] Launching hw_server...
+INFO: [Labtools 27-2221] Launch Output:
+
+****** Xilinx hw_server v2015.2
+  **** Build date : Jun 26 2015-16:42:45
+    ** Copyright 1986-1999, 2001-2015 Xilinx, Inc. All Rights Reserved.
+
+
+current_hw_target [get_hw_targets */xilinx_tcf/Xilinx/000010ef936801]
+set_property PARAM.FREQUENCY 6000000 [get_hw_targets */xilinx_tcf/Xilinx/000010ef936801]
+open_hw_target
+INFO: [Labtoolstcl 44-466] Opening hw_target localhost:3121/xilinx_tcf/Xilinx/000010ef936801
+set_property PROGRAM.FILE {/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.runs/impl_1/ChipInterface.bit} [lindex [get_hw_devices] 0]
+set_property PROBES.FILE {/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.runs/impl_1/debug_nets.ltx} [lindex [get_hw_devices] 0]
+current_hw_device [lindex [get_hw_devices] 0]
+refresh_hw_device -update_hw_probes false [lindex [get_hw_devices] 0]
+INFO: [Labtools 27-1434] Device xc7vx485t (JTAG device index = 0) is programmed with a design that has no supported debug core(s) in it.
+WARNING: [Labtools 27-3123] The debug hub core was not detected at User Scan Chain 1 or 3.
+Resolution: 
+1. Make sure the clock connected to the debug hub (dbg_hub) core is a free running clock and is active OR
+2. Manually launch hw_server with -e "set xsdb-user-bscan <C_USER_SCAN_CHAIN scan_chain_number>" to detect the debug hub at User Scan Chain of 2 or 4. To determine the user scan chain setting, open the implemented design and use: get_property C_USER_SCAN_CHAIN [get_debug_cores dbg_hub].
+set_property PROBES.FILE {/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.runs/impl_1/debug_nets.ltx} [lindex [get_hw_devices] 0]
+set_property PROGRAM.FILE {/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.runs/impl_1/ChipInterface.bit} [lindex [get_hw_devices] 0]
+program_hw_devices [lindex [get_hw_devices] 0]
+INFO: [Labtools 27-3164] End of startup status: HIGH
+program_hw_devices: Time (s): cpu = 00:00:53 ; elapsed = 00:00:43 . Memory (MB): peak = 6204.238 ; gain = 0.000 ; free physical = 10880 ; free virtual = 22057
+refresh_hw_device [lindex [get_hw_devices] 0]
+INFO: [Labtools 27-1434] Device xc7vx485t (JTAG device index = 0) is programmed with a design that has no supported debug core(s) in it.
+WARNING: [Labtools 27-3123] The debug hub core was not detected at User Scan Chain 1 or 3.
+Resolution: 
+1. Make sure the clock connected to the debug hub (dbg_hub) core is a free running clock and is active OR
+2. Manually launch hw_server with -e "set xsdb-user-bscan <C_USER_SCAN_CHAIN scan_chain_number>" to detect the debug hub at User Scan Chain of 2 or 4. To determine the user scan chain setting, open the implemented design and use: get_property C_USER_SCAN_CHAIN [get_debug_cores dbg_hub].
+ERROR: [Vivado 12-106] *** Exception: java.lang.ClassCastException: sun.awt.image.BufImgSurfaceData cannot be cast to sun.java2d.xr.XRSurfaceData (See /afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/vivado_pid305.debug)
+ERROR: [Vivado 12-106] *** Exception: java.lang.ClassCastException: sun.awt.image.BufImgSurfaceData cannot be cast to sun.java2d.xr.XRSurfaceData (See /afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/vivado_pid305.debug)
+****** Webtalk v2015.2 (64-bit)
+  **** SW Build 1266856 on Fri Jun 26 16:35:25 MDT 2015
+  **** IP Build 1264090 on Wed Jun 24 14:22:01 MDT 2015
+    ** Copyright 1986-2015 Xilinx, Inc. All Rights Reserved.
+
+source /afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.hw/webtalk/labtool_webtalk.tcl -notrace
+INFO: [Common 17-186] '/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.hw/webtalk/usage_statistics_ext_labtool.xml' has been successfully sent to Xilinx on Sun Oct  4 00:14:34 2015. For additional details about this file, please refer to the WebTalk help file at /afs/ece/support/xilinx/xilinx.release/2015.2/doc/webtalk_introduction.html.
+INFO: [Common 17-206] Exiting Webtalk at Sun Oct  4 00:14:34 2015...
+exit

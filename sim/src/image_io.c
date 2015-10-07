@@ -61,7 +61,7 @@ vector_t read_bitmap(char *filename)
     /* Extract header bytes */
     uint8_t header[BMP_HEADER_SIZE];
     Fread(header, sizeof(uint8_t), BMP_HEADER_SIZE, image);
-   
+
 #ifdef IMAGE_IO_DBG
     printf("Bitmap header: \n");
     for (int i = 0; i < BMP_HEADER_SIZE; i++) {
@@ -69,7 +69,7 @@ vector_t read_bitmap(char *filename)
     }
     printf("\n");
 #endif
-   
+
     /* Extract width, height from header */
     uint32_t height = read_word_le(header, HEIGHT_OFFSET);
     uint32_t width = read_word_le(header, WIDTH_OFFSET);
@@ -121,17 +121,17 @@ vector_t read_bitmap(char *filename)
     printf("]\n");
 #endif
     // TODO: remove every 10th byte
-    
+
     vector_t vec = Vector((size_t) (num_bytes / NUM_BYTES_IN_PIX));
     uint32_t *vector_data = (uint32_t*) Calloc(num_bytes / NUM_BYTES_IN_PIX, 
-                                              sizeof(uint32_t));
+            sizeof(uint32_t));
     /* Copy over image data into vectro data and set the vector's data */
     for (uint32_t i = 0; i < num_bytes / NUM_BYTES_IN_PIX; i++) {
         vector_data[i] = (uint32_t) reduced_image[i];
     }
     assert(vec);
     vec->data = vector_data;
-    
+
 #ifdef IMAGE_IO_DBG
     printf("VECTOR DATA: Length: %zu\n[ ", vec->length);
     assert(vec->data);

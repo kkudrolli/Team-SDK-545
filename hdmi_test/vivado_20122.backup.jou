@@ -1,0 +1,24 @@
+#-----------------------------------------------------------
+# Vivado v2015.2 (64-bit)
+# SW Build 1266856 on Fri Jun 26 16:35:25 MDT 2015
+# IP Build 1264090 on Wed Jun 24 14:22:01 MDT 2015
+# Start of session at: Sun Oct  4 00:11:07 2015
+# Process ID: 305
+# Log file: /afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/vivado.log
+# Journal file: /afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/vivado.jou
+#-----------------------------------------------------------
+start_gui
+open_project hdmi_test.xpr
+open_hw
+connect_hw_server -url localhost:3121
+current_hw_target [get_hw_targets */xilinx_tcf/Xilinx/000010ef936801]
+set_property PARAM.FREQUENCY 6000000 [get_hw_targets */xilinx_tcf/Xilinx/000010ef936801]
+open_hw_target
+set_property PROGRAM.FILE {/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.runs/impl_1/ChipInterface.bit} [lindex [get_hw_devices] 0]
+set_property PROBES.FILE {/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.runs/impl_1/debug_nets.ltx} [lindex [get_hw_devices] 0]
+current_hw_device [lindex [get_hw_devices] 0]
+refresh_hw_device -update_hw_probes false [lindex [get_hw_devices] 0]
+set_property PROBES.FILE {/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.runs/impl_1/debug_nets.ltx} [lindex [get_hw_devices] 0]
+set_property PROGRAM.FILE {/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.runs/impl_1/ChipInterface.bit} [lindex [get_hw_devices] 0]
+program_hw_devices [lindex [get_hw_devices] 0]
+refresh_hw_device [lindex [get_hw_devices] 0]

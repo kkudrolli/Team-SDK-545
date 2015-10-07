@@ -1,0 +1,537 @@
+#-----------------------------------------------------------
+# Vivado v2015.2 (64-bit)
+# SW Build 1266856 on Fri Jun 26 16:35:25 MDT 2015
+# IP Build 1264090 on Wed Jun 24 14:22:01 MDT 2015
+# Start of session at: Sat Sep 26 14:31:19 2015
+# Process ID: 16544
+# Log file: /afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/vivado.log
+# Journal file: /afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/vivado.jou
+#-----------------------------------------------------------
+start_gui
+open_project hdmi_test.xpr
+Scanning sources...
+Finished scanning sources
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1704] No user IP repositories specified
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository '/afs/ece/support/xilinx/xilinx.release/Vivado/data/ip'.
+open_project: Time (s): cpu = 00:00:16 ; elapsed = 00:00:06 . Memory (MB): peak = 5930.801 ; gain = 87.207 ; free physical = 3651 ; free virtual = 17820
+create_bd_design "vio"
+Wrote  : </afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/vio/vio.bd> 
+update_compile_order -fileset sources_1
+startgroup
+create_bd_cell -type ip -vlnv xilinx.com:ip:vio:3.0 vio_0
+endgroup
+set_property location {0.5 -103 -76} [get_bd_cells vio_0]
+set_property screensize {202 260} [get_bd_cells vio_0]
+set_property location {1.5 237 226} [get_bd_cells vio_0]
+startgroup
+set_property -dict [list CONFIG.C_NUM_PROBE_IN {2} CONFIG.C_NUM_PROBE_OUT {0}] [get_bd_cells vio_0]
+endgroup
+startgroup
+create_bd_port -dir I -type clk clk
+connect_bd_net [get_bd_pins /vio_0/clk] [get_bd_ports clk]
+endgroup
+startgroup
+create_bd_port -dir I -from 0 -to 0 probe_in0
+connect_bd_net [get_bd_pins /vio_0/probe_in0] [get_bd_ports probe_in0]
+endgroup
+startgroup
+create_bd_port -dir I -from 0 -to 0 probe_in1
+connect_bd_net [get_bd_pins /vio_0/probe_in1] [get_bd_ports probe_in1]
+endgroup
+generate_target all [get_files  /afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/vio/vio.bd]
+Verilog Output written to : /afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/vio/hdl/vio.v
+Verilog Output written to : /afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/vio/hdl/vio_wrapper.v
+Wrote  : </afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/vio/vio.bd> 
+INFO: [IP_Flow 19-1686] Generating 'Instantiation Template' target for IP 'vio_vio_0_0'...
+INFO: [IP_Flow 19-1686] Generating 'Synthesis' target for IP 'vio_vio_0_0'...
+INFO: [IP_Flow 19-1686] Generating 'Simulation' target for IP 'vio_vio_0_0'...
+INFO: [IP_Flow 19-1686] Generating 'Change Log' target for IP 'vio_vio_0_0'...
+INFO: [BD 41-1029] Generation completed for the IP Integrator block vio_0 .
+INFO: [BD 41-1379] This design does not contain any processor.
+Exporting to file /afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/vio/hw_handoff/vio.hwh
+Generated Block Design Tcl file /afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/vio/hw_handoff/vio_bd.tcl
+Generated Hardware Definition File /afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/vio/hdl/vio.hwdef
+make_wrapper -files [get_files /afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/vio/vio.bd] -top
+add_files -norecurse /afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/vio/hdl/vio_wrapper.v
+update_compile_order -fileset sources_1
+update_compile_order -fileset sources_1
+save_bd_design
+Wrote  : </afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/vio/vio.bd> 
+reset_run synth_1
+launch_runs synth_1 -jobs 4
+INFO: [HDL 9-2216] Analyzing Verilog file "/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/clock/hdl/clock_wrapper.v" into library work [/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/clock/hdl/clock_wrapper.v:1]
+INFO: [HDL 9-2216] Analyzing Verilog file "/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/framebuffer/hdl/framebuffer_wrapper.v" into library work [/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/framebuffer/hdl/framebuffer_wrapper.v:1]
+INFO: [HDL 9-2216] Analyzing Verilog file "/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/vio/hdl/vio_wrapper.v" into library work [/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/vio/hdl/vio_wrapper.v:1]
+INFO: [HDL 9-2216] Analyzing SystemVerilog file "/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/imports/gameboy/HDMI.sv" into library work [/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/imports/gameboy/HDMI.sv:1]
+INFO: [HDL 9-2216] Analyzing SystemVerilog file "/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/imports/gameboy/I2C.sv" into library work [/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/imports/gameboy/I2C.sv:1]
+INFO: [HDL 9-1065] Parsing verilog file "/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/imports/gameboy/constants.sv" included at line 22. [/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/imports/gameboy/I2C.sv:22]
+INFO: [HDL 9-2216] Analyzing SystemVerilog file "/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/imports/gameboy/chipinterface.sv" into library work [/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/imports/gameboy/chipinterface.sv:1]
+INFO: [HDL 9-2216] Analyzing SystemVerilog file "/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/imports/gameboy/constants.sv" into library work [/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/imports/gameboy/constants.sv:1]
+INFO: [HDL 9-2216] Analyzing SystemVerilog file "/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/new/video_unit.sv" into library work [/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/new/video_unit.sv:1]
+INFO: [HDL 9-2216] Analyzing Verilog file "/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/clock/hdl/clock.v" into library work [/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/clock/hdl/clock.v:1]
+INFO: [HDL 9-2216] Analyzing Verilog file "/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/framebuffer/hdl/framebuffer.v" into library work [/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/framebuffer/hdl/framebuffer.v:1]
+INFO: [HDL 9-2216] Analyzing Verilog file "/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/vio/hdl/vio.v" into library work [/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/vio/hdl/vio.v:1]
+Adding component instance block -- xilinx.com:ip:blk_mem_gen:8.2 - blk_mem_gen_0
+Successfully read diagram <framebuffer> from BD file </afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/framebuffer/framebuffer.bd>
+Verilog Output written to : /afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/framebuffer/hdl/framebuffer.v
+Verilog Output written to : /afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/framebuffer/hdl/framebuffer_wrapper.v
+Wrote  : </afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/framebuffer/framebuffer.bd> 
+INFO: [IP_Flow 19-1686] Generating 'Synthesis' target for IP 'framebuffer_blk_mem_gen_0_0'...
+WARNING: [IP_Flow 19-1687] The current project language is set to Verilog. However IP 'framebuffer_blk_mem_gen_0_0' does not support 'Verilog Synthesis' output products, delivering 'VHDL Synthesis' output products instead.
+INFO: [BD 41-1029] Generation completed for the IP Integrator block blk_mem_gen_0 .
+INFO: [BD 41-1379] This design does not contain any processor.
+Exporting to file /afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/framebuffer/hw_handoff/framebuffer.hwh
+Generated Block Design Tcl file /afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/framebuffer/hw_handoff/framebuffer_bd.tcl
+Generated Hardware Definition File /afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/framebuffer/hdl/framebuffer.hwdef
+Adding component instance block -- xilinx.com:ip:blk_mem_gen:8.2 - blk_mem_gen_0
+Successfully read diagram <framebuffer> from BD file </afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/framebuffer/framebuffer.bd>
+INFO: [BD 41-1662] The design 'framebuffer.bd' is already validated. Therefore parameter propagation will not be re-run.
+Verilog Output written to : /afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/framebuffer/hdl/framebuffer.v
+Verilog Output written to : /afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/framebuffer/hdl/framebuffer_wrapper.v
+Wrote  : </afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/framebuffer/framebuffer.bd> 
+INFO: [IP_Flow 19-1706] Not generating 'Synthesis' target for IP 'framebuffer_blk_mem_gen_0_0'. Target already exists and is up to date.
+INFO: [BD 41-1029] Generation completed for the IP Integrator block blk_mem_gen_0 .
+INFO: [BD 41-1379] This design does not contain any processor.
+Exporting to file /afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/framebuffer/hw_handoff/framebuffer.hwh
+Generated Block Design Tcl file /afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/framebuffer/hw_handoff/framebuffer_bd.tcl
+Generated Hardware Definition File /afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/framebuffer/hdl/framebuffer.hwdef
+[Sat Sep 26 14:35:54 2015] Launched synth_1...
+Run output will be captured here: /afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.runs/synth_1/runme.log
+reset_run synth_1
+launch_runs synth_1 -jobs 4
+INFO: [HDL 9-2216] Analyzing Verilog file "/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/clock/hdl/clock_wrapper.v" into library work [/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/clock/hdl/clock_wrapper.v:1]
+INFO: [HDL 9-2216] Analyzing Verilog file "/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/framebuffer/hdl/framebuffer_wrapper.v" into library work [/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/framebuffer/hdl/framebuffer_wrapper.v:1]
+INFO: [HDL 9-2216] Analyzing Verilog file "/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/vio/hdl/vio_wrapper.v" into library work [/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/vio/hdl/vio_wrapper.v:1]
+INFO: [HDL 9-2216] Analyzing SystemVerilog file "/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/imports/gameboy/HDMI.sv" into library work [/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/imports/gameboy/HDMI.sv:1]
+INFO: [HDL 9-2216] Analyzing SystemVerilog file "/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/imports/gameboy/I2C.sv" into library work [/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/imports/gameboy/I2C.sv:1]
+INFO: [HDL 9-1065] Parsing verilog file "/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/imports/gameboy/constants.sv" included at line 22. [/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/imports/gameboy/I2C.sv:22]
+INFO: [HDL 9-2216] Analyzing SystemVerilog file "/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/imports/gameboy/chipinterface.sv" into library work [/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/imports/gameboy/chipinterface.sv:1]
+INFO: [HDL 9-2216] Analyzing SystemVerilog file "/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/imports/gameboy/constants.sv" into library work [/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/imports/gameboy/constants.sv:1]
+INFO: [HDL 9-2216] Analyzing SystemVerilog file "/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/new/video_unit.sv" into library work [/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/new/video_unit.sv:1]
+INFO: [HDL 9-2216] Analyzing Verilog file "/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/clock/hdl/clock.v" into library work [/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/clock/hdl/clock.v:1]
+INFO: [HDL 9-2216] Analyzing Verilog file "/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/framebuffer/hdl/framebuffer.v" into library work [/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/framebuffer/hdl/framebuffer.v:1]
+INFO: [HDL 9-2216] Analyzing Verilog file "/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/vio/hdl/vio.v" into library work [/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/vio/hdl/vio.v:1]
+[Sat Sep 26 14:36:29 2015] Launched synth_1...
+Run output will be captured here: /afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.runs/synth_1/runme.log
+reset_run synth_1
+launch_runs synth_1 -jobs 4
+INFO: [HDL 9-2216] Analyzing Verilog file "/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/clock/hdl/clock_wrapper.v" into library work [/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/clock/hdl/clock_wrapper.v:1]
+INFO: [HDL 9-2216] Analyzing Verilog file "/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/framebuffer/hdl/framebuffer_wrapper.v" into library work [/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/framebuffer/hdl/framebuffer_wrapper.v:1]
+INFO: [HDL 9-2216] Analyzing Verilog file "/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/vio/hdl/vio_wrapper.v" into library work [/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/vio/hdl/vio_wrapper.v:1]
+INFO: [HDL 9-2216] Analyzing SystemVerilog file "/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/imports/gameboy/HDMI.sv" into library work [/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/imports/gameboy/HDMI.sv:1]
+INFO: [HDL 9-2216] Analyzing SystemVerilog file "/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/imports/gameboy/I2C.sv" into library work [/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/imports/gameboy/I2C.sv:1]
+INFO: [HDL 9-1065] Parsing verilog file "/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/imports/gameboy/constants.sv" included at line 22. [/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/imports/gameboy/I2C.sv:22]
+INFO: [HDL 9-2216] Analyzing SystemVerilog file "/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/imports/gameboy/chipinterface.sv" into library work [/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/imports/gameboy/chipinterface.sv:1]
+INFO: [HDL 9-2216] Analyzing SystemVerilog file "/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/imports/gameboy/constants.sv" into library work [/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/imports/gameboy/constants.sv:1]
+INFO: [HDL 9-2216] Analyzing SystemVerilog file "/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/new/video_unit.sv" into library work [/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/new/video_unit.sv:1]
+INFO: [HDL 9-2216] Analyzing Verilog file "/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/clock/hdl/clock.v" into library work [/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/clock/hdl/clock.v:1]
+INFO: [HDL 9-2216] Analyzing Verilog file "/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/framebuffer/hdl/framebuffer.v" into library work [/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/framebuffer/hdl/framebuffer.v:1]
+INFO: [HDL 9-2216] Analyzing Verilog file "/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/vio/hdl/vio.v" into library work [/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/vio/hdl/vio.v:1]
+[Sat Sep 26 14:36:52 2015] Launched synth_1...
+Run output will be captured here: /afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.runs/synth_1/runme.log
+launch_runs impl_1 -jobs 4
+[Sat Sep 26 14:48:10 2015] Launched impl_1...
+Run output will be captured here: /afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.runs/impl_1/runme.log
+launch_runs impl_1 -to_step write_bitstream -jobs 4
+[Sat Sep 26 14:56:34 2015] Launched impl_1...
+Run output will be captured here: /afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.runs/impl_1/runme.log
+open_hw
+connect_hw_server -url localhost:3121
+INFO: [Labtools 27-2285] Connecting to hw_server url TCP:localhost:3121
+INFO: [Labtools 27-2222] Launching hw_server...
+INFO: [Labtools 27-2221] Launch Output:
+
+****** Xilinx hw_server v2015.2
+  **** Build date : Jun 26 2015-16:42:45
+    ** Copyright 1986-1999, 2001-2015 Xilinx, Inc. All Rights Reserved.
+
+
+current_hw_target [get_hw_targets */xilinx_tcf/Xilinx/000010ef936801]
+set_property PARAM.FREQUENCY 6000000 [get_hw_targets */xilinx_tcf/Xilinx/000010ef936801]
+open_hw_target
+INFO: [Labtoolstcl 44-466] Opening hw_target localhost:3121/xilinx_tcf/Xilinx/000010ef936801
+set_property PROGRAM.FILE {/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.runs/impl_1/ChipInterface.bit} [lindex [get_hw_devices] 0]
+set_property PROBES.FILE {/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.runs/impl_1/debug_nets.ltx} [lindex [get_hw_devices] 0]
+current_hw_device [lindex [get_hw_devices] 0]
+refresh_hw_device [lindex [get_hw_devices] 0]
+INFO: [Labtools 27-2302] Device xc7vx485t (JTAG device index = 0) is programmed with a design that has 1 ILA core(s).
+ERROR: [Labtools 27-1974] Mismatch between the design programmed into the device xc7vx485t_0 and the probes file /afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.runs/impl_1/debug_nets.ltx.
+The device design has 1 ILA core(s) and 0 VIO core(s). The probes file has 0 ILA core(s) and 1 VIO core(s).
+Resolution: 
+1. Reprogram device with the correct programming file and associated probes file OR
+2. Goto device properties and associate the correct probes file with the programming file already programmed in the device.
+disconnect_hw_server localhost:3121
+****** Webtalk v2015.2 (64-bit)
+  **** SW Build 1266856 on Fri Jun 26 16:35:25 MDT 2015
+  **** IP Build 1264090 on Wed Jun 24 14:22:01 MDT 2015
+    ** Copyright 1986-2015 Xilinx, Inc. All Rights Reserved.
+
+source /afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.hw/webtalk/labtool_webtalk.tcl -notrace
+INFO: [Common 17-186] '/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.hw/webtalk/usage_statistics_ext_labtool.xml' has been successfully sent to Xilinx on Sat Sep 26 15:00:52 2015. For additional details about this file, please refer to the WebTalk help file at /afs/ece/support/xilinx/xilinx.release/Vivado/doc/webtalk_introduction.html.
+INFO: [Common 17-206] Exiting Webtalk at Sat Sep 26 15:00:52 2015...
+connect_hw_server -url localhost:3121
+INFO: [Labtools 27-2285] Connecting to hw_server url TCP:localhost:3121
+current_hw_target [get_hw_targets */xilinx_tcf/Xilinx/000010ef936801]
+set_property PARAM.FREQUENCY 6000000 [get_hw_targets */xilinx_tcf/Xilinx/000010ef936801]
+open_hw_target
+INFO: [Labtoolstcl 44-466] Opening hw_target localhost:3121/xilinx_tcf/Xilinx/000010ef936801
+set_property PROGRAM.FILE {/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.runs/impl_1/ChipInterface.bit} [lindex [get_hw_devices] 0]
+set_property PROBES.FILE {/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.runs/impl_1/debug_nets.ltx} [lindex [get_hw_devices] 0]
+current_hw_device [lindex [get_hw_devices] 0]
+refresh_hw_device [lindex [get_hw_devices] 0]
+INFO: [Labtools 27-2302] Device xc7vx485t (JTAG device index = 0) is programmed with a design that has 1 ILA core(s).
+ERROR: [Labtools 27-1974] Mismatch between the design programmed into the device xc7vx485t_0 and the probes file /afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.runs/impl_1/debug_nets.ltx.
+The device design has 1 ILA core(s) and 0 VIO core(s). The probes file has 0 ILA core(s) and 1 VIO core(s).
+Resolution: 
+1. Reprogram device with the correct programming file and associated probes file OR
+2. Goto device properties and associate the correct probes file with the programming file already programmed in the device.
+set_property PROBES.FILE {/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.runs/impl_1/debug_nets.ltx} [lindex [get_hw_devices] 0]
+set_property PROGRAM.FILE {/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.runs/impl_1/ChipInterface.bit} [lindex [get_hw_devices] 0]
+program_hw_devices [lindex [get_hw_devices] 0]
+INFO: [Labtools 27-3164] End of startup status: HIGH
+program_hw_devices: Time (s): cpu = 00:00:44 ; elapsed = 00:00:43 . Memory (MB): peak = 6382.637 ; gain = 0.000 ; free physical = 2764 ; free virtual = 16840
+refresh_hw_device [lindex [get_hw_devices] 0]
+INFO: [Labtools 27-2302] Device xc7vx485t (JTAG device index = 0) is programmed with a design that has 1 VIO core(s).
+open_bd_design {/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/vio/vio.bd}
+open_bd_design {/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/vio/vio.bd}
+startgroup
+endgroup
+delete_bd_objs [get_bd_nets clk_1] [get_bd_nets probe_in0_1] [get_bd_nets probe_in1_1] [get_bd_cells vio_0]
+remove_files /afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/vio/vio.bd
+file delete -force /afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/vio
+remove_files /afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/vio/hdl/vio_wrapper.v
+file delete -force /afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/vio/hdl/vio_wrapper.v
+create_bd_design "ila"
+Wrote  : </afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/ila/ila.bd> 
+update_compile_order -fileset sources_1
+ERROR: [Xicom 50-38] xicom: Core access failed. Check cable connectivity and that the target board is powered up then use the disconnect_hw_server and connect_hw_server to re-initialize the hardware target. Use open_hw_target to re-register the hardware device.
+ERROR: [Xicom 50-38] xicom: Core access failed. Check cable connectivity and that the target board is powered up then use the disconnect_hw_server and connect_hw_server to re-initialize the hardware target. Use open_hw_target to re-register the hardware device.
+ERROR: [Labtools 27-3175] Target jsn-DLC9LP-000010ef936801 is no longer available.
+Please use disconnect_hw_server to close the current server connection. Check cable connectivity and that the target board is powered up.
+Restart the hw_server application running on host localhost, port 3121 and then use connect_hw_server to re-establish connection to target.
+close_hw_target
+INFO: [Labtoolstcl 44-464] Closing hw_target localhost:3121/xilinx_tcf/Xilinx/000010ef936801
+startgroup
+create_bd_cell -type ip -vlnv xilinx.com:ip:ila:5.1 ila_0
+endgroup
+WARNING: [IP_Flow 19-4067] Ignoring invalid widget type specified checkbox.Providing a default widget
+startgroup
+set_property -dict [list CONFIG.C_NUM_OF_PROBES {2} CONFIG.C_MONITOR_TYPE {Native} CONFIG.C_ENABLE_ILA_AXI_MON {false}] [get_bd_cells ila_0]
+endgroup
+set_property location {0.5 -22 30} [get_bd_cells ila_0]
+startgroup
+create_bd_port -dir I -type clk clk
+connect_bd_net [get_bd_pins /ila_0/clk] [get_bd_ports clk]
+endgroup
+startgroup
+create_bd_port -dir I -from 0 -to 0 probe0
+connect_bd_net [get_bd_pins /ila_0/probe0] [get_bd_ports probe0]
+endgroup
+startgroup
+create_bd_port -dir I -from 0 -to 0 probe1
+connect_bd_net [get_bd_pins /ila_0/probe1] [get_bd_ports probe1]
+endgroup
+generate_target all [get_files  /afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/ila/ila.bd]
+Verilog Output written to : /afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/ila/hdl/ila.v
+Verilog Output written to : /afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/ila/hdl/ila_wrapper.v
+Wrote  : </afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/ila/ila.bd> 
+INFO: [IP_Flow 19-1686] Generating 'Instantiation Template' target for IP 'ila_ila_0_0'...
+INFO: [IP_Flow 19-1686] Generating 'Synthesis' target for IP 'ila_ila_0_0'...
+INFO: [IP_Flow 19-1686] Generating 'Simulation' target for IP 'ila_ila_0_0'...
+INFO: [IP_Flow 19-1686] Generating 'Change Log' target for IP 'ila_ila_0_0'...
+INFO: [BD 41-1029] Generation completed for the IP Integrator block ila_0 .
+INFO: [BD 41-1379] This design does not contain any processor.
+Exporting to file /afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/ila/hw_handoff/ila.hwh
+Generated Block Design Tcl file /afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/ila/hw_handoff/ila_bd.tcl
+Generated Hardware Definition File /afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/ila/hdl/ila.hwdef
+make_wrapper -files [get_files /afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/ila/ila.bd] -top
+add_files -norecurse /afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/ila/hdl/ila_wrapper.v
+update_compile_order -fileset sources_1
+update_compile_order -fileset sources_1
+save_bd_design
+Wrote  : </afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/ila/ila.bd> 
+reset_run synth_1
+launch_runs synth_1 -jobs 4
+INFO: [HDL 9-2216] Analyzing Verilog file "/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/clock/hdl/clock_wrapper.v" into library work [/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/clock/hdl/clock_wrapper.v:1]
+INFO: [HDL 9-2216] Analyzing Verilog file "/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/framebuffer/hdl/framebuffer_wrapper.v" into library work [/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/framebuffer/hdl/framebuffer_wrapper.v:1]
+INFO: [HDL 9-2216] Analyzing Verilog file "/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/ila/hdl/ila_wrapper.v" into library work [/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/ila/hdl/ila_wrapper.v:1]
+INFO: [HDL 9-2216] Analyzing SystemVerilog file "/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/imports/gameboy/HDMI.sv" into library work [/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/imports/gameboy/HDMI.sv:1]
+INFO: [HDL 9-2216] Analyzing SystemVerilog file "/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/imports/gameboy/I2C.sv" into library work [/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/imports/gameboy/I2C.sv:1]
+INFO: [HDL 9-1065] Parsing verilog file "/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/imports/gameboy/constants.sv" included at line 22. [/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/imports/gameboy/I2C.sv:22]
+INFO: [HDL 9-2216] Analyzing SystemVerilog file "/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/imports/gameboy/chipinterface.sv" into library work [/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/imports/gameboy/chipinterface.sv:1]
+INFO: [HDL 9-2216] Analyzing SystemVerilog file "/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/imports/gameboy/constants.sv" into library work [/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/imports/gameboy/constants.sv:1]
+INFO: [HDL 9-2216] Analyzing SystemVerilog file "/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/new/video_unit.sv" into library work [/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/new/video_unit.sv:1]
+INFO: [HDL 9-2216] Analyzing Verilog file "/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/clock/hdl/clock.v" into library work [/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/clock/hdl/clock.v:1]
+INFO: [HDL 9-2216] Analyzing Verilog file "/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/framebuffer/hdl/framebuffer.v" into library work [/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/framebuffer/hdl/framebuffer.v:1]
+INFO: [HDL 9-2216] Analyzing Verilog file "/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/ila/hdl/ila.v" into library work [/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/ila/hdl/ila.v:1]
+[Sat Sep 26 15:16:10 2015] Launched synth_1...
+Run output will be captured here: /afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.runs/synth_1/runme.log
+launch_runs impl_1 -jobs 4
+[Sat Sep 26 15:27:40 2015] Launched impl_1...
+Run output will be captured here: /afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.runs/impl_1/runme.log
+launch_runs impl_1 -to_step write_bitstream -jobs 4
+[Sat Sep 26 15:31:21 2015] Launched impl_1...
+Run output will be captured here: /afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.runs/impl_1/runme.log
+disconnect_hw_server localhost:3121
+connect_hw_server -url localhost:3121
+INFO: [Labtools 27-2285] Connecting to hw_server url TCP:localhost:3121
+current_hw_target [get_hw_targets */xilinx_tcf/Xilinx/000010ef936801]
+set_property PARAM.FREQUENCY 6000000 [get_hw_targets */xilinx_tcf/Xilinx/000010ef936801]
+open_hw_target
+INFO: [Labtoolstcl 44-466] Opening hw_target localhost:3121/xilinx_tcf/Xilinx/000010ef936801
+set_property PROGRAM.FILE {/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.runs/impl_1/ChipInterface.bit} [lindex [get_hw_devices] 0]
+set_property PROBES.FILE {/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.runs/impl_1/debug_nets.ltx} [lindex [get_hw_devices] 0]
+current_hw_device [lindex [get_hw_devices] 0]
+refresh_hw_device [lindex [get_hw_devices] 0]
+INFO: [Labtools 27-2302] Device xc7vx485t (JTAG device index = 0) is programmed with a design that has 1 ILA core(s).
+display_hw_ila_data [ get_hw_ila_data hw_ila_data_1]
+WARNING: Simulation object ila/ILA_i/probe0_1 was not found in the design.
+WARNING: Simulation object ila/ILA_i/probe1_1 was not found in the design.
+set_property PROBES.FILE {/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.runs/impl_1/debug_nets.ltx} [lindex [get_hw_devices] 0]
+set_property PROGRAM.FILE {/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.runs/impl_1/ChipInterface.bit} [lindex [get_hw_devices] 0]
+program_hw_devices [lindex [get_hw_devices] 0]
+INFO: [Labtools 27-3164] End of startup status: HIGH
+program_hw_devices: Time (s): cpu = 00:00:45 ; elapsed = 00:00:43 . Memory (MB): peak = 6516.391 ; gain = 0.000 ; free physical = 2462 ; free virtual = 16536
+refresh_hw_device [lindex [get_hw_devices] 0]
+INFO: [Labtools 27-2302] Device xc7vx485t (JTAG device index = 0) is programmed with a design that has 1 ILA core(s).
+add_wave -into {hw_ila_data_1.wcfg} -radix bin [get_hw_probes {myila/ila_i/probe0_1}]
+add_wave -into {hw_ila_data_1.wcfg} -radix bin [get_hw_probes {myila/ila_i/probe1_1}]
+run_hw_ila hw_ila_1 -trigger_now
+INFO: [Labtools 27-1964] The ILA core 'hw_ila_1' trigger was armed at 2015-Sep-26 15:35:05
+run_hw_ila hw_ila_1 -trigger_now
+INFO: [Labtools 27-1964] The ILA core 'hw_ila_1' trigger was armed at 2015-Sep-26 15:35:10
+run_hw_ila hw_ila_1 -trigger_now
+INFO: [Labtools 27-1964] The ILA core 'hw_ila_1' trigger was armed at 2015-Sep-26 15:35:13
+run_hw_ila hw_ila_1 -trigger_now
+INFO: [Labtools 27-1964] The ILA core 'hw_ila_1' trigger was armed at 2015-Sep-26 15:35:16
+run_hw_ila hw_ila_1 -trigger_now
+INFO: [Labtools 27-1964] The ILA core 'hw_ila_1' trigger was armed at 2015-Sep-26 15:35:19
+run_hw_ila hw_ila_1 -trigger_now
+ERROR: [Labtools 27-1395] Unable to arm ILA 'hw_ila_1'. The core clock is slow or no core clock connected for this ILA or the ILA core may not meet timing.
+run_hw_ila hw_ila_1 -trigger_now
+INFO: [Labtools 27-1964] The ILA core 'hw_ila_1' trigger was armed at 2015-Sep-26 15:35:34
+run_hw_ila hw_ila_1 -trigger_now
+INFO: [Labtools 27-1964] The ILA core 'hw_ila_1' trigger was armed at 2015-Sep-26 15:35:35
+run_hw_ila hw_ila_1 -trigger_now
+INFO: [Labtools 27-1964] The ILA core 'hw_ila_1' trigger was armed at 2015-Sep-26 15:35:36
+run_hw_ila hw_ila_1 -trigger_now
+INFO: [Labtools 27-1964] The ILA core 'hw_ila_1' trigger was armed at 2015-Sep-26 15:35:39
+run_hw_ila hw_ila_1 -trigger_now
+INFO: [Labtools 27-1964] The ILA core 'hw_ila_1' trigger was armed at 2015-Sep-26 15:35:40
+run_hw_ila hw_ila_1 -trigger_now
+ERROR: [Labtools 27-1395] Unable to arm ILA 'hw_ila_1'. The core clock is slow or no core clock connected for this ILA or the ILA core may not meet timing.
+run_hw_ila hw_ila_1 -trigger_now
+INFO: [Labtools 27-1964] The ILA core 'hw_ila_1' trigger was armed at 2015-Sep-26 15:35:46
+run_hw_ila hw_ila_1 -trigger_now
+ERROR: [Labtools 27-1395] Unable to arm ILA 'hw_ila_1'. The core clock is slow or no core clock connected for this ILA or the ILA core may not meet timing.
+run_hw_ila hw_ila_1
+INFO: [Labtools 27-1964] The ILA core 'hw_ila_1' trigger was armed at 2015-Sep-26 15:35:52
+run_hw_ila hw_ila_1 -trigger_now
+INFO: [Labtools 27-1964] The ILA core 'hw_ila_1' trigger was armed at 2015-Sep-26 15:35:57
+run_hw_ila hw_ila_1 -trigger_now
+INFO: [Labtools 27-1964] The ILA core 'hw_ila_1' trigger was armed at 2015-Sep-26 15:35:58
+run_hw_ila hw_ila_1
+INFO: [Labtools 27-1964] The ILA core 'hw_ila_1' trigger was armed at 2015-Sep-26 15:35:59
+set_property TRIGGER_COMPARE_VALUE eq1'b1 [get_hw_probes myila/ila_i/probe1_1 -of_objects [get_hw_ilas hw_ila_1]]
+run_hw_ila hw_ila_1 -trigger_now
+INFO: [Labtools 27-1964] The ILA core 'hw_ila_1' trigger was armed at 2015-Sep-26 15:36:20
+run_hw_ila hw_ila_1 -trigger_now
+INFO: [Labtools 27-1964] The ILA core 'hw_ila_1' trigger was armed at 2015-Sep-26 15:36:22
+run_hw_ila hw_ila_1
+INFO: [Labtools 27-1964] The ILA core 'hw_ila_1' trigger was armed at 2015-Sep-26 15:36:24
+run_hw_ila hw_ila_1
+INFO: [Labtools 27-1964] The ILA core 'hw_ila_1' trigger was armed at 2015-Sep-26 15:36:25
+run_hw_ila hw_ila_1 -trigger_now
+INFO: [Labtools 27-1964] The ILA core 'hw_ila_1' trigger was armed at 2015-Sep-26 15:36:27
+set_property TRIGGER_COMPARE_VALUE eq1'b0 [get_hw_probes myila/ila_i/probe1_1 -of_objects [get_hw_ilas hw_ila_1]]
+remove_files /afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/ila/hdl/ila_wrapper.v
+file delete -force /afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/ila/hdl/ila_wrapper.v
+update_compile_order -fileset sources_1
+remove_files /afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/ila/ila.bd
+file delete -force /afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/ila
+reset_run synth_1
+launch_runs synth_1 -jobs 4
+INFO: [HDL 9-2216] Analyzing Verilog file "/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/clock/hdl/clock_wrapper.v" into library work [/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/clock/hdl/clock_wrapper.v:1]
+INFO: [HDL 9-2216] Analyzing Verilog file "/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/framebuffer/hdl/framebuffer_wrapper.v" into library work [/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/framebuffer/hdl/framebuffer_wrapper.v:1]
+INFO: [HDL 9-2216] Analyzing SystemVerilog file "/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/imports/gameboy/HDMI.sv" into library work [/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/imports/gameboy/HDMI.sv:1]
+INFO: [HDL 9-2216] Analyzing SystemVerilog file "/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/imports/gameboy/I2C.sv" into library work [/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/imports/gameboy/I2C.sv:1]
+INFO: [HDL 9-1065] Parsing verilog file "/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/imports/gameboy/constants.sv" included at line 22. [/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/imports/gameboy/I2C.sv:22]
+INFO: [HDL 9-2216] Analyzing SystemVerilog file "/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/imports/gameboy/chipinterface.sv" into library work [/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/imports/gameboy/chipinterface.sv:1]
+INFO: [HDL 9-2216] Analyzing SystemVerilog file "/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/imports/gameboy/constants.sv" into library work [/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/imports/gameboy/constants.sv:1]
+INFO: [HDL 9-2216] Analyzing SystemVerilog file "/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/new/video_unit.sv" into library work [/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/new/video_unit.sv:1]
+INFO: [HDL 9-2216] Analyzing Verilog file "/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/clock/hdl/clock.v" into library work [/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/clock/hdl/clock.v:1]
+INFO: [HDL 9-2216] Analyzing Verilog file "/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/framebuffer/hdl/framebuffer.v" into library work [/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/framebuffer/hdl/framebuffer.v:1]
+[Sat Sep 26 15:37:38 2015] Launched synth_1...
+Run output will be captured here: /afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.runs/synth_1/runme.log
+reset_run synth_1
+update_compile_order -fileset sources_1
+launch_runs synth_1 -jobs 4
+INFO: [HDL 9-2216] Analyzing Verilog file "/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/clock/hdl/clock_wrapper.v" into library work [/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/clock/hdl/clock_wrapper.v:1]
+INFO: [HDL 9-2216] Analyzing Verilog file "/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/framebuffer/hdl/framebuffer_wrapper.v" into library work [/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/framebuffer/hdl/framebuffer_wrapper.v:1]
+INFO: [HDL 9-2216] Analyzing SystemVerilog file "/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/imports/gameboy/HDMI.sv" into library work [/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/imports/gameboy/HDMI.sv:1]
+INFO: [HDL 9-2216] Analyzing SystemVerilog file "/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/imports/gameboy/I2C.sv" into library work [/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/imports/gameboy/I2C.sv:1]
+INFO: [HDL 9-1065] Parsing verilog file "/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/imports/gameboy/constants.sv" included at line 22. [/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/imports/gameboy/I2C.sv:22]
+INFO: [HDL 9-2216] Analyzing SystemVerilog file "/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/imports/gameboy/chipinterface.sv" into library work [/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/imports/gameboy/chipinterface.sv:1]
+INFO: [HDL 9-2216] Analyzing SystemVerilog file "/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/imports/gameboy/constants.sv" into library work [/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/imports/gameboy/constants.sv:1]
+INFO: [HDL 9-2216] Analyzing SystemVerilog file "/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/new/video_unit.sv" into library work [/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/new/video_unit.sv:1]
+INFO: [HDL 9-2216] Analyzing Verilog file "/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/clock/hdl/clock.v" into library work [/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/clock/hdl/clock.v:1]
+INFO: [HDL 9-2216] Analyzing Verilog file "/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/framebuffer/hdl/framebuffer.v" into library work [/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/framebuffer/hdl/framebuffer.v:1]
+[Sat Sep 26 15:37:57 2015] Launched synth_1...
+Run output will be captured here: /afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.runs/synth_1/runme.log
+reset_run synth_1
+launch_runs synth_1 -jobs 4
+INFO: [HDL 9-2216] Analyzing Verilog file "/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/clock/hdl/clock_wrapper.v" into library work [/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/clock/hdl/clock_wrapper.v:1]
+INFO: [HDL 9-2216] Analyzing Verilog file "/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/framebuffer/hdl/framebuffer_wrapper.v" into library work [/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/framebuffer/hdl/framebuffer_wrapper.v:1]
+INFO: [HDL 9-2216] Analyzing SystemVerilog file "/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/imports/gameboy/HDMI.sv" into library work [/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/imports/gameboy/HDMI.sv:1]
+INFO: [HDL 9-2216] Analyzing SystemVerilog file "/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/imports/gameboy/I2C.sv" into library work [/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/imports/gameboy/I2C.sv:1]
+INFO: [HDL 9-1065] Parsing verilog file "/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/imports/gameboy/constants.sv" included at line 22. [/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/imports/gameboy/I2C.sv:22]
+INFO: [HDL 9-2216] Analyzing SystemVerilog file "/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/imports/gameboy/chipinterface.sv" into library work [/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/imports/gameboy/chipinterface.sv:1]
+INFO: [HDL 9-2216] Analyzing SystemVerilog file "/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/imports/gameboy/constants.sv" into library work [/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/imports/gameboy/constants.sv:1]
+INFO: [HDL 9-2216] Analyzing SystemVerilog file "/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/new/video_unit.sv" into library work [/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/new/video_unit.sv:1]
+INFO: [HDL 9-2216] Analyzing Verilog file "/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/clock/hdl/clock.v" into library work [/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/clock/hdl/clock.v:1]
+INFO: [HDL 9-2216] Analyzing Verilog file "/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/framebuffer/hdl/framebuffer.v" into library work [/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/framebuffer/hdl/framebuffer.v:1]
+[Sat Sep 26 15:38:20 2015] Launched synth_1...
+Run output will be captured here: /afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.runs/synth_1/runme.log
+launch_runs impl_1 -jobs 4
+[Sat Sep 26 15:39:12 2015] Launched impl_1...
+Run output will be captured here: /afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.runs/impl_1/runme.log
+reset_run impl_1 -noclean_dir 
+open_run synth_1 -name synth_1
+Design is defaulting to impl run constrset: constrs_1
+Design is defaulting to synth run part: xc7vx485tffg1761-2
+INFO: [Netlist 29-17] Analyzing 4 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [Project 1-479] Netlist was created with Vivado 2015.2
+INFO: [Device 21-403] Loading part xc7vx485tffg1761-2
+INFO: [Project 1-570] Preparing netlist for logic optimization
+Parsing XDC File [/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/clock/ip/clock_clk_wiz_0_0/clock_clk_wiz_0_0_board.xdc] for cell 'ck/clock_i/clk_wiz_0/inst'
+Finished Parsing XDC File [/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/clock/ip/clock_clk_wiz_0_0/clock_clk_wiz_0_0_board.xdc] for cell 'ck/clock_i/clk_wiz_0/inst'
+Parsing XDC File [/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/clock/ip/clock_clk_wiz_0_0/clock_clk_wiz_0_0.xdc] for cell 'ck/clock_i/clk_wiz_0/inst'
+INFO: [Timing 38-35] Done setting XDC timing constraints. [/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/clock/ip/clock_clk_wiz_0_0/clock_clk_wiz_0_0.xdc:56]
+INFO: [Timing 38-2] Deriving generated clocks [/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/clock/ip/clock_clk_wiz_0_0/clock_clk_wiz_0_0.xdc:56]
+get_clocks: Time (s): cpu = 00:00:12 ; elapsed = 00:00:12 . Memory (MB): peak = 7176.590 ; gain = 539.773 ; free physical = 2155 ; free virtual = 15982
+Finished Parsing XDC File [/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/sources_1/bd/clock/ip/clock_clk_wiz_0_0/clock_clk_wiz_0_0.xdc] for cell 'ck/clock_i/clk_wiz_0/inst'
+Parsing XDC File [/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/constrs_1/new/pin.xdc]
+Finished Parsing XDC File [/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.srcs/constrs_1/new/pin.xdc]
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+INFO: [Project 1-111] Unisim Transformation Summary:
+  A total of 1 instances were transformed.
+  IOBUF => IOBUF (IBUF, OBUFT): 1 instances
+
+open_run: Time (s): cpu = 00:00:35 ; elapsed = 00:00:24 . Memory (MB): peak = 7248.574 ; gain = 697.320 ; free physical = 2089 ; free virtual = 15915
+CRITICAL WARNING: [Chipscope 16-3] Cannot debug net 'I2C_SDA'; it is not accessible from the fabric routing.
+CRITICAL WARNING: [Chipscope 16-3] Cannot debug net 'I2C_SCL'; it is not accessible from the fabric routing.
+set_property mark_debug true [get_nets [list I2C_SDA I2C_SCL I2C_SCL_OBUF I2C_SDA_IBUF I2C_SDA_OBUF I2C_SDA_TRI]]
+CRITICAL WARNING: [Chipscope 16-3] Cannot debug net 'I2C_SDA'; it is not accessible from the fabric routing.
+CRITICAL WARNING: [Chipscope 16-3] Cannot debug net 'I2C_SCL'; it is not accessible from the fabric routing.
+set_property mark_debug true [get_nets [list {bus/next[0]} {bus/next[1]}]]
+create_debug_core u_ila_0 ila
+set_property C_DATA_DEPTH 1024 [get_debug_cores u_ila_0]
+set_property C_TRIGIN_EN false [get_debug_cores u_ila_0]
+set_property C_TRIGOUT_EN false [get_debug_cores u_ila_0]
+set_property C_ADV_TRIGGER false [get_debug_cores u_ila_0]
+set_property C_INPUT_PIPE_STAGES 0 [get_debug_cores u_ila_0]
+set_property C_EN_STRG_QUAL false [get_debug_cores u_ila_0]
+set_property ALL_PROBE_SAME_MU true [get_debug_cores u_ila_0]
+set_property ALL_PROBE_SAME_MU_CNT 1 [get_debug_cores u_ila_0]
+set_property port_width 1 [get_debug_ports u_ila_0/clk]
+connect_debug_port u_ila_0/clk [get_nets [list ck/clock_i/clk_wiz_0/inst/clk_out2 ]]
+set_property port_width 2 [get_debug_ports u_ila_0/probe0]
+connect_debug_port u_ila_0/probe0 [get_nets [list {bus/next[0]} {bus/next[1]} ]]
+create_debug_port u_ila_0 probe
+set_property port_width 1 [get_debug_ports u_ila_0/probe1]
+connect_debug_port u_ila_0/probe1 [get_nets [list I2C_SCL_OBUF ]]
+create_debug_port u_ila_0 probe
+set_property port_width 1 [get_debug_ports u_ila_0/probe2]
+connect_debug_port u_ila_0/probe2 [get_nets [list I2C_SDA_OBUF ]]
+create_debug_port u_ila_0 probe
+set_property port_width 1 [get_debug_ports u_ila_0/probe3]
+connect_debug_port u_ila_0/probe3 [get_nets [list I2C_SDA_TRI ]]
+save_constraints
+launch_runs impl_1 -jobs 4
+Writing placer database...
+Writing XDEF routing.
+Writing XDEF routing logical nets.
+Writing XDEF routing special nets.
+Write XDEF Complete: Time (s): cpu = 00:00:00.07 ; elapsed = 00:00:00.29 . Memory (MB): peak = 7258.867 ; gain = 0.000 ; free physical = 2067 ; free virtual = 15899
+[Sat Sep 26 15:44:28 2015] Launched impl_1...
+Run output will be captured here: /afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.runs/impl_1/runme.log
+launch_runs impl_1 -to_step write_bitstream -jobs 4
+[Sat Sep 26 15:50:25 2015] Launched impl_1...
+Run output will be captured here: /afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.runs/impl_1/runme.log
+set_property PROBES.FILE {/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.runs/impl_1/debug_nets.ltx} [lindex [get_hw_devices] 0]
+set_property PROGRAM.FILE {/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.runs/impl_1/ChipInterface.bit} [lindex [get_hw_devices] 0]
+program_hw_devices [lindex [get_hw_devices] 0]
+INFO: [Labtools 27-3164] End of startup status: HIGH
+program_hw_devices: Time (s): cpu = 00:00:46 ; elapsed = 00:00:43 . Memory (MB): peak = 7258.871 ; gain = 0.000 ; free physical = 2340 ; free virtual = 16036
+refresh_hw_device [lindex [get_hw_devices] 0]
+INFO: [Labtools 27-2302] Device xc7vx485t (JTAG device index = 0) is programmed with a design that has 1 ILA core(s).
+add_wave -into {hw_ila_data_1.wcfg} -radix bin [get_hw_probes {I2C_SCL_OBUF}]
+add_wave -into {hw_ila_data_1.wcfg} -radix bin [get_hw_probes {I2C_SDA_OBUF}]
+add_wave -into {hw_ila_data_1.wcfg} -radix hex [get_hw_probes {bus/next}]
+add_wave -into {hw_ila_data_1.wcfg} -radix bin [get_hw_probes {I2C_SDA_TRI}]
+run_hw_ila hw_ila_1 -trigger_now
+INFO: [Labtools 27-1964] The ILA core 'hw_ila_1' trigger was armed at 2015-Sep-26 15:53:57
+run_hw_ila hw_ila_1
+INFO: [Labtools 27-1964] The ILA core 'hw_ila_1' trigger was armed at 2015-Sep-26 15:54:00
+run_hw_ila hw_ila_1 -trigger_now
+INFO: [Labtools 27-1964] The ILA core 'hw_ila_1' trigger was armed at 2015-Sep-26 15:54:03
+run_hw_ila hw_ila_1 -trigger_now
+INFO: [Labtools 27-1964] The ILA core 'hw_ila_1' trigger was armed at 2015-Sep-26 15:54:03
+run_hw_ila hw_ila_1 -trigger_now
+INFO: [Labtools 27-1964] The ILA core 'hw_ila_1' trigger was armed at 2015-Sep-26 15:54:07
+run_hw_ila hw_ila_1 -trigger_now
+INFO: [Labtools 27-1964] The ILA core 'hw_ila_1' trigger was armed at 2015-Sep-26 15:54:09
+run_hw_ila hw_ila_1 -trigger_now
+INFO: [Labtools 27-1964] The ILA core 'hw_ila_1' trigger was armed at 2015-Sep-26 15:54:10
+run_hw_ila hw_ila_1 -trigger_now
+INFO: [Labtools 27-1964] The ILA core 'hw_ila_1' trigger was armed at 2015-Sep-26 15:54:11
+run_hw_ila hw_ila_1 -trigger_now
+INFO: [Labtools 27-1964] The ILA core 'hw_ila_1' trigger was armed at 2015-Sep-26 15:54:13
+run_hw_ila hw_ila_1 -trigger_now
+ERROR: [Labtools 27-1395] Unable to arm ILA 'hw_ila_1'. The core clock is slow or no core clock connected for this ILA or the ILA core may not meet timing.
+run_hw_ila hw_ila_1 -trigger_now
+INFO: [Labtools 27-1964] The ILA core 'hw_ila_1' trigger was armed at 2015-Sep-26 15:54:17
+run_hw_ila hw_ila_1 -trigger_now
+INFO: [Labtools 27-1964] The ILA core 'hw_ila_1' trigger was armed at 2015-Sep-26 15:54:18
+run_hw_ila hw_ila_1 -trigger_now
+INFO: [Labtools 27-1964] The ILA core 'hw_ila_1' trigger was armed at 2015-Sep-26 15:54:18
+run_hw_ila hw_ila_1 -trigger_now
+INFO: [Labtools 27-1964] The ILA core 'hw_ila_1' trigger was armed at 2015-Sep-26 15:54:19
+run_hw_ila hw_ila_1 -trigger_now
+INFO: [Labtools 27-1964] The ILA core 'hw_ila_1' trigger was armed at 2015-Sep-26 15:54:20
+run_hw_ila hw_ila_1 -trigger_now
+INFO: [Labtools 27-1964] The ILA core 'hw_ila_1' trigger was armed at 2015-Sep-26 15:54:20
+run_hw_ila hw_ila_1 -trigger_now
+ERROR: [Labtools 27-1395] Unable to arm ILA 'hw_ila_1'. The core clock is slow or no core clock connected for this ILA or the ILA core may not meet timing.
+run_hw_ila hw_ila_1
+INFO: [Labtools 27-1964] The ILA core 'hw_ila_1' trigger was armed at 2015-Sep-26 15:54:24
+run_hw_ila hw_ila_1 -trigger_now
+INFO: [Labtools 27-1964] The ILA core 'hw_ila_1' trigger was armed at 2015-Sep-26 15:54:25
+run_hw_ila hw_ila_1
+INFO: [Labtools 27-1964] The ILA core 'hw_ila_1' trigger was armed at 2015-Sep-26 15:54:27
+run_hw_ila hw_ila_1 -trigger_now
+INFO: [Labtools 27-1964] The ILA core 'hw_ila_1' trigger was armed at 2015-Sep-26 15:54:27
+run_hw_ila hw_ila_1
+INFO: [Labtools 27-1964] The ILA core 'hw_ila_1' trigger was armed at 2015-Sep-26 15:54:28
+set_property TRIGGER_COMPARE_VALUE eq2'b00 [get_hw_probes bus/next -of_objects [get_hw_ilas hw_ila_1]]
+run_hw_ila hw_ila_1
+INFO: [Labtools 27-1964] The ILA core 'hw_ila_1' trigger was armed at 2015-Sep-26 15:54:47
+run_hw_ila hw_ila_1 -trigger_now
+INFO: [Labtools 27-1964] The ILA core 'hw_ila_1' trigger was armed at 2015-Sep-26 15:54:48
+run_hw_ila hw_ila_1 -trigger_now
+INFO: [Labtools 27-1964] The ILA core 'hw_ila_1' trigger was armed at 2015-Sep-26 15:54:49
+run_hw_ila hw_ila_1 -trigger_now
+INFO: [Labtools 27-1964] The ILA core 'hw_ila_1' trigger was armed at 2015-Sep-26 15:54:49
+run_hw_ila hw_ila_1 -trigger_now
+INFO: [Labtools 27-1964] The ILA core 'hw_ila_1' trigger was armed at 2015-Sep-26 15:54:50
+run_hw_ila hw_ila_1 -trigger_now
+INFO: [Labtools 27-1964] The ILA core 'hw_ila_1' trigger was armed at 2015-Sep-26 15:54:50
+run_hw_ila hw_ila_1 -trigger_now
+INFO: [Labtools 27-1964] The ILA core 'hw_ila_1' trigger was armed at 2015-Sep-26 15:54:51
+run_hw_ila hw_ila_1 -trigger_now
+ERROR: [Labtools 27-1395] Unable to arm ILA 'hw_ila_1'. The core clock is slow or no core clock connected for this ILA or the ILA core may not meet timing.
+save_wave_config {/afs/ece.cmu.edu/usr/sohils/Private/18545/hdmi_test/hdmi_test.hw/hw_1/wave/hw_ila_data_1/hw_ila_data_1.wcfg}
+exit
+INFO: [Common 17-206] Exiting Vivado at Sat Sep 26 15:55:33 2015...
