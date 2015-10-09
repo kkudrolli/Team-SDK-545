@@ -20,7 +20,7 @@
 #include "tile.h"
 
 //#define DEBUG
-#define TEST_PICS_DIR "../sw/camera/pics/"
+#define TEST_PICS_DIR "digits/"
 
 int main() 
 {
@@ -84,6 +84,16 @@ int main()
             /* Read bitmap data */
             vector_t image_data = read_bitmap(full_path);
             // TODO: call network here...
+	    printf("Evaluating file: %s\n\n", filename);
+
+	    vector_t results = evaluate_image(image_data);
+
+	    printf("Results of neural propogation:\n");
+	    for (int i = 0; i < results->length; i++) {
+	      printf("Data[%d]: %d\n", i, results->data[i]);
+	    }
+	
+	    vector_destroy(results);
             vector_destroy(image_data);
         }
     }

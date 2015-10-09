@@ -18,7 +18,6 @@
 typedef vector_t** weightfile_t;
 
 weightfile_t initWeights(uint32_t numLayersPlusOne, ...);
-
 /**
  * Returns wegiht vector for dest_neuron.
  */
