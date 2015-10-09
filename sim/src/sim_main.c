@@ -19,7 +19,7 @@
 #include "err_wrappers.h"
 #include "tile.h"
 
-//#define DEBUG
+#define DEBUG
 #define TEST_PICS_DIR "../sw/camera/pics/"
 
 int main() 
