@@ -9,8 +9,12 @@
 /**
  * NOTE: Remember to free returned weightfile.
  *
- * ex) initWeights(4, 100, 1024, 512, 256) when image size is 10x10
- * 4: the number of layers + 1, think this number as the number of arguments after it.
+ * ex) initWeights(parameter)
+ * parameter->data[0]=100
+ * parameter->data[1]=1024
+ * parameter->data[2]=512
+ * parameter->data[3]=256
+ * parameter->length=4
  * 100 : the number of pixels
  */
 weightfile_t initWeights(vector_t parameter){
@@ -77,9 +81,7 @@ void setWeights(weightfile_t weightfile, uint32_t layer, uint32_t dest_neuron, v
 }
 
 /**
- * ex) freeWeightfile(weightfile, 4, 100, 1024, 512, 256) when image size is 10x10
- * 4: the number of layers + 1, think this number as the number of arguments after it.
- * 100: the number of pixels
+ * Frees weightfile struct
  */
 void freeWeightfile(weightfile_t weightfile){
     uint32_t i,j,numNeurons_currLayer,numPixels,numLayers;
