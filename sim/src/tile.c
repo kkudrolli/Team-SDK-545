@@ -64,6 +64,26 @@ neuron_t Neuron(uint32_t input_len, uint32_t (*activation_fn)(uint32_t)) {
   return neuron;
 }
 
+network_t Network(uint32_t num_layers, uint32_t num_inputs, uint32_t num_outputs, 
+		  uint32_t (*activation_fn)(uint32_t)) {
+  assert(num_layers > 0);
+  assert(num_inputs > 0);
+  assert(num_outputs > 0);
+
+  network_t network = Malloc(sizeof(struct network));
+  network->num_layers = num_layers;
+  network->tiles = Calloc(sizeof(tile_t), num_layers);
+
+  network->tiles[0] = Tile(NEURONS_PER_TILE, num_inputs, activation_fn, 0);
+  uint32_t i;
+  for (i = 1; i < num_layers-1; i++) {
+    network->tiles[i] = Tile(NEURONS_PER_TILE, NEURONS_PER_TILE, activation_fn, i);
+  }
+  network->tiles[i] = Tile(num_outputs, NEURONS_PER_TILE, activation_fn, i);
+
+  return network;
+}
+
 /**
  * Computes the output of a neuron given its activation function by performing a 
  * vector dot product of the input and weights. This is then summed and 
@@ -82,14 +102,8 @@ uint32_t linear_interpolation(uint32_t input) {
   return input;
 }
 
-vector_t evaluate_image (vector_t image) {
-  tile_t tile_in = Tile(NEURONS_PER_TILE, image->length, &linear_interpolation, 0);
-  tile_t tile_h1 = Tile(NEURONS_PER_TILE, NEURONS_PER_TILE, &linear_interpolation, 1);
-  tile_t tile_h2 = Tile(NEURONS_PER_TILE, NEURONS_PER_TILE, &linear_interpolation, 2);
-  tile_t tile_out = Tile(10, NEURONS_PER_TILE, &linear_interpolation, 3);
-
-  weightfile_t weights = initWeights(5, image->length, NEURONS_PER_TILE, NEURONS_PER_TILE, 
-				     NEURONS_PER_TILE, NEURONS_PER_TILE);
+vector_t evaluate_image (network_t network, vector_t image) {
+  weightfile_t weights = initWeights(vector_t param);
 
   printf("Propogating tile 1...");
   vector_t data = evaluate_tile(tile_in, image, weights);
@@ -108,8 +122,7 @@ vector_t evaluate_image (vector_t image) {
   tile_destroy(tile_h1);
   tile_destroy(tile_h2);
   tile_destroy(tile_out);
-  freeWeightfile(weights, 5, image->length, NEURONS_PER_TILE, NEURONS_PER_TILE, NEURONS_PER_TILE, 
-		 NEURONS_PER_TILE);
+  freeWeightfile(weights);
 
   return data3;
 }

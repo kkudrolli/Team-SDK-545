@@ -26,6 +26,8 @@ weightfile_t initWeights(uint32_t numLayersPlusOne, ...){
     numLayers = numLayersPlusOne-1;
     //printf("numPixels=%d\n",numPixels);
 
+    numNeurons_prevLayer = 0;
+
     weightfile_t weightfile = (weightfile_t) Malloc(sizeof(vector_t*)*(numLayers));
     for (i=0 ; i<numLayers; i++){
         numNeurons_currLayer = va_arg(arguments, uint32_t);
