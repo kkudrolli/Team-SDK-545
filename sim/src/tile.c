@@ -73,7 +73,7 @@ network_t Network(uint32_t num_layers, uint32_t num_inputs, uint32_t num_outputs
   printf("Creating network...\n");
   network_t network = Malloc(sizeof(struct network));
   network->num_layers = num_layers;
-  network->tiles = Calloc(sizeof(tile_t), num_layers);
+  network->tiles = Calloc(num_layers, sizeof(tile_t));
 
   uint32_t i;
 
