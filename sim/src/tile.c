@@ -7,20 +7,20 @@
  */
 
 #include "tile.h"
-#include "err_wrappers.h"
 
 /**
  * Constructor for a tile: allocates space for tile, sets parameters, and 
  * creates neurons associated with tile. 
  */
 tile_t Tile(uint32_t num_neurons, uint32_t num_inputs, uint32_t num_outputs, 
-	    uint32_t (*activation_fn)(uint32_t)) {
+	    uint32_t (*activation_fn)(uint32_t), uint32_t tile_index) {
   tile_t tile = Malloc(sizeof(struct tile));
 
   tile->num_neurons = num_neurons;
   tile->num_inputs = num_inputs;
   tile->num_outputs = num_outputs;
   tile->neurons = Calloc(num_neurons, sizeof(neuron_t));
+  tile->tile_index = tile_index;
 
   for (uint32_t i = 0; i < num_neurons; ++i) {
     neuron_t neuron = Neuron(num_inputs, activation_fn);    
@@ -43,10 +43,10 @@ void tile_destroy(tile_t tile) {
   Free(tile);
 }
 
-vector_t evaluate_tile(tile_t tile, vector_t input, vector_t weights) {
-  vector_t v = Vector(tile->num_inputs);
+vector_t evaluate_tile(tile_t tile, vector_t input, weightfile_t weights) {
+  vector_t v = Vector(tile->num_outputs);
   for (uint32_t i = 0; i < tile->num_neurons; ++i) {
-    v->data[i] = evaluate_neuron(tile->neurons[i], input, weights);
+    v->data[i] = evaluate_neuron(tile->neurons[i], input, getWeights(weights, tile->tile_index, i));
   }
   return v;
 }
@@ -71,7 +71,7 @@ neuron_t Neuron(uint32_t input_len, uint32_t (*activation_fn)(uint32_t)) {
  * passed through the activation function. 
  */
 uint32_t evaluate_neuron(neuron_t neuron, vector_t input, vector_t weights) {
-  uint32_t sum = vmad(input, weights);  
+  uint32_t sum = vmad(input, weights);
   return (neuron->activation_fn)(sum);
 }
 
@@ -84,36 +84,33 @@ uint32_t linear_interpolation(uint32_t input) {
 }
 
 vector_t evaluate_image (vector_t image) {
-  tile_t tile_in = Tile(NEURONS_PER_TILE, NEURONS_PER_TILE, NEURONS_PER_TILE, &linear_interpolation);
-  tile_t tile_h1 = Tile(NEURONS_PER_TILE, NEURONS_PER_TILE, NEURONS_PER_TILE, &linear_interpolation);
-  tile_t tile_h2 = Tile(NEURONS_PER_TILE, NEURONS_PER_TILE, NEURONS_PER_TILE, &linear_interpolation);
-  tile_t tile_out = Tile(10, NEURONS_PER_TILE, 10, &linear_interpolation);
+  tile_t tile_in = Tile(NEURONS_PER_TILE, image->length, NEURONS_PER_TILE, &linear_interpolation, 0);
+  tile_t tile_h1 = Tile(NEURONS_PER_TILE, NEURONS_PER_TILE, NEURONS_PER_TILE, &linear_interpolation, 1);
+  tile_t tile_h2 = Tile(NEURONS_PER_TILE, NEURONS_PER_TILE, NEURONS_PER_TILE, &linear_interpolation, 2);
+  tile_t tile_out = Tile(NEURONS_PER_TILE, NEURONS_PER_TILE, NEURONS_PER_TILE, &linear_interpolation, 3);
 
-  vector_t weights = Vector(NEURONS_PER_TILE);
-  vector_t weights1 = Vector(NEURONS_PER_TILE);
-  vector_t weights2 = Vector(NEURONS_PER_TILE);
-  vector_t weights3 = Vector(NEURONS_PER_TILE);
+  weightfile_t weights = initWeights(5, image->length, NEURONS_PER_TILE, NEURONS_PER_TILE, 
+				     NEURONS_PER_TILE, NEURONS_PER_TILE);
 
-  for (uint32_t i = 0; i < NEURONS_PER_TILE; ++i) {
-    weights->data[i] = NEURONS_PER_TILE - i;
-  }
-
+  printf("Propogating tile 1...");
   vector_t data = evaluate_tile(tile_in, image, weights);
+  printf("done!\nPropogating tile 2...");
   vector_t data1 = evaluate_tile(tile_h1, data, weights);
+  printf("done!\nPropogating tile 3...");
   vector_t data2 = evaluate_tile(tile_h2, data1, weights);
+  printf("done!\nPropogating tile 4...");
   vector_t data3 = evaluate_tile(tile_out, data2, weights);
+  printf("done!\n\nAll tiles propogated!\n\n");
 
   vector_destroy(data);
   vector_destroy(data1);
   vector_destroy(data2);
-  vector_destroy(weights);
-  vector_destroy(weights1);
-  vector_destroy(weights2);
-  vector_destroy(weights3);
   tile_destroy(tile_in);
   tile_destroy(tile_h1);
   tile_destroy(tile_h2);
   tile_destroy(tile_out);
+  freeWeightfile(weights, 5, image->length, NEURONS_PER_TILE, NEURONS_PER_TILE, NEURONS_PER_TILE, 
+		 NEURONS_PER_TILE);
 
   return data3;
 }

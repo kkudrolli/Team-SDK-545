@@ -84,6 +84,26 @@ int main()
             /* Read bitmap data */
             vector_t image_data = read_bitmap(full_path);
             // TODO: call network here...
+	    printf("Evaluating file: %s\n\n", filename);
+
+	    vector_t results = evaluate_image(image_data);
+	    
+	    char output_file[64];
+	    sprintf(output_file, "results_%s.txt", filename);
+
+	    FILE *f = fopen(output_file, "w");
+
+	    printf("Results of neural propogation stored in %s\n", output_file);
+
+	    for (int i = 0; i < results->length; i++) {
+	      char string[64];
+	      sprintf(string, "Data[%d]: %d\n", i, results->data[i]);
+	      fputs(string, f);
+	    }
+	
+	    close(f);
+
+	    vector_destroy(results);
             vector_destroy(image_data);
         }
     }
