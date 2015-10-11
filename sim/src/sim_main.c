@@ -19,7 +19,8 @@
 #include "err_wrappers.h"
 #include "tile.h"
 
-//#define DEBUG
+#define DEBUG
+//#define TEST_PICS_DIR "../sw/camera/pics/"
 #define TEST_PICS_DIR "digits/"
 
 int main() 
@@ -83,7 +84,6 @@ int main()
 
             /* Read bitmap data */
             vector_t image_data = read_bitmap(full_path);
-            // TODO: call network here...
 	    printf("Evaluating file: %s\n\n", filename);
 
 	    vector_t results = evaluate_image(image_data);
@@ -95,7 +95,7 @@ int main()
 
 	    printf("Results of neural propogation stored in %s\n", output_file);
 
-	    for (int i = 0; i < results->length; i++) {
+	    for (uint32_t i = 0; i < results->length; i++) {
 	      char string[64];
 	      sprintf(string, "Data[%d]: %u\n", i, results->data[i]);
 	      fputs(string, f);
