@@ -15,7 +15,7 @@
 #include "vector.h"
 #include "err_wrappers.h"
 
-#define MNIST_DBG
+//#define MNIST_DBG
 #define FILE_MODE         "rb"
 #define BYTE_SIZE         8
 #define WORD_BYTES        4
