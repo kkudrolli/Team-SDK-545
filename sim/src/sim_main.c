@@ -14,6 +14,7 @@
 #include <stdio.h>
 #include <stdint.h>
 #include <stdlib.h>
+#include "activation_fns.h"
 #include "mnist.h"
 #include "image_io.h"
 #include "err_wrappers.h"
@@ -70,6 +71,8 @@ int main()
         error_print("Directory error");
     }
 
+    network_t network = Network(4, 5625, 10, linear_fn);
+
     /* 
      * Loop over entries in directory, read each bitmap file,  and 
      * launch a neural network call for each bitmap image.
@@ -86,18 +89,18 @@ int main()
             vector_t image_data = read_bitmap(full_path);
 	    printf("Evaluating file: %s\n\n", filename);
 
-	    vector_t results = evaluate_image(image_data);
+	    vector_t results = evaluate_image(network, image_data);
 	    
 	    char output_file[64];
 	    sprintf(output_file, "results_%s.txt", filename);
 
-	    FILE *f = fopen(output_file, "w");
-
+	    FILE *f = Fopen(output_file, "w");
+	    
 	    printf("Results of neural propogation stored in %s\n", output_file);
 
 	    for (uint32_t i = 0; i < results->length; i++) {
 	      char string[64];
-	      sprintf(string, "Data[%d]: %d\n", i, results->data[i]);
+	      sprintf(string, "Data[%d]: %u\n", i, results->data[i]);
 	      fputs(string, f);
 	    }
 	

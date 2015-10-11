@@ -15,9 +15,13 @@
 #include "err_wrappers.h"
 #include "vector.h"
 
-typedef vector_t** weightfile_t;
+struct weightfile {
+  vector_t param;
+  vector_t **weights;
+}; 
+typedef struct weightfile* weightfile_t;
 
-weightfile_t initWeights(uint32_t numLayersPlusOne, ...);
+weightfile_t initWeights(vector_t param);
 
 /**
  * Returns wegiht vector for dest_neuron.
@@ -29,5 +33,5 @@ vector_t getWeights(weightfile_t weightfile, uint32_t layer, uint32_t dest_neuro
  */
 void setWeights(weightfile_t weightfile, uint32_t layer, uint32_t dest_neuron, vector_t weights);
 
-void freeWeightfile(weightfile_t weightfile, uint32_t numLayersPlusOne, ...);
+void freeWeightfile(weightfile_t weightfile);
 #endif
