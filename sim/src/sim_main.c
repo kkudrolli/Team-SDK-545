@@ -20,7 +20,8 @@
 #include "tile.h"
 
 #define DEBUG
-#define TEST_PICS_DIR "../sw/camera/pics/"
+//#define TEST_PICS_DIR "../sw/camera/pics/"
+#define TEST_PICS_DIR "digits/"
 
 int main() 
 {
@@ -95,13 +96,13 @@ int main()
 
 	    printf("Results of neural propogation stored in %s\n", output_file);
 
-	    for (int i = 0; i < results->length; i++) {
+	    for (uint32_t i = 0; i < results->length; i++) {
 	      char string[64];
 	      sprintf(string, "Data[%d]: %d\n", i, results->data[i]);
 	      fputs(string, f);
 	    }
 	
-	    close(f);
+	    Fclose(f);
 
 	    vector_destroy(results);
             vector_destroy(image_data);

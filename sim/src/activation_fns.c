@@ -82,7 +82,7 @@ uint32_t tan_sigmoid_drv(uint32_t in)
     return 1 - ipow(tan_sigmoid_fn(in), 2);
 }
 
-int main (void) 
+/*int main (void) 
 {
     assert(ipow(1, 2) == 1);
     assert(ipow(0, 2) == 0);
@@ -91,6 +91,6 @@ int main (void)
     assert(ipow(17, 2) == 289);
     printf("Finished tests!\n");
     return 0;
-}
+}*/
 
 
