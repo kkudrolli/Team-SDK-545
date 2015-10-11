@@ -19,7 +19,7 @@ struct weightfile {
   vector_t param;
   vector_t **weights;
 }; 
-typedef weightfile* weightfile_t;
+typedef struct weightfile* weightfile_t;
 
 weightfile_t initWeights(vector_t param);
 
