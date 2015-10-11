@@ -44,7 +44,7 @@ void tile_destroy(tile_t tile) {
 }
 
 vector_t evaluate_tile(tile_t tile, vector_t input, weightfile_t weights) {
-  vector_t v = Vector(tile->num_inputs);
+  vector_t v = Vector(tile->num_outputs);
   for (uint32_t i = 0; i < tile->num_neurons; ++i) {
     v->data[i] = evaluate_neuron(tile->neurons[i], input, getWeights(weights, tile->tile_index, i));
   }
