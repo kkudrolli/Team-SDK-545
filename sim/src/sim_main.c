@@ -111,6 +111,8 @@ int main()
         }
     }
 
+    network_destroy(network);
+
     Closedir(dir_ptr);
     return 0;
 }

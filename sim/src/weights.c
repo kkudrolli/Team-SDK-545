@@ -30,10 +30,10 @@ weightfile_t initWeights(vector_t parameter){
     numNeurons_prevLayer = 0;
 
     weightfile_t weightfile = (weightfile_t) Malloc(sizeof(struct weightfile));
-    weightfile->param = Vector(parameter->length); // malloc param part
+    weightfile->param = parameter;/*
     for(i=0; i<(parameter->length); i++){
         weightfile->param->data[i] = parameter->data[i];
-    }
+	}*/
     weightfile->weights = (vector_t**) Malloc(sizeof(vector_t*)*(numLayers)); // malloc weights part
 
     for (i=0 ; i<numLayers; i++){
@@ -148,4 +148,5 @@ int main(){
    
     return 0;
 }
+
 */
