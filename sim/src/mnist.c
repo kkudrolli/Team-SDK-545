@@ -110,11 +110,12 @@ mnist_images_t read_images(uint32_t train)
         }
 
         // Move 8 bit data to 32 bit integer for more precision
-        uint32_t *vector_data = (uint32_t*) Calloc(img_size, sizeof(uint32_t));
+        //uint32_t *vector_data = (uint32_t*) Calloc(img_size, sizeof(uint32_t));
+        assert(image_bytes);
+        assert(mnist_data);
         for (uint32_t j = 0; j < img_size; j++) {
-            vector_data[j] = (uint32_t) image_bytes[j];
+            mnist_data[i]->data[j] = (uint32_t) image_bytes[j];
         }
-        mnist_data[i]->data = vector_data;
         Free(image_bytes);
     }
 

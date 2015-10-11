@@ -123,14 +123,15 @@ vector_t read_bitmap(char *filename)
     // TODO: remove every 10th byte
 
     vector_t vec = Vector((size_t) (num_bytes / NUM_BYTES_IN_PIX));
-    uint32_t *vector_data = (uint32_t*) Calloc(num_bytes / NUM_BYTES_IN_PIX, 
-            sizeof(uint32_t));
+    //uint32_t *vector_data = (uint32_t*) Calloc(num_bytes / NUM_BYTES_IN_PIX, 
+    //        sizeof(uint32_t));
     /* Copy over image data into vectro data and set the vector's data */
-    for (uint32_t i = 0; i < num_bytes / NUM_BYTES_IN_PIX; i++) {
-        vector_data[i] = (uint32_t) reduced_image[i];
-    }
     assert(vec);
-    vec->data = vector_data;
+    for (uint32_t i = 0; i < num_bytes / NUM_BYTES_IN_PIX; i++) {
+        assert(vec->data);
+        assert(reduced_image);
+        vec->data[i] = (uint32_t) reduced_image[i];
+    }
 
 #ifdef IMAGE_IO_DBG
     printf("VECTOR DATA: Length: %zu\n[ ", vec->length);
