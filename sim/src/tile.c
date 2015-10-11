@@ -89,7 +89,8 @@ vector_t evaluate_image (vector_t image) {
   tile_t tile_h2 = Tile(NEURONS_PER_TILE, NEURONS_PER_TILE, NEURONS_PER_TILE, &linear_interpolation, 2);
   tile_t tile_out = Tile(NEURONS_PER_TILE, NEURONS_PER_TILE, NEURONS_PER_TILE, &linear_interpolation, 3);
 
-  weightfile_t weights = initWeights(4, image->length, NEURONS_PER_TILE, NEURONS_PER_TILE, NEURONS_PER_TILE, NEURONS_PER_TILE);
+  weightfile_t weights = initWeights(5, image->length, NEURONS_PER_TILE, NEURONS_PER_TILE, 
+				     NEURONS_PER_TILE, NEURONS_PER_TILE);
 
   printf("Propogating tile 1...");
   vector_t data = evaluate_tile(tile_in, image, weights);
@@ -108,7 +109,8 @@ vector_t evaluate_image (vector_t image) {
   tile_destroy(tile_h1);
   tile_destroy(tile_h2);
   tile_destroy(tile_out);
-  freeWeightfile(weights, 4, image->length, NEURONS_PER_TILE, NEURONS_PER_TILE, NEURONS_PER_TILE, NEURONS_PER_TILE);
+  freeWeightfile(weights, 5, image->length, NEURONS_PER_TILE, NEURONS_PER_TILE, NEURONS_PER_TILE, 
+		 NEURONS_PER_TILE);
 
   return data3;
 }
