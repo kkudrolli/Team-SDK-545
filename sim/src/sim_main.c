@@ -91,17 +91,17 @@ int main()
 	    char output_file[64];
 	    sprintf(output_file, "results_%s.txt", filename);
 
-	    FILE *f = fopen(output_file, "w");
+	    FILE *f = Fopen(output_file, "w");
 
 	    printf("Results of neural propogation stored in %s\n", output_file);
 
 	    for (int i = 0; i < results->length; i++) {
 	      char string[64];
-	      sprintf(string, "Data[%d]: %d\n", i, results->data[i]);
+	      sprintf(string, "Data[%d]: %u\n", i, results->data[i]);
 	      fputs(string, f);
 	    }
 	
-	    close(f);
+	    Fclose(f);
 
 	    vector_destroy(results);
             vector_destroy(image_data);

@@ -12,13 +12,12 @@
  * Constructor for a tile: allocates space for tile, sets parameters, and 
  * creates neurons associated with tile. 
  */
-tile_t Tile(uint32_t num_neurons, uint32_t num_inputs, uint32_t num_outputs, 
+tile_t Tile(uint32_t num_neurons, uint32_t num_inputs, 
 	    uint32_t (*activation_fn)(uint32_t), uint32_t tile_index) {
   tile_t tile = Malloc(sizeof(struct tile));
 
   tile->num_neurons = num_neurons;
   tile->num_inputs = num_inputs;
-  tile->num_outputs = num_outputs;
   tile->neurons = Calloc(num_neurons, sizeof(neuron_t));
   tile->tile_index = tile_index;
 
@@ -44,7 +43,7 @@ void tile_destroy(tile_t tile) {
 }
 
 vector_t evaluate_tile(tile_t tile, vector_t input, weightfile_t weights) {
-  vector_t v = Vector(tile->num_outputs);
+  vector_t v = Vector(tile->num_neurons);
   for (uint32_t i = 0; i < tile->num_neurons; ++i) {
     v->data[i] = evaluate_neuron(tile->neurons[i], input, getWeights(weights, tile->tile_index, i));
   }
@@ -84,10 +83,10 @@ uint32_t linear_interpolation(uint32_t input) {
 }
 
 vector_t evaluate_image (vector_t image) {
-  tile_t tile_in = Tile(NEURONS_PER_TILE, image->length, NEURONS_PER_TILE, &linear_interpolation, 0);
-  tile_t tile_h1 = Tile(NEURONS_PER_TILE, NEURONS_PER_TILE, NEURONS_PER_TILE, &linear_interpolation, 1);
-  tile_t tile_h2 = Tile(NEURONS_PER_TILE, NEURONS_PER_TILE, NEURONS_PER_TILE, &linear_interpolation, 2);
-  tile_t tile_out = Tile(NEURONS_PER_TILE, NEURONS_PER_TILE, NEURONS_PER_TILE, &linear_interpolation, 3);
+  tile_t tile_in = Tile(NEURONS_PER_TILE, image->length, &linear_interpolation, 0);
+  tile_t tile_h1 = Tile(NEURONS_PER_TILE, NEURONS_PER_TILE, &linear_interpolation, 1);
+  tile_t tile_h2 = Tile(NEURONS_PER_TILE, NEURONS_PER_TILE, &linear_interpolation, 2);
+  tile_t tile_out = Tile(10, NEURONS_PER_TILE, &linear_interpolation, 3);
 
   weightfile_t weights = initWeights(5, image->length, NEURONS_PER_TILE, NEURONS_PER_TILE, 
 				     NEURONS_PER_TILE, NEURONS_PER_TILE);

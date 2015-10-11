@@ -47,7 +47,6 @@ typedef struct neuron* neuron_t;
 struct tile {
   uint32_t num_neurons;
   uint32_t num_inputs;
-  uint32_t num_outputs;
   uint32_t tile_index;
   neuron_t *neurons;
 };
@@ -59,7 +58,7 @@ typedef struct tile* tile_t;
  * parameters. tile_destroy is used to free allocated space and destroy 
  * tile and its neurons. 
  */
-tile_t Tile(uint32_t num_neurons, uint32_t num_inputs, uint32_t num_outputs, 
+tile_t Tile(uint32_t num_neurons, uint32_t num_inputs,
 	    uint32_t (*activation_fn)(uint32_t), uint32_t tile_index);
 vector_t evaluate_tile(tile_t tile, vector_t input, weightfile_t weights);
 void tile_destroy(tile_t tile);
