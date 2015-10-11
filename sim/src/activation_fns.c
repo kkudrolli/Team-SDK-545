@@ -70,6 +70,10 @@ uint32_t tan_sigmoid_fn(uint32_t in)
     
 }
 
+uint32_t linear_fn(uint32_t in) {
+  return in;
+}
+
 uint32_t log_sigmoid_drv(uint32_t in)
 {
     // dF/dt = B * (F(B,in) * (1-F(B, in)))
