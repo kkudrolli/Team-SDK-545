@@ -89,6 +89,7 @@ int main()
 
             /* Read bitmap data */
             vector_t image_data = read_bitmap(full_path);
+            printf("-------------------------------------\n");
 	    printf("Evaluating file: %s\n\n", filename);
 
 	    vector_t results = evaluate_image(network, image_data);

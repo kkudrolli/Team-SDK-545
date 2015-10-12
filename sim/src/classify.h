@@ -12,7 +12,8 @@
 #include <math.h>
 #include "vector.h"
 
-#define BETA 0.00000001
+#define BETA 0.00000001 // Can play around with this
+                        // to handle larger numbers
 
 /* 
  * Classifies output of neural network to a handwritten digit.

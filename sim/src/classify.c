@@ -46,7 +46,7 @@ uint32_t classify(vector_t net_out)
     uint32_t* data = net_out->data;
 
     // Prints out the confidence in each digit
-    printf("CLASSIFICATION: \n");
+    printf("\nCLASSIFICATION: \n");
     printf("# Conf    Digit\n");
     printf("- ------- -----\n");
     for (size_t i = 0; i < length; i++) {
@@ -57,9 +57,9 @@ uint32_t classify(vector_t net_out)
             prediction = i;
             conf = new_conf;
         }
-        printf("%zu %-7.5f %d\n", i, new_conf, data[i]);
+        printf("%zu %-7.5f %u\n", i, new_conf, data[i]);
     }
-    printf("Prediction: %d\n", prediction);
+    printf("Prediction: %d\n\n", prediction);
 
     return prediction;
 }
