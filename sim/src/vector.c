@@ -63,3 +63,19 @@ uint32_t vmad(vector_t v1, vector_t v2) {
   
   return sum;
 }
+
+/**
+ * Addition of two vectors.
+ * NOTE: Remember to free returned vector.
+ */
+vector_t vadd(vector_t v1, vector_t v2) {
+  assert(v1);
+  assert(v2);
+  assert(v1->length == v2->length);
+  vector_t v = Vector(v1->length);
+  
+  for (size_t i = 0; i < v->length; ++i) {
+    v->data[i] = v1->data[i] + v2->data[i];
+  }
+  return v;
+}

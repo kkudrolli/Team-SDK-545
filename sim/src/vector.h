@@ -45,4 +45,7 @@ vector_t vmult(vector_t v1, vector_t v2);
 /** Vector multiply-add: dot product then sum values */
 uint32_t vmad(vector_t v1, vector_t v2);
 
+/** Vector addition */
+vector_t vadd(vector_t v1, vector_t v2);
+
 #endif

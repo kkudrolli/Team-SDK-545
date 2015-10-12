@@ -30,10 +30,7 @@ weightfile_t initWeights(vector_t parameter){
     numNeurons_prevLayer = 0;
 
     weightfile_t weightfile = (weightfile_t) Malloc(sizeof(struct weightfile));
-    weightfile->param = parameter;/*
-    for(i=0; i<(parameter->length); i++){
-        weightfile->param->data[i] = parameter->data[i];
-	}*/
+    weightfile->param = parameter; // holds the number of layer, how many neurons exist for each layer
     weightfile->weights = (vector_t**) Malloc(sizeof(vector_t*)*(numLayers)); // malloc weights part
 
     for (i=0 ; i<numLayers; i++){
@@ -69,6 +66,21 @@ vector_t getWeights(weightfile_t weightfile, uint32_t layer, uint32_t dest_neuro
 }
 
 /**
+ * Returns weight vector for src_neuron.
+ * NOTE: Remember to free generated weights.
+ */
+vector_t getWeightsFromSrc(weightfile_t weightfile, uint32_t src_layer, uint32_t src_neuron){
+    assert(src_layer+1 < weightfile->param->length);
+    uint32_t i,destNeuronLength;
+    destNeuronLength = weightfile->param->data[src_layer+1]; // 1024
+    vector_t weights = Vector(destNeuronLength);
+    for(i=0; i<destNeuronLength; i++){ // 1024
+        weights->data[i] = getWeights(weightfile,src_layer,i)->data[src_neuron];
+    }
+    return weights;
+}
+
+/**
  * Sets weights for dest_neuron.
  */
 void setWeights(weightfile_t weightfile, uint32_t layer, uint32_t dest_neuron, vector_t weights){
@@ -77,7 +89,6 @@ void setWeights(weightfile_t weightfile, uint32_t layer, uint32_t dest_neuron, v
     for(size_t i = 0; i < weights->length; i++){
         weightfile->weights[layer][dest_neuron]->data[i] = weights->data[i];
     }
-    //weightfile->weights[layer][dest_neuron]->length = weights->length;
 }
 
 /**
@@ -104,6 +115,22 @@ void freeWeightfile(weightfile_t weightfile){
     Free(weightfile);
 }
 
+/**
+ * Update weightfile for a specific layer
+ */
+void updateWeightfile(weightfile_t weightfile, uint32_t layer, vector_t* deltaWeights_l){
+    uint32_t j,k,numNeurons_dest;
+    vector_t weights;
+    vector_t newWeights;
+    numNeurons_dest  = weightfile->param->data[layer];
+
+    for(j=0; j<numNeurons_dest; j++){
+        weights = getWeights(weightfile,layer,j);
+        newWeights = vadd(weights,deltaWeights_l[j]);
+        setWeights(weightfile,layer,j,newWeights);
+    }
+    vector_destroy(newWeights); // NOT SURE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+}
 
 /**
  * TEST
@@ -129,24 +156,32 @@ int main(){
     weights->data[0] = 100;
     weights->data[1] = 101;
     weights->data[2] = 102;
+    setWeights(weightfile,0,0,weights);
+    setWeights(weightfile,0,1,weights); 
+ 
     setWeights(weightfile,0,1023,weights);
     setWeights(weightfile,0,1022,weights);
     setWeights(weightfile,0,1021,weights);
 
     printf("getWeights(weightfile,0,1023)->data[0]=%d\n",getWeights(weightfile,0,1023)->data[0]);
     printf("getWeights(weightfile,0,1023)->data[1]=%d\n",getWeights(weightfile,0,1023)->data[1]);
+    printf("getWeightsFromSrc,0,0->data[0]=%d\n",getWeightsFromSrc(weightfile, 0, 0)->data[0]);
+    printf("getWeightsFromSrc,0,0->data[1]=%d\n",getWeightsFromSrc(weightfile, 0, 0)->data[1]);
+    printf("getWeightsFromSrc,0,0->data[99]=%d\n",getWeightsFromSrc(weightfile, 0, 0)->data[99]);
+ 
     printf("get here1\n");
+
+
     vector_destroy(weights);
     printf("get here2\n");
  
-    vector_destroy(parameter);
-    printf("get here3\n");
  
     freeWeightfile(weightfile);
-    printf("get here4\n");
+    printf("get here3\n");
  
-   
+    vector_destroy(parameter);
+    printf("get here4\n");
+
     return 0;
 }
-
 */
