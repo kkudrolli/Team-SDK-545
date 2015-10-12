@@ -44,6 +44,7 @@ int main()
      * free all the things
      */
 
+  
     mnist_images_t mnist_data = read_images(0);
 #ifdef DEBUG
     printf("MNIST IMAGE:\n[ ");
@@ -114,6 +115,8 @@ int main()
     }
 
     network_destroy(network);
+    mnist_labels_destroy(mnist_labels);
+    mnist_images_destroy(mnist_data);
 
     Closedir(dir_ptr);
     return 0;

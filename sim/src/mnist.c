@@ -110,7 +110,6 @@ mnist_images_t read_images(uint32_t train)
         }
 
         // Move 8 bit data to 32 bit integer for more precision
-        //uint32_t *vector_data = (uint32_t*) Calloc(img_size, sizeof(uint32_t));
         assert(image_bytes);
         assert(mnist_data);
         for (uint32_t j = 0; j < img_size; j++) {
@@ -156,11 +155,9 @@ mnist_labels_t read_labels(uint32_t train)
         return NULL;
     }
 
-    uint32_t *vector_data = (uint32_t*) Calloc(num_labels, sizeof(uint32_t));
     for (uint32_t i = 0; i < num_labels; i++) {
-        vector_data[i] = (uint32_t) label_bytes[i];
+        lbls->data[i] = (uint32_t) label_bytes[i];
     }
-    lbls->data = vector_data;
 
     mnist_labels_t mnist_lbls = Mnist_labels((size_t) num_labels);
     mnist_lbls->labels = lbls;
@@ -173,7 +170,7 @@ mnist_labels_t read_labels(uint32_t train)
 
 mnist_images_t Mnist_images(size_t size) 
 {
-    mnist_images_t mnist_imgs = Malloc(sizeof(struct mnist_images *)); 
+    mnist_images_t mnist_imgs = Malloc(sizeof(struct mnist_images)); 
     mnist_imgs->size = size;
     return mnist_imgs;
 }
@@ -183,12 +180,13 @@ void mnist_images_destroy(mnist_images_t images)
     for (size_t i = 0; i < images->size; i++) {
         vector_destroy(images->imgs[i]);
     }
+    Free(images->imgs);
     Free(images);
 }
 
 mnist_labels_t Mnist_labels(size_t size)
 {
-    mnist_labels_t mnist_lbls = Malloc(sizeof(struct mnist_labels *));
+    mnist_labels_t mnist_lbls = Malloc(sizeof(struct mnist_labels));
     mnist_lbls->size = size;
     return mnist_lbls;
 }
