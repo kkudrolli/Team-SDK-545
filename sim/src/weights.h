@@ -33,5 +33,13 @@ vector_t getWeights(weightfile_t weightfile, uint32_t layer, uint32_t dest_neuro
  */
 void setWeights(weightfile_t weightfile, uint32_t layer, uint32_t dest_neuron, vector_t weights);
 
+/**
+ * Free weightfile
+ */
 void freeWeightfile(weightfile_t weightfile);
+
+/**
+ * Update weightfile wigh a given delta weights
+ */
+void updateWeightfile(weightfile_t weightfile, uint32_t layer, vector_t* deltaWeights_l);
 #endif

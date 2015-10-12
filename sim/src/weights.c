@@ -30,10 +30,7 @@ weightfile_t initWeights(vector_t parameter){
     numNeurons_prevLayer = 0;
 
     weightfile_t weightfile = (weightfile_t) Malloc(sizeof(struct weightfile));
-    weightfile->param = parameter;/*
-    for(i=0; i<(parameter->length); i++){
-        weightfile->param->data[i] = parameter->data[i];
-	}*/
+    weightfile->param = parameter; // holds the number of layer, how many neurons exist for each layer
     weightfile->weights = (vector_t**) Malloc(sizeof(vector_t*)*(numLayers)); // malloc weights part
 
     for (i=0 ; i<numLayers; i++){
@@ -77,7 +74,6 @@ void setWeights(weightfile_t weightfile, uint32_t layer, uint32_t dest_neuron, v
     for(size_t i = 0; i < weights->length; i++){
         weightfile->weights[layer][dest_neuron]->data[i] = weights->data[i];
     }
-    //weightfile->weights[layer][dest_neuron]->length = weights->length;
 }
 
 /**
@@ -104,6 +100,22 @@ void freeWeightfile(weightfile_t weightfile){
     Free(weightfile);
 }
 
+/**
+ * Update weightfile for a specific layer
+ */
+void updateWeightfile(weightfile_t weightfile, uint32_t layer, vector_t* deltaWeights_l){
+    uint32_t j,k,numNeurons_dest;
+    vector_t weights;
+    vector_t newWeights;
+    numNeurons_dest  = weightfile->param->data[layer];
+
+    for(j=0; j<numNeurons_dest; j++){
+        weights = getWeights(weightfile,layer,j);
+        newWeights = vadd(weights,deltaWeights_l[j]);
+        setWeights(weightfile,layer,j,newWeights);
+    }
+    vector_destroy(newWeights); // NOT SURE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+}
 
 /**
  * TEST
