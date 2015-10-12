@@ -15,7 +15,7 @@
 #include <stdint.h>
 #include <stdlib.h>
 #include "activation_fns.h"
-#include "mnist.h"
+//#include "mnist.h"
 #include "image_io.h"
 #include "err_wrappers.h"
 #include "tile.h"
@@ -23,7 +23,7 @@
 
 //#define DEBUG
 //#define TEST_PICS_DIR "../sw/camera/pics/"
-#define TEST_PICS_DIR "digits/"
+#define TEST_PICS_DIR "./"
 
 int main() 
 {
@@ -43,7 +43,7 @@ int main()
      *
      * free all the things
      */
-
+  /*
   
     mnist_images_t mnist_data = read_images(0);
 #ifdef DEBUG
@@ -63,7 +63,7 @@ int main()
     printf("]\n");
 #endif
 
-
+  */
     DIR *dir_ptr;
     struct dirent *entry_ptr = NULL;
 
@@ -73,7 +73,7 @@ int main()
         error_print("Directory error");
     }
 
-    network_t network = Network(4, 5625, 10, linear_fn);
+    network_t network = Network(4, 5625, 10, linear_fn, linear_fn_drv);
 
     /* 
      * Loop over entries in directory, read each bitmap file,  and 
@@ -92,9 +92,17 @@ int main()
             printf("-------------------------------------\n");
 	    printf("Evaluating file: %s\n\n", filename);
 
-	    vector_t results = evaluate_image(network, image_data);
-            classify(results);
-	    
+	    vector_t ideal = Vector(10);
+	    ideal->data[6] = 1 << 16;
+
+	    for (uint32_t i = 0; i < 10; i++) {
+	      vector_t results = evaluate_image(network, image_data);
+	      classify(results);
+	      backpropogate (network, image_data, ideal);
+	      vector_destroy(results);
+	    }
+	    vector_destroy(ideal);
+	    /*
 	    char output_file[64];
 	    sprintf(output_file, "results_%s.txt", filename);
 
@@ -110,15 +118,15 @@ int main()
 	
 	    Fclose(f);
 
-	    vector_destroy(results);
+	    vector_destroy(results);*/
             vector_destroy(image_data);
         }
     }
 
-    network_destroy(network);
+    network_destroy(network);/*
     mnist_labels_destroy(mnist_labels);
     mnist_images_destroy(mnist_data);
-
+			     */
     Closedir(dir_ptr);
     return 0;
 }

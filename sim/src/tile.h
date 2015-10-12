@@ -13,7 +13,7 @@
 #include "err_wrappers.h"
 #include "weights.h"
 
-#define NEURONS_PER_TILE (1<<14)
+#define NEURONS_PER_TILE (1<<10)
 
 /**
  * Basic structure of a neuron. Contains the following parameters:
@@ -54,6 +54,8 @@ typedef struct tile* tile_t;
 
 struct network {
   uint32_t num_layers;
+  uint32_t (*activation_fn)(uint32_t);
+  uint32_t (*activation_fn_drv)(uint32_t);
   weightfile_t weights;
   tile_t *tiles;
 }; 
@@ -79,7 +81,7 @@ neuron_t Neuron(uint32_t input_len, uint32_t (*activation_fn)(uint32_t));
 void neuron_destroy(neuron_t neuron);
 
 network_t Network(uint32_t num_layers, uint32_t num_inputs, uint32_t num_outputs, 
-		  uint32_t (*activation_fn)(uint32_t));
+		  uint32_t (*activation_fn)(uint32_t), uint32_t (*activation_fn_drv)(uint32_t));
 void network_destroy(network_t network);
 
 /**

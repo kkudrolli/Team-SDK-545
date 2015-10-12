@@ -21,13 +21,12 @@ uint32_t step_fn(uint32_t in);
 uint32_t lin_comb_fn(uint32_t in);
 uint32_t log_sigmoid_fn(uint32_t in);
 uint32_t tan_sigmoid_fn(uint32_t in);
-uint32_t linear_fn(uint32_t input);
+uint32_t linear_fn(uint32_t in);
 
 /* Their derivatives */
 uint32_t log_sigmoid_drv(uint32_t in);
 uint32_t tan_sigmoid_drv(uint32_t in);
-
-
+uint32_t linear_fn_drv(uint32_t in);
 
 
 #endif

@@ -65,7 +65,7 @@ neuron_t Neuron(uint32_t input_len, uint32_t (*activation_fn)(uint32_t)) {
 }
 
 network_t Network(uint32_t num_layers, uint32_t num_inputs, uint32_t num_outputs, 
-		  uint32_t (*activation_fn)(uint32_t)) {
+		  uint32_t (*activation_fn)(uint32_t), uint32_t (*activation_fn_drv)(uint32_t)) {
   assert(num_layers > 0);
   assert(num_inputs > 0);
   assert(num_outputs > 0);
@@ -74,6 +74,8 @@ network_t Network(uint32_t num_layers, uint32_t num_inputs, uint32_t num_outputs
   network_t network = Malloc(sizeof(struct network));
   network->num_layers = num_layers;
   network->tiles = Calloc(num_layers, sizeof(tile_t));
+  network->activation_fn_drv = activation_fn_drv;
+  network->activation_fn = activation_fn;
 
   uint32_t i;
 

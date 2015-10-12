@@ -86,6 +86,11 @@ uint32_t tan_sigmoid_drv(uint32_t in)
     return 1 - ipow(tan_sigmoid_fn(in), 2);
 }
 
+uint32_t linear_fn_drv(uint32_t in) {
+  (void) in;
+  return 1;
+}
+
 /*int main (void) 
 {
     assert(ipow(1, 2) == 1);

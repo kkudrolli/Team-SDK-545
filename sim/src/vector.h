@@ -44,6 +44,8 @@ void vector_destroy(vector_t vector);
 vector_t vmult(vector_t v1, vector_t v2);
 /** Vector multiply-add: dot product then sum values */
 uint32_t vmad(vector_t v1, vector_t v2);
+vector_t *vouter(vector_t v1, vector_t v2);
+vector_t vsub(vector_t v1, vector_t v2);
 
 /** Vector addition */
 vector_t vadd(vector_t v1, vector_t v2);
