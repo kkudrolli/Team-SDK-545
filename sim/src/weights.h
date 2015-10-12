@@ -29,6 +29,12 @@ weightfile_t initWeights(vector_t param);
 vector_t getWeights(weightfile_t weightfile, uint32_t layer, uint32_t dest_neuron);
 
 /**
+ * Returns wegiht vector for dest_neuron.
+ */
+vector_t getWeightsFromSrc(weightfile_t weightfile, uint32_t src_layer, uint32_t src_neuron);
+
+
+/**
  * Sets weights for dest_neuron.
  */
 void setWeights(weightfile_t weightfile, uint32_t layer, uint32_t dest_neuron, vector_t weights);
