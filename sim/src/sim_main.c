@@ -19,6 +19,7 @@
 #include "image_io.h"
 #include "err_wrappers.h"
 #include "tile.h"
+#include "classify.h"
 
 //#define DEBUG
 //#define TEST_PICS_DIR "../sw/camera/pics/"
@@ -90,6 +91,7 @@ int main()
 	    printf("Evaluating file: %s\n\n", filename);
 
 	    vector_t results = evaluate_image(network, image_data);
+            classify(results);
 	    
 	    char output_file[64];
 	    sprintf(output_file, "results_%s.txt", filename);
