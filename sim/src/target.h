@@ -7,6 +7,7 @@
 #ifndef _TARGET_H_
 #define _TARGET_H_
 
+#include <assert.h>
 #include "mnist.h"
 
 #define TARGET_SIZE 10
@@ -15,5 +16,6 @@
 
 mnist_labels_t load_labels(uint32_t train);
 vector_t get_label(mnist_labels_t labels, size_t i);
+vector_t gen_target(uint32_t target);
 
 #endif
