@@ -41,11 +41,20 @@ vector_t vmult(vector_t v1, vector_t v2) {
   assert(v1->length == v2->length);
   vector_t v = Vector(v1->length);
   
-  for (size_t i = 0; i < v->length; ++i) {
+  for (size_t i = 0; i < v->length; i++) {
     v->data[i] = v1->data[i] * v2->data[i];
   }
   
   return v;
+}
+
+
+void vdiv(vector_t v, int factor) {
+  assert(v);
+  
+  for (size_t i = 0; i < v->length; i++) {
+    v->data[i] = (uint32_t)(((int)v->data[i]) >> factor);
+  }
 }
 
 /**

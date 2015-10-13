@@ -128,11 +128,11 @@ vector_t evaluate_image (network_t network, vector_t image) {
 
   vector_t hidden, output;
   
-  printf("Evaluating tile 0...\n");
+  //printf("Evaluating tile 0...\n");
   hidden = evaluate_tile(network->tiles[0], image, network->weights);
   output = hidden;
   for (uint32_t i = 1; i < network->num_layers; i++) {
-    printf("Evaluating tile %d...\n", i);
+    //printf("Evaluating tile %d...\n", i);
     output = evaluate_tile(network->tiles[i], hidden, network->weights);
     vector_destroy(hidden);
     hidden = output;

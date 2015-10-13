@@ -17,6 +17,7 @@ vector_t evaluate_activation (vector_t input, uint32_t (*activation_fn)(uint32_t
 }
 
 vector_t *evaluate_weight_change (vector_t delta, vector_t prev_output) {
+  //vdiv(delta, 6);
   return vouter(prev_output, delta);
 }
 

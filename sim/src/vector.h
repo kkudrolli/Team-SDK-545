@@ -40,8 +40,10 @@ void vector_destroy(vector_t vector);
 /**
  * Basic operations with vectors. 
  */
-/** Vector dot product */
+/** Vector elementwise product/quotient */
 vector_t vmult(vector_t v1, vector_t v2);
+void vdiv(vector_t v, int factor);
+
 /** Vector multiply-add: dot product then sum values */
 uint32_t vmad(vector_t v1, vector_t v2);
 vector_t *vouter(vector_t v1, vector_t v2);
