@@ -14,7 +14,7 @@
 #define STEP_THRESHOLD   1      // For step function
 #define BETA_SLOPE_PARAM 1      // For sigmoid
 #define E_NUM            271828 // Fixed point, so no decimal point
-#define BIAS             1      // For linear combination
+#define BIAS             1<<16      // For linear combination
 
 /* Actiavtion functions */
 uint32_t step_fn(uint32_t in);
