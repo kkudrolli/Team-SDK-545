@@ -17,6 +17,7 @@ vector_t evaluate_activation (vector_t input, uint32_t (*activation_fn)(uint32_t
 }
 
 vector_t *evaluate_weight_change (vector_t delta, vector_t prev_output) {
+  smult(delta, 1 << 11);
   return vouter(prev_output, delta);
 }
 
@@ -31,10 +32,11 @@ void backpropogate (network_t network, vector_t image, vector_t ideal) {
   // Neural outputs after activation (Y)
   vector_t outputs[network->num_layers+1];
 
-  // First net vector is just the image
-  nets[0] = image;  
-  // Activate first net vector
-  outputs[0] = evaluate_activation(nets[0], network->activation_fn);
+  // First net vector is undefined
+  //nets[0] = image;  
+
+  // Image is 0th output
+  outputs[0] = image;
 
   // Calculate net values for first propogation
   nets[1] = evaluate_net(network->tiles[0], image, network->weights);
@@ -82,7 +84,6 @@ void backpropogate (network_t network, vector_t image, vector_t ideal) {
   Free(matrix);
 
   vector_destroy(delta);
-  vector_destroy(outputs[0]);
   for (uint32_t i = 1; i <= network->num_layers; i++) {
     vector_destroy(nets[i]);
     vector_destroy(outputs[i]);

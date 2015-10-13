@@ -75,8 +75,30 @@ int main()
         error_print("Directory error");
     }
 
-    network_t network = Network(4, 5625, 10, linear_fn, linear_fn_drv);
+    network_t network = Network(2, 5625, 10, linear_fn, linear_drv);
+    /*
+    network_t network = Network(1, 10, 10, linear_fn, linear_drv);
 
+    vector_t image = gen_target(3);
+    image->data[2] = FIXED_1 / 10;
+    //image->data[3] = FIXED_1 / 8;
+    //image->data[8] = FIXED_1 / 6;
+    //image->data[1] = FIXED_1 / 2;
+    
+    vector_t ideal = gen_target(8);
+    for (uint32_t i = 0; i < 3; i++) {
+      printf("Beginning backpropogation iteration %d...\n", i); 
+      vector_t results = evaluate_image(network, image);
+      printf("Evaluate image done!\n"); 
+      classify(results);
+      backpropogate (network, image, ideal);
+      printf("Backpropogation done!\n"); 
+      vector_destroy(results);
+    }
+    vector_destroy(ideal);
+
+    return;
+    */
     /* 
      * Loop over entries in directory, read each bitmap file,  and 
      * launch a neural network call for each bitmap image.
@@ -96,15 +118,16 @@ int main()
 
 	    vector_t ideal = gen_target(6);
 
-	    for (uint32_t i = 0; i < 1000; i++) {
-	      printf("Beginning backpropogation iteration %d...\n", i); 
-	      vector_t results = evaluate_image(network, image_data);
-	      printf("Evaluate image done!\n"); 
-	      classify(results);
+	    vector_t results = 0;
+	    for (uint32_t i = 0; i < 10; i++) {
+	      if (results) vector_destroy(results);
+	      //printf("Beginning backpropogation iteration %d...\n", i); 
+	      results = evaluate_image(network, image_data);
+	      //printf("Evaluate image done!\n"); 
 	      backpropogate (network, image_data, ideal);
-	      printf("Backpropogation done!\n"); 
-	      vector_destroy(results);
+	      //printf("Backpropogation done!\n"); 
 	    }
+	    classify(results);
 	    vector_destroy(ideal);
 	    /*
 	    char output_file[64];

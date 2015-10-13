@@ -46,7 +46,7 @@ weightfile_t initWeights(vector_t parameter){
                 for(k = 0; k < numPixels; k++){
                     weightfile->weights[i][j]->data[k] = 0; // 0
 #ifdef RAND 
-                    weightfile->weights[i][j]->data[k] = rand()%50; // random value between 0,50
+                    weightfile->weights[i][j]->data[k] = rand()%(2 << 16); // random value between 0,2
 #endif
                   
 
@@ -57,7 +57,7 @@ weightfile_t initWeights(vector_t parameter){
                 for(k = 0; k < numNeurons_prevLayer; k++){
                     weightfile->weights[i][j]->data[k] = 0; // 0
 #ifdef RAND
-                    weightfile->weights[i][j]->data[k] = rand()%50; // random value between 0,50
+                    weightfile->weights[i][j]->data[k] = rand()%(2 << 12); // random value between 0,2
 #endif
                 }
             }
