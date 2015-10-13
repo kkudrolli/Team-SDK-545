@@ -5,16 +5,18 @@
  * that frees the weight array.
  */
 #include "weights.h"
+#define RAND
 
 /**
  * NOTE: Remember to free returned weightfile.
  *
  * ex) initWeights(parameter)
  * parameter->data[0]=100
- * parameter->data[1]=1024
- * parameter->data[2]=512
- * parameter->data[3]=256
- * parameter->length=4
+ * parameter->data[1]=1024, 0th layer
+ * parameter->data[2]=1024, 1st layer
+ * parameter->data[3]=1024, 2nd layer
+ * parameter->data[4]=10, 3rd layer
+ * parameter->length=5
  * 100 : the number of pixels
  */
 weightfile_t initWeights(vector_t parameter){
@@ -42,13 +44,21 @@ weightfile_t initWeights(vector_t parameter){
             if(i==0){ // if it's 0th layer
                 weightfile->weights[i][j] = Vector(numPixels);
                 for(k = 0; k < numPixels; k++){
+                    weightfile->weights[i][j]->data[k] = 0; // 0
+#ifdef RAND 
                     weightfile->weights[i][j]->data[k] = rand()%50; // random value between 0,50
+#endif
+                  
+
                 }
             }
             else{
                 weightfile->weights[i][j] = Vector(numNeurons_prevLayer);
                 for(k = 0; k < numNeurons_prevLayer; k++){
+                    weightfile->weights[i][j]->data[k] = 0; // 0
+#ifdef RAND
                     weightfile->weights[i][j]->data[k] = rand()%50; // random value between 0,50
+#endif
                 }
             }
         }
@@ -70,9 +80,9 @@ vector_t getWeights(weightfile_t weightfile, uint32_t layer, uint32_t dest_neuro
  * NOTE: Remember to free generated weights.
  */
 vector_t getWeightsFromSrc(weightfile_t weightfile, uint32_t src_layer, uint32_t src_neuron){
-    assert(src_layer+1 < weightfile->param->length);
+    assert(src_layer+2 < weightfile->param->length);
     uint32_t i,destNeuronLength;
-    destNeuronLength = weightfile->param->data[src_layer+1]; // 1024
+    destNeuronLength = weightfile->param->data[src_layer+2]; // 10
     vector_t weights = Vector(destNeuronLength);
     for(i=0; i<destNeuronLength; i++){ // 1024
         weights->data[i] = getWeights(weightfile,src_layer,i)->data[src_neuron];
@@ -128,7 +138,7 @@ void updateWeightfile(weightfile_t weightfile, uint32_t layer, vector_t* deltaWe
         weights = getWeights(weightfile,layer,j);
         newWeights = vadd(weights,deltaWeights_l[j]);
         setWeights(weightfile,layer,j,newWeights);
-	vector_destroy(newWeights); // NOT SURE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        vector_destroy(newWeights);
     }
 }
 
