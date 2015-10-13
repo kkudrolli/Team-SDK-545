@@ -89,7 +89,7 @@ network_t Network(uint32_t num_layers, uint32_t num_inputs, uint32_t num_outputs
     network->tiles[i] = Tile(NEURONS_PER_TILE, NEURONS_PER_TILE, activation_fn, i);
   }
   param->data[i] = NEURONS_PER_TILE;
-  param->data[i+1] = NEURONS_PER_TILE;
+  param->data[i+1] = num_outputs;
   printf("Allocating layer %d...\n", i);
   network->tiles[i] = Tile(num_outputs, NEURONS_PER_TILE, activation_fn, i);
 

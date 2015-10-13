@@ -15,15 +15,17 @@
 #include <stdint.h>
 #include <stdlib.h>
 #include "activation_fns.h"
+#include "backprop.h"
 //#include "mnist.h"
 #include "image_io.h"
 #include "err_wrappers.h"
 #include "tile.h"
 #include "classify.h"
+#include "target.h"
 
 //#define DEBUG
 //#define TEST_PICS_DIR "../sw/camera/pics/"
-#define TEST_PICS_DIR "./"
+#define TEST_PICS_DIR "num_six/"
 
 int main() 
 {
@@ -92,13 +94,15 @@ int main()
             printf("-------------------------------------\n");
 	    printf("Evaluating file: %s\n\n", filename);
 
-	    vector_t ideal = Vector(10);
-	    ideal->data[6] = 1 << 16;
+	    vector_t ideal = gen_target(6);
 
-	    for (uint32_t i = 0; i < 10; i++) {
+	    for (uint32_t i = 0; i < 1000; i++) {
+	      printf("Beginning backpropogation iteration %d...\n", i); 
 	      vector_t results = evaluate_image(network, image_data);
+	      printf("Evaluate image done!\n"); 
 	      classify(results);
 	      backpropogate (network, image_data, ideal);
+	      printf("Backpropogation done!\n"); 
 	      vector_destroy(results);
 	    }
 	    vector_destroy(ideal);

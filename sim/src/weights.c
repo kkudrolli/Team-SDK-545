@@ -119,17 +119,17 @@ void freeWeightfile(weightfile_t weightfile){
  * Update weightfile for a specific layer
  */
 void updateWeightfile(weightfile_t weightfile, uint32_t layer, vector_t* deltaWeights_l){
-    uint32_t j,k,numNeurons_dest;
+    uint32_t j,numNeurons_dest;
     vector_t weights;
     vector_t newWeights;
-    numNeurons_dest  = weightfile->param->data[layer];
+    numNeurons_dest  = weightfile->param->data[layer+1];
 
     for(j=0; j<numNeurons_dest; j++){
         weights = getWeights(weightfile,layer,j);
         newWeights = vadd(weights,deltaWeights_l[j]);
         setWeights(weightfile,layer,j,newWeights);
+	vector_destroy(newWeights); // NOT SURE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     }
-    vector_destroy(newWeights); // NOT SURE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 }
 
 /**

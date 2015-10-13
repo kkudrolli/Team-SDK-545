@@ -63,6 +63,7 @@ vector_t *vouter(vector_t v1, vector_t v2) {
     uint32_t scalar = v2->data[i];
     for (size_t j = 0; j < v1->length; j++)
       v->data[j] = v1->data[j] * scalar;
+    matrix[i] = v;
   }
   
   return matrix;
