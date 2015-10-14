@@ -3,7 +3,7 @@
 vector_t evaluate_net (tile_t tile, vector_t input, weightfile_t weights) {
   vector_t v = Vector(tile->num_neurons);
   for (uint32_t i = 0; i < tile->num_neurons; i++) {
-    v->data[i] = vmad(input, getWeights(weights, tile->tile_index-1, i));
+    v->data[i] = vmad(input, getWeights(weights, tile->tile_index, i));
   }
   return v;  
 }
