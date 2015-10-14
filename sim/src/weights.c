@@ -42,7 +42,7 @@ weightfile_t initWeights(vector_t parameter){
             if(i==0){ // if it's 0th layer
                 weightfile->weights[i][j] = Vector(numPixels);
                 for(k = 0; k < numPixels; k++){
-                    weightfile->weights[i][j]->data[k] = 2; // 0
+                    weightfile->weights[i][j]->data[k] = 0; // 0
 #ifdef RAND 
                     weightfile->weights[i][j]->data[k] = rand()%(2 << 16); // random value between 0,2
 #endif
@@ -51,9 +51,9 @@ weightfile_t initWeights(vector_t parameter){
             else{
                 weightfile->weights[i][j] = Vector(numNeurons_prevLayer);
                 for(k = 0; k < numNeurons_prevLayer; k++){
-                    weightfile->weights[i][j]->data[k] = 2; // 0
+                    weightfile->weights[i][j]->data[k] = 0; // 0
 #ifdef RAND
-                    weightfile->weights[i][j]->data[k] = rand()%(2 << 12); // random value between 0,?
+                    weightfile->weights[i][j]->data[k] = rand()%(2 << 12); // random value between 0,2
 #endif
                 }
             }
@@ -67,7 +67,7 @@ weightfile_t initWeights(vector_t parameter){
  * Returns weight vector for dest_neuron.
  */
 vector_t getWeights(weightfile_t weightfile, uint32_t layer, uint32_t dest_neuron){
-  return weightfile->weights[layer][dest_neuron]; // layer+1
+    return weightfile->weights[layer][dest_neuron];
 }
 
 /**
@@ -89,10 +89,10 @@ vector_t getWeightsFromSrc(weightfile_t weightfile, uint32_t src_layer, uint32_t
  * Sets weights for dest_neuron.
  */
 void setWeights(weightfile_t weightfile, uint32_t layer, uint32_t dest_neuron, vector_t weights){
-    assert(weightfile->weights[layer+1][dest_neuron]->length==weights->length);
+    assert(weightfile->weights[layer][dest_neuron]->length==weights->length);
 
     for(size_t i = 0; i < weights->length; i++){
-        weightfile->weights[layer+1][dest_neuron]->data[i] = weights->data[i];
+        weightfile->weights[layer][dest_neuron]->data[i] = weights->data[i];
     }
 }
 
