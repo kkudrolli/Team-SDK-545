@@ -25,7 +25,7 @@
 
 //#define DEBUG
 //#define TEST_PICS_DIR "../sw/camera/pics/"
-#define TEST_PICS_DIR "num_six/"
+#include "params.h"
 
 int main() 
 {
@@ -70,23 +70,22 @@ int main()
     struct dirent *entry_ptr = NULL;
 
     /* Open directory */
-    dir_ptr = Opendir(TEST_PICS_DIR);
+    /*    dir_ptr = Opendir(TEST_PICS_DIR);
     if (!dir_ptr) {
         error_print("Directory error");
-    }
+	}*/
 
-    //network_t network = Network(2, 5625, 10, linear_fn, linear_drv);
+    network_t network = Network(NUM_LAYERS, 5625, 10, linear_fn, linear_drv);
     
-    network_t network = Network(2, 10, 10, linear_fn, linear_drv);
-
-    vector_t image = gen_target(7);
-    //image->data[2] = FIXED_1;
-    //image->data[3] = FIXED_1;
-    //image->data[8] = FIXED_1 / 6;
-    //image->data[1] = FIXED_1 / 2;
+    /*network_t network = Network(4, 2, 2, linear_fn, linear_drv);
     
-    vector_t ideal = gen_target(8);
-    for (uint32_t i = 0; i < 300; i++) {
+    vector_t image = Vector(2);
+    image->data[0] = 1 << 16;
+    image->data[1] = 2 << 16;
+    vector_t ideal = Vector(2);
+    ideal->data[0] = 0 << 16;
+    ideal->data[1] = 1 << 16;
+    for (uint32_t i = 0; i < 5; i++) {
       printf("Beginning backpropogation iteration %d...\n", i); 
       vector_t results = evaluate_image(network, image);
       printf("Evaluate image done!\n"); 
@@ -97,8 +96,8 @@ int main()
     }
     vector_destroy(ideal);
     vector_destroy(image);
-    /*
-    image = gen_target(4);
+    
+    /*image = gen_target(4);
     ideal = gen_target(2);
     for (uint32_t i = 0; i < 300; i++) {
       printf("Beginning backpropogation iteration %d...\n", i); 
@@ -139,14 +138,14 @@ int main()
     }
     vector_destroy(ideal);
     vector_destroy(image);
-    */
+    
     image = gen_target(7);
     image->data[5] = 300;
     image->data[2] = 200;
     vector_t results = evaluate_image(network, image);
 
     classify(results);
-    /*
+    
     image = gen_target(4);    
     image->data[8] = 300;
     image->data[1] = 200;
@@ -165,65 +164,154 @@ int main()
     results = evaluate_image(network, image);
     classify(results);
     */
-    return;    
+    //return;    
 
     /* 
      * Loop over entries in directory, read each bitmap file,  and 
      * launch a neural network call for each bitmap image.
      */
-    while ((entry_ptr = readdir(dir_ptr))) {
-        /* Get name of file and append it to directory name */
-        char *filename = entry_ptr->d_name;
-        if (filename[0] != '.') {
-            size_t path_len = strlen(filename) + strlen(TEST_PICS_DIR) + 1;
-            char full_path[path_len];
-            snprintf(full_path, path_len, "%s%s", TEST_PICS_DIR, filename);
 
-            /* Read bitmap data */
-            vector_t image_data = read_bitmap(full_path);
-            printf("-------------------------------------\n");
-	    printf("Evaluating file: %s\n\n", filename);
-
-	    vector_t ideal = gen_target(6);
-
-	    vector_t results = 0;
-	    for (uint32_t i = 0; i < 10; i++) {
-	      if (results) vector_destroy(results);
-	      //printf("Beginning backpropogation iteration %d...\n", i); 
-	      results = evaluate_image(network, image_data);
-	      classify(results);
-	      //printf("Evaluate image done!\n"); 
-	      backpropogate (network, image_data, ideal);
-	      //printf("Backpropogation done!\n"); 
-	    }
-	    classify(results);
-	    vector_destroy(ideal);
-	    /*
-	    char output_file[64];
-	    sprintf(output_file, "results_%s.txt", filename);
-
-	    FILE *f = Fopen(output_file, "w");
-	    
-	    printf("Results of neural propogation stored in %s\n", output_file);
-
-	    for (uint32_t i = 0; i < results->length; i++) {
-	      char string[64];
-	      sprintf(string, "Data[%d]: %u\n", i, results->data[i]);
-	      fputs(string, f);
-	    }
-	
-	    Fclose(f);
-
-	    vector_destroy(results);*/
-            vector_destroy(image_data);
-        }
+    dir_ptr = Opendir(TEST_PICS_DIR);
+    if (!dir_ptr) {
+      error_print("Directory error");
     }
+    int i = 0;
+    vector_t image_data[NUM_IMAGES];
+    vector_t ideal[NUM_IMAGES];
+    while ((entry_ptr = readdir(dir_ptr))) {
+      /* Get name of file and append it to directory name */
+      char *filename = entry_ptr->d_name;
+      if (filename[0] != '.') {
+	size_t path_len = strlen(filename) + strlen(TEST_PICS_DIR) + 1;
+	char full_path[path_len];
+	snprintf(full_path, path_len, "%s%s", TEST_PICS_DIR, filename);
+	
+	/* Read bitmap data */
+	image_data[i] = read_bitmap(full_path);
+	ideal[i] = gen_target(i);      	
+	i++;
+      }
+    }
+    Closedir(dir_ptr);
+
+    time_t t;
+    srand((unsigned) time(&t));
+
+    printf("Beginning backpropogation...\n");
+    printf("Progress: [                              ]\033[31D");
+    fflush(stdout);
+
+    for (int j = 0; j < OUTER_ITER; j++) {
+      //printf("-------------------------------------\n");
+      //printf("Evaluating file: %s\n\n", filename);
+
+      if (!((j+1) % (OUTER_ITER/30))) { printf("*"); fflush(stdout); }
+
+      vector_t results = 0;
+      uint32_t i = rand() % NUM_IMAGES;
+      for (uint32_t k = 0; k < INNER_ITER; k++) {
+	//if (results) vector_destroy(results);
+	//printf("Beginning backpropogation iteration %d...\n", i); 
+	//results = evaluate_image(network, image_data);
+	//classify(results);
+	//printf("Evaluate image done!\n"); 
+	backpropogate (network, image_data[i], ideal[i]);
+	//printf("Backpropogation done!\n"); 
+      }
+      //classify(results);
+      /*
+	char output_file[64];
+	sprintf(output_file, "results_%s.txt", filename);
+
+	FILE *f = Fopen(output_file, "w");
+	    
+	printf("Results of neural propogation stored in %s\n", output_file);
+
+	for (uint32_t i = 0; i < results->length; i++) {
+	char string[64];
+	sprintf(string, "Data[%d]: %u\n", i, results->data[i]);
+	fputs(string, f);
+	}
+	
+	Fclose(f);
+
+	vector_destroy(results);*/
+    }
+
+    printf("\nBackpropogation complete! Testing image 0.bmp:\n");
+    vector_t image = read_bitmap("digits/0.bmp");
+    vector_t result = evaluate_image(network, image);
+    classify(result);
+    vector_destroy(result);
+    vector_destroy(image);
+
+    printf("\nBackpropogation complete! Testing image 4.bmp:\n");
+    image = read_bitmap("digits/4.bmp");
+    result = evaluate_image(network, image);
+    classify(result);
+    vector_destroy(result);
+    vector_destroy(image);
+
+    printf("\nBackpropogation complete! Testing image 2.bmp:\n");
+    image = read_bitmap("digits/2.bmp");
+    result = evaluate_image(network, image);
+    classify(result);
+    vector_destroy(result);
+    vector_destroy(image);
+
+    printf("\nBackpropogation complete! Testing image 9.bmp:\n");
+    image = read_bitmap("digits/9.bmp");
+    result = evaluate_image(network, image);
+    classify(result);
+    vector_destroy(result);
+    vector_destroy(image);
+
+    printf("\nBackpropogation complete! Testing image 8.bmp:\n");
+    image = read_bitmap("digits/8.bmp");
+    result = evaluate_image(network, image);
+    classify(result);
+    vector_destroy(result);
+    vector_destroy(image);
+
+    printf("\nBackpropogation complete! Testing image 3.bmp:\n");
+    image = read_bitmap("digits/3.bmp");
+    result = evaluate_image(network, image);
+    classify(result);
+    vector_destroy(result);
+    vector_destroy(image);
+
+    printf("\nBackpropogation complete! Testing image 1.bmp:\n");
+    image = read_bitmap("digits/1.bmp");
+    result = evaluate_image(network, image);
+    classify(result);
+    vector_destroy(result);
+    vector_destroy(image);
+
+    printf("\nBackpropogation complete! Testing image 5.bmp:\n");
+    image = read_bitmap("digits/5.bmp");
+    result = evaluate_image(network, image);
+    classify(result);
+    vector_destroy(result);
+    vector_destroy(image);
+
+    printf("\nBackpropogation complete! Testing image 7.bmp:\n");
+    image = read_bitmap("digits/7.bmp");
+    result = evaluate_image(network, image);
+    classify(result);
+    vector_destroy(result);
+    vector_destroy(image);
+
+    printf("\nBackpropogation complete! Testing image 6.bmp:\n");
+    image = read_bitmap("digits/6.bmp");
+    result = evaluate_image(network, image);
+    classify(result);
+    vector_destroy(result);
+    vector_destroy(image);
 
     network_destroy(network);/*
     mnist_labels_destroy(mnist_labels);
     mnist_images_destroy(mnist_data);
 			     */
-    Closedir(dir_ptr);
     return 0;
 }
 

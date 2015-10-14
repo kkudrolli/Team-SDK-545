@@ -72,6 +72,7 @@ uint32_t tan_sigmoid_fn(uint32_t in)
 }
 
 uint32_t linear_fn(uint32_t in) {
+  if (!in) return 1;
   return (in > FIXED_1 << 5) ? 1 : (in > (16*FIXED_1)) ? (FIXED_1) : in / 16;
 }
 
@@ -88,6 +89,7 @@ uint32_t tan_sigmoid_drv(uint32_t in)
 }
 
 uint32_t linear_drv(uint32_t in) {
+  if (!in) return 1;
   uint32_t out = ((int32_t)in < 0) ? 1 : (in > (16*FIXED_1)) ? 1 : FIXED_1 / 16;
   return out;
 }

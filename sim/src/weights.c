@@ -5,7 +5,7 @@
  * that frees the weight array.
  */
 #include "weights.h"
-//#define RAND
+#define RAND
 
 /**
  * NOTE: Remember to free returned weightfile.
@@ -42,18 +42,18 @@ weightfile_t initWeights(vector_t parameter){
             if(i==0){ // if it's 0th layer
                 weightfile->weights[i][j] = Vector(numPixels);
                 for(k = 0; k < numPixels; k++){
-                    weightfile->weights[i][j]->data[k] = 0; // 0
+                    weightfile->weights[i][j]->data[k] = 1 << 15; // 0
 #ifdef RAND 
-                    weightfile->weights[i][j]->data[k] = rand()%(2 << 16); // random value between 0,2
+                    weightfile->weights[i][j]->data[k] = (rand()%(1 << 16) + 1); // random value between 0,2
 #endif
                 }
             }
             else{
                 weightfile->weights[i][j] = Vector(numNeurons_prevLayer);
                 for(k = 0; k < numNeurons_prevLayer; k++){
-                    weightfile->weights[i][j]->data[k] = 0; // 0
+                    weightfile->weights[i][j]->data[k] = 1 << 15; // 0
 #ifdef RAND
-                    weightfile->weights[i][j]->data[k] = rand()%(2 << 12); // random value between 0,2
+                    weightfile->weights[i][j]->data[k] = (rand()%(1 << 16) + 1); // random value between 0,2
 #endif
                 }
             }

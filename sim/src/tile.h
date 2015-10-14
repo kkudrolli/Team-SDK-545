@@ -12,8 +12,7 @@
 #include "vector.h"
 #include "err_wrappers.h"
 #include "weights.h"
-
-#define NEURONS_PER_TILE (32)
+#include "params.h"
 
 /**
  * Basic structure of a neuron. Contains the following parameters:
