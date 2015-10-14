@@ -1,4 +1,5 @@
 #include "tile.h"
+#include "params.h"
 
 vector_t evaluate_net (tile_t tile, vector_t input, weightfile_t weights);
 vector_t evaluate_activation (vector_t input, uint32_t (*activation_fn)(uint32_t));

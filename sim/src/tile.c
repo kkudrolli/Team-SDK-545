@@ -70,7 +70,7 @@ network_t Network(uint32_t num_layers, uint32_t num_inputs, uint32_t num_outputs
   assert(num_inputs > 0);
   assert(num_outputs > 0);
 
-  printf("Creating network...\n");
+  printf(BOLD UNDERLINE "Creating network...\n" NORMAL);
   network_t network = Malloc(sizeof(struct network));
   network->num_layers = num_layers;
   network->tiles = Calloc(num_layers, sizeof(tile_t));
@@ -98,9 +98,10 @@ network_t Network(uint32_t num_layers, uint32_t num_inputs, uint32_t num_outputs
     param->data[1] = num_outputs;
   }
 
-  printf("Initializing weights file...\n");
+  printf(BOLD UNDERLINE "\nInitializing weights file...\n\n" NORMAL);
   network->weights = initWeights(param);
 
+  printf("Network created successfully!\n\n" NORMAL);
   return network;
 }
 
