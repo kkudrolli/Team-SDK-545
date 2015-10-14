@@ -75,7 +75,97 @@ int main()
         error_print("Directory error");
     }
 
-    network_t network = Network(4, 5625, 10, linear_fn, linear_fn_drv);
+    //network_t network = Network(2, 5625, 10, linear_fn, linear_drv);
+    
+    network_t network = Network(2, 10, 10, linear_fn, linear_drv);
+
+    vector_t image = gen_target(7);
+    //image->data[2] = FIXED_1;
+    //image->data[3] = FIXED_1;
+    //image->data[8] = FIXED_1 / 6;
+    //image->data[1] = FIXED_1 / 2;
+    
+    vector_t ideal = gen_target(8);
+    for (uint32_t i = 0; i < 300; i++) {
+      printf("Beginning backpropogation iteration %d...\n", i); 
+      vector_t results = evaluate_image(network, image);
+      printf("Evaluate image done!\n"); 
+      classify(results);
+      backpropogate (network, image, ideal);
+      printf("Backpropogation done!\n"); 
+      vector_destroy(results);
+    }
+    vector_destroy(ideal);
+    vector_destroy(image);
+    /*
+    image = gen_target(4);
+    ideal = gen_target(2);
+    for (uint32_t i = 0; i < 300; i++) {
+      printf("Beginning backpropogation iteration %d...\n", i); 
+      vector_t results = evaluate_image(network, image);
+      printf("Evaluate image done!\n"); 
+      classify(results);
+      backpropogate (network, image, ideal);
+      printf("Backpropogation done!\n"); 
+      vector_destroy(results);
+    }
+    vector_destroy(ideal);
+    vector_destroy(image);
+
+    image = gen_target(6);
+    ideal = gen_target(3);
+    for (uint32_t i = 0; i < 300; i++) {
+      printf("Beginning backpropogation iteration %d...\n", i); 
+      vector_t results = evaluate_image(network, image);
+      printf("Evaluate image done!\n"); 
+      classify(results);
+      backpropogate (network, image, ideal);
+      printf("Backpropogation done!\n"); 
+      vector_destroy(results);
+    }
+    vector_destroy(ideal);
+    vector_destroy(image);
+
+    image = gen_target(9);
+    ideal = gen_target(0);
+    for (uint32_t i = 0; i < 300; i++) {
+      printf("Beginning backpropogation iteration %d...\n", i); 
+      vector_t results = evaluate_image(network, image);
+      printf("Evaluate image done!\n"); 
+      classify(results);
+      backpropogate (network, image, ideal);
+      printf("Backpropogation done!\n"); 
+      vector_destroy(results);
+    }
+    vector_destroy(ideal);
+    vector_destroy(image);
+    */
+    image = gen_target(7);
+    image->data[5] = 300;
+    image->data[2] = 200;
+    vector_t results = evaluate_image(network, image);
+
+    classify(results);
+    /*
+    image = gen_target(4);    
+    image->data[8] = 300;
+    image->data[1] = 200;
+    results = evaluate_image(network, image);
+    classify(results);
+
+    image = gen_target(6);    
+    image->data[3] = 300;
+    image->data[9] = 200;
+    results = evaluate_image(network, image);
+    classify(results);
+
+    image = gen_target(9);    
+    image->data[1] = 800;
+    image->data[0] = 100;
+    results = evaluate_image(network, image);
+    classify(results);
+    */
+    return;    
 
     /* 
      * Loop over entries in directory, read each bitmap file,  and 
@@ -96,15 +186,17 @@ int main()
 
 	    vector_t ideal = gen_target(6);
 
-	    for (uint32_t i = 0; i < 1000; i++) {
-	      printf("Beginning backpropogation iteration %d...\n", i); 
-	      vector_t results = evaluate_image(network, image_data);
-	      printf("Evaluate image done!\n"); 
+	    vector_t results = 0;
+	    for (uint32_t i = 0; i < 10; i++) {
+	      if (results) vector_destroy(results);
+	      //printf("Beginning backpropogation iteration %d...\n", i); 
+	      results = evaluate_image(network, image_data);
 	      classify(results);
+	      //printf("Evaluate image done!\n"); 
 	      backpropogate (network, image_data, ideal);
-	      printf("Backpropogation done!\n"); 
-	      vector_destroy(results);
+	      //printf("Backpropogation done!\n"); 
 	    }
+	    classify(results);
 	    vector_destroy(ideal);
 	    /*
 	    char output_file[64];

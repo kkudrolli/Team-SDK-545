@@ -46,7 +46,7 @@ weightfile_t initWeights(vector_t parameter){
                 for(k = 0; k < numPixels; k++){
                     weightfile->weights[i][j]->data[k] = 2; // 0
 #ifdef RAND 
-                    weightfile->weights[i][j]->data[k] = rand(); // random value between 0,50
+                    weightfile->weights[i][j]->data[k] = rand()%(2 << 16); // random value between 0,2
 #endif
                   
 
@@ -57,7 +57,7 @@ weightfile_t initWeights(vector_t parameter){
                 for(k = 0; k < numNeurons_prevLayer; k++){
                     weightfile->weights[i][j]->data[k] = 2; // 0
 #ifdef RAND
-                    weightfile->weights[i][j]->data[k] = rand(); // random value between 0,50
+                    weightfile->weights[i][j]->data[k] = rand()%(2 << 12); // random value between 0,?
 #endif
                 }
             }
@@ -72,7 +72,7 @@ weightfile_t initWeights(vector_t parameter){
  * Returns weight vector for dest_neuron.
  */
 vector_t getWeights(weightfile_t weightfile, uint32_t layer, uint32_t dest_neuron){
-    return weightfile->weights[layer][dest_neuron];
+  return weightfile->weights[layer+1][dest_neuron]; // layer+1
 }
 
 /**
@@ -85,7 +85,7 @@ vector_t getWeightsFromSrc(weightfile_t weightfile, uint32_t src_layer, uint32_t
     destNeuronLength = weightfile->param->data[src_layer+2]; // 10
     vector_t weights = Vector(destNeuronLength);
     for(i=0; i<destNeuronLength; i++){ // 1024
-        weights->data[i] = getWeights(weightfile,src_layer,i)->data[src_neuron];
+      weights->data[i] = weightfile->weights[src_layer+2][i]->data[src_neuron];       
     }
     return weights;
 }
@@ -94,10 +94,10 @@ vector_t getWeightsFromSrc(weightfile_t weightfile, uint32_t src_layer, uint32_t
  * Sets weights for dest_neuron.
  */
 void setWeights(weightfile_t weightfile, uint32_t layer, uint32_t dest_neuron, vector_t weights){
-    assert(weightfile->weights[layer][dest_neuron]->length==weights->length);
+    assert(weightfile->weights[layer+1][dest_neuron]->length==weights->length);
 
     for(size_t i = 0; i < weights->length; i++){
-        weightfile->weights[layer][dest_neuron]->data[i] = weights->data[i];
+        weightfile->weights[layer+1][dest_neuron]->data[i] = weights->data[i];
     }
 }
 

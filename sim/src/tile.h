@@ -13,7 +13,7 @@
 #include "err_wrappers.h"
 #include "weights.h"
 
-#define NEURONS_PER_TILE (1<<8)
+#define NEURONS_PER_TILE (32)
 
 /**
  * Basic structure of a neuron. Contains the following parameters:

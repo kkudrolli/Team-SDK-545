@@ -40,7 +40,8 @@ void vector_destroy(vector_t vector);
 /**
  * Basic operations with vectors. 
  */
-/** Vector elementwise product/quotient */
+void smult(vector_t v, uint32_t scale);
+/** Vector dot product */
 vector_t vmult(vector_t v1, vector_t v2);
 void vdiv(vector_t v, int factor);
 
@@ -51,5 +52,9 @@ vector_t vsub(vector_t v1, vector_t v2);
 
 /** Vector addition */
 vector_t vadd(vector_t v1, vector_t v2);
+
+/** Fixed point multiply and divide */
+uint32_t fmult(uint32_t x, uint32_t y);
+uint32_t fdiv(uint32_t x, uint32_t y);
 
 #endif
