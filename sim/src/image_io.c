@@ -125,12 +125,15 @@ vector_t read_bitmap(char *filename)
     vector_t vec = Vector((size_t) (num_bytes / NUM_BYTES_IN_PIX));
     //uint32_t *vector_data = (uint32_t*) Calloc(num_bytes / NUM_BYTES_IN_PIX, 
     //        sizeof(uint32_t));
-    /* Copy over image data into vectro data and set the vector's data */
+    /* Copy over image data into vector data and set the vector's data */
     assert(vec);
     for (uint32_t i = 0; i < num_bytes / NUM_BYTES_IN_PIX; i++) {
         assert(vec->data);
         assert(reduced_image);
         vec->data[i] = (uint32_t) reduced_image[i];
+
+	// Normalize to have mean 1, variance 1
+	
     }
 
 #ifdef IMAGE_IO_DBG

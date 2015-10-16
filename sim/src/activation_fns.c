@@ -66,17 +66,20 @@ uint32_t piecewise_sigmoid(uint32_t in)
 uint32_t sigmoid_approx_fn(uint32_t in)
 {
     uint32_t sign = (in & 0x80000000) >> 31;
+    uint32_t out = 0;
     //in = in & ~0x80000000;
     if (sign) {
-        return FIXED_1 - piecewise_sigmoid(~in+1);  
+      out = FIXED_1 - piecewise_sigmoid(~in+1);  
     } else {
-        return piecewise_sigmoid(in);
+      out = piecewise_sigmoid(in);
     }
+    if (out == 0) return 1;
 }
 
 uint32_t sigmoid_approx_drv(uint32_t in)
 {
-    return fixed_mult(sigmoid_approx_fn(in), (FIXED_1 - sigmoid_approx_fn(in)));
+    uint32_t out = fixed_mult(sigmoid_approx_fn(in), (FIXED_1 - sigmoid_approx_fn(in)));
+    return out;
 }
 
 uint32_t step_fn(uint32_t in)

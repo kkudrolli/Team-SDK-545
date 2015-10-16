@@ -5,7 +5,7 @@
  * that frees the weight array.
  */
 #include "weights.h"
-#define RAND
+//#define RAND
 
 /**
  * NOTE: Remember to free returned weightfile.

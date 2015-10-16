@@ -1,10 +1,17 @@
+#include "activation_fns.h"
+
 #define TEST_PICS_DIR "digits_subset/"
 #define NUM_IMAGES 3
-#define OUTER_ITER 5000
+#define OUTER_ITER 4000000
 #define INNER_ITER 1
-#define NUM_LAYERS 4
-#define NEURONS_PER_TILE 128
-#define LEARNING_RATE (1 << 12)
+#define NUM_LAYERS 2
+#define NEURONS_PER_TILE 64
+#define LEARNING_RATE (1 << 13)
+#define ACTIVATION_FN sigmoid_approx_fn
+#define ACTIVATION_DRV sigmoid_approx_drv
+//#define ACTIVATION_FN linear_fn
+//#define ACTIVATION_DRV linear_drv
+
 
 
 #define NORMAL    "\033[0m"

@@ -75,7 +75,7 @@ int main()
         error_print("Directory error");
 	}*/
 
-  network_t network = Network(NUM_LAYERS, 5625, 10, linear_fn, linear_drv);
+  network_t network = Network(NUM_LAYERS, 5625, 10, ACTIVATION_FN, ACTIVATION_DRV);
     
   /*network_t network = Network(4, 2, 2, linear_fn, linear_drv);
     

@@ -59,7 +59,7 @@ uint32_t classify(vector_t net_out)
         }
         printf("%zu %-7.5f      %u\n", i, new_conf, data[i]);
     }
-    printf(BOLD "Prediction: %d\n\n" NORMAL, prediction);
+    printf(BOLD "Prediction: %d with %2.1f%% confidence \n\n" NORMAL, prediction, conf * 100);
 
     return prediction;
 }
