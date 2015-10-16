@@ -11,20 +11,18 @@
  * NOTE: Remember to free returned weightfile.
  *
  * ex) initWeights(parameter)
- * parameter->data[0]=100
- * parameter->data[1]=1024, 0th layer
- * parameter->data[2]=1024, 1st layer
- * parameter->data[3]=1024, 2nd layer
- * parameter->data[4]=10, 3rd layer
- * parameter->length=5
- * 100 : the number of pixels
+ * parameter->data[0]=10
+ * parameter->data[1]=9, 0th layer
+ * parameter->data[2]=10, 1st layer
+ * parameter->length=3
+ * 10 : the number of pixels
  */
 weightfile_t initWeights(vector_t parameter){
     uint32_t i,j,k,numNeurons_prevLayer,numNeurons_currLayer,numLayers,numPixels;
     time_t t;
     srand((unsigned) time(&t));
 
-    numLayers = parameter->length-1;
+    numLayers = parameter->length-1; // 2
     numPixels = parameter->data[0];
     assert(numPixels>0);
     //printf("numPixels=%d\n",numPixels);
@@ -33,7 +31,7 @@ weightfile_t initWeights(vector_t parameter){
 
     weightfile_t weightfile = (weightfile_t) Malloc(sizeof(struct weightfile));
     weightfile->param = parameter; // holds the number of layer, how many neurons exist for each layer
-    weightfile->weights = (vector_t**) Malloc(sizeof(vector_t*)*(numLayers)); // malloc weights part
+    weightfile->weights = (vector_t**) Malloc(sizeof(vector_t*)*(numLayers)); // malloc weights part, in this case 2 layers
 
     for (i=0 ; i<numLayers; i++){
         numNeurons_currLayer = parameter->data[i+1]; // NOTE that this is i+1
@@ -44,27 +42,24 @@ weightfile_t initWeights(vector_t parameter){
             if(i==0){ // if it's 0th layer
                 weightfile->weights[i][j] = Vector(numPixels);
                 for(k = 0; k < numPixels; k++){
-                    weightfile->weights[i][j]->data[k] = 0; // 0
+                    weightfile->weights[i][j]->data[k] = 1 << 15; // 0
 #ifdef RAND 
-                    weightfile->weights[i][j]->data[k] = rand()%50; // random value between 0,50
+                    weightfile->weights[i][j]->data[k] = (rand()%(1 << 16) + 1); // random value between 0,2
 #endif
-                  
-
                 }
             }
             else{
                 weightfile->weights[i][j] = Vector(numNeurons_prevLayer);
                 for(k = 0; k < numNeurons_prevLayer; k++){
-                    weightfile->weights[i][j]->data[k] = 0; // 0
+                    weightfile->weights[i][j]->data[k] = 1 << 15; // 0
 #ifdef RAND
-                    weightfile->weights[i][j]->data[k] = rand()%50; // random value between 0,50
+                    weightfile->weights[i][j]->data[k] = (rand()%(1 << 16) + 1); // random value between 0,2
 #endif
                 }
             }
         }
         numNeurons_prevLayer = numNeurons_currLayer;
     }
-
     return weightfile;
 }
 
@@ -84,8 +79,8 @@ vector_t getWeightsFromSrc(weightfile_t weightfile, uint32_t src_layer, uint32_t
     uint32_t i,destNeuronLength;
     destNeuronLength = weightfile->param->data[src_layer+2]; // 10
     vector_t weights = Vector(destNeuronLength);
-    for(i=0; i<destNeuronLength; i++){ // 1024
-        weights->data[i] = getWeights(weightfile,src_layer,i)->data[src_neuron];
+    for(i=0; i<destNeuronLength; i++){
+        weights->data[i] = weightfile->weights[src_layer+1][i]->data[src_neuron];
     }
     return weights;
 }
@@ -188,10 +183,120 @@ int main(){
  
     freeWeightfile(weightfile);
     printf("get here3\n");
- 
+
     vector_destroy(parameter);
     printf("get here4\n");
 
+
+
+    vector_t parameter = Vector(3);
+    parameter->data[0] = 10;
+    parameter->data[1] = 9;
+    parameter->data[2] = 10;
+    parameter->length = 3; // ONLY TWO LAYERS
+
+    weightfile_t weightfile = initWeights(parameter);
+ 
+    printf("getWeights(weightfile,1,0)->length)=%d\n",getWeights(weightfile,1,0)->length);
+    // TEST 0
+    printf("getWeights(weightfile,1,0)->data[0]=%d\n",getWeights(weightfile,1,0)->data[0]); // last layer's 1st neuron
+    printf("getWeights(weightfile,1,0)->data[8]=%d\n",getWeights(weightfile,1,0)->data[8]); // last layer's 1st neuron
+    printf("getWeights(weightfile,1,9)->data[0]=%d\n",getWeights(weightfile,1,9)->data[0]); // last layer's 9th neuron
+    printf("getWeights(weightfile,1,9)->data[8]=%d\n",getWeights(weightfile,1,9)->data[8]); // last layer's 9th neuron
+
+    printf("getWeightsFromSrc(weightfile,0,0)->data[0]=%d\n",getWeightsFromSrc(weightfile,0,0)->data[0]); 
+    printf("getWeightsFromSrc(weightfile,0,8)->data[0]=%d\n",getWeightsFromSrc(weightfile,0,8)->data[0]);
+    printf("getWeightsFromSrc(weightfile,0,0)->data[9]=%d\n",getWeightsFromSrc(weightfile,0,0)->data[9]);
+    printf("getWeightsFromSrc(weightfile,0,8)->data[9]=%d\n",getWeightsFromSrc(weightfile,0,8)->data[9]);
+
+    vector_t weights = Vector(9);
+    weights->data[0] = 100;
+    weights->data[1] = 101;
+    weights->data[2] = 102;
+    weights->data[3] = 103;
+    weights->data[4] = 104;
+    weights->data[5] = 105;
+    weights->data[6] = 106;
+    weights->data[7] = 107;
+    weights->data[8] = 108;
+ 
+    setWeights(weightfile,1,0,weights); // TEST 1
+    printf("set weights - 0 DONE\n");
+    printf("getWeights(weightfile,1,0)->data[0]=%d\n",getWeights(weightfile,1,0)->data[0]); // 100
+    printf("getWeights(weightfile,1,0)->data[8]=%d\n",getWeights(weightfile,1,0)->data[8]); // 108
+    printf("getWeights(weightfile,1,9)->data[0]=%d\n",getWeights(weightfile,1,9)->data[0]); // 0
+    printf("getWeights(weightfile,1,9)->data[8]=%d\n",getWeights(weightfile,1,9)->data[8]); // 0
+
+    printf("getWeightsFromSrc(weightfile,0,0)->data[0]=%d\n",getWeightsFromSrc(weightfile,0,0)->data[0]); // 100
+    printf("getWeightsFromSrc(weightfile,0,8)->data[0]=%d\n",getWeightsFromSrc(weightfile,0,8)->data[0]); // 108
+    printf("getWeightsFromSrc(weightfile,0,0)->data[9]=%d\n",getWeightsFromSrc(weightfile,0,0)->data[9]); // 0
+    printf("getWeightsFromSrc(weightfile,0,8)->data[9]=%d\n",getWeightsFromSrc(weightfile,0,8)->data[9]); // 0
+
+    setWeights(weightfile,1,9,weights); // TEST 2
+    printf("set weights - 1 DONE\n");
+    printf("getWeights(weightfile,1,0)->data[0]=%d\n",getWeights(weightfile,1,0)->data[0]); // 100
+    printf("getWeights(weightfile,1,0)->data[8]=%d\n",getWeights(weightfile,1,0)->data[8]); // 108
+    printf("getWeights(weightfile,1,9)->data[0]=%d\n",getWeights(weightfile,1,9)->data[0]); // 100
+    printf("getWeights(weightfile,1,9)->data[8]=%d\n",getWeights(weightfile,1,9)->data[8]); // 108
+
+    printf("getWeightsFromSrc(weightfile,0,0)->data[0]=%d\n",getWeightsFromSrc(weightfile,0,0)->data[0]); // 100
+    printf("getWeightsFromSrc(weightfile,0,8)->data[0]=%d\n",getWeightsFromSrc(weightfile,0,8)->data[0]); // 108
+    printf("getWeightsFromSrc(weightfile,0,0)->data[9]=%d\n",getWeightsFromSrc(weightfile,0,0)->data[9]); // 100
+    printf("getWeightsFromSrc(weightfile,0,8)->data[9]=%d\n",getWeightsFromSrc(weightfile,0,8)->data[9]); // 108
+
+    vector_t add = Vector(9);
+    add->data[0] = 10;
+    add->data[1] = 10;
+    add->data[2] = 10;
+    add->data[3] = 10;
+    add->data[4] = 10;
+    add->data[5] = 10;
+    add->data[6] = 10;
+    add->data[7] = 10;
+    add->data[8] = 10;
+    vector_t add2 = Vector(9);
+    add2->data[0] = 20;
+    add2->data[1] = 20;
+    add2->data[2] = 20;
+    add2->data[3] = 20;
+    add2->data[4] = 20;
+    add2->data[5] = 20;
+    add2->data[6] = 20;
+    add2->data[7] = 20;
+    add2->data[8] = 20;
+ 
+    vector_t* deltaWeights_l;
+    deltaWeights_l = (vector_t*) Malloc(sizeof(vector_t)*10); // update last layer
+    uint32_t i;
+    for(i=0; i<10; i++){
+        if(i==0) deltaWeights_l[i] = add;
+        else deltaWeights_l[i] = add2;
+    }
+
+    updateWeightfile(weightfile, 1, deltaWeights_l);
+
+    printf("updated weights for layer \n");
+    printf("getWeights(weightfile,1,0)->data[0]=%d\n",getWeights(weightfile,1,0)->data[0]); // 110
+    printf("getWeights(weightfile,1,0)->data[8]=%d\n",getWeights(weightfile,1,0)->data[8]); // 118
+    printf("getWeights(weightfile,1,9)->data[0]=%d\n",getWeights(weightfile,1,9)->data[0]); // 120
+    printf("getWeights(weightfile,1,9)->data[8]=%d\n",getWeights(weightfile,1,9)->data[8]); // 128
+
+    printf("getWeightsFromSrc(weightfile,0,0)->data[0]=%d\n",getWeightsFromSrc(weightfile,0,0)->data[0]);
+    printf("getWeightsFromSrc(weightfile,0,8)->data[0]=%d\n",getWeightsFromSrc(weightfile,0,8)->data[0]);
+    printf("getWeightsFromSrc(weightfile,0,0)->data[9]=%d\n",getWeightsFromSrc(weightfile,0,0)->data[9]);
+    printf("getWeightsFromSrc(weightfile,0,8)->data[9]=%d\n",getWeightsFromSrc(weightfile,0,8)->data[9]);
+
+    // FREE
+
+    vector_destroy(weights);
+    vector_destroy(add);
+    vector_destroy(add2);
+    freeWeightfile(weightfile);
+
+    vector_destroy(parameter);
+
+    Free(deltaWeights_l); // deltaWeights_l is not fully freed but anyway..
+ 
     return 0;
 }
 */

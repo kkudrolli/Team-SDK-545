@@ -24,11 +24,20 @@ vector_t Vector(size_t length) {
 }
 
 /**
- * destructor for a vector. 
+ * Destructor for a vector. 
  */
 void vector_destroy(vector_t vector) {
   Free(vector->data);
   Free(vector);
+}
+
+/**
+ * Multiply by a scalar
+ */
+void smult(vector_t v, uint32_t scale) {
+  for (size_t i = 0; i < v->length; ++i) {
+    v->data[i] = fmult(v->data[i], scale);
+  }
 }
 
 /**
@@ -42,10 +51,19 @@ vector_t vmult(vector_t v1, vector_t v2) {
   vector_t v = Vector(v1->length);
   
   for (size_t i = 0; i < v->length; ++i) {
-    v->data[i] = v1->data[i] * v2->data[i];
+    v->data[i] = fmult(v1->data[i], v2->data[i]);
   }
   
   return v;
+}
+
+
+void vdiv(vector_t v, int factor) {
+  assert(v);
+  
+  for (size_t i = 0; i < v->length; i++) {
+    v->data[i] = (uint32_t)(((int)v->data[i]) >> factor);
+  }
 }
 
 /**
@@ -61,8 +79,9 @@ vector_t *vouter(vector_t v1, vector_t v2) {
   for (size_t i = 0; i < v2->length; i++) {
     vector_t v = Vector(v1->length);
     uint32_t scalar = v2->data[i];
-    for (size_t j = 0; j < v1->length; j++)
-      v->data[j] = v1->data[j] * scalar;
+    for (size_t j = 0; j < v1->length; j++) {
+      v->data[j] = fmult(v1->data[j], scalar);
+    }
     matrix[i] = v;
   }
   
@@ -79,7 +98,7 @@ uint32_t vmad(vector_t v1, vector_t v2) {
   uint32_t sum = 0;
   
   for (size_t i = 0; i < v1->length; ++i) {
-    sum += v1->data[i] * v2->data[i];
+    sum += fmult(v1->data[i], v2->data[i]);
   }
   
   return sum;
@@ -115,4 +134,37 @@ vector_t vsub(vector_t v1, vector_t v2) {
     v->data[i] = v1->data[i] - v2->data[i];
   }
   return v;
+}
+
+void vprint(vector_t v) {
+  assert(v);
+
+  for (uint32_t i = 0; i < v->length; i++) 
+    printf("v[%u] = %u\n", i, v->data[i]);
+}
+
+/**
+ * Fixed point multiply (Q16.16)
+ */
+uint32_t fmult(uint32_t x, uint32_t y) {
+  uint32_t result;
+  int64_t intermediate;
+
+  intermediate = ((int64_t)((int32_t)x)) * ((int64_t)((int32_t)y));
+  result = (uint32_t)((uint64_t)(intermediate >> 16));
+
+  return result;
+}
+
+/**
+ * Fixed point divide (Q16.16)
+ */
+uint32_t fdiv(uint32_t x, uint32_t y) {
+  uint32_t result;
+  uint64_t intermediate;
+
+  intermediate = ((uint64_t)x) / ((uint64_t)y);
+  result = (uint32_t)(intermediate >> 16);
+
+  return result;
 }

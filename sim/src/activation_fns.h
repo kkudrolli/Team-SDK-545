@@ -13,9 +13,10 @@
 #include "vector.h"
 
 #define STEP_THRESHOLD   1      // For step function
-#define BETA_SLOPE_PARAM 1      // For sigmoid
-#define E_NUM            271828 // Fixed point, so no decimal point
-#define BIAS             1<<16      // For linear combination
+#define BETA_SLOPE_PARAM (1<<16)      // For sigmoid
+#define E_NUM            0x2b7e1 // Fixed point, so no decimal point
+#define BIAS             (1<<16)      // For linear combination
+#define FIXED_1          (1<<16)
 
 #define FIXED_5       (5<<16)
 #define FIXED_1       (1<<16)
@@ -39,6 +40,6 @@ uint32_t linear_fn(uint32_t in);
 uint32_t sigmoid_approx_drv(uint32_t in);
 uint32_t log_sigmoid_drv(uint32_t in);
 uint32_t tan_sigmoid_drv(uint32_t in);
-uint32_t linear_fn_drv(uint32_t in);
+uint32_t linear_drv(uint32_t in);
 
 #endif

@@ -70,7 +70,7 @@ network_t Network(uint32_t num_layers, uint32_t num_inputs, uint32_t num_outputs
   assert(num_inputs > 0);
   assert(num_outputs > 0);
 
-  printf("Creating network...\n");
+  printf(BOLD UNDERLINE "Creating network...\n" NORMAL);
   network_t network = Malloc(sizeof(struct network));
   network->num_layers = num_layers;
   network->tiles = Calloc(num_layers, sizeof(tile_t));
@@ -82,20 +82,26 @@ network_t Network(uint32_t num_layers, uint32_t num_inputs, uint32_t num_outputs
   vector_t param = Vector(num_layers+1);
   param->data[0] = num_inputs;
   printf("Allocating layer 0...\n");
-  network->tiles[0] = Tile(NEURONS_PER_TILE, num_inputs, activation_fn, 0);
-  for (i = 1; i < num_layers-1; i++) {
+  if (num_layers > 1) {
+    network->tiles[0] = Tile(NEURONS_PER_TILE, num_inputs, activation_fn, 0);
+    for (i = 1; i < num_layers-1; i++) {
+      param->data[i] = NEURONS_PER_TILE;
+      printf("Allocating layer %d...\n", i);
+      network->tiles[i] = Tile(NEURONS_PER_TILE, NEURONS_PER_TILE, activation_fn, i);
+    }
     param->data[i] = NEURONS_PER_TILE;
+    param->data[i+1] = num_outputs;
     printf("Allocating layer %d...\n", i);
-    network->tiles[i] = Tile(NEURONS_PER_TILE, NEURONS_PER_TILE, activation_fn, i);
+    network->tiles[i] = Tile(num_outputs, NEURONS_PER_TILE, activation_fn, i);
+  } else {
+    network->tiles[0] = Tile(num_outputs, num_inputs, activation_fn, 0);
+    param->data[1] = num_outputs;
   }
-  param->data[i] = NEURONS_PER_TILE;
-  param->data[i+1] = num_outputs;
-  printf("Allocating layer %d...\n", i);
-  network->tiles[i] = Tile(num_outputs, NEURONS_PER_TILE, activation_fn, i);
 
-  printf("Initializing weights file...\n");
+  printf(BOLD UNDERLINE "\nInitializing weights file...\n\n" NORMAL);
   network->weights = initWeights(param);
 
+  printf("Network created successfully!\n\n" NORMAL);
   return network;
 }
 
@@ -128,11 +134,11 @@ vector_t evaluate_image (network_t network, vector_t image) {
 
   vector_t hidden, output;
   
-  printf("Evaluating tile 0...\n");
+  //printf("Evaluating tile 0...\n");
   hidden = evaluate_tile(network->tiles[0], image, network->weights);
   output = hidden;
   for (uint32_t i = 1; i < network->num_layers; i++) {
-    printf("Evaluating tile %d...\n", i);
+    //printf("Evaluating tile %d...\n", i);
     output = evaluate_tile(network->tiles[i], hidden, network->weights);
     vector_destroy(hidden);
     hidden = output;
