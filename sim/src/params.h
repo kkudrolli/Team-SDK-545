@@ -1,10 +1,10 @@
 #define TEST_PICS_DIR "digits_subset/"
-#define NUM_IMAGES 5
-#define OUTER_ITER 170000
-#define INNER_ITER 5
-#define NUM_LAYERS 2
-#define NEURONS_PER_TILE 64
-#define LEARNING_RATE (1 << 10)
+#define NUM_IMAGES 3
+#define OUTER_ITER 5000
+#define INNER_ITER 1
+#define NUM_LAYERS 4
+#define NEURONS_PER_TILE 128
+#define LEARNING_RATE (1 << 12)
 
 
 #define NORMAL    "\033[0m"

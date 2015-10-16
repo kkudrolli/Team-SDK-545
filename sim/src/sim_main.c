@@ -200,22 +200,26 @@ int main()
   printf(BOLD UNDERLINE "\nBeginning backpropogation...\n" NORMAL);
 
   int progress = 0;
+  int percent = 0;
   uint32_t epsilon = 0;
   for (int j = 0; j < OUTER_ITER; j++) {
     //printf("-------------------------------------\n");
     //printf("Evaluating file: %s\n\n", filename);
 
-    printf(GREEN "Progress: \u2551");
-    for (int i = 0; i < progress; i++) printf(YELLOW "\u2588");
-    for (int i = 0; i < 29-progress; i++) printf(" ");
-    printf(GREEN "\u2551");
-
-    printf(GREEN " %d%%", ((j+1)*100 / (OUTER_ITER)));
-
-    printf(KILL_LINE "\r" NORMAL);
-    fflush(stdout);
+    if (!(j % (OUTER_ITER/300))) {
+      printf(GREEN "Progress: \u2551");
+      for (int i = 0; i < progress; i++) printf(YELLOW "\u2588");
+      for (int i = 0; i < 29-progress; i++) printf(" ");
+      printf(GREEN "\u2551");
+      
+      printf(GREEN " %d%%", percent);
+      
+      printf(KILL_LINE "\r" NORMAL);
+      fflush(stdout);
+    }
 
     if (!((j+1) % (OUTER_ITER/30))) progress++;
+    percent = ((j+1)*100 / (OUTER_ITER));
 
     vector_t results = 0;
     uint32_t i = rand() % NUM_IMAGES;
@@ -248,71 +252,73 @@ int main()
       vector_destroy(results);*/
   }
 
-  printf("\nBackpropogation complete! Testing image 0.bmp:\n");
+  printf(BOLD UNDERLINE "\n\nBackpropogation complete! Testing images...\n" NORMAL);
+
+  printf("\nTesting image 0.bmp:\n");
   vector_t image = read_bitmap("digits/0.bmp");
   vector_t result = evaluate_image(network, image);
   classify(result);
   vector_destroy(result);
   vector_destroy(image);
 
-  printf("\nBackpropogation complete! Testing image 4.bmp:\n");
-  image = read_bitmap("digits/4.bmp");
-  result = evaluate_image(network, image);
-  classify(result);
-  vector_destroy(result);
-  vector_destroy(image);
-
-  printf("\nBackpropogation complete! Testing image 2.bmp:\n");
-  image = read_bitmap("digits/2.bmp");
-  result = evaluate_image(network, image);
-  classify(result);
-  vector_destroy(result);
-  vector_destroy(image);
-
-  printf("\nBackpropogation complete! Testing image 9.bmp:\n");
-  image = read_bitmap("digits/9.bmp");
-  result = evaluate_image(network, image);
-  classify(result);
-  vector_destroy(result);
-  vector_destroy(image);
-
-  printf("\nBackpropogation complete! Testing image 8.bmp:\n");
-  image = read_bitmap("digits/8.bmp");
-  result = evaluate_image(network, image);
-  classify(result);
-  vector_destroy(result);
-  vector_destroy(image);
-
-  printf("\nBackpropogation complete! Testing image 3.bmp:\n");
-  image = read_bitmap("digits/3.bmp");
-  result = evaluate_image(network, image);
-  classify(result);
-  vector_destroy(result);
-  vector_destroy(image);
-
-  printf("\nBackpropogation complete! Testing image 1.bmp:\n");
+  printf("\nTesting image 1.bmp:\n");
   image = read_bitmap("digits/1.bmp");
   result = evaluate_image(network, image);
   classify(result);
   vector_destroy(result);
   vector_destroy(image);
 
-  printf("\nBackpropogation complete! Testing image 5.bmp:\n");
+  printf("\nTesting image 2.bmp:\n");
+  image = read_bitmap("digits/2.bmp");
+  result = evaluate_image(network, image);
+  classify(result);
+  vector_destroy(result);
+  vector_destroy(image);
+
+  printf("\nTesting image 3.bmp:\n");
+  image = read_bitmap("digits/3.bmp");
+  result = evaluate_image(network, image);
+  classify(result);
+  vector_destroy(result);
+  vector_destroy(image);
+
+  printf("\nTesting image 4.bmp:\n");
+  image = read_bitmap("digits/4.bmp");
+  result = evaluate_image(network, image);
+  classify(result);
+  vector_destroy(result);
+  vector_destroy(image);
+
+  printf("\nTesting image 5.bmp:\n");
   image = read_bitmap("digits/5.bmp");
   result = evaluate_image(network, image);
   classify(result);
   vector_destroy(result);
   vector_destroy(image);
 
-  printf("\nBackpropogation complete! Testing image 7.bmp:\n");
+  printf("\nTesting image 6.bmp:\n");
+  image = read_bitmap("digits/6.bmp");
+  result = evaluate_image(network, image);
+  classify(result);
+  vector_destroy(result);
+  vector_destroy(image);
+
+  printf("\nTesting image 7.bmp:\n");
   image = read_bitmap("digits/7.bmp");
   result = evaluate_image(network, image);
   classify(result);
   vector_destroy(result);
   vector_destroy(image);
 
-  printf("\nBackpropogation complete! Testing image 6.bmp:\n");
-  image = read_bitmap("digits/6.bmp");
+  printf("\nTesting image 8.bmp:\n");
+  image = read_bitmap("digits/8.bmp");
+  result = evaluate_image(network, image);
+  classify(result);
+  vector_destroy(result);
+  vector_destroy(image);
+
+  printf("\nTesting image 9.bmp:\n");
+  image = read_bitmap("digits/9.bmp");
   result = evaluate_image(network, image);
   classify(result);
   vector_destroy(result);
