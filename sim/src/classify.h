@@ -11,8 +11,10 @@
 #include <stdint.h>
 #include <math.h>
 #include "vector.h"
+#include "params.h"
 
-#define BETA 0.00000001 // Can play around with this
+
+#define BETA 10 // Can play around with this
                         // to handle larger numbers
 
 /* 

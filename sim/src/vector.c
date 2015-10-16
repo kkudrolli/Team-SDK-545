@@ -136,7 +136,7 @@ vector_t vsub(vector_t v1, vector_t v2) {
   return v;
 }
 
-void vprint(vector_t v) {
+inline void vprint(vector_t v) {
   assert(v);
 
   for (uint32_t i = 0; i < v->length; i++) 
@@ -146,7 +146,7 @@ void vprint(vector_t v) {
 /**
  * Fixed point multiply (Q16.16)
  */
-uint32_t fmult(uint32_t x, uint32_t y) {
+inline uint32_t fmult(uint32_t x, uint32_t y) {
   uint32_t result;
   int64_t intermediate;
 
@@ -159,7 +159,7 @@ uint32_t fmult(uint32_t x, uint32_t y) {
 /**
  * Fixed point divide (Q16.16)
  */
-uint32_t fdiv(uint32_t x, uint32_t y) {
+inline uint32_t fdiv(uint32_t x, uint32_t y) {
   uint32_t result;
   uint64_t intermediate;
 
@@ -167,4 +167,14 @@ uint32_t fdiv(uint32_t x, uint32_t y) {
   result = (uint32_t)(intermediate >> 16);
 
   return result;
+}
+
+
+/** 
+ * Fixed point to float
+ */
+inline float fixed_to_float(uint32_t x) {
+  float y = (float)((int32_t)x);
+  float div = (float)(1 << 16);
+  return (y / div);
 }
