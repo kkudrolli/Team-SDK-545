@@ -57,7 +57,7 @@ int main()
     //specs.c_oflag = (OPOST | CR3);
 
     // Set Baud Rate to 9600bps
-    if ((ret = cfsetospeed(&specs, B19200)) == -1){
+    if ((ret = cfsetospeed(&specs, B9600)) == -1){
         printf("Error in setting baud rate\n");
     }
 
