@@ -20,6 +20,6 @@
 /* 
  * Classifies output of neural network to a handwritten digit.
  */
-uint32_t classify(vector_t net_out);
+uint32_t classify(vector_t net_out, uint32_t quiet);
 
 #endif

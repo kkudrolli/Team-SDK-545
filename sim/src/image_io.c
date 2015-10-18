@@ -132,8 +132,8 @@ vector_t read_bitmap(char *filename)
         assert(reduced_image);
         vec->data[i] = (uint32_t) reduced_image[i];
 
-	// Normalize to have mean 1, variance 1
-	
+	// Normalize to have mean 1, var 1
+	vec->data[i] = ((vec->data[i] * (1 << 16)) / 128);
     }
 
 #ifdef IMAGE_IO_DBG

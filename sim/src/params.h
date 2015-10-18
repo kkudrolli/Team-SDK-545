@@ -1,12 +1,18 @@
 #include "activation_fns.h"
 
+#define MODE_MNIST
+#define INPUT_SIZE 28
+
 #define TEST_PICS_DIR "digits_subset/"
 #define NUM_IMAGES 3
-#define OUTER_ITER 4000000
+
+#define MNIST_IMAGES 100
+
+#define OUTER_ITER 800
 #define INNER_ITER 1
 #define NUM_LAYERS 2
-#define NEURONS_PER_TILE 64
-#define LEARNING_RATE (1 << 13)
+#define NEURONS_PER_TILE 100
+#define LEARNING_RATE (1 << 14)
 #define ACTIVATION_FN sigmoid_approx_fn
 #define ACTIVATION_DRV sigmoid_approx_drv
 //#define ACTIVATION_FN linear_fn

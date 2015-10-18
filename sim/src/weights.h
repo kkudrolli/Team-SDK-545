@@ -12,8 +12,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <math.h>
 #include "err_wrappers.h"
 #include "vector.h"
+#include "params.h"
 
 struct weightfile {
   vector_t param;

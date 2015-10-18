@@ -37,7 +37,7 @@ float softmax(uint32_t* data, size_t length, size_t i)
  * Return value:
  *  - prediction
  */
-uint32_t classify(vector_t net_out) 
+uint32_t classify(vector_t net_out, uint32_t quiet) 
 {
     uint32_t prediction = 0;
     float conf = 0;
@@ -47,8 +47,10 @@ uint32_t classify(vector_t net_out)
 
     // Prints out the confidence in each digit
     printf(BOLD UNDERLINE "\nClassification:\n" NORMAL);
-    printf(BOLD "# Confidence   Neuron Output\n" NORMAL);
-    printf(BOLD "- ----------   -------------\n" NORMAL);
+    if (!quiet) {
+      printf(BOLD "# Confidence   Neuron Output\n" NORMAL);
+      printf(BOLD "- ----------   -------------\n" NORMAL);
+    }
     for (size_t i = 0; i < length; i++) {
         // Get the confidence of this digit using softmax
         float new_conf = softmax(data, length, i);
@@ -57,7 +59,8 @@ uint32_t classify(vector_t net_out)
             prediction = i;
             conf = new_conf;
         }
-        printf("%zu %-7.5f      %u\n", i, new_conf, data[i]);
+	if (!quiet)
+	  printf("%zu %-7.5f      %u\n", i, new_conf, data[i]);
     }
     printf(BOLD "Prediction: %d with %2.1f%% confidence \n\n" NORMAL, prediction, conf * 100);
 

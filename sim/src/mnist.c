@@ -114,6 +114,8 @@ mnist_images_t read_images(uint32_t train)
         assert(mnist_data);
         for (uint32_t j = 0; j < img_size; j++) {
             mnist_data[i]->data[j] = (uint32_t) image_bytes[j];
+	    // Normalize to have mean 1, var 1
+	    mnist_data[i]->data[j] = ((mnist_data[i]->data[j] * (1 << 16)) / 128);
         }
         Free(image_bytes);
     }

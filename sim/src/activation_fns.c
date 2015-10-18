@@ -43,43 +43,43 @@ uint32_t ipow(uint32_t base, uint32_t exp)
 
 uint32_t fixed_mult(uint32_t a, uint32_t b)
 {
-    uint64_t a_64 = (uint64_t) a;
-    uint64_t b_64 = (uint64_t) b;
-    uint64_t c = a_64 * b_64;
-    c = c >> 16;
-    return (uint32_t) c;
+  uint64_t a_64 = (uint64_t) a;
+  uint64_t b_64 = (uint64_t) b;
+  uint64_t c = a_64 * b_64;
+  c = c >> 16;
+  return (uint32_t) c;
 }
 
 uint32_t piecewise_sigmoid(uint32_t in) 
 {
-    if (in >= FIXED_5) {
-        return FIXED_1;
-    } else if ((in >= FIXED_2_375) && (in < FIXED_5)) {
-        return fixed_mult(FIXED_0_03125, in) + FIXED_0_84375;
-    } else if ((in >= FIXED_1) && (in < FIXED_2_375)) {
-        return fixed_mult(FIXED_0_125, in) + FIXED_0_625;
-    } else {
-        return fixed_mult(FIXED_0_25, in) + FIXED_0_5;
-    }
+  if (in >= FIXED_5) {
+    return FIXED_1;
+  } else if ((in >= FIXED_2_375) && (in < FIXED_5)) {
+    return fixed_mult(FIXED_0_03125, in) + FIXED_0_84375;
+  } else if ((in >= FIXED_1) && (in < FIXED_2_375)) {
+    return fixed_mult(FIXED_0_125, in) + FIXED_0_625;
+  } else {
+    return fixed_mult(FIXED_0_25, in) + FIXED_0_5;
+  }
 }
 
 uint32_t sigmoid_approx_fn(uint32_t in)
 {
-    uint32_t sign = (in & 0x80000000) >> 31;
-    uint32_t out = 0;
-    //in = in & ~0x80000000;
-    if (sign) {
-      out = FIXED_1 - piecewise_sigmoid(~in+1);  
-    } else {
-      out = piecewise_sigmoid(in);
-    }
-    if (out == 0) return 1;
+  uint32_t sign = (in & 0x80000000) >> 31;
+  uint32_t out = 0;
+  //in = in & ~0x80000000;
+  if (sign) {
+    out = FIXED_1 - piecewise_sigmoid(~in+1);  
+  } else {
+    out = piecewise_sigmoid(in);
+  }
+  if (out == 0) return 1;
 }
 
 uint32_t sigmoid_approx_drv(uint32_t in)
 {
-    uint32_t out = fixed_mult(sigmoid_approx_fn(in), (FIXED_1 - sigmoid_approx_fn(in)));
-    return out;
+  uint32_t out = fixed_mult(sigmoid_approx_fn(in), (FIXED_1 - sigmoid_approx_fn(in)));
+  return out;
 }
 
 uint32_t step_fn(uint32_t in)
@@ -135,25 +135,25 @@ uint32_t linear_drv(uint32_t in) {
   return out;
 }
 /*
-int main (void) 
-{
-    assert(sigmoid_approx_fn(FIXED_1) == 0xc000);
-    assert(sigmoid_approx_fn(FIXED_5) == 1<<16);
-    assert(sigmoid_approx_fn(100 << 16) == 1<<16);
-    assert(sigmoid_approx_fn(0) == FIXED_0_5);
-    assert(sigmoid_approx_fn(0x2c000) == 0xee00); // x = 2.75
-    assert(sigmoid_approx_fn(0x6000) == 0x9800); // x = 0.375
-    assert(sigmoid_approx_fn(0x6000000) == 1<<16);
-    assert(sigmoid_approx_fn(0x18000) == 0xd000); // x = 1.5
-    assert(sigmoid_approx_fn(0xfffe8000) == 0x3000); // x = -1.5
-    assert(sigmoid_approx_fn(0xffff0000) == 0x4000); // x = -1.0
-    assert(sigmoid_approx_fn(0xffffe000) == 0x7800); // x = -0.125
-    assert(sigmoid_approx_fn(0xfffd4000) == 0x1200); // x = -2.75
-    assert(sigmoid_approx_fn(0xfffa0000) == 0x0000); // x = -6.0
-    printf("Finished tests!\n");
-    return 0;
-}
-int main (void) 
+  int main (void) 
+  {
+  assert(sigmoid_approx_fn(FIXED_1) == 0xc000);
+  assert(sigmoid_approx_fn(FIXED_5) == 1<<16);
+  assert(sigmoid_approx_fn(100 << 16) == 1<<16);
+  assert(sigmoid_approx_fn(0) == FIXED_0_5);
+  assert(sigmoid_approx_fn(0x2c000) == 0xee00); // x = 2.75
+  assert(sigmoid_approx_fn(0x6000) == 0x9800); // x = 0.375
+  assert(sigmoid_approx_fn(0x6000000) == 1<<16);
+  assert(sigmoid_approx_fn(0x18000) == 0xd000); // x = 1.5
+  assert(sigmoid_approx_fn(0xfffe8000) == 0x3000); // x = -1.5
+  assert(sigmoid_approx_fn(0xffff0000) == 0x4000); // x = -1.0
+  assert(sigmoid_approx_fn(0xffffe000) == 0x7800); // x = -0.125
+  assert(sigmoid_approx_fn(0xfffd4000) == 0x1200); // x = -2.75
+  assert(sigmoid_approx_fn(0xfffa0000) == 0x0000); // x = -6.0
+  printf("Finished tests!\n");
+  return 0;
+  }
+  int main (void) 
   {
   assert(ipow(1, 2) == 1);
   assert(ipow(0, 2) == 0);
