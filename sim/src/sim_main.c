@@ -47,7 +47,9 @@ int main()
    */
   
   
-  mnist_images_t mnist_data = read_images(0);
+  mnist_images_t mnist_data = read_images(1);
+  mnist_images_t mnist_test = read_images(0);
+
 #ifdef DEBUG
   printf("MNIST IMAGE:\n[ ");
   for (size_t i = 0; i < mnist_data->imgs[0]->length; i++) {
@@ -56,7 +58,9 @@ int main()
   printf("]\n");
 #endif
   
-  mnist_labels_t mnist_labels = read_labels(0);
+  mnist_labels_t mnist_labels = read_labels(1);
+  mnist_labels_t mnist_test_l = read_labels(0);
+
 #ifdef DEBUG
   printf("MNIST LABEL:\n[ ");
   for (size_t i = 0; i < mnist_labels->labels->length; i++) {
@@ -258,12 +262,12 @@ int main()
   printf(BOLD UNDERLINE "\n\nBackpropogation complete! Testing images...\n" NORMAL);
 
   int correct = 0;
-  for (int i = MNIST_IMAGES ; i < 2*MNIST_IMAGES; i++) {
-    vector_t ideal = gen_target(mnist_labels->labels->data[i]);
+  for (int i = 0 ; i < MNIST_IMAGES; i++) {
+    vector_t ideal = gen_target(mnist_test_l->labels->data[i]);
     for (int j = 0; j < INNER_ITER; j++) {      
-      printf("\nTesting image of %d:\n", mnist_labels->labels->data[i]);
-      vector_t result = evaluate_image(network, mnist_data->imgs[i]);
-      if (classify(result, 0) == mnist_labels->labels->data[i]) correct++;
+      printf("\nTesting image of %d:\n", mnist_test_l->labels->data[i]);
+      vector_t result = evaluate_image(network, mnist_test->imgs[i]);
+      if (classify(result, 1) == mnist_test_l->labels->data[i]) correct++;
       vector_destroy(result);
     }
   }
@@ -273,11 +277,14 @@ int main()
   printf("\n\n");
 #endif
 
+
   network_destroy(network);
 			   
   mnist_labels_destroy(mnist_labels);
   mnist_images_destroy(mnist_data);
-  
+  mnist_labels_destroy(mnist_test_l);
+  mnist_images_destroy(mnist_test);
+
   return 0;
 }
 

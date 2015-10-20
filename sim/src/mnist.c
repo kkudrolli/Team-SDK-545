@@ -64,7 +64,7 @@ char *concat_fname(const char *dir_name, const char *fname)
  *              images into and array of vectors.
  *
  * Parameters:
- *  - train: boolean value, read from training db if 0, test db if 1
+ *  - train: boolean value, read from training db if 1, test db if 0
  *
  * Return value:
  *  - array of vectors containing mnist images

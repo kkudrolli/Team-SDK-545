@@ -112,28 +112,56 @@ int main()
 
     // Get the mnist data
     mnist_images_t m_imgs = read_images(TRAIN);
+    mnist_labels_t m_lbls = read_labels(TRAIN);
     size_t size = 300; // TODO: m_imgs->size
+    vector_t typeset_imgs[10];
+
+    typeset_imgs[0] = read_bitmap("../../sim/digits/0.bmp");
+    typeset_imgs[1] = read_bitmap("../../sim/digits/1.bmp");
+    typeset_imgs[2] = read_bitmap("../../sim/digits/2.bmp");
+    typeset_imgs[3] = read_bitmap("../../sim/digits/3.bmp");
+    typeset_imgs[4] = read_bitmap("../../sim/digits/4.bmp");
+    typeset_imgs[5] = read_bitmap("../../sim/digits/5.bmp");
+    typeset_imgs[6] = read_bitmap("../../sim/digits/6.bmp");
+    typeset_imgs[7] = read_bitmap("../../sim/digits/7.bmp");
+    typeset_imgs[8] = read_bitmap("../../sim/digits/8.bmp");
+    typeset_imgs[9] = read_bitmap("../../sim/digits/9.bmp");
+
     for (size_t i = 0; i < size; i++) {
-        printf("In loop\n");
     
         vector_t img = m_imgs->imgs[i];
         size_t length = img->length;
         uint32_t *data = img->data; 
+	uint32_t label = m_lbls->labels->data[i];
 
         unsigned char *bytes = (unsigned char*) Calloc(length, sizeof(unsigned char));
         
         for (size_t j = 0; j < length; j++) {
             bytes[j] = (unsigned char) data[j];
-            
-            //printf("%x ", bytes[j]);
         }
         
         for (size_t j = 0; j < length; j++) {
-            if ((n = write(port, &(bytes[j]), 1)) < 0) { // n = no of bytes written
+	  if (0){//(n = write(port, &(bytes[j]), 1)) < 0) { // n = no of bytes written
                 printf("\nError");
             }
-            usleep(1000); // Sleep for 1 ms
         }
+
+	img = typeset_imgs[label];
+	length = img->length;
+	data = img->data;
+        for (size_t j = 0; j < length; j++) {
+            bytes[j] = (unsigned char) data[j];
+        }
+        
+        for (size_t j = 0; j < length; j++) {
+	  if (0){//(n = write(port, &(bytes[j]), 1)) < 0) { // n = no of bytes written
+                printf("\nError");
+            }
+        }
+
+	printf("Iteration %d (num: %d)...\n", i, label);
+
+	sleep(1);
     }
 
     // MNIST TEST END

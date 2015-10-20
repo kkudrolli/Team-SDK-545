@@ -6,7 +6,7 @@
 #define TEST_PICS_DIR "digits_subset/"
 #define NUM_IMAGES 3
 
-#define MNIST_IMAGES 100
+#define MNIST_IMAGES 10000
 
 #define OUTER_ITER 800
 #define INNER_ITER 1
