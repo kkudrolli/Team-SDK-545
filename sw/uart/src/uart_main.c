@@ -141,7 +141,7 @@ int main()
         }
         
         for (size_t j = 0; j < length; j++) {
-	  if (0){//(n = write(port, &(bytes[j]), 1)) < 0) { // n = no of bytes written
+	  if (n = write(port, &(bytes[j]), 1)) < 0) { // n = no of bytes written
                 printf("\nError");
             }
         }
@@ -154,7 +154,7 @@ int main()
         }
         
         for (size_t j = 0; j < length; j++) {
-	  if (0){//(n = write(port, &(bytes[j]), 1)) < 0) { // n = no of bytes written
+	  if ((n = write(port, &(bytes[j]), 1)) < 0) { // n = no of bytes written
                 printf("\nError");
             }
         }
