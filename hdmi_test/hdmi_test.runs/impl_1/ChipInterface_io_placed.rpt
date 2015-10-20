@@ -1,14 +1,14 @@
 Copyright 1986-2015 Xilinx, Inc. All Rights Reserved.
-----------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2015.2 (lin64) Build 1266856 Fri Jun 26 16:35:25 MDT 2015
-| Date         : Sun Oct  4 23:13:21 2015
-| Host         : graces.andrew.local.cmu.edu running 64-bit Red Hat Enterprise Linux Server release 7.1 (Maipo)
+| Date         : Mon Oct 19 23:57:47 2015
+| Host         : savage.andrew.cmu.edu running 64-bit Red Hat Enterprise Linux Server release 7.1 (Maipo)
 | Command      : report_io -file ChipInterface_io_placed.rpt
 | Design       : ChipInterface
 | Device       : xc7vx485t
 | Speed File   : -2
 | Package      : ffg1761
-----------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------
 
 IO Information
 

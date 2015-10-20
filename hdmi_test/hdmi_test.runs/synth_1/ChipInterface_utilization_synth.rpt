@@ -1,8 +1,8 @@
 Copyright 1986-2015 Xilinx, Inc. All Rights Reserved.
 ---------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2015.2 (lin64) Build 1266856 Fri Jun 26 16:35:25 MDT 2015
-| Date         : Sun Oct  4 23:12:29 2015
-| Host         : graces.andrew.local.cmu.edu running 64-bit Red Hat Enterprise Linux Server release 7.1 (Maipo)
+| Date         : Mon Oct 19 23:56:51 2015
+| Host         : savage.andrew.cmu.edu running 64-bit Red Hat Enterprise Linux Server release 7.1 (Maipo)
 | Command      : report_utilization -file ChipInterface_utilization_synth.rpt -pb ChipInterface_utilization_synth.pb
 | Design       : ChipInterface
 | Device       : xc7vx485t
@@ -30,11 +30,11 @@ Table of Contents
 +-------------------------+------+-------+-----------+-------+
 |        Site Type        | Used | Fixed | Available | Util% |
 +-------------------------+------+-------+-----------+-------+
-| Slice LUTs*             | 1230 |     0 |    303600 |  0.41 |
-|   LUT as Logic          | 1230 |     0 |    303600 |  0.41 |
+| Slice LUTs*             | 1227 |     0 |    303600 |  0.40 |
+|   LUT as Logic          | 1227 |     0 |    303600 |  0.40 |
 |   LUT as Memory         |    0 |     0 |    130800 |  0.00 |
-| Slice Registers         |  159 |     0 |    607200 |  0.03 |
-|   Register as Flip Flop |  159 |     0 |    607200 |  0.03 |
+| Slice Registers         |  181 |     0 |    607200 |  0.03 |
+|   Register as Flip Flop |  181 |     0 |    607200 |  0.03 |
 |   Register as Latch     |    0 |     0 |    607200 |  0.00 |
 | F7 Muxes                |   96 |     0 |    151800 |  0.06 |
 | F8 Muxes                |   40 |     0 |     75900 |  0.05 |
@@ -54,10 +54,10 @@ Table of Contents
 | 0     |            _ |         Set |            - |
 | 0     |            _ |       Reset |            - |
 | 0     |          Yes |           - |            - |
-| 3     |          Yes |           - |          Set |
-| 120   |          Yes |           - |        Reset |
+| 9     |          Yes |           - |          Set |
+| 135   |          Yes |           - |        Reset |
 | 0     |          Yes |         Set |            - |
-| 36    |          Yes |       Reset |            - |
+| 37    |          Yes |       Reset |            - |
 +-------+--------------+-------------+--------------+
 
 
@@ -79,11 +79,12 @@ Table of Contents
 3. DSP
 ------
 
-+-----------+------+-------+-----------+-------+
-| Site Type | Used | Fixed | Available | Util% |
-+-----------+------+-------+-----------+-------+
-| DSPs      |    0 |     0 |      2800 |  0.00 |
-+-----------+------+-------+-----------+-------+
++----------------+------+-------+-----------+-------+
+|    Site Type   | Used | Fixed | Available | Util% |
++----------------+------+-------+-----------+-------+
+| DSPs           |    1 |     0 |      2800 |  0.04 |
+|   DSP48E1 only |    1 |       |           |       |
++----------------+------+-------+-----------+-------+
 
 
 4. IO and GT Specific
@@ -153,26 +154,27 @@ Table of Contents
 +------------+------+---------------------+
 |  Ref Name  | Used | Functional Category |
 +------------+------+---------------------+
-| LUT6       |  885 |                 LUT |
-| LUT5       |  197 |                 LUT |
-| LUT4       |  132 |                 LUT |
-| FDCE       |  120 |        Flop & Latch |
+| LUT6       |  898 |                 LUT |
+| LUT5       |  220 |                 LUT |
+| FDCE       |  135 |        Flop & Latch |
+| LUT4       |  128 |                 LUT |
 | MUXF7      |   96 |               MuxFx |
 | RAMB36E1   |   84 |        Block Memory |
-| LUT2       |   53 |                 LUT |
 | OBUF       |   51 |                  IO |
 | MUXF8      |   40 |               MuxFx |
-| LUT1       |   40 |                 LUT |
-| FDRE       |   36 |        Flop & Latch |
-| LUT3       |   30 |                 LUT |
-| CARRY4     |   21 |          CarryLogic |
+| FDRE       |   37 |        Flop & Latch |
+| LUT3       |   29 |                 LUT |
+| LUT1       |   28 |                 LUT |
+| LUT2       |   23 |                 LUT |
+| CARRY4     |   13 |          CarryLogic |
+| FDPE       |    9 |        Flop & Latch |
 | BUFG       |    5 |               Clock |
 | IBUF       |    3 |                  IO |
-| FDPE       |    3 |        Flop & Latch |
 | OBUFT      |    2 |                  IO |
 | RAMB18E1   |    1 |        Block Memory |
 | MMCME2_ADV |    1 |               Clock |
 | IBUFDS     |    1 |                  IO |
+| DSP48E1    |    1 |    Block Arithmetic |
 +------------+------+---------------------+
 
 

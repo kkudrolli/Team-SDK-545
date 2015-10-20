@@ -1,8 +1,8 @@
 Copyright 1986-2015 Xilinx, Inc. All Rights Reserved.
 -------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2015.2 (lin64) Build 1266856 Fri Jun 26 16:35:25 MDT 2015
-| Date             : Sun Oct  4 23:14:45 2015
-| Host             : graces.andrew.local.cmu.edu running 64-bit Red Hat Enterprise Linux Server release 7.1 (Maipo)
+| Date             : Mon Oct 19 23:59:40 2015
+| Host             : savage.andrew.cmu.edu running 64-bit Red Hat Enterprise Linux Server release 7.1 (Maipo)
 | Command          : report_power -file ChipInterface_power_routed.rpt -pb ChipInterface_power_summary_routed.pb
 | Design           : ChipInterface
 | Device           : xc7vx485tffg1761-2
@@ -30,8 +30,8 @@ Table of Contents
 ----------
 
 +--------------------------+-------+
-| Total On-Chip Power (W)  | 0.322 |
-| Dynamic (W)              | 0.075 |
+| Total On-Chip Power (W)  | 0.323 |
+| Dynamic (W)              | 0.076 |
 | Device Static (W)        | 0.248 |
 | Effective TJA (C/W)      | 1.1   |
 | Max Ambient (C)          | 84.6  |
@@ -50,19 +50,20 @@ Table of Contents
 | On-Chip        | Power (W) | Used     | Available | Utilization (%) |
 +----------------+-----------+----------+-----------+-----------------+
 | Clocks         |     0.004 |        6 |       --- |             --- |
-| Slice Logic    |     0.001 |     1810 |       --- |             --- |
-|   LUT as Logic |     0.001 |     1207 |    303600 |            0.40 |
-|   Register     |    <0.001 |      159 |    607200 |            0.03 |
+| Slice Logic    |     0.001 |     1820 |       --- |             --- |
+|   LUT as Logic |     0.001 |     1209 |    303600 |            0.40 |
+|   Register     |    <0.001 |      181 |    607200 |            0.03 |
 |   F7/F8 Muxes  |    <0.001 |      136 |    303600 |            0.04 |
+|   CARRY4       |    <0.001 |       13 |     75900 |            0.02 |
 |   BUFG         |    <0.001 |        2 |        32 |            6.25 |
-|   CARRY4       |    <0.001 |       21 |     75900 |            0.03 |
-|   Others       |     0.000 |      179 |       --- |             --- |
-| Signals        |     0.002 |     1925 |       --- |             --- |
+|   Others       |     0.000 |      181 |       --- |             --- |
+| Signals        |     0.002 |     1963 |       --- |             --- |
 | Block RAM      |     0.001 |     84.5 |      1030 |            8.20 |
 | MMCM           |     0.057 |        1 |        14 |            7.14 |
+| DSPs           |     0.000 |        1 |      2800 |            0.04 |
 | I/O            |     0.010 |       65 |       700 |            9.29 |
 | Static Power   |     0.248 |          |           |                 |
-| Total          |     0.322 |          |           |                 |
+| Total          |     0.323 |          |           |                 |
 +----------------+-----------+----------+-----------+-----------------+
 
 
@@ -72,7 +73,7 @@ Table of Contents
 +-----------+-------------+-----------+-------------+------------+
 | Source    | Voltage (V) | Total (A) | Dynamic (A) | Static (A) |
 +-----------+-------------+-----------+-------------+------------+
-| Vccint    |       1.000 |     0.145 |       0.009 |      0.136 |
+| Vccint    |       1.000 |     0.146 |       0.010 |      0.136 |
 | Vccaux    |       1.800 |     0.071 |       0.033 |      0.038 |
 | Vcco33    |       3.300 |     0.000 |       0.000 |      0.000 |
 | Vcco25    |       2.500 |     0.000 |       0.000 |      0.000 |
@@ -147,7 +148,7 @@ Table of Contents
 +---------------------------------------------+-----------+
 | Name                                        | Power (W) |
 +---------------------------------------------+-----------+
-| ChipInterface                               |     0.075 |
+| ChipInterface                               |     0.076 |
 |   I2C_SDA_IOBUF_inst                        |    <0.001 |
 |   bus                                       |    <0.001 |
 |   ck                                        |     0.059 |

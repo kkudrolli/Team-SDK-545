@@ -1,5 +1,5 @@
 
-`define BUADRATE 9600
+`define BUADRATE 921600
 `define BUAD_COUNT(rate) (200000000 / (16*rate))
 
 module ChipInterface
@@ -34,13 +34,19 @@ module ChipInterface
    enum logic [1:0] {S_IDLE, S_READ, S_WRITE} state;
    logic [3:0] sample_count;
    logic [3:0] bit_count;
-   logic [7:0] uart_byte;
+   logic [7:0] uart_byte,uart_byte_buf;
    
    logic [18:0] addr, addr_w;
    logic [31:0] data_in;
-   logic [7:0] tile_count;
+   //logic [7:0] tile_count;
    logic [3:0] we;   
    logic rx_probe;
+   
+   logic [3:0] col_counter_small,row_counter_small;
+   logic [4:0] col_counter_large, row_counter_large;
+   logic startWrite;
+   logic processingPixel;
+   logic side, flip;
 
    logic [10:0] clock_divider;
    logic uart_sampling_clk;
@@ -57,15 +63,85 @@ module ChipInterface
 
    assign rx_probe = USB_RX;
 
+    // write FSM
+    always_ff @(posedge uart_sampling_clk, posedge rst) begin
+        if (rst) begin
+            we <= 1'b0;
+            addr_w <= 19'd0;
+            row_counter_small <= 0;
+            col_counter_small <= 0;
+            row_counter_large <= 0;
+            col_counter_large <= 0;
+            processingPixel <= 0;
+            side <= 0;
+            flip <= 0;
+        end
+        else begin
+            if(startWrite) begin
+                processingPixel <= 1;
+                data_in <= uart_byte_buf;
+                we <= 1;
+                side = (flip) ? ~side : side;
+                flip <= 0;
+                if (side == 0) 
+                    addr_w <= 72039 + col_counter_large*10 + row_counter_large*6480; // 72040 = 720*100+40
+                else
+                    addr_w <= 72399 + col_counter_large*10 + row_counter_large*6480; // 72040 = 720*100+40                                
+            end
+                       
+            // Still same pixel
+            if(processingPixel && row_counter_small<9) begin                
+                if(col_counter_small<9) begin
+                    col_counter_small <= col_counter_small+1;
+                    addr_w <= addr_w+1;
+                end
+                else begin // col_counter_small==10
+                    col_counter_small <= 0;
+                    addr_w <= addr_w+711;
+                    row_counter_small <= row_counter_small+1;
+                end
+            end
+            // Done with this pixel && still same row_large
+            else if (processingPixel && row_counter_small==9 && col_counter_large<27 && row_counter_large<28) begin
+                we <= 0;
+                processingPixel <= 0; // wait for new uart_byte_buf
+                col_counter_small <= 0;
+                row_counter_small <= 0;
+                col_counter_large <= col_counter_large+1;
+            end
+            // Need to go to next row_large
+            else if(processingPixel && row_counter_small==9 && col_counter_large==27 && row_counter_large<27) begin
+                we <= 0;
+                processingPixel <= 0; // wait for new uart_byte_buf
+                col_counter_small <= 0;
+                row_counter_small <= 0;
+                col_counter_large <= 0;
+                row_counter_large <= row_counter_large+1;
+            end
+            // Done with this digit
+            else if(processingPixel && row_counter_small==9 && col_counter_large==27 && row_counter_large==27) begin
+                we <= 0;
+                processingPixel <= 0; // wait for new uart_byte_buf
+                col_counter_small <= 0;
+                row_counter_small <= 0;
+                col_counter_large <= 0;
+                row_counter_large <= 0;              
+                flip <= 1;
+            end
+        end
+    end
+
    always_ff @(posedge uart_sampling_clk, posedge rst) begin
        if (rst) begin
            state <= S_IDLE;
            sample_count <= 4'd0;
            uart_byte <= 8'b0;
-           we <= 1'b0;
-           addr_w <= 19'd0;
-           tile_count <= 0;
+           uart_byte_buf <= 8'hbe;
+           //we <= 1'b0;
+           //addr_w <= 19'd0;
+           //tile_count <= 0;
            LEDS <= 8'b0;
+           
        end else begin
            case (state)
 
@@ -74,7 +150,7 @@ module ChipInterface
                    state <= USB_RX ? S_IDLE : S_READ;
                    sample_count <= 4'd8;
                    bit_count <= 4'd0;
-                   we <= 1'b0;
+                   //we <= 1'b0;
                    USB_CTS <= 1'b0;
                end
                
@@ -83,7 +159,7 @@ module ChipInterface
                    state <= (bit_count == 4'd9) ? S_WRITE : S_READ;
                    bit_count <= (sample_count == 4'd0) ? bit_count + 1 : bit_count;
                    uart_byte <= (sample_count == 4'd0) ? {uart_byte[6:0], USB_RX} : uart_byte;
-                   we <= 1'b0;
+                   //we <= 1'b0;
                    USB_CTS <= 1'b0;
                end
                
@@ -91,9 +167,10 @@ module ChipInterface
                    sample_count <= sample_count + 1;
                    state <= (sample_count == 4'd0) ? S_IDLE : S_WRITE;
                    LEDS <= (sample_count == 4'd0) ? ((LEDS == 27) ? 0 : LEDS + 1) : LEDS;
-                   we <= 1'b1;
-                   data_in <= uart_byte;
                    
+                   //we <= 1'b1;
+                   //data_in <= uart_byte;
+                   /*
                    if (sample_count == 4'd0) begin
                         if (addr_w < 344907 + tile_count*28) begin
                             addr_w <= (LEDS == 27) ? addr_w + 693 : addr_w + 1;
@@ -102,14 +179,21 @@ module ChipInterface
                             tile_count <= tile_count + 1;
                         end
                    end
-                   
+                   */
                    USB_CTS <= 1'b1;
+                   
+                   // below are newly added
+                   uart_byte_buf <= (sample_count == 4'd2) ? uart_byte : uart_byte_buf; 
+                   startWrite <= (sample_count == 4'd2) ? 1 : 0;
                end
                
                default: ; // Do nothing
            endcase
        end
    end
+   
+   
+   
 
 
    logic clk;  

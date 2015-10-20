@@ -10,7 +10,7 @@
 #include "mnist.h"
 #include "image_io.h"
 
-static const char *serial_port =  "/dev/tty.SLAB_USBtoUART";
+static const char *serial_port =  "/dev/ttyUSB0";
 
 // Function to open the port
 int open_port(void)
@@ -57,7 +57,7 @@ int main()
     //specs.c_oflag = (OPOST | CR3);
 
     // Set Baud Rate to 9600bps
-    if ((ret = cfsetospeed(&specs, B9600)) == -1){
+    if ((ret = cfsetospeed(&specs, B921600)) == -1){
         printf("Error in setting baud rate\n");
     }
 
@@ -135,17 +135,19 @@ int main()
 	uint32_t label = m_lbls->labels->data[i];
 
         unsigned char *bytes = (unsigned char*) Calloc(length, sizeof(unsigned char));
-        
+	        
         for (size_t j = 0; j < length; j++) {
             bytes[j] = (unsigned char) data[j];
         }
         
         for (size_t j = 0; j < length; j++) {
-	  if (n = write(port, &(bytes[j]), 1)) < 0) { // n = no of bytes written
+	  if ((n = write(port, &(bytes[j]), 1)) < 0) { // n = no of bytes written
                 printf("\nError");
             }
         }
 
+	//sleep(5);
+	
 	img = typeset_imgs[label];
 	length = img->length;
 	data = img->data;
@@ -161,7 +163,7 @@ int main()
 
 	printf("Iteration %d (num: %d)...\n", i, label);
 
-	sleep(1);
+	//sleep(1);
     }
 
     // MNIST TEST END
