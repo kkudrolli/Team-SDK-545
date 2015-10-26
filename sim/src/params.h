@@ -6,17 +6,18 @@
 #define TEST_PICS_DIR "digits_subset/"
 #define NUM_IMAGES 3
 
-#define MNIST_IMAGES 10000
+#define MNIST_TRAIN_IMAGES 600
+#define MNIST_TEST_IMAGES 1000
 
-#define OUTER_ITER 800
+#define OUTER_ITER 200
 #define INNER_ITER 1
 #define NUM_LAYERS 2
-#define NEURONS_PER_TILE 100
-#define LEARNING_RATE (1 << 14)
-#define ACTIVATION_FN sigmoid_approx_fn
-#define ACTIVATION_DRV sigmoid_approx_drv
-//#define ACTIVATION_FN linear_fn
-//#define ACTIVATION_DRV linear_drv
+#define NEURONS_PER_TILE 256
+#define LEARNING_RATE (1 << 13)
+//#define ACTIVATION_FN sigmoid_approx_fn
+//#define ACTIVATION_DRV sigmoid_approx_drv
+#define ACTIVATION_FN linear_fn
+#define ACTIVATION_DRV linear_drv
 
 
 

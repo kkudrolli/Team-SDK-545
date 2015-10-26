@@ -95,7 +95,7 @@ int main()
   printf(BOLD UNDERLINE "\nBeginning backpropogation...\n" NORMAL);
   for (int j = 0; j < OUTER_ITER; j++) {
 
-    if (!(j % (OUTER_ITER/300))) {
+    if (!(j % (OUTER_ITER/300+1))) {
       printf(GREEN "Progress: \u2551");
       for (int i = 0; i < progress; i++) printf(YELLOW "\u2588");
       for (int i = 0; i < 29-progress; i++) printf(" ");
@@ -107,10 +107,10 @@ int main()
       fflush(stdout);
     }
 
-    if (!((j+1) % (OUTER_ITER/30))) progress++;
+    if (!((j+1) % (OUTER_ITER/30+1))) progress++;
     percent = ((j+1)*100 / (OUTER_ITER));
 
-    for (int i = 0 ; i < MNIST_IMAGES; i++) {
+    for (int i = 0 ; i < MNIST_TRAIN_IMAGES; i++) {
       vector_t ideal = gen_target(mnist_labels->labels->data[i]);
       for (int j = 0; j < INNER_ITER; j++) {
 	epsilon = backpropogate (network, mnist_data->imgs[i], ideal);
@@ -262,19 +262,39 @@ int main()
   printf(BOLD UNDERLINE "\n\nBackpropogation complete! Testing images...\n" NORMAL);
 
   int correct = 0;
-  for (int i = 0 ; i < MNIST_IMAGES; i++) {
+  int mistakes[10][10];
+  for (int i = 0; i < 10; i++)
+    for(int j = 0; j < 10; j++)
+      mistakes[i][j] = 0;
+
+  for (int i = 0 ; i < MNIST_TEST_IMAGES; i++) {
     vector_t ideal = gen_target(mnist_test_l->labels->data[i]);
     for (int j = 0; j < INNER_ITER; j++) {      
-      printf("\nTesting image of %d:\n", mnist_test_l->labels->data[i]);
+      int test_num = mnist_test_l->labels->data[i];
+      printf("\nTesting image of %d:\n", test_num);
       vector_t result = evaluate_image(network, mnist_test->imgs[i]);
-      if (classify(result, 1) == mnist_test_l->labels->data[i]) correct++;
+      int classification = classify(result, 0);
+      if (classification == test_num) correct++;
+      else mistakes[test_num][classification]++;
       vector_destroy(result);
     }
   }
 
+  int err_actual = 0;
+  int err_predic = 0;
+  int max_err = 0;
+  for (int i = 0; i < 10; i++)
+    for (int j = 0; j < 10; j++)
+      if (mistakes[i][j] > max_err) {
+	err_actual = i;
+	err_predic = j;
+	max_err = mistakes[i][j];
+      }
+
   printf(BOLD UNDERLINE "\n\nFINAL RESULTS: Success rate: %2.1f%% (%d correct, %d incorrect)" NORMAL, 
-	 (float)correct*100 / (float)MNIST_IMAGES, correct, MNIST_IMAGES - correct);
-  printf("\n\n");
+	 (float)correct*100 / (float)MNIST_TEST_IMAGES, correct, MNIST_TEST_IMAGES - correct);
+  printf(BOLD "\n\nMost common mistake: %d mistaken for a %d (%d times)\n\n" NORMAL, err_actual, 
+	 err_predic, max_err);
 #endif
 
 
