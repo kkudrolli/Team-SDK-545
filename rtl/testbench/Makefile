@@ -20,5 +20,9 @@ Vdeep: obj_dir
 obj_dir: 
 	VERILATOR_ROOT=$(ROOT)/verilator $(VERILATOR) $(VFLAGS) --cc $(VSOURCES) --exe $(CSOURCES)
 
+verilator:
+	cd verilator ; autoconf ; ./configure 
+	$(MAKE) -C verilator
+
 clean:
 	rm -rf Vdeep obj_dir
