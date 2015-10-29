@@ -132,7 +132,7 @@ int main()
         vector_t img = m_imgs->imgs[i];
         size_t length = img->length;
         uint32_t *data = img->data; 
-	uint32_t label = m_lbls->labels->data[i];
+	    uint32_t label = m_lbls->labels->data[i];
 
         unsigned char *bytes = (unsigned char*) Calloc(length, sizeof(unsigned char));
 	        
@@ -141,7 +141,7 @@ int main()
         }
         
         for (size_t j = 0; j < length; j++) {
-	  if ((n = write(port, &(bytes[j]), 1)) < 0) { // n = no of bytes written
+	        if ((n = write(port, &(bytes[j]), 1)) < 0) { // n = no of bytes written
                 printf("\nError");
             }
         }
@@ -156,7 +156,7 @@ int main()
         }
         
         for (size_t j = 0; j < length; j++) {
-	  if ((n = write(port, &(bytes[j]), 1)) < 0) { // n = no of bytes written
+	        if ((n = write(port, &(bytes[j]), 1)) < 0) { // n = no of bytes written
                 printf("\nError");
             }
         }
