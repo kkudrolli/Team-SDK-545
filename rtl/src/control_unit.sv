@@ -17,7 +17,7 @@ module control_unit
     // Input image
     input  logic [IMG_SZ-1:0] image_in,
     // Output control signals
-    output logic              get_all_weights, do_fp, do_bp, draw,
+    output logic              get_all_weights, do_fp, do_bp, draw, ack,
     // Output image vector
     output logic [IMG_SZ-1:0] image_out);
 
@@ -70,6 +70,7 @@ module control_unit
                 // Clear the start and train when done with a backprop pass
                 clear_start = (bp_done) ? 1 : 0;
                 clear_train = (bp_done) ? 1 : 0;
+                ack = (bp_done) ? 1 : 0;
             end
             display: begin
                 draw = (drawn) ? 0 : 1; 
@@ -77,6 +78,7 @@ module control_unit
                 ns = (drawn) ? weights : display;
                 // Clear the start when done with a display pass
                 clear_start = (drawn) ? 1 : 0;
+                ack = (drawn) ? 1 : 0;
             end
         endcase
     end

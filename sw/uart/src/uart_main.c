@@ -1,10 +1,10 @@
 // Code from: http://yengal-marumugam.blogspot.com/2011/07/serial-port-manipulation-in-c-linux.html
 
-#include <stdio.h>     // Standard input/output definitions
-#include <string.h>    // String function definitions
+#include <stdio.h>    // Standard input/output definitions
+#include <string.h>   // String function definitions
 #include <unistd.h>   // UNIX standard function definitions
-#include <fcntl.h>      // File control definitions
-#include <errno.h>     // Error number definitions
+#include <fcntl.h>    // File control definitions
+#include <errno.h>    // Error number definitions
 #include <termios.h>  // POSIX terminal control definitions 
 #include <string.h>
 #include "mnist.h"
@@ -56,7 +56,7 @@ int main()
     // CR3 - delay of 150ms after transmitting every line
     //specs.c_oflag = (OPOST | CR3);
 
-    // Set Baud Rate to 9600bps
+    // Set Baud Rate to 921600 bps
     if ((ret = cfsetospeed(&specs, B921600)) == -1){
         printf("Error in setting baud rate\n");
     }
@@ -68,23 +68,9 @@ int main()
         perror("Error in setting attribute:");
     }
     
-    //printf("\nPress SPACE to send data, q to quit\n");
-    //scanf("%s", str);
-    //if (str[0] == 'q') exit(0);
+
     printf("Press ENTER to send image\n");
     getchar();
-
-    /*n = 20;
-    char buf[20] = {0, 0x10, 0x20, 0x30, 0x40, 0x50, 0x60, 0x70, 
-                    0x80, 0x90, 0xa0, 0xb0, 0xc0, 0xd0, 0xe0, 0xf0, 
-                    0x1, 0x2, 0x3, 0xff};
-    for (int i = 0; 1; i++) {
-        if ((n = write(port, &buf[19], 1)) < 0) { // n = no of bytes written
-            printf("\nError");
-        }
-        usleep(1000); // Sleep for 1 ms
-        printf("Done sleep\n");
-    }*/
 
     // IMAGE_IO TEST
     /*
@@ -146,11 +132,11 @@ int main()
             }
         }
 
-	//sleep(5);
-	
-	img = typeset_imgs[label];
-	length = img->length;
-	data = img->data;
+        //sleep(5);
+
+        img = typeset_imgs[label];
+        length = img->length;
+        data = img->data;
         for (size_t j = 0; j < length; j++) {
             bytes[j] = (unsigned char) data[j];
         }
@@ -161,15 +147,14 @@ int main()
             }
         }
 
-	printf("Iteration %d (num: %d)...\n", i, label);
+        printf("Iteration %d (num: %d)...\n", i, label);
 
-	//sleep(1);
+        //sleep(1);
     }
 
     // MNIST TEST END
 
     // Close the port
-    //usleep(1000); // Sleep for 1 ms
     tcflush(0, TCIOFLUSH);
     close(port);
     return 0;
