@@ -9,6 +9,7 @@
 
 #include <assert.h>
 #include "mnist.h"
+#include "params.h"
 
 #define TARGET_SIZE 10
 #define FX_PT       16

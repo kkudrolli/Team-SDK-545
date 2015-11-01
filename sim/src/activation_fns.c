@@ -74,6 +74,7 @@ uint32_t sigmoid_approx_fn(uint32_t in)
     out = piecewise_sigmoid(in);
   }
   if (out == 0) return 1;
+  else return out;
 }
 
 uint32_t sigmoid_approx_drv(uint32_t in)
