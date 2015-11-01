@@ -5,7 +5,7 @@ SRC := src
 VSOURCES := $(wildcard ../src/*.sv)
 CSOURCES := $(wildcard src/*.cpp)
 VERILATOR = verilator/bin/verilator
-VFLAGS = -Wall 
+VFLAGS = --top-module deep -Wall 
 ROOT = $(CURDIR)
 
 ###################################################################
@@ -18,7 +18,7 @@ Vdeep: obj_dir
 	cp obj_dir/Vdeep .
 
 obj_dir: 
-	VERILATOR_ROOT=$(ROOT)/verilator $(VERILATOR) $(VFLAGS) --cc $(VSOURCES) --exe $(CSOURCES)
+	LD_LIBRARY_PATH=/usr/lib VERILATOR_ROOT=$(ROOT)/verilator $(VERILATOR) $(VFLAGS) --cc $(VSOURCES) --exe $(CSOURCES)
 
 ver:
 	cd verilator ; autoconf ; ./configure 
