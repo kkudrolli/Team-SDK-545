@@ -23,7 +23,7 @@ module uart_recv(
 
                 // Wait for start condition
                 S_IDLE: begin
-                    state <= (USB_RX) ? S_IDLE : S_READ; // High RX is START
+                    state <= (USB_RX) ? S_IDLE : S_READ; // Low RX is START
                     sample_count <= 4'd8;
                     bit_count <= 4'd0;
                     USB_CTS <= 1'b0; // When 0, PC cleared to send

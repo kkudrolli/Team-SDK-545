@@ -37,7 +37,7 @@ module control_unit
         if (rst) begin
             cs <= idle;
             started <= 1'b0;
-            started <= 1'b0;
+            train_reg <= 1'b0;
         end
         else begin
             cs <= ns;
@@ -62,9 +62,9 @@ module control_unit
             end
             fwd_prop: begin
                 do_fp = (fp_done) ? 0 : 1;
-                do_bp = (fp_done & train) ? 1 : 0;
-                draw = (fp_done & ~train) ? 1 : 0;
-                ns = (fp_done) ? ((train) ? back_prop : display) : fwd_prop;
+                do_bp = (fp_done & (train | train_reg)) ? 1 : 0;
+                draw = (fp_done & ~(train | train_reg)) ? 1 : 0;
+                ns = (fp_done) ? ((train | train_reg) ? back_prop : display) : fwd_prop;
             end
             back_prop: begin
                 do_bp = (bp_done) ? 0 : 1;
@@ -83,6 +83,5 @@ module control_unit
             end
         endcase
     end
-   
 
 endmodule: control_unit

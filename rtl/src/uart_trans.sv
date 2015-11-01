@@ -56,16 +56,16 @@ module uart_trans(
         clr_resend = 1'b0;
         clr_byte = 1'b0;
         shift = 1'b0;
-        USB_TX = 1'b0;
+        USB_TX = 1'b1;
         set_byte = 1'b0;
         next_byte = 8'd0; 
 
         case (cs) 
-        // TODO: may need to flip start and stop logic levels
+            // start condition is logic 0 and stop is logic 1!!
             s_idle: begin
                 ns = (start_trans) ? s_start : s_idle;
                 inc_sample = start_trans;
-                USB_TX = start_trans;
+                USB_TX = ~start_trans;
                 set_byte = start_trans;
                 next_byte = (start_trans) ? ((resend) ? `RESEND : `ACK) : 8'd0;
             end
@@ -73,7 +73,7 @@ module uart_trans(
                 ns = (~USB_RTS && sample_count == 4'd0) ? s_trans : s_start; 
                 inc_sample = ~USB_RTS;
                 clr_sample = USB_RTS;
-                USB_TX = (USB_RTS) ? 1'b0 : (sample_count != 4'd0);
+                USB_TX = (USB_RTS) ? 1'b1 : ~(sample_count != 4'd0);
             end
             s_trans: begin
                 ns = (~USB_RTS && bit_count == 4'd9) ? s_stop : s_trans; 
@@ -83,7 +83,7 @@ module uart_trans(
                 clr_bit = USB_RTS;
                 shift = (~USB_RTS && sample_count == 4'd0);
                 // Drive with data
-                USB_TX = (USB_RTS) ? 1'b0 : uart_byte[0];
+                USB_TX = (USB_RTS) ? 1'b1 : uart_byte[0];
             end
             s_stop: begin
                 ns = (~USB_RTS && sample_count == 4'd0) ? s_idle : s_stop; 
