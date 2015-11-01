@@ -1,23 +1,28 @@
 /*
  * Authors: Kais Kudrolli, DJ Park, Sohil Shah
  *
- * Description: Main file for C-level simulator of our neural network. This 
- * file sets up the test image I/O, neural network tiles, and weight memory.
- * It also simulates training by gradient descent (backpropagation) of the NN.
- * The simulator has been made modular to allow us to experiment with different
- * system and neural network configurations before implementing the system on an
- * FPGA. This project is for our capstone design project 18-545 at Carnegie 
- * Mellon University.
+ * Description: Main SystemVerilog RTL of our neural network. 
  *
  */
 
 module deep
-  (a, b, c);
-   input logic [7:0] a;
-   input logic [7:0] b;
-   output logic [15:0] c;
+  (clk, rst, start, image, label_in, image_in);
+   
+   // Inputs
+   input logic clk, rst;
+   input logic start;
+   input logic [31:0] [783:0] image_in;
+   input logic [7:0] 	      label_in;
+   
+   // Outputs
+   output logic [2351:0]      image;
 
-   assign c = a * b;
+   
+   control_unit cu (.clk, .rst, .start, .train (1'b0), .bp_done, .fp_done, .drawn, 
+		    .label_in, .image (image_in), .do_fp, .do_bp, .draw, .ack, 
+		    .label_out, .image_out);
+
+   tile t (.clk, .rst, );
    
 endmodule: deep
 

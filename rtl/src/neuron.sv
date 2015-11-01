@@ -1,5 +1,5 @@
 module neuron
-  (clk, rst_l, clear, );
+  (clk, rst, clear, );
    
    
 endmodule: neuron
