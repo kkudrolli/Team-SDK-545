@@ -4,13 +4,16 @@ module uart_control_synch
     input  logic              clk, uart_sampling_clk, rst,
     // Inputs
     input  logic              start, train,
+    input  logic [7:0]        label,
     input  logic [IMG_SZ-1:0] image,
     // Outputs
     output logic              start_out, train_out,
+    output logic [7:0]        label_out,
     output logic [IMG_SZ-1:0] image_out);
 
-    logic              start_mid, train_mid,
-    logic [IMG_SZ-1:0] image_mid);
+    logic              start_mid, train_mid;
+    logic [7:0]        label_mid;
+    logic [IMG_SZ-1:0] image_mid;
     
     // Clock first synch register at uart clock
     always_ff @(posedge uart_sampling_clk, posedge rst) begin
@@ -18,11 +21,13 @@ module uart_control_synch
             start_mid <= 1'b0;
             train_mid <= 1'b0;
             image_mid <= 'd0;
+            label_mid <= 8'd0;
         end
         else begin
             start_mid <= start;
             train_mid <= train;
             image_mid <= image;
+            label_mid <= label;
         end
     end
     
@@ -32,11 +37,13 @@ module uart_control_synch
             start_out <= 1'b0;
             train_out <= 1'b0;
             image_out <= 'd0;
+            label_out <= 8'd0;
         end
         else begin
             start_out <= start_mid;
             train_out <= train_mid;
             image_out <= image_mid;
+            label_out <= label_mid;
         end
     end
 

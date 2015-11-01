@@ -14,10 +14,14 @@ module control_unit
     input  logic              clk, rst, train, start, 
     // Input control signals
     input  logic              weights_ack, bp_done, fp_done, drawn,
+    // Input label
+    input  logic [7:0]        label_in,
     // Input image
     input  logic [IMG_SZ-1:0] image_in,
     // Output control signals
     output logic              get_all_weights, do_fp, do_bp, draw, ack,
+    // Output label
+    output logic [7:0]        label_out,
     // Output image vector
     output logic [IMG_SZ-1:0] image_out);
 
@@ -27,6 +31,7 @@ module control_unit
 
     // Just pass input image 
     assign image_out = image_in;
+    assign label_out = label_in;
 
     always_ff @(posedge clk, posedge rst) begin
         if (rst) begin

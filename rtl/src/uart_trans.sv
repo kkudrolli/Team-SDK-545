@@ -10,13 +10,13 @@ module uart_trans(
     enum logic [1:0] {s_idle, s_start, s_trans, s_stop} cs, ns;
 
     // Control signals
-    logic       inc_sample, inc_bit, clr_sample, clr_bit, clr_ack, clr_resend,
-                clr_byte, set_byte, shift;
+    logic       inc_sample, inc_bit, clr_sample, clr_bit, clr_ack, clr_resend;
+    logic       clr_byte, set_byte, shift;
     // Input buffers
     logic       ack_buf, resend_buf;
     // Registers
     logic [3:0] sample_count;
-    logic [2:0] bit_count
+    logic [2:0] bit_count;
     logic [7:0] uart_byte, next_byte;
 
     always_ff @(posedge clk, posedge rst) begin

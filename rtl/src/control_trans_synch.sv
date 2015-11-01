@@ -6,7 +6,7 @@ module control_trans_synch(
     logic ack_mid;
 
     // TODO: ack may be too fast and missed, so hold for like 16 cycles?
-    always_ff @(posedge clk, @posedge rst) begin
+    always_ff @(posedge clk, posedge rst) begin
         if (rst) begin
             ack_mid <= 1'b0;
         end
@@ -15,7 +15,7 @@ module control_trans_synch(
         end
     end
 
-    always_ff @(posedge uart_sampling_clk, @posedge rst) begin
+    always_ff @(posedge uart_sampling_clk, posedge rst) begin
         if (rst) begin
             ack_out <= 1'b0;
         end
