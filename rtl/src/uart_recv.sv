@@ -1,6 +1,6 @@
 
 module uart_recv(
-    input  logic       uart_sampling_clock, rst,
+    input  logic       uart_sampling_clk, rst,
     input  logic       USB_RX,
     output logic       byte_ready,
     output logic       USB_CTS,
@@ -30,7 +30,7 @@ module uart_recv(
                 end
                 // Read data into shift register
                 S_READ: begin
-                    state <= (bit_count == 4'd9) ? S_STOP : S_READ;
+                    state <= (bit_count == 4'd8) ? S_STOP : S_READ;
                     sample_count <= sample_count + 1;
                     bit_count <= (sample_count == 4'd0) ? bit_count + 1 : bit_count;
                     uart_byte <= (sample_count == 4'd0) ? {uart_byte[6:0], USB_RX} :
