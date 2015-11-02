@@ -15,15 +15,14 @@ module uart_trans(
     // Input buffers
     logic       ack_buf, resend_buf;
     // Registers
-    logic [3:0] sample_count;
-    logic [2:0] bit_count;
+    logic [3:0] sample_count, bit_count;
     logic [7:0] uart_byte, next_byte;
 
-    always_ff @(posedge clk, posedge rst) begin
+    always_ff @(posedge uart_sampling_clk, posedge rst) begin
         if (rst) begin
             cs <= s_idle;
             sample_count <= 4'd0;
-            bit_count <= 3'd0;
+            bit_count <= 4'd0;
             ack_buf <= 1'b0;
             resend_buf <= 1'b0;
             uart_byte <= 8'd0;
@@ -32,15 +31,15 @@ module uart_trans(
             cs <= ns;
             sample_count <= (clr_sample) ? 4'd1 : 
                             ((inc_sample) ? sample_count + 4'd1 : sample_count);
-            bit_count <= (clr_bit) ? 3'd0 : 
-                         ((inc_bit) ? bit_count + 3'd1 : bit_count);
+            bit_count <= (clr_bit) ? 4'd0 : 
+                         ((inc_bit) ? bit_count + 4'd1 : bit_count);
             // Buffer inputs and clear them when done
             ack_buf <= (ack) ? 1'b1 : ((clr_ack) ? 1'b0 : ack_buf);
             resend_buf <= (resend) ? 1'b1 : ((clr_resend) ? 1'b0 : resend_buf);
             // Shift register for byte
             uart_byte <= (clr_byte) ? 8'd0 : 
                          ((set_byte) ? next_byte :
-                         ((shift) ? {1'b0, uart_byte[6:0]} : uart_byte));
+                         ((shift) ? {1'b0, uart_byte[7:1]} : uart_byte));
         end
     end
 
@@ -67,6 +66,7 @@ module uart_trans(
                 inc_sample = start_trans;
                 USB_TX = ~start_trans;
                 set_byte = start_trans;
+                clr_bit = 1'b1;
                 next_byte = (start_trans) ? ((resend) ? `RESEND : `ACK) : 8'd0;
             end
             s_start: begin
@@ -76,7 +76,7 @@ module uart_trans(
                 USB_TX = (USB_RTS) ? 1'b1 : ~(sample_count != 4'd0);
             end
             s_trans: begin
-                ns = (~USB_RTS && bit_count == 4'd9) ? s_stop : s_trans; 
+                ns = (~USB_RTS && bit_count == 4'd8) ? s_stop : s_trans; 
                 inc_sample = ~USB_RTS;
                 inc_bit = (~USB_RTS && sample_count == 4'd0);
                 clr_sample = USB_RTS;
