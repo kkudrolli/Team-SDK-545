@@ -14,8 +14,8 @@ module uart_protocol
 
     enum logic [2:0] {s_start, s_train, s_data, s_label, s_check, s_stop} cs, ns;
 
-    logic shift, inc, resent, set_resent, next_resent, set_label;
-    logic [15:0] count; // 16 bits should be big enough for our IMG_SZs
+    logic shift, inc, resent, set_resent, next_resent, set_label, clr_checksum;
+    logic [15:0] count, next_count; // 16 bits should be big enough for our IMG_SZs
     logic [7:0]  checksum, checksum_add, result, next_label;
     
     always_ff @(posedge uart_sampling_clk, posedge rst) begin 
@@ -30,10 +30,10 @@ module uart_protocol
         else begin 
             cs <= ns;
             // Shift image data into this register
-            image <= (shift) ? {image[IMG_SZ-1:8], uart_byte} : image;
+            image <= (shift) ? {uart_byte, image[IMG_SZ-1:8]} : image;
             label <= (set_label) ? next_label : label;
             count <= next_count;
-            checksum <= result;
+            checksum <= (clr_checksum) ? 8'd0 : result;
             resent <= (set_resent) ? next_resent: resent;
         end
     end
@@ -53,6 +53,7 @@ module uart_protocol
         next_resent = 1'b0;
         set_label = 1'b0;
         next_label = 8'd0;
+        clr_checksum = 1'b0;
         case (cs)
             s_start: begin
                 ns = (data_rdy && uart_byte == `START) ? s_train : s_start;
@@ -62,11 +63,12 @@ module uart_protocol
                      ? s_data : s_train;
                 // Asserted for one cycle, buffered and cleared in control unit
                 train = (data_rdy && uart_byte == `TRAIN) ? 1'b1 : 1'b0;
+                shift = (data_rdy && uart_byte == `TRAIN) ? 1'b1 : 1'b0;
             end
             s_data: begin
                 // Shift in all the pixel data
-                ns = (data_rdy && count == IMG_SZ) ? s_label : s_data; 
-                shift = (data_rdy) ? 1'b1 : 1'b0;
+                ns = (data_rdy && count == IMG_SZ-16'd8) ? s_label : s_data; 
+                shift = (data_rdy && count != IMG_SZ-16'd8) ? 1'b1 : 1'b0;
                 next_count = (data_rdy) ? count + 16'd8 : count;
                 checksum_add = uart_byte;
             end
@@ -77,8 +79,9 @@ module uart_protocol
                 checksum_add = uart_byte;
             end
             s_check: begin
-                ns = (data_rdy) ? ((uart_byte == checksum) ? s_stop : s_start) 
-                                  : s_check;
+                ns = (~resent) ? ((data_rdy) ? 
+                                 ((uart_byte == checksum) ? s_stop : s_start) :
+                                 s_check) : s_stop;
                 // Only resend once
                 // Resend in the case checksum doesn't match given checksum
                 resend = (~resent) ? ((data_rdy) ? 
@@ -90,6 +93,9 @@ module uart_protocol
                 next_resent = (~resent) ? ((data_rdy) ? 
                                      ((uart_byte == checksum) ? 1'b0 : 1'b1) 
                                      : 1'b0) : 1'b0;
+                clr_checksum = (~resent) ? ((data_rdy) ? 
+                                     ((uart_byte == checksum) ? 1'b0 : 1'b1) 
+                                     : 1'b0) : 1'b0;
             end
             s_stop: begin
                 ns = (data_rdy && uart_byte == `STOP) ? s_start : s_stop;
@@ -97,6 +103,7 @@ module uart_protocol
                 next_resent = 1'b0;
                 // Asserted for one cycle, buffered and cleared in control unit
                 start = (data_rdy && uart_byte == `STOP) ? 1'b1 : 1'b0;
+                clr_checksum = (data_rdy && uart_byte == `STOP) ? 1'b1 : 1'b0;
             end
         endcase
     end
