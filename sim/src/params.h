@@ -6,10 +6,10 @@
 #define TEST_PICS_DIR "digits_subset/"
 #define NUM_IMAGES 3
 
-#define MNIST_TRAIN_IMAGES 60000
-#define MNIST_TEST_IMAGES 10000
+#define MNIST_TRAIN_IMAGES 0
+#define MNIST_TEST_IMAGES 1
 
-#define OUTER_ITER 20
+#define OUTER_ITER 100
 #define INNER_ITER 1
 #define NUM_LAYERS 2
 #define NEURONS_PER_TILE 128

@@ -12,13 +12,13 @@ module weight(input clka, rst,
     logic [6:0] counter_1;
  
    
-//32 x 128, for 784 cycles
+    //32 x 128, for 784 cycles
     logic [783:0] [127:0] [31:0] douta_0;
     logic [783:0] [127:0] [31:0] dina_0;
-
-// 32 x 10, 128 cycles
-    logic [127:0] [9:0] [31:0] dina_1;
-    logic [127:0] [9:0] [31:0] douta_1;
+   
+    // 32 x 10, 128 cycles
+    logic [127:0] [9:0] [31:0] 	 dina_1;
+    logic [127:0] [9:0] [31:0] 	 douta_1;
 
     integer i,j;
     // READING
@@ -33,13 +33,13 @@ module weight(input clka, rst,
             // initialize for the purpose of testing
             for(j=0;j<784;j=j+1) begin
                 for(i=0;i<128;i=i+1) begin
-                    douta_0[j][i] = i;
+                    douta_0[j][i] <= 1520;
                 end
             end
             // initialize for the purpose of testing
             for(j=0;j<128;j=j+1) begin
                 for(i=0;i<10;i=i+1) begin
-                    douta_1[j][i] = i;
+                    douta_1[j][i] <= 320;
                 end
             end
         end
