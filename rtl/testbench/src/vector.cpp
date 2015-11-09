@@ -173,7 +173,7 @@ inline uint32_t fdiv(uint32_t x, uint32_t y) {
 /** 
  * Fixed point to float
  */
-inline float fixed_to_float(uint32_t x) {
+float fixed_to_float(uint32_t x) {
   float y = (float)((int32_t)x);
   float div = (float)(1 << 16);
   return (y / div);

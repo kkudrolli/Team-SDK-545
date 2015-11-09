@@ -27,6 +27,8 @@ module weights(input clka, rst,
             counter_1 <= 0;
             processing_0 <= 0;
             processing_1 <= 0;
+
+	   /*
             // initialize for the purpose of testing
             for(j=0;j<784;j=j+1) begin
                 for(i=0;i<128;i=i+1) begin
@@ -38,7 +40,7 @@ module weights(input clka, rst,
                 for(i=0;i<10;i=i+1) begin
                     douta_1[j][i] <= 10*j + i;
                 end
-            end
+            end*/
         end
         else begin
             /////////////////
