@@ -76,6 +76,7 @@ network_t Network(uint32_t num_layers, uint32_t num_inputs, uint32_t num_outputs
   network->tiles = Calloc(num_layers, sizeof(tile_t));
   network->activation_fn_drv = activation_fn_drv;
   network->activation_fn = activation_fn;
+  network->num_outputs = num_outputs;
 
   uint32_t i;
 
@@ -133,7 +134,7 @@ vector_t evaluate_image (network_t network, vector_t image) {
   assert(network->tiles[0]->num_inputs == image->length);
 
   vector_t hidden, output;
-  
+
   //printf("Evaluating tile 0...\n");
   hidden = evaluate_tile(network->tiles[0], image, network->weights);
   output = hidden;
@@ -145,4 +146,42 @@ vector_t evaluate_image (network_t network, vector_t image) {
   }
 
   return output;
+}
+
+
+void export_network(network_t network, char *filename) {
+  FILE *f = Fopen(filename, "wb");
+
+  for (size_t i = 0; i < network->num_layers; i++) {
+    for (size_t j = 0; j < network->tiles[i]->num_neurons; j++) {
+      vector_t w = getWeights(network->weights, i, j);
+      fwrite(w->data, sizeof(uint32_t), w->length, f);
+    }
+  }
+  
+  Fclose(f);	  
+}
+
+network_t import_network(char *filename) {
+  FILE *f = Fopen(filename, "rb");
+  network_t network;
+
+  uint32_t num_layers, num_inputs, num_outputs;
+
+  num_layers = 2;
+  num_inputs = 784;
+  num_outputs = 10;
+
+  network = Network(num_layers, num_inputs, num_outputs, ACTIVATION_FN, ACTIVATION_DRV);
+  
+  for (size_t i = 0; i < network->num_layers; i++) {
+    for (size_t j = 0; j < network->tiles[i]->num_neurons; j++) {
+      vector_t w = Vector(network->tiles[i]->num_inputs);
+      fread(w->data, sizeof(uint32_t), w->length, f);
+      setWeights(network->weights, i, j, w);
+    }
+  }
+  
+  Fclose(f);
+  return network;
 }
