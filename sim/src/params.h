@@ -1,5 +1,8 @@
 #include "activation_fns.h"
 
+#define IMPORT
+#define IMPORT_FILE "networks/ideal.deep"
+
 #define MODE_MNIST
 #define INPUT_SIZE 28
 
@@ -7,9 +10,9 @@
 #define NUM_IMAGES 3
 
 #define MNIST_TRAIN_IMAGES 0
-#define MNIST_TEST_IMAGES 1
+#define MNIST_TEST_IMAGES 1000
 
-#define OUTER_ITER 100
+#define OUTER_ITER 0
 #define INNER_ITER 1
 #define NUM_LAYERS 2
 #define NEURONS_PER_TILE 128

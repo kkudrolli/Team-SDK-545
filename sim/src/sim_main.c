@@ -79,6 +79,10 @@ int main()
         error_print("Directory error");
 	}*/  
 
+#ifdef IMPORT
+  network_t network = import_network(IMPORT_FILE);
+#else
+
 #ifdef MODE_MNIST
   network_t network = Network(NUM_LAYERS, 784, 10, ACTIVATION_FN, ACTIVATION_DRV);
 
@@ -257,6 +261,7 @@ int main()
   vector_destroy(result);
   vector_destroy(image);
 #endif
+#endif
 
 #ifdef MODE_MNIST
   printf(BOLD UNDERLINE "\n\nBackpropogation complete! Testing images...\n" NORMAL);
@@ -297,6 +302,7 @@ int main()
 	 err_predic, max_err);
 #endif
 
+  export_network(network, "networks/test.deep");
 
   network_destroy(network);
 			   

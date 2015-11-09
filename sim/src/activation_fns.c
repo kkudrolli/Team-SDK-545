@@ -68,11 +68,13 @@ uint32_t sigmoid_approx_fn(uint32_t in)
   uint32_t sign = (in & 0x80000000) >> 31;
   uint32_t out = 0;
   //in = in & ~0x80000000;
+    
   if (sign) {
     out = FIXED_1 - piecewise_sigmoid(~in+1);  
   } else {
     out = piecewise_sigmoid(in);
   }
+
   if (out == 0) return 1;
   else return out;
 }
