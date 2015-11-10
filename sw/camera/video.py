@@ -83,6 +83,7 @@ def manipulate(frame):
     # classification.
     cv2.normalize(gray, gray, 0, 255, cv2.NORM_MINMAX)
 
+    
     (thresh, im_bw) = cv2.threshold(gray, 100, 255, cv2.THRESH_BINARY_INV);
 
     # Downsize the image, using image pyramids, this function has 
@@ -150,16 +151,17 @@ def feed(video_capture, cap_dir):
     while (True):
         video = get_video(video_capture)
         # Capture image must be flipped otherwise display is mirrored
-        flipped = cv2.flip(video, VERTICAL_FLIP)        
+        #flipped = cv2.flip(video, VERTICAL_FLIP)        
         # Greyscale the image
-        gray = cv2.cvtColor(flipped, cv2.COLOR_BGR2GRAY)
+        gray = cv2.cvtColor(video, cv2.COLOR_BGR2GRAY)
 
+        (thresh, im_bw) = cv2.threshold(gray, 100, 255, cv2.THRESH_BINARY_INV);
         # Display the video feed - grayscaled image displayed will
         # be slightly different from what is stored to disk
-        cv2.imshow("Video", gray)
+        cv2.imshow("Video", im_bw)
         
         # Capture the keys pressed and quit if get_key returns True
-        if (get_key(flipped, cap_dir)): 
+        if (get_key(video, cap_dir)): 
             break
     
     # Clean up
