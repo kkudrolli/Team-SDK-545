@@ -18,7 +18,7 @@
 #define PACK    0xaa
 #define PRESEND 0xcc
 
-//#define SLOW
+#define SLOW
 
 static const char *serial_port =  "/dev/ttyUSB0";
 
@@ -44,10 +44,17 @@ int main()
 
     // Now the specs points to the opened port's specifications
 
+    //specs.c_iflag &= ~(IGNBRK | BRKINT | PARMRK | ISTRIP 
+    //                 | INLCR | IGNCR | ICRNL | IXON);
+    specs.c_iflag |= IGNBRK; // Ignore breaks
+    //specs.c_iflag |= IGNPAR; // Ignore parity and frame errors
+    //specs.c_iflag |= IXON;
+    specs.c_iflag |= IXOFF; // Turn sw handshaking off
+
     specs.c_cflag = (CLOCAL | CREAD); //control flags
     specs.c_cflag &= ~CSIZE;
     specs.c_cflag |= CS8;
-    //specs.c_cflag |= CSTOPB;
+    //specs.c_cflag |= CSTOPB;    
 
     // Output flags
     // CR3 - delay of 150ms after transmitting every line
@@ -111,7 +118,7 @@ int main()
     typeset_imgs[9] = read_bitmap("../../sim/digits/9.bmp");
     uint32_t typeset_lbls[10] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
 
-    transfer(m_imgs->imgs, m_lbls->labels->data, port, 1, 1);
+    transfer(m_imgs->imgs, m_lbls->labels->data, port, 1, 30);
     //transfer(typeset_imgs, typeset_lbls, port, 1, 10);
 
     // MNIST TEST END
@@ -232,6 +239,7 @@ void transfer(vector_t *images, uint32_t *labels, int port, int train, size_t nu
         //Free(bytes);
         resent = 0;
         i++;
+        //sleep(2);
     }
 
     return;

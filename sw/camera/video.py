@@ -83,6 +83,8 @@ def manipulate(frame):
     # classification.
     cv2.normalize(gray, gray, 0, 255, cv2.NORM_MINMAX)
 
+    (thresh, im_bw) = cv2.threshold(gray, 100, 255, cv2.THRESH_BINARY_INV);
+
     # Downsize the image, using image pyramids, this function has 
     # anti-aliasing built in
     # TODO: resize so that number is recognizable
@@ -92,11 +94,8 @@ def manipulate(frame):
         resized = cv2.pyrDown(resized)
         i += 1
         """
-    """
-    resized = cv2.resize(gray, (28, 28))   
-    """
-    #return resized
-    return gray
+    resized = cv2.resize(im_bw, (28, 28))
+    return resized
 
 """
 capture: Function captures a frame and stores it as an image on disk.
