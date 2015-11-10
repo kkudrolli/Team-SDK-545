@@ -10,7 +10,7 @@ Tested using:
 - OpenCV 3.0.0
 - Python 2.7.10
 
-Setup:
+Setup OSX:
 - Get OpenCV 3.0 and Python 2.7 (varies based on your OS)
 - Install virtualenv and virtualenvwrapper 
 - mkvirtualenv cv (now you're in the cv virtual env)
@@ -42,3 +42,7 @@ Sources for code:
 - https://extr3metech.wordpress.com/2012/09/23/convert-photo-to-grayscale-with-python-opencv/
 - http://codeplasma.com/2012/12/03/getting-webcam-images-with-python-and-opencv-2-for-real-this-time/
 - OpenCV Docs
+
+Setup Red Hat Linux:
+- follow instructions on https://blog.kevin-brown.com/programming/2014/09/27/building-and-installing-opencv-3.html
+- EXXCEPT get opencv 3.0.0 NOT 3.0.0-alpha as the website suggests
