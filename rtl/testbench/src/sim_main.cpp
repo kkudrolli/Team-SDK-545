@@ -70,7 +70,6 @@ int main (int argc, char **argv) {
 	else mistakes[mnist_labels->labels->data[k]][classification]++;
 	break;
       }
-
     }
 
     top->rst = 1;
