@@ -131,7 +131,6 @@ set_property PACKAGE_PIN BA31 [get_ports fp_done]
 set_property IOSTANDARD LVCMOS18 [get_ports fp_done]
 set_property PACKAGE_PIN AW40 [get_ports push]
 set_property IOSTANDARD LVCMOS18 [get_ports push]
-set_property PACKAGE_PIN BA32 [get_ports sel]
 set_property IOSTANDARD LVCMOS18 [get_ports {sel[1]}]
 set_property IOSTANDARD LVCMOS18 [get_ports {sel[0]}]
 

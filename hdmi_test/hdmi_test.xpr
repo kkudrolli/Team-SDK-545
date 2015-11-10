@@ -3,7 +3,7 @@
 <!--                                                         -->
 <!-- Copyright 1986-2015 Xilinx, Inc. All Rights Reserved.   -->
 
-<Project Version="7" Minor="5" Path="/afs/ece.cmu.edu/usr/kkudroll/Private/class/18-545/Team-SDK-545/hdmi_test/hdmi_test.xpr">
+<Project Version="7" Minor="5" Path="/afs/ece.cmu.edu/usr/sohils/Private/18545/deep/hdmi_test/hdmi_test.xpr">
   <DefaultLaunch Dir="$PRUNDIR"/>
   <Configuration>
     <Option Name="Id" Val="a9b16b7ac1c3445b8c6c50c6678513ac"/>
@@ -166,6 +166,42 @@
       </File>
       <File Path="$PPRDIR/../rtl/src/uart_protocol.sv">
         <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PSRCDIR/sources_1/imports/src/deep.sv">
+        <FileInfo>
+          <Attr Name="ImportPath" Val="$PPRDIR/../rtl/src/deep.sv"/>
+          <Attr Name="ImportTime" Val="1447006539"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PSRCDIR/sources_1/imports/src/tile.sv">
+        <FileInfo>
+          <Attr Name="ImportPath" Val="$PPRDIR/../rtl/src/tile.sv"/>
+          <Attr Name="ImportTime" Val="1447033824"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PSRCDIR/sources_1/imports/src/activation_fns.sv">
+        <FileInfo>
+          <Attr Name="ImportPath" Val="$PPRDIR/../rtl/src/activation_fns.sv"/>
+          <Attr Name="ImportTime" Val="1446416943"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PSRCDIR/sources_1/imports/src/neuron.sv">
+        <FileInfo>
+          <Attr Name="ImportPath" Val="$PPRDIR/../rtl/src/neuron.sv"/>
+          <Attr Name="ImportTime" Val="1447033833"/>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="implementation"/>
           <Attr Name="UsedIn" Val="simulation"/>

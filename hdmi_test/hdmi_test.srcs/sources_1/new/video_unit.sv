@@ -24,8 +24,8 @@ module video_unit
   (input logic 	       clka, clkb, 
    input logic 	       de,
    input logic         we,
-   input logic [19:0]  addr_w,
-   input logic [19:0]  addr_r,
+   input logic [18:0]  addr_w,
+   input logic [18:0]  addr_r,
    output logic [35:0] data,
    input logic [7:0]  data_in 
    );
