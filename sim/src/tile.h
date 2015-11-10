@@ -53,6 +53,7 @@ typedef struct tile* tile_t;
 
 struct network {
   uint32_t num_layers;
+  uint32_t num_outputs;
   uint32_t (*activation_fn)(uint32_t);
   uint32_t (*activation_fn_drv)(uint32_t);
   weightfile_t weights;
@@ -82,6 +83,8 @@ void neuron_destroy(neuron_t neuron);
 network_t Network(uint32_t num_layers, uint32_t num_inputs, uint32_t num_outputs, 
 		  uint32_t (*activation_fn)(uint32_t), uint32_t (*activation_fn_drv)(uint32_t));
 void network_destroy(network_t network);
+void export_network(network_t network, char *filename);
+network_t import_network(char *filename);
 
 /**
  * Evaluates the activation function for a neuron on the weighted sum of 

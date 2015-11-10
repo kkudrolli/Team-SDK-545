@@ -21,18 +21,18 @@
 
 
 module video_unit
-  (input logic 	       clk, 
+  (input logic 	       clka, clkb, 
    input logic 	       de,
    input logic         we,
-   input logic [19:0]  addr_w,
-   input logic [19:0]  addr_r,
+   input logic [18:0]  addr_w,
+   input logic [18:0]  addr_r,
    output logic [35:0] data,
    input logic [7:0]  data_in 
    );
    
    logic [7:0]        dout;
    // 524888? what is this magig number in bram generator?
-   framebuffer_wrapper fb(.addra (addr_w), .addrb (addr_r), .clka (clk), .clkb (clk), .dina (data_in), 
+   framebuffer_wrapper fb(.addra (addr_w), .addrb (addr_r), .clka (clka), .clkb (clkb), .dina (data_in), 
                           .doutb (dout), .wea (we), .enb (de));
 
    assign data = {{dout, 4'h0}, {dout, 4'h0}, {dout, 4'h0}};

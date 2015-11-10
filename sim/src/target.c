@@ -51,6 +51,8 @@ vector_t gen_target(uint32_t target)
       } else {
 #ifdef ENABLE_TARGET_BIAS
 	target_vec->data[x] = FX_PT_1 >> (difference[target][x] - TARGET_BIAS_OFFSET);
+#else
+	target_vec->data[x] = 1;
 #endif
       }
     }

@@ -11,16 +11,18 @@
 #include "image_io.h"
 
 // UART Protocol Bytes
-#define START  0xff
-#define TRAIN  0xf0
-#define TEST   0x0f
-#define STOP   0xbb
-#define ACK    0xaa
-#define RESEND 0xcc
+#define PSTART  0xff
+#define PTRAIN  0xf0
+#define PTEST   0x0f
+#define PSTOP   0xf0
+#define PACK    0xaa
+#define PRESEND 0xcc
+
+#define SLOW
 
 static const char *serial_port =  "/dev/ttyUSB0";
 
-void transfer(vector_t *images, uint32_t *labels, int port, size_t num_images); 
+void transfer(vector_t *images, uint32_t *labels, int port, int train, size_t num_images); 
 uint8_t ones_comp_add(uint8_t a, uint8_t b);
 void write_byte(int port, uint8_t buf); 
 uint8_t read_byte(int port);
@@ -42,10 +44,17 @@ int main()
 
     // Now the specs points to the opened port's specifications
 
+    //specs.c_iflag &= ~(IGNBRK | BRKINT | PARMRK | ISTRIP 
+    //                 | INLCR | IGNCR | ICRNL | IXON);
+    specs.c_iflag |= IGNBRK; // Ignore breaks
+    //specs.c_iflag |= IGNPAR; // Ignore parity and frame errors
+    //specs.c_iflag |= IXON;
+    specs.c_iflag |= IXOFF; // Turn sw handshaking off
+
     specs.c_cflag = (CLOCAL | CREAD); //control flags
     specs.c_cflag &= ~CSIZE;
     specs.c_cflag |= CS8;
-    specs.c_cflag |= CSTOPB;
+    //specs.c_cflag |= CSTOPB;    
 
     // Output flags
     // CR3 - delay of 150ms after transmitting every line
@@ -109,7 +118,7 @@ int main()
     typeset_imgs[9] = read_bitmap("../../sim/digits/9.bmp");
     uint32_t typeset_lbls[10] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
 
-    transfer(m_imgs->imgs, m_lbls->labels->data, port, 1, 1);
+    transfer(m_imgs->imgs, m_lbls->labels->data, port, 1, 30);
     //transfer(typeset_imgs, typeset_lbls, port, 1, 10);
 
     // MNIST TEST END
@@ -126,7 +135,6 @@ void transfer(vector_t *images, uint32_t *labels, int port, int train, size_t nu
     uint32_t resent = 0;
     while (i < num_images) {
         
-        ssize_t n;
         uint8_t checksum = 0;
     
         vector_t img = images[i];
@@ -147,51 +155,91 @@ void transfer(vector_t *images, uint32_t *labels, int port, int train, size_t nu
         // START-TRAIN/TEST-DATA-...-DATA-LABEL-CHECKSUM-STOP
 
         // START
-        write_byte(port, START);
+#ifdef SLOW
+        printf("Press ENTER to send start\n");
+        getchar();
+#endif
+        printf("START\n");
+        write_byte(port, PSTART);
 
+#ifdef SLOW
+        printf("Press ENTER to send train/test\n");
+        getchar();
+#endif
         if (train) {
             // TRAIN
-            write_byte(port, TRAIN);
+            printf("TRAIN\n");
+            write_byte(port, PTRAIN);
         } else {
             // TEST
-            write_byte(port, TEST);
+            printf("TEST\n");
+            write_byte(port, PTEST);
         }
 
-        // DATA 784 times
+        // DATA 784 times        
+#ifdef SLOW
+        printf("Press ENTER to send data\n");
+        getchar();
+#endif
+ 
+        printf("DATA\n");
         for (size_t j = 0; j < length; j++) {
+            printf("Press ENTER to send data %u, byte: %x\n", j, bytes[j]);
+//            getchar();
             write_byte(port, bytes[j]);
             // Add up bytes with 1's complement addition to get checksum
             checksum = ones_comp_add(checksum, bytes[j]);
         }
-
+  
+#ifdef SLOW
+        printf("Press ENTER to send label: %x\n", label);
+        getchar();
+#endif
         // LABEL
+        printf("LABEL\n");
         write_byte(port, label);
         checksum = ones_comp_add(checksum, label);
 
+#ifdef SLOW
+        printf("Press ENTER to send checksum: %x\n", checksum);
+        getchar();
+#endif
         // CHECKSUM
+        printf("CHECKSUM\n");
         write_byte(port, checksum);
 
+        printf("Before RESEND check\n");
         // Check for resend
         // TODO: may miss, check more than once?
-        if (!resent && read_byte(port) == RESEND) {
+        /*printf("WAT...\n");
+        uint8_t rd = read_byte(port);
+        printf("After read\n");
+        if (!resent && rd == PRESEND) {
             resent = 1; // Only resend once
+            printf("Before continue\n");
             continue;   // Skips the rest of the loop so don't update i or resent
-        }
+        }*/
 
         // STOP
-        write_byte(port, STOP);
+#ifdef SLOW
+        printf("Press ENTER to send stop\n");
+        getchar();
+#endif
+        printf("STOP\n");
+        write_byte(port, PSTOP);
 
         // Wait for an ACK
-        printf("Waiting for an ACK...");
+        /*printf("Waiting for an ACK...");
         uint32_t ack_buf = 0;
-        while (ack_buf != ACK) {
+        while (ack_buf != PACK) {
             ack_buf = read_byte(port);
         }
-        printf("got the ACK!\n");
+        printf("got the ACK!\n");*/
 
         //Free(bytes);
         resent = 0;
         i++;
+        //sleep(2);
     }
 
     return;
@@ -219,6 +267,7 @@ uint8_t ones_comp_add(uint8_t a, uint8_t b)
 // Write one byte to a port
 void write_byte(int port, uint8_t buf) 
 {
+    ssize_t n;
     if ((n = write(port, &buf, 1)) < 0) { 
         printf("\nError writing bytes to serial port!\n");
     }
@@ -227,10 +276,15 @@ void write_byte(int port, uint8_t buf)
 // Read one byte from a port
 uint8_t read_byte(int port) 
 {
+    printf("In read byte\n");
     uint8_t buf;
+    printf("After buf creation\n");
+    int n;
+    printf("Before the read...\n");
     if ((n = read(port, &buf, 1)) < 0) { 
         printf("\nError reading bytes from serial port!\n");
     }
+    printf("after the read\n");
     return buf;
 }
 

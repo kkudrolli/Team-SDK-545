@@ -17,7 +17,7 @@ module deep
    // Outputs
    output logic [9:0] [31:0]  result;
    output logic 	      done;
-   
+
    logic 		      fp_done;
    logic 		      do_fp, do_bp, draw, ack;
    
@@ -35,7 +35,7 @@ module deep
    tile t (.clk, .rst, .start (do_fp), .done (fp_done), .get_weights0, .get_weights1, 
 	   .image (image_in), .weights0, .weights1, .result);
    
-   weight wf (.clka (clk), .rst, .start_0 (get_weights0), .start_1 (get_weights1), 
+   weights wf (.clka (clk), .rst, .start_0 (get_weights0), .start_1 (get_weights1), 
 	      .values_0 (weights0), .values_1 (weights1));
    
 endmodule: deep

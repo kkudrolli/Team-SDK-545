@@ -1,12 +1,13 @@
-
 module uart_recv(
     input  logic       uart_sampling_clk, rst,
     input  logic       USB_RX,
     output logic       byte_ready,
     output logic       USB_CTS,
+    output logic [1:0] state_out,
     output logic [7:0] uart_byte);
 
     enum logic [1:0] {S_IDLE, S_READ, S_STOP} state;
+    assign state_out = state;
 
     logic [3:0] sample_count;
     logic [3:0] bit_count;
@@ -30,7 +31,7 @@ module uart_recv(
                 end
                 // Read data into shift register
                 S_READ: begin
-                    state <= (bit_count == 4'd8) ? S_STOP : S_READ;
+                    state <= (bit_count == 4'd9) ? S_STOP : S_READ;
                     sample_count <= sample_count + 1;
                     bit_count <= (sample_count == 4'd0) ? bit_count + 1 : bit_count;
                     uart_byte <= (sample_count == 4'd0) ? {uart_byte[6:0], USB_RX} :
@@ -43,7 +44,7 @@ module uart_recv(
                     sample_count <= sample_count + 1;
                     USB_CTS <= 1'b1; // When 1, PC not cleared to send
                     // Byte is ready for use when stop is seen
-                    byte_ready <= (sample_count == 4'd0) ? 1'b1: 1'b0;
+                    byte_ready <= (sample_count == 4'd2) ? 1'b1: 1'b0;
                 end
 
                 default: ; // Do nothing

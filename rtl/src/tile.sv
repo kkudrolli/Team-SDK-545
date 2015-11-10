@@ -46,7 +46,7 @@ module tile
       genvar i;
       for (i = 0; i < NUM_NEURONS; i++) begin
 	 neuron layer0 (.clk, .rst, .clear, .en (enable_0), .weight (weights0[i]), 
-			.data (image[lay0_idx]), .accum (acc_lay0[i]));
+			.data (image_reg[lay0_idx]), .accum (acc_lay0[i]));
 	 sigmoid_approx_fn act_lay0(.in (acc_lay0[i]), .out (hidden[i]));
       end
       for (i = 0; i < OUTPUT_SZ; i++) begin
@@ -55,8 +55,8 @@ module tile
 	 sigmoid_approx_fn act_lay1(.in (acc_lay1[i]), .out (result[i]));
       end
    endgenerate
-   
 
+   integer j;
    always_comb begin
       done = 1'b0;
       clear = 1'b0;
@@ -68,17 +68,17 @@ module tile
 	S_IDLE: begin
 	   clear = start;
 	   ns = start ? S_PROP_LAYER1 : S_IDLE;
-	   get_weights0 = 1'b1;
+	   get_weights0 = start;
 	end
 
 	S_PROP_LAYER1: begin
-	   enable_0 = 1'b1;
 	   ns = lay0_idx < IMG_SZ-1 ? S_PROP_LAYER1 : S_PROP_LAYER2;
 	   get_weights1 = lay0_idx >= IMG_SZ-1;
+	   enable_0 = 1;
 	end
 
 	S_PROP_LAYER2: begin
-	   enable_1 = 1'b1;
+	   enable_1 = 1;
 	   ns = lay1_idx < NUM_NEURONS-1 ? S_PROP_LAYER2 : S_DONE;
 	end
 
@@ -88,7 +88,7 @@ module tile
 	end
 
 	default: ns = S_IDLE;	 
-      endcase      
+      endcase
    end
 
    always_ff @(posedge clk, posedge rst) begin

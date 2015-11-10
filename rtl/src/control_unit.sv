@@ -23,9 +23,11 @@ module control_unit
     // Output label
     output logic [7:0]        label_out,
     // Output image vector
-    output logic [IMG_SZ-1:0] image_out);
+    output logic [IMG_SZ-1:0] image_out,
+    output logic [1:0]        cs_ctrl);
 
     enum logic [1:0] {idle, fwd_prop, back_prop, display} cs, ns;
+    assign cs_ctrl = cs;
 
     logic started, clear_start, train_reg, clear_train;
 

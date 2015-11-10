@@ -13,12 +13,10 @@ module weights(input clka, rst,
  
    
     //32 x 128, for 784 cycles
-    logic [783:0] [127:0] [31:0] douta_0;
-    logic [783:0] [127:0] [31:0] dina_0;
+    logic [783:0] [127:0] [31:0] douta_0 /* verilator public */;
    
     // 32 x 10, 128 cycles
-    logic [127:0] [9:0] [31:0] 	 dina_1;
-    logic [127:0] [9:0] [31:0] 	 douta_1;
+    logic [127:0] [9:0] [31:0] 	 douta_1 /* verilator public */;
 
     integer i,j;
     always_ff @(posedge clka or posedge rst) begin
@@ -29,18 +27,20 @@ module weights(input clka, rst,
             counter_1 <= 0;
             processing_0 <= 0;
             processing_1 <= 0;
+
+	   /*
             // initialize for the purpose of testing
             for(j=0;j<784;j=j+1) begin
                 for(i=0;i<128;i=i+1) begin
-                    douta_0[j][i] <= 1520;
+                    douta_0[j][i] <= 128*j + i;
                 end
             end
             // initialize for the purpose of testing
             for(j=0;j<128;j=j+1) begin
                 for(i=0;i<10;i=i+1) begin
-                    douta_1[j][i] <= 320;
+                    douta_1[j][i] <= 10*j + i;
                 end
-            end
+            end*/
         end
         else begin
             /////////////////
@@ -66,7 +66,7 @@ module weights(input clka, rst,
                 end
             end
             else begin
-                values_0 <= 0;
+                values_0 <= 32'h0;
             end
 
             /////////////////
@@ -88,11 +88,11 @@ module weights(input clka, rst,
                 processing_1 <= 1;
                 counter_1 <= counter_1 + 1;
                 for(i=0;i<10;i=i+1) begin
-                    values_1[i] <= douta_1[counter_1][i];
+                   values_1[i] <= douta_1[counter_1][i];
                 end
             end
             else begin
-                values_1 <= 0;
+               values_1 <= 32'h0;
             end
         end
     end
