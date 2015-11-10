@@ -1,0 +1,37 @@
+{
+   guistr: "# # String gsaved with Nlview 6.4.12  2014-12-16 bk=1.3272 VDI=35 GEI=35 GUI=JA:1.8
+#  -string -flagsOSRD
+preplace port BRAM_PORTA1 -pg 1 -y 50 -defaultsOSRD
+preplace port BRAM_PORTA2 -pg 1 -y 230 -defaultsOSRD
+preplace port BRAM_PORTA3 -pg 1 -y 320 -defaultsOSRD
+preplace port BRAM_PORTA4 -pg 1 -y 410 -defaultsOSRD
+preplace port BRAM_PORTA5 -pg 1 -y 500 -defaultsOSRD
+preplace port BRAM_PORTA6 -pg 1 -y 590 -defaultsOSRD
+preplace port BRAM_PORTA7 -pg 1 -y 680 -defaultsOSRD
+preplace port BRAM_PORTA8 -pg 1 -y 770 -defaultsOSRD
+preplace port BRAM_PORTA9 -pg 1 -y 860 -defaultsOSRD
+preplace port BRAM_PORTA -pg 1 -y 140 -defaultsOSRD
+preplace inst blk_mem_gen_7 -pg 1 -lvl 1 -y 680 -defaultsOSRD
+preplace inst blk_mem_gen_8 -pg 1 -lvl 1 -y 770 -defaultsOSRD
+preplace inst blk_mem_gen_9 -pg 1 -lvl 1 -y 860 -defaultsOSRD
+preplace inst blk_mem_gen_0 -pg 1 -lvl 1 -y 140 -defaultsOSRD
+preplace inst blk_mem_gen_1 -pg 1 -lvl 1 -y 50 -defaultsOSRD
+preplace inst blk_mem_gen_2 -pg 1 -lvl 1 -y 230 -defaultsOSRD
+preplace inst blk_mem_gen_3 -pg 1 -lvl 1 -y 320 -defaultsOSRD
+preplace inst blk_mem_gen_4 -pg 1 -lvl 1 -y 410 -defaultsOSRD
+preplace inst blk_mem_gen_5 -pg 1 -lvl 1 -y 500 -defaultsOSRD
+preplace inst blk_mem_gen_6 -pg 1 -lvl 1 -y 590 -defaultsOSRD
+preplace netloc BRAM_PORTA_8 1 0 1 N
+preplace netloc BRAM_PORTA_9 1 0 1 N
+preplace netloc BRAM_PORTA_1 1 0 1 N
+preplace netloc BRAM_PORTA_2 1 0 1 N
+preplace netloc BRAM_PORTA_3 1 0 1 N
+preplace netloc BRAM_PORTA_4 1 0 1 N
+preplace netloc BRAM_PORTA_5 1 0 1 N
+preplace netloc BRAM_PORTA_10 1 0 1 N
+preplace netloc BRAM_PORTA_6 1 0 1 N
+preplace netloc BRAM_PORTA_7 1 0 1 N
+levelinfo -pg 1 140 270 400
+",
+}
+0

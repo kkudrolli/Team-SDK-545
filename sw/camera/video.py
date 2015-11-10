@@ -22,7 +22,7 @@ CAPTURE_KEY = ' '
 QUIT_KEY = 'q'
 NORM_MIN = 0
 NORM_MAX = 255
-DOWN_AMOUNT = 5 # Manually tuned 
+#DOWN_AMOUNT = 5 # Manually tuned 
 
 """
 get_video: Reads a frame of video input from the camera and returns it.
@@ -83,7 +83,7 @@ def manipulate(frame):
     # classification.
     cv2.normalize(gray, gray, 0, 255, cv2.NORM_MINMAX)
 
-    
+    # Snaps colors to white or black
     (thresh, im_bw) = cv2.threshold(gray, 100, 255, cv2.THRESH_BINARY_INV);
 
     # Downsize the image, using image pyramids, this function has 
