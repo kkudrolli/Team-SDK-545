@@ -1,0 +1,308 @@
+INFO: [VRFC 10-2263] Analyzing Verilog file "/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/ipshared/xilinx.com/blk_mem_gen_v8_2/7b054ed9/simulation/blk_mem_gen_v8_2.v" into library blk_mem_gen_v8_2
+INFO: [VRFC 10-311] analyzing module STATE_LOGIC_v8_2
+INFO: [VRFC 10-311] analyzing module beh_vlog_muxf7_v8_2
+INFO: [VRFC 10-311] analyzing module beh_vlog_ff_clr_v8_2
+INFO: [VRFC 10-311] analyzing module beh_vlog_ff_pre_v8_2
+INFO: [VRFC 10-311] analyzing module beh_vlog_ff_ce_clr_v8_2
+INFO: [VRFC 10-311] analyzing module write_netlist_v8_2
+INFO: [VRFC 10-311] analyzing module read_netlist_v8_2
+INFO: [VRFC 10-311] analyzing module blk_mem_axi_write_wrapper_beh_v8_2
+INFO: [VRFC 10-311] analyzing module blk_mem_axi_read_wrapper_beh_v8_2
+INFO: [VRFC 10-311] analyzing module blk_mem_axi_regs_fwd_v8_2
+INFO: [VRFC 10-311] analyzing module BLK_MEM_GEN_v8_2_output_stage
+INFO: [VRFC 10-311] analyzing module BLK_MEM_GEN_v8_2_softecc_output_reg_stage
+INFO: [VRFC 10-311] analyzing module BLK_MEM_GEN_v8_2_mem_module
+INFO: [VRFC 10-311] analyzing module blk_mem_gen_v8_2
+INFO: [VRFC 10-2263] Analyzing Verilog file "/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/bd/weights_layer_1/ip/weights_layer_1_blk_mem_gen_0_0/sim/weights_layer_1_blk_mem_gen_0_0.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module weights_layer_1_blk_mem_gen_0_0
+INFO: [VRFC 10-2263] Analyzing Verilog file "/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/bd/weights_layer_1/hdl/weights_layer_1.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module weights_layer_1
+INFO: [VRFC 10-2263] Analyzing Verilog file "/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/bd/weights_layer_1/ip/weights_layer_1_blk_mem_gen_0_1/sim/weights_layer_1_blk_mem_gen_0_1.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module weights_layer_1_blk_mem_gen_0_1
+INFO: [VRFC 10-2263] Analyzing Verilog file "/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/bd/weights_layer_1/ip/weights_layer_1_blk_mem_gen_0_2/sim/weights_layer_1_blk_mem_gen_0_2.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module weights_layer_1_blk_mem_gen_0_2
+INFO: [VRFC 10-2263] Analyzing Verilog file "/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/bd/weights_layer_1/ip/weights_layer_1_blk_mem_gen_0_3/sim/weights_layer_1_blk_mem_gen_0_3.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module weights_layer_1_blk_mem_gen_0_3
+INFO: [VRFC 10-2263] Analyzing Verilog file "/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/bd/weights_layer_1/ip/weights_layer_1_blk_mem_gen_0_4/sim/weights_layer_1_blk_mem_gen_0_4.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module weights_layer_1_blk_mem_gen_0_4
+INFO: [VRFC 10-2263] Analyzing Verilog file "/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/bd/weights_layer_1/ip/weights_layer_1_blk_mem_gen_0_5/sim/weights_layer_1_blk_mem_gen_0_5.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module weights_layer_1_blk_mem_gen_0_5
+INFO: [VRFC 10-2263] Analyzing Verilog file "/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/bd/weights_layer_1/ip/weights_layer_1_blk_mem_gen_0_6/sim/weights_layer_1_blk_mem_gen_0_6.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module weights_layer_1_blk_mem_gen_0_6
+INFO: [VRFC 10-2263] Analyzing Verilog file "/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/bd/weights_layer_1/ip/weights_layer_1_blk_mem_gen_0_7/sim/weights_layer_1_blk_mem_gen_0_7.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module weights_layer_1_blk_mem_gen_0_7
+INFO: [VRFC 10-2263] Analyzing Verilog file "/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/bd/weights_layer_1/ip/weights_layer_1_blk_mem_gen_0_8/sim/weights_layer_1_blk_mem_gen_0_8.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module weights_layer_1_blk_mem_gen_0_8
+INFO: [VRFC 10-2263] Analyzing Verilog file "/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/bd/weights_layer_1/ip/weights_layer_1_blk_mem_gen_0_9/sim/weights_layer_1_blk_mem_gen_0_9.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module weights_layer_1_blk_mem_gen_0_9
+INFO: [VRFC 10-2263] Analyzing Verilog file "/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/bd/weights_layer_0/ip/weights_layer_0_blk_mem_gen_0_0/sim/weights_layer_0_blk_mem_gen_0_0.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module weights_layer_0_blk_mem_gen_0_0
+INFO: [VRFC 10-2263] Analyzing Verilog file "/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/bd/weights_layer_0/hdl/weights_layer_0.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module weights_layer_0
+INFO: [VRFC 10-2263] Analyzing Verilog file "/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/bd/weights_layer_0/ip/weights_layer_0_blk_mem_gen_0_2/sim/weights_layer_0_blk_mem_gen_0_2.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module weights_layer_0_blk_mem_gen_0_2
+INFO: [VRFC 10-2263] Analyzing Verilog file "/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/bd/weights_layer_0/ip/weights_layer_0_blk_mem_gen_1_2/sim/weights_layer_0_blk_mem_gen_1_2.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module weights_layer_0_blk_mem_gen_1_2
+INFO: [VRFC 10-2263] Analyzing Verilog file "/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/bd/weights_layer_0/ip/weights_layer_0_blk_mem_gen_1_3/sim/weights_layer_0_blk_mem_gen_1_3.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module weights_layer_0_blk_mem_gen_1_3
+INFO: [VRFC 10-2263] Analyzing Verilog file "/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/bd/weights_layer_0/ip/weights_layer_0_blk_mem_gen_3_0/sim/weights_layer_0_blk_mem_gen_3_0.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module weights_layer_0_blk_mem_gen_3_0
+INFO: [VRFC 10-2263] Analyzing Verilog file "/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/bd/weights_layer_0/ip/weights_layer_0_blk_mem_gen_3_1/sim/weights_layer_0_blk_mem_gen_3_1.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module weights_layer_0_blk_mem_gen_3_1
+INFO: [VRFC 10-2263] Analyzing Verilog file "/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/bd/weights_layer_0/ip/weights_layer_0_blk_mem_gen_3_2/sim/weights_layer_0_blk_mem_gen_3_2.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module weights_layer_0_blk_mem_gen_3_2
+INFO: [VRFC 10-2263] Analyzing Verilog file "/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/bd/weights_layer_0/ip/weights_layer_0_blk_mem_gen_3_3/sim/weights_layer_0_blk_mem_gen_3_3.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module weights_layer_0_blk_mem_gen_3_3
+INFO: [VRFC 10-2263] Analyzing Verilog file "/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/bd/weights_layer_0/ip/weights_layer_0_blk_mem_gen_3_4/sim/weights_layer_0_blk_mem_gen_3_4.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module weights_layer_0_blk_mem_gen_3_4
+INFO: [VRFC 10-2263] Analyzing Verilog file "/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/bd/weights_layer_0/ip/weights_layer_0_blk_mem_gen_3_5/sim/weights_layer_0_blk_mem_gen_3_5.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module weights_layer_0_blk_mem_gen_3_5
+INFO: [VRFC 10-2263] Analyzing Verilog file "/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/bd/weights_layer_0/ip/weights_layer_0_blk_mem_gen_3_6/sim/weights_layer_0_blk_mem_gen_3_6.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module weights_layer_0_blk_mem_gen_3_6
+INFO: [VRFC 10-2263] Analyzing Verilog file "/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/bd/weights_layer_0/ip/weights_layer_0_blk_mem_gen_3_7/sim/weights_layer_0_blk_mem_gen_3_7.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module weights_layer_0_blk_mem_gen_3_7
+INFO: [VRFC 10-2263] Analyzing Verilog file "/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/bd/weights_layer_0/ip/weights_layer_0_blk_mem_gen_3_8/sim/weights_layer_0_blk_mem_gen_3_8.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module weights_layer_0_blk_mem_gen_3_8
+INFO: [VRFC 10-2263] Analyzing Verilog file "/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/bd/weights_layer_0/ip/weights_layer_0_blk_mem_gen_3_9/sim/weights_layer_0_blk_mem_gen_3_9.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module weights_layer_0_blk_mem_gen_3_9
+INFO: [VRFC 10-2263] Analyzing Verilog file "/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/bd/weights_layer_0/ip/weights_layer_0_blk_mem_gen_3_10/sim/weights_layer_0_blk_mem_gen_3_10.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module weights_layer_0_blk_mem_gen_3_10
+INFO: [VRFC 10-2263] Analyzing Verilog file "/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/bd/weights_layer_0/ip/weights_layer_0_blk_mem_gen_14_0/sim/weights_layer_0_blk_mem_gen_14_0.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module weights_layer_0_blk_mem_gen_14_0
+INFO: [VRFC 10-2263] Analyzing Verilog file "/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/bd/weights_layer_0/ip/weights_layer_0_blk_mem_gen_14_1/sim/weights_layer_0_blk_mem_gen_14_1.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module weights_layer_0_blk_mem_gen_14_1
+INFO: [VRFC 10-2263] Analyzing Verilog file "/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/bd/weights_layer_0/ip/weights_layer_0_blk_mem_gen_14_2/sim/weights_layer_0_blk_mem_gen_14_2.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module weights_layer_0_blk_mem_gen_14_2
+INFO: [VRFC 10-2263] Analyzing Verilog file "/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/bd/weights_layer_0/ip/weights_layer_0_blk_mem_gen_14_3/sim/weights_layer_0_blk_mem_gen_14_3.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module weights_layer_0_blk_mem_gen_14_3
+INFO: [VRFC 10-2263] Analyzing Verilog file "/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/bd/weights_layer_0/ip/weights_layer_0_blk_mem_gen_14_4/sim/weights_layer_0_blk_mem_gen_14_4.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module weights_layer_0_blk_mem_gen_14_4
+INFO: [VRFC 10-2263] Analyzing Verilog file "/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/bd/weights_layer_0/ip/weights_layer_0_blk_mem_gen_14_5/sim/weights_layer_0_blk_mem_gen_14_5.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module weights_layer_0_blk_mem_gen_14_5
+INFO: [VRFC 10-2263] Analyzing Verilog file "/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/bd/weights_layer_0/ip/weights_layer_0_blk_mem_gen_14_6/sim/weights_layer_0_blk_mem_gen_14_6.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module weights_layer_0_blk_mem_gen_14_6
+INFO: [VRFC 10-2263] Analyzing Verilog file "/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/bd/weights_layer_0/ip/weights_layer_0_blk_mem_gen_14_7/sim/weights_layer_0_blk_mem_gen_14_7.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module weights_layer_0_blk_mem_gen_14_7
+INFO: [VRFC 10-2263] Analyzing Verilog file "/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/bd/weights_layer_0/ip/weights_layer_0_blk_mem_gen_14_8/sim/weights_layer_0_blk_mem_gen_14_8.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module weights_layer_0_blk_mem_gen_14_8
+INFO: [VRFC 10-2263] Analyzing Verilog file "/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/bd/weights_layer_0/ip/weights_layer_0_blk_mem_gen_14_9/sim/weights_layer_0_blk_mem_gen_14_9.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module weights_layer_0_blk_mem_gen_14_9
+INFO: [VRFC 10-2263] Analyzing Verilog file "/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/bd/weights_layer_0/ip/weights_layer_0_blk_mem_gen_14_10/sim/weights_layer_0_blk_mem_gen_14_10.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module weights_layer_0_blk_mem_gen_14_10
+INFO: [VRFC 10-2263] Analyzing Verilog file "/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/bd/weights_layer_0/ip/weights_layer_0_blk_mem_gen_1_0/sim/weights_layer_0_blk_mem_gen_1_0.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module weights_layer_0_blk_mem_gen_1_0
+INFO: [VRFC 10-2263] Analyzing Verilog file "/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/bd/weights_layer_0/ip/weights_layer_0_blk_mem_gen_26_0/sim/weights_layer_0_blk_mem_gen_26_0.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module weights_layer_0_blk_mem_gen_26_0
+INFO: [VRFC 10-2263] Analyzing Verilog file "/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/bd/weights_layer_0/ip/weights_layer_0_blk_mem_gen_27_0/sim/weights_layer_0_blk_mem_gen_27_0.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module weights_layer_0_blk_mem_gen_27_0
+INFO: [VRFC 10-2263] Analyzing Verilog file "/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/bd/weights_layer_0/ip/weights_layer_0_blk_mem_gen_27_1/sim/weights_layer_0_blk_mem_gen_27_1.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module weights_layer_0_blk_mem_gen_27_1
+INFO: [VRFC 10-2263] Analyzing Verilog file "/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/bd/weights_layer_0/ip/weights_layer_0_blk_mem_gen_27_2/sim/weights_layer_0_blk_mem_gen_27_2.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module weights_layer_0_blk_mem_gen_27_2
+INFO: [VRFC 10-2263] Analyzing Verilog file "/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/bd/weights_layer_0/ip/weights_layer_0_blk_mem_gen_27_3/sim/weights_layer_0_blk_mem_gen_27_3.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module weights_layer_0_blk_mem_gen_27_3
+INFO: [VRFC 10-2263] Analyzing Verilog file "/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/bd/weights_layer_0/ip/weights_layer_0_blk_mem_gen_27_4/sim/weights_layer_0_blk_mem_gen_27_4.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module weights_layer_0_blk_mem_gen_27_4
+INFO: [VRFC 10-2263] Analyzing Verilog file "/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/bd/weights_layer_0/ip/weights_layer_0_blk_mem_gen_27_5/sim/weights_layer_0_blk_mem_gen_27_5.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module weights_layer_0_blk_mem_gen_27_5
+INFO: [VRFC 10-2263] Analyzing Verilog file "/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/bd/weights_layer_0/ip/weights_layer_0_blk_mem_gen_27_6/sim/weights_layer_0_blk_mem_gen_27_6.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module weights_layer_0_blk_mem_gen_27_6
+INFO: [VRFC 10-2263] Analyzing Verilog file "/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/bd/weights_layer_0/ip/weights_layer_0_blk_mem_gen_27_7/sim/weights_layer_0_blk_mem_gen_27_7.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module weights_layer_0_blk_mem_gen_27_7
+INFO: [VRFC 10-2263] Analyzing Verilog file "/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/bd/weights_layer_0/ip/weights_layer_0_blk_mem_gen_27_8/sim/weights_layer_0_blk_mem_gen_27_8.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module weights_layer_0_blk_mem_gen_27_8
+INFO: [VRFC 10-2263] Analyzing Verilog file "/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/bd/weights_layer_0/ip/weights_layer_0_blk_mem_gen_27_9/sim/weights_layer_0_blk_mem_gen_27_9.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module weights_layer_0_blk_mem_gen_27_9
+INFO: [VRFC 10-2263] Analyzing Verilog file "/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/bd/weights_layer_0/ip/weights_layer_0_blk_mem_gen_27_10/sim/weights_layer_0_blk_mem_gen_27_10.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module weights_layer_0_blk_mem_gen_27_10
+INFO: [VRFC 10-2263] Analyzing Verilog file "/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/bd/weights_layer_0/ip/weights_layer_0_blk_mem_gen_27_11/sim/weights_layer_0_blk_mem_gen_27_11.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module weights_layer_0_blk_mem_gen_27_11
+INFO: [VRFC 10-2263] Analyzing Verilog file "/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/bd/weights_layer_0/ip/weights_layer_0_blk_mem_gen_27_12/sim/weights_layer_0_blk_mem_gen_27_12.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module weights_layer_0_blk_mem_gen_27_12
+INFO: [VRFC 10-2263] Analyzing Verilog file "/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/bd/weights_layer_0/ip/weights_layer_0_blk_mem_gen_27_13/sim/weights_layer_0_blk_mem_gen_27_13.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module weights_layer_0_blk_mem_gen_27_13
+INFO: [VRFC 10-2263] Analyzing Verilog file "/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/bd/weights_layer_0/ip/weights_layer_0_blk_mem_gen_27_14/sim/weights_layer_0_blk_mem_gen_27_14.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module weights_layer_0_blk_mem_gen_27_14
+INFO: [VRFC 10-2263] Analyzing Verilog file "/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/bd/weights_layer_0/ip/weights_layer_0_blk_mem_gen_27_15/sim/weights_layer_0_blk_mem_gen_27_15.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module weights_layer_0_blk_mem_gen_27_15
+INFO: [VRFC 10-2263] Analyzing Verilog file "/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/bd/weights_layer_0/ip/weights_layer_0_blk_mem_gen_27_16/sim/weights_layer_0_blk_mem_gen_27_16.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module weights_layer_0_blk_mem_gen_27_16
+INFO: [VRFC 10-2263] Analyzing Verilog file "/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/bd/weights_layer_0/ip/weights_layer_0_blk_mem_gen_27_17/sim/weights_layer_0_blk_mem_gen_27_17.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module weights_layer_0_blk_mem_gen_27_17
+INFO: [VRFC 10-2263] Analyzing Verilog file "/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/bd/weights_layer_0/ip/weights_layer_0_blk_mem_gen_27_18/sim/weights_layer_0_blk_mem_gen_27_18.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module weights_layer_0_blk_mem_gen_27_18
+INFO: [VRFC 10-2263] Analyzing Verilog file "/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/bd/weights_layer_0/ip/weights_layer_0_blk_mem_gen_27_19/sim/weights_layer_0_blk_mem_gen_27_19.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module weights_layer_0_blk_mem_gen_27_19
+INFO: [VRFC 10-2263] Analyzing Verilog file "/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/bd/weights_layer_0/ip/weights_layer_0_blk_mem_gen_27_20/sim/weights_layer_0_blk_mem_gen_27_20.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module weights_layer_0_blk_mem_gen_27_20
+INFO: [VRFC 10-2263] Analyzing Verilog file "/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/bd/weights_layer_0/ip/weights_layer_0_blk_mem_gen_27_21/sim/weights_layer_0_blk_mem_gen_27_21.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module weights_layer_0_blk_mem_gen_27_21
+INFO: [VRFC 10-2263] Analyzing Verilog file "/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/bd/weights_layer_0/ip/weights_layer_0_blk_mem_gen_27_22/sim/weights_layer_0_blk_mem_gen_27_22.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module weights_layer_0_blk_mem_gen_27_22
+INFO: [VRFC 10-2263] Analyzing Verilog file "/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/bd/weights_layer_0/ip/weights_layer_0_blk_mem_gen_27_23/sim/weights_layer_0_blk_mem_gen_27_23.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module weights_layer_0_blk_mem_gen_27_23
+INFO: [VRFC 10-2263] Analyzing Verilog file "/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/bd/weights_layer_0/ip/weights_layer_0_blk_mem_gen_27_24/sim/weights_layer_0_blk_mem_gen_27_24.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module weights_layer_0_blk_mem_gen_27_24
+INFO: [VRFC 10-2263] Analyzing Verilog file "/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/bd/weights_layer_0/ip/weights_layer_0_blk_mem_gen_27_25/sim/weights_layer_0_blk_mem_gen_27_25.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module weights_layer_0_blk_mem_gen_27_25
+INFO: [VRFC 10-2263] Analyzing Verilog file "/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/bd/weights_layer_0/ip/weights_layer_0_blk_mem_gen_27_26/sim/weights_layer_0_blk_mem_gen_27_26.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module weights_layer_0_blk_mem_gen_27_26
+INFO: [VRFC 10-2263] Analyzing Verilog file "/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/bd/weights_layer_0/ip/weights_layer_0_blk_mem_gen_27_27/sim/weights_layer_0_blk_mem_gen_27_27.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module weights_layer_0_blk_mem_gen_27_27
+INFO: [VRFC 10-2263] Analyzing Verilog file "/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/bd/weights_layer_0/ip/weights_layer_0_blk_mem_gen_27_28/sim/weights_layer_0_blk_mem_gen_27_28.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module weights_layer_0_blk_mem_gen_27_28
+INFO: [VRFC 10-2263] Analyzing Verilog file "/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/bd/weights_layer_0/ip/weights_layer_0_blk_mem_gen_27_29/sim/weights_layer_0_blk_mem_gen_27_29.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module weights_layer_0_blk_mem_gen_27_29
+INFO: [VRFC 10-2263] Analyzing Verilog file "/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/bd/weights_layer_0/ip/weights_layer_0_blk_mem_gen_27_30/sim/weights_layer_0_blk_mem_gen_27_30.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module weights_layer_0_blk_mem_gen_27_30
+INFO: [VRFC 10-2263] Analyzing Verilog file "/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/bd/weights_layer_0/ip/weights_layer_0_blk_mem_gen_27_31/sim/weights_layer_0_blk_mem_gen_27_31.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module weights_layer_0_blk_mem_gen_27_31
+INFO: [VRFC 10-2263] Analyzing Verilog file "/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/bd/weights_layer_0/ip/weights_layer_0_blk_mem_gen_27_32/sim/weights_layer_0_blk_mem_gen_27_32.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module weights_layer_0_blk_mem_gen_27_32
+INFO: [VRFC 10-2263] Analyzing Verilog file "/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/bd/weights_layer_0/ip/weights_layer_0_blk_mem_gen_27_33/sim/weights_layer_0_blk_mem_gen_27_33.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module weights_layer_0_blk_mem_gen_27_33
+INFO: [VRFC 10-2263] Analyzing Verilog file "/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/bd/weights_layer_0/ip/weights_layer_0_blk_mem_gen_27_34/sim/weights_layer_0_blk_mem_gen_27_34.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module weights_layer_0_blk_mem_gen_27_34
+INFO: [VRFC 10-2263] Analyzing Verilog file "/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/bd/weights_layer_0/ip/weights_layer_0_blk_mem_gen_27_35/sim/weights_layer_0_blk_mem_gen_27_35.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module weights_layer_0_blk_mem_gen_27_35
+INFO: [VRFC 10-2263] Analyzing Verilog file "/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/bd/weights_layer_0/ip/weights_layer_0_blk_mem_gen_27_36/sim/weights_layer_0_blk_mem_gen_27_36.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module weights_layer_0_blk_mem_gen_27_36
+INFO: [VRFC 10-2263] Analyzing Verilog file "/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/bd/weights_layer_0/ip/weights_layer_0_blk_mem_gen_27_37/sim/weights_layer_0_blk_mem_gen_27_37.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module weights_layer_0_blk_mem_gen_27_37
+INFO: [VRFC 10-2263] Analyzing Verilog file "/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/bd/weights_layer_0/ip/weights_layer_0_blk_mem_gen_27_38/sim/weights_layer_0_blk_mem_gen_27_38.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module weights_layer_0_blk_mem_gen_27_38
+INFO: [VRFC 10-2263] Analyzing Verilog file "/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/bd/weights_layer_0/ip/weights_layer_0_blk_mem_gen_27_39/sim/weights_layer_0_blk_mem_gen_27_39.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module weights_layer_0_blk_mem_gen_27_39
+INFO: [VRFC 10-2263] Analyzing Verilog file "/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/bd/weights_layer_0/ip/weights_layer_0_blk_mem_gen_27_40/sim/weights_layer_0_blk_mem_gen_27_40.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module weights_layer_0_blk_mem_gen_27_40
+INFO: [VRFC 10-2263] Analyzing Verilog file "/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/bd/weights_layer_0/ip/weights_layer_0_blk_mem_gen_27_41/sim/weights_layer_0_blk_mem_gen_27_41.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module weights_layer_0_blk_mem_gen_27_41
+INFO: [VRFC 10-2263] Analyzing Verilog file "/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/bd/weights_layer_0/ip/weights_layer_0_blk_mem_gen_27_42/sim/weights_layer_0_blk_mem_gen_27_42.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module weights_layer_0_blk_mem_gen_27_42
+INFO: [VRFC 10-2263] Analyzing Verilog file "/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/bd/weights_layer_0/ip/weights_layer_0_blk_mem_gen_27_43/sim/weights_layer_0_blk_mem_gen_27_43.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module weights_layer_0_blk_mem_gen_27_43
+INFO: [VRFC 10-2263] Analyzing Verilog file "/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/bd/weights_layer_0/ip/weights_layer_0_blk_mem_gen_27_44/sim/weights_layer_0_blk_mem_gen_27_44.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module weights_layer_0_blk_mem_gen_27_44
+INFO: [VRFC 10-2263] Analyzing Verilog file "/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/bd/weights_layer_0/ip/weights_layer_0_blk_mem_gen_27_45/sim/weights_layer_0_blk_mem_gen_27_45.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module weights_layer_0_blk_mem_gen_27_45
+INFO: [VRFC 10-2263] Analyzing Verilog file "/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/bd/weights_layer_0/ip/weights_layer_0_blk_mem_gen_27_46/sim/weights_layer_0_blk_mem_gen_27_46.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module weights_layer_0_blk_mem_gen_27_46
+INFO: [VRFC 10-2263] Analyzing Verilog file "/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/bd/weights_layer_0/ip/weights_layer_0_blk_mem_gen_27_47/sim/weights_layer_0_blk_mem_gen_27_47.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module weights_layer_0_blk_mem_gen_27_47
+INFO: [VRFC 10-2263] Analyzing Verilog file "/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/bd/weights_layer_0/ip/weights_layer_0_blk_mem_gen_27_48/sim/weights_layer_0_blk_mem_gen_27_48.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module weights_layer_0_blk_mem_gen_27_48
+INFO: [VRFC 10-2263] Analyzing Verilog file "/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/bd/weights_layer_0/ip/weights_layer_0_blk_mem_gen_27_49/sim/weights_layer_0_blk_mem_gen_27_49.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module weights_layer_0_blk_mem_gen_27_49
+INFO: [VRFC 10-2263] Analyzing Verilog file "/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/bd/weights_layer_0/ip/weights_layer_0_blk_mem_gen_27_50/sim/weights_layer_0_blk_mem_gen_27_50.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module weights_layer_0_blk_mem_gen_27_50
+INFO: [VRFC 10-2263] Analyzing Verilog file "/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/bd/weights_layer_0/ip/weights_layer_0_blk_mem_gen_27_51/sim/weights_layer_0_blk_mem_gen_27_51.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module weights_layer_0_blk_mem_gen_27_51
+INFO: [VRFC 10-2263] Analyzing Verilog file "/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/bd/weights_layer_0/ip/weights_layer_0_blk_mem_gen_27_52/sim/weights_layer_0_blk_mem_gen_27_52.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module weights_layer_0_blk_mem_gen_27_52
+INFO: [VRFC 10-2263] Analyzing Verilog file "/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/bd/weights_layer_0/ip/weights_layer_0_blk_mem_gen_27_53/sim/weights_layer_0_blk_mem_gen_27_53.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module weights_layer_0_blk_mem_gen_27_53
+INFO: [VRFC 10-2263] Analyzing Verilog file "/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/bd/weights_layer_0/ip/weights_layer_0_blk_mem_gen_27_54/sim/weights_layer_0_blk_mem_gen_27_54.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module weights_layer_0_blk_mem_gen_27_54
+INFO: [VRFC 10-2263] Analyzing Verilog file "/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/bd/weights_layer_0/ip/weights_layer_0_blk_mem_gen_27_55/sim/weights_layer_0_blk_mem_gen_27_55.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module weights_layer_0_blk_mem_gen_27_55
+INFO: [VRFC 10-2263] Analyzing Verilog file "/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/bd/weights_layer_0/ip/weights_layer_0_blk_mem_gen_27_56/sim/weights_layer_0_blk_mem_gen_27_56.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module weights_layer_0_blk_mem_gen_27_56
+INFO: [VRFC 10-2263] Analyzing Verilog file "/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/bd/weights_layer_0/ip/weights_layer_0_blk_mem_gen_27_57/sim/weights_layer_0_blk_mem_gen_27_57.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module weights_layer_0_blk_mem_gen_27_57
+INFO: [VRFC 10-2263] Analyzing Verilog file "/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/bd/weights_layer_0/ip/weights_layer_0_blk_mem_gen_27_58/sim/weights_layer_0_blk_mem_gen_27_58.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module weights_layer_0_blk_mem_gen_27_58
+INFO: [VRFC 10-2263] Analyzing Verilog file "/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/bd/weights_layer_0/ip/weights_layer_0_blk_mem_gen_27_59/sim/weights_layer_0_blk_mem_gen_27_59.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module weights_layer_0_blk_mem_gen_27_59
+INFO: [VRFC 10-2263] Analyzing Verilog file "/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/bd/weights_layer_0/ip/weights_layer_0_blk_mem_gen_27_60/sim/weights_layer_0_blk_mem_gen_27_60.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module weights_layer_0_blk_mem_gen_27_60
+INFO: [VRFC 10-2263] Analyzing Verilog file "/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/bd/weights_layer_0/ip/weights_layer_0_blk_mem_gen_27_61/sim/weights_layer_0_blk_mem_gen_27_61.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module weights_layer_0_blk_mem_gen_27_61
+INFO: [VRFC 10-2263] Analyzing Verilog file "/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/bd/weights_layer_0/ip/weights_layer_0_blk_mem_gen_27_62/sim/weights_layer_0_blk_mem_gen_27_62.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module weights_layer_0_blk_mem_gen_27_62
+INFO: [VRFC 10-2263] Analyzing Verilog file "/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/bd/weights_layer_0/ip/weights_layer_0_blk_mem_gen_27_63/sim/weights_layer_0_blk_mem_gen_27_63.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module weights_layer_0_blk_mem_gen_27_63
+INFO: [VRFC 10-2263] Analyzing Verilog file "/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/bd/weights_layer_0/ip/weights_layer_0_blk_mem_gen_27_64/sim/weights_layer_0_blk_mem_gen_27_64.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module weights_layer_0_blk_mem_gen_27_64
+INFO: [VRFC 10-2263] Analyzing Verilog file "/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/bd/weights_layer_0/ip/weights_layer_0_blk_mem_gen_27_65/sim/weights_layer_0_blk_mem_gen_27_65.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module weights_layer_0_blk_mem_gen_27_65
+INFO: [VRFC 10-2263] Analyzing Verilog file "/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/bd/weights_layer_0/ip/weights_layer_0_blk_mem_gen_27_66/sim/weights_layer_0_blk_mem_gen_27_66.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module weights_layer_0_blk_mem_gen_27_66
+INFO: [VRFC 10-2263] Analyzing Verilog file "/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/bd/weights_layer_0/ip/weights_layer_0_blk_mem_gen_27_67/sim/weights_layer_0_blk_mem_gen_27_67.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module weights_layer_0_blk_mem_gen_27_67
+INFO: [VRFC 10-2263] Analyzing Verilog file "/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/bd/weights_layer_0/ip/weights_layer_0_blk_mem_gen_27_68/sim/weights_layer_0_blk_mem_gen_27_68.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module weights_layer_0_blk_mem_gen_27_68
+INFO: [VRFC 10-2263] Analyzing Verilog file "/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/bd/weights_layer_0/ip/weights_layer_0_blk_mem_gen_27_69/sim/weights_layer_0_blk_mem_gen_27_69.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module weights_layer_0_blk_mem_gen_27_69
+INFO: [VRFC 10-2263] Analyzing Verilog file "/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/bd/weights_layer_0/ip/weights_layer_0_blk_mem_gen_27_70/sim/weights_layer_0_blk_mem_gen_27_70.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module weights_layer_0_blk_mem_gen_27_70
+INFO: [VRFC 10-2263] Analyzing Verilog file "/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/bd/weights_layer_0/ip/weights_layer_0_blk_mem_gen_27_71/sim/weights_layer_0_blk_mem_gen_27_71.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module weights_layer_0_blk_mem_gen_27_71
+INFO: [VRFC 10-2263] Analyzing Verilog file "/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/bd/weights_layer_0/ip/weights_layer_0_blk_mem_gen_27_72/sim/weights_layer_0_blk_mem_gen_27_72.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module weights_layer_0_blk_mem_gen_27_72
+INFO: [VRFC 10-2263] Analyzing Verilog file "/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/bd/weights_layer_0/ip/weights_layer_0_blk_mem_gen_27_73/sim/weights_layer_0_blk_mem_gen_27_73.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module weights_layer_0_blk_mem_gen_27_73
+INFO: [VRFC 10-2263] Analyzing Verilog file "/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/bd/weights_layer_0/ip/weights_layer_0_blk_mem_gen_27_74/sim/weights_layer_0_blk_mem_gen_27_74.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module weights_layer_0_blk_mem_gen_27_74
+INFO: [VRFC 10-2263] Analyzing Verilog file "/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/bd/weights_layer_0/ip/weights_layer_0_blk_mem_gen_27_75/sim/weights_layer_0_blk_mem_gen_27_75.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module weights_layer_0_blk_mem_gen_27_75
+INFO: [VRFC 10-2263] Analyzing Verilog file "/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/bd/weights_layer_0/ip/weights_layer_0_blk_mem_gen_27_76/sim/weights_layer_0_blk_mem_gen_27_76.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module weights_layer_0_blk_mem_gen_27_76
+INFO: [VRFC 10-2263] Analyzing Verilog file "/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/bd/weights_layer_0/ip/weights_layer_0_blk_mem_gen_27_77/sim/weights_layer_0_blk_mem_gen_27_77.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module weights_layer_0_blk_mem_gen_27_77
+INFO: [VRFC 10-2263] Analyzing Verilog file "/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/bd/weights_layer_0/ip/weights_layer_0_blk_mem_gen_27_78/sim/weights_layer_0_blk_mem_gen_27_78.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module weights_layer_0_blk_mem_gen_27_78
+INFO: [VRFC 10-2263] Analyzing Verilog file "/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/bd/weights_layer_0/ip/weights_layer_0_blk_mem_gen_27_79/sim/weights_layer_0_blk_mem_gen_27_79.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module weights_layer_0_blk_mem_gen_27_79
+INFO: [VRFC 10-2263] Analyzing Verilog file "/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/bd/weights_layer_0/ip/weights_layer_0_blk_mem_gen_27_80/sim/weights_layer_0_blk_mem_gen_27_80.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module weights_layer_0_blk_mem_gen_27_80
+INFO: [VRFC 10-2263] Analyzing Verilog file "/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/bd/weights_layer_0/ip/weights_layer_0_blk_mem_gen_27_81/sim/weights_layer_0_blk_mem_gen_27_81.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module weights_layer_0_blk_mem_gen_27_81
+INFO: [VRFC 10-2263] Analyzing Verilog file "/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/bd/weights_layer_0/ip/weights_layer_0_blk_mem_gen_27_82/sim/weights_layer_0_blk_mem_gen_27_82.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module weights_layer_0_blk_mem_gen_27_82
+INFO: [VRFC 10-2263] Analyzing Verilog file "/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/bd/weights_layer_0/ip/weights_layer_0_blk_mem_gen_27_83/sim/weights_layer_0_blk_mem_gen_27_83.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module weights_layer_0_blk_mem_gen_27_83
+INFO: [VRFC 10-2263] Analyzing Verilog file "/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/bd/weights_layer_0/ip/weights_layer_0_blk_mem_gen_27_84/sim/weights_layer_0_blk_mem_gen_27_84.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module weights_layer_0_blk_mem_gen_27_84
+INFO: [VRFC 10-2263] Analyzing Verilog file "/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/bd/weights_layer_0/ip/weights_layer_0_blk_mem_gen_27_85/sim/weights_layer_0_blk_mem_gen_27_85.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module weights_layer_0_blk_mem_gen_27_85
+INFO: [VRFC 10-2263] Analyzing Verilog file "/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/bd/weights_layer_0/ip/weights_layer_0_blk_mem_gen_27_86/sim/weights_layer_0_blk_mem_gen_27_86.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module weights_layer_0_blk_mem_gen_27_86
+INFO: [VRFC 10-2263] Analyzing Verilog file "/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/bd/weights_layer_0/ip/weights_layer_0_blk_mem_gen_27_87/sim/weights_layer_0_blk_mem_gen_27_87.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module weights_layer_0_blk_mem_gen_27_87
+INFO: [VRFC 10-2263] Analyzing Verilog file "/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/bd/weights_layer_0/ip/weights_layer_0_blk_mem_gen_27_88/sim/weights_layer_0_blk_mem_gen_27_88.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module weights_layer_0_blk_mem_gen_27_88
+INFO: [VRFC 10-2263] Analyzing Verilog file "/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/bd/weights_layer_0/ip/weights_layer_0_blk_mem_gen_27_89/sim/weights_layer_0_blk_mem_gen_27_89.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module weights_layer_0_blk_mem_gen_27_89
+INFO: [VRFC 10-2263] Analyzing Verilog file "/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/bd/weights_layer_0/ip/weights_layer_0_blk_mem_gen_27_90/sim/weights_layer_0_blk_mem_gen_27_90.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module weights_layer_0_blk_mem_gen_27_90
+INFO: [VRFC 10-2263] Analyzing Verilog file "/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/bd/weights_layer_0/ip/weights_layer_0_blk_mem_gen_27_91/sim/weights_layer_0_blk_mem_gen_27_91.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module weights_layer_0_blk_mem_gen_27_91
+INFO: [VRFC 10-2263] Analyzing Verilog file "/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/bd/weights_layer_0/ip/weights_layer_0_blk_mem_gen_27_92/sim/weights_layer_0_blk_mem_gen_27_92.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module weights_layer_0_blk_mem_gen_27_92
+INFO: [VRFC 10-2263] Analyzing Verilog file "/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/bd/weights_layer_0/ip/weights_layer_0_blk_mem_gen_27_93/sim/weights_layer_0_blk_mem_gen_27_93.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module weights_layer_0_blk_mem_gen_27_93
+INFO: [VRFC 10-2263] Analyzing Verilog file "/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/bd/weights_layer_0/ip/weights_layer_0_blk_mem_gen_27_94/sim/weights_layer_0_blk_mem_gen_27_94.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module weights_layer_0_blk_mem_gen_27_94
+INFO: [VRFC 10-2263] Analyzing Verilog file "/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/bd/weights_layer_0/ip/weights_layer_0_blk_mem_gen_27_95/sim/weights_layer_0_blk_mem_gen_27_95.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module weights_layer_0_blk_mem_gen_27_95
+INFO: [VRFC 10-2263] Analyzing Verilog file "/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/bd/weights_layer_0/ip/weights_layer_0_blk_mem_gen_27_96/sim/weights_layer_0_blk_mem_gen_27_96.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module weights_layer_0_blk_mem_gen_27_96
+INFO: [VRFC 10-2263] Analyzing Verilog file "/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/bd/weights_layer_0/ip/weights_layer_0_blk_mem_gen_27_97/sim/weights_layer_0_blk_mem_gen_27_97.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module weights_layer_0_blk_mem_gen_27_97
+INFO: [VRFC 10-2263] Analyzing Verilog file "/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/bd/weights_layer_0/ip/weights_layer_0_blk_mem_gen_27_98/sim/weights_layer_0_blk_mem_gen_27_98.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module weights_layer_0_blk_mem_gen_27_98
+INFO: [VRFC 10-2263] Analyzing Verilog file "/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/bd/weights_layer_0/ip/weights_layer_0_blk_mem_gen_27_99/sim/weights_layer_0_blk_mem_gen_27_99.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module weights_layer_0_blk_mem_gen_27_99
+INFO: [VRFC 10-2263] Analyzing Verilog file "/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/bd/weights_layer_1/hdl/weights_layer_1_wrapper.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module weights_layer_1_wrapper
+INFO: [VRFC 10-2263] Analyzing Verilog file "/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/bd/weights_layer_0/hdl/weights_layer_0_wrapper.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module weights_layer_0_wrapper
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/new/weight.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module weights
+WARNING: [VRFC 10-756] identifier i is used before its declaration [/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/new/weight.sv:745]
+WARNING: [VRFC 10-756] identifier i is used before its declaration [/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/new/weight.sv:746]
+WARNING: [VRFC 10-756] identifier i is used before its declaration [/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/new/weight.sv:753]
+WARNING: [VRFC 10-756] identifier i is used before its declaration [/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.srcs/sources_1/new/weight.sv:754]
+INFO: [VRFC 10-311] analyzing module test
+INFO: [VRFC 10-2263] Analyzing Verilog file "/afs/ece.cmu.edu/usr/dongjoop/Desktop/weightProject_FP/weight/weight.sim/sim_1/behav/glbl.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module glbl
