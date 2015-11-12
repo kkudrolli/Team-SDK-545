@@ -9,10 +9,13 @@ and store it as a greyscaled image.
 
 import time
 import cv2
+from subprocess import call
 
 # Constants so that setup can be easily configured
 WEBCAM_CAMERA_NUM = 0
 DEF_CAP_DIR = "./pics/"
+UART_CAP_DIR = "../camera/pics/"
+UART_DIR = "../image/"
 VERTICAL_FLIP = 1
 WAIT_KEY_TIME = 1
 IMAGE_NAME = "cap"
@@ -20,9 +23,14 @@ DEF_TIME_STR = "%Y%m%d-%H%M%S"
 IMAGE_TYPE = ".bmp"
 CAPTURE_KEY = ' '
 QUIT_KEY = 'q'
+CAM_TRAIN_KEY = 'j'
+CAM_TEST_KEY = 'i'
+MNIST_TRAIN_KEY = 'n'
+MNIST_TEST_KEY = 'm'
 NORM_MIN = 0
 NORM_MAX = 255
 #DOWN_AMOUNT = 5 # Manually tuned 
+THRESH = 100
 
 """
 get_video: Reads a frame of video input from the camera and returns it.
@@ -84,7 +92,7 @@ def manipulate(frame):
     cv2.normalize(gray, gray, 0, 255, cv2.NORM_MINMAX)
 
     # Snaps colors to white or black
-    (thresh, im_bw) = cv2.threshold(gray, 70, 255, cv2.THRESH_TOZERO_INV)
+    (thresh, im_bw) = cv2.threshold(gray, 100, 255, cv2.THRESH_BINARY_INV);
 
     # Downsize the image, using image pyramids, this function has 
     # anti-aliasing built in
@@ -106,13 +114,15 @@ Parameters:
 - cap_dir: Directory to store captured frame
 
 Return value:
-- None
+- filename of written image
 """
 def capture(frame, cap_dir):
     timestr = time.strftime(DEF_TIME_STR)
     man_frame = manipulate(frame) 
-    cv2.imwrite(cap_dir + IMAGE_NAME + timestr + IMAGE_TYPE, man_frame)
+    filename = IMAGE_NAME + timestr + IMAGE_TYPE
+    cv2.imwrite(cap_dir+ filename, man_frame)
     print "Image written!"
+    return filename
     
 """
 get_key: Gets the key that was pressed and takes action if it was a 
@@ -131,6 +141,16 @@ def get_key(original, cap_dir):
     if (wait == ord(CAPTURE_KEY)):
         capture(original, cap_dir)
         return False
+    elif (wait == ord(CAM_TRAIN_KEY)):
+        filename = capture(original, cap_dir)
+        call([UART_DIR + "send_image", "-i", "train", UART_CAP_DIR + filename])
+    elif (wait == ord(CAM_TEST_KEY)):
+        filename = capture(original, cap_dir)
+        call([UART_DIR + "send_image", "-i", "test", UART_CAP_DIR + filename])
+    elif (wait == ord(MNIST_TRAIN_KEY)):
+        call([UART_DIR + "send_image", "-m", "train", "1"])
+    elif (wait == ord(MNIST_TEST_KEY)): 
+        call([UART_DIR + "send_image", "-m", "test", "1"])
     elif (wait == ord(QUIT_KEY)):
         return True
     else:
@@ -151,16 +171,17 @@ def feed(video_capture, cap_dir):
     while (True):
         video = get_video(video_capture)
         # Capture image must be flipped otherwise display is mirrored
-        flipped = cv2.flip(video, VERTICAL_FLIP)        
+        #flipped = cv2.flip(video, VERTICAL_FLIP)        
         # Greyscale the image
-        gray = cv2.cvtColor(flipped, cv2.COLOR_BGR2GRAY)
+        gray = cv2.cvtColor(video, cv2.COLOR_BGR2GRAY)
 
+        (thresh, im_bw) = cv2.threshold(gray, THRESH, 255, cv2.THRESH_BINARY_INV);
         # Display the video feed - grayscaled image displayed will
         # be slightly different from what is stored to disk
-        cv2.imshow("Video", gray)
+        cv2.imshow("Video", im_bw)
         
         # Capture the keys pressed and quit if get_key returns True
-        if (get_key(flipped, cap_dir)): 
+        if (get_key(video, cap_dir)): 
             break
     
     # Clean up
