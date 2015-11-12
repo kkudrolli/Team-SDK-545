@@ -32,19 +32,6 @@
         <CompFileExtendedInfo CompFileName="framebuffer.bd" FileRelPathName="ip/framebuffer_blk_mem_gen_1_0/framebuffer_blk_mem_gen_1_0.xci"/>
         <CompFileExtendedInfo CompFileName="framebuffer.bd" FileRelPathName="hdl/framebuffer.v"/>
       </File>
-      <File Path="$PSRCDIR/sources_1/bd/clock/clock.bd">
-        <FileInfo>
-          <Attr Name="UsedIn" Val="synthesis"/>
-          <Attr Name="UsedIn" Val="implementation"/>
-          <Attr Name="UsedIn" Val="simulation"/>
-        </FileInfo>
-        <CompFileExtendedInfo CompFileName="clock.bd" FileRelPathName="hdl/clock.hwdef"/>
-        <CompFileExtendedInfo CompFileName="clock.bd" FileRelPathName="hw_handoff/clock_bd.tcl"/>
-        <CompFileExtendedInfo CompFileName="clock.bd" FileRelPathName="hw_handoff/clock.hwh"/>
-        <CompFileExtendedInfo CompFileName="clock.bd" FileRelPathName="clock_ooc.xdc"/>
-        <CompFileExtendedInfo CompFileName="clock.bd" FileRelPathName="hdl/clock.v"/>
-        <CompFileExtendedInfo CompFileName="clock.bd" FileRelPathName="ip/clock_clk_wiz_0_0/clock_clk_wiz_0_0.xci"/>
-      </File>
       <File Path="$PSRCDIR/sources_1/new/video_unit.sv">
         <FileInfo>
           <Attr Name="UsedIn" Val="synthesis"/>
@@ -56,13 +43,6 @@
         <FileInfo>
           <Attr Name="ImportPath" Val="$PPRDIR/../../projects/gameboy/HDMI.sv"/>
           <Attr Name="ImportTime" Val="1411761516"/>
-          <Attr Name="UsedIn" Val="synthesis"/>
-          <Attr Name="UsedIn" Val="implementation"/>
-          <Attr Name="UsedIn" Val="simulation"/>
-        </FileInfo>
-      </File>
-      <File Path="$PSRCDIR/sources_1/bd/clock/hdl/clock_wrapper.v">
-        <FileInfo>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="implementation"/>
           <Attr Name="UsedIn" Val="simulation"/>
@@ -207,6 +187,26 @@
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
+      <File Path="$PSRCDIR/sources_1/bd/clock/clock.bd">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+        <CompFileExtendedInfo CompFileName="clock.bd" FileRelPathName="ip/clock_clk_wiz_0_0/clock_clk_wiz_0_0.xci"/>
+        <CompFileExtendedInfo CompFileName="clock.bd" FileRelPathName="clock_ooc.xdc"/>
+        <CompFileExtendedInfo CompFileName="clock.bd" FileRelPathName="hw_handoff/clock_bd.tcl"/>
+        <CompFileExtendedInfo CompFileName="clock.bd" FileRelPathName="hw_handoff/clock.hwh"/>
+        <CompFileExtendedInfo CompFileName="clock.bd" FileRelPathName="hdl/clock.hwdef"/>
+        <CompFileExtendedInfo CompFileName="clock.bd" FileRelPathName="hdl/clock.v"/>
+      </File>
+      <File Path="$PSRCDIR/sources_1/bd/clock/hdl/clock_wrapper.v">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
       <Config>
         <Option Name="DesignMode" Val="RTL"/>
         <Option Name="TopModule" Val="ChipInterface"/>
@@ -258,13 +258,14 @@
     </Simulator>
   </Simulators>
   <Runs Version="1" Minor="9">
-    <Run Id="synth_1" Type="Ft3:Synth" SrcSet="sources_1" Part="xc7vx485tffg1761-2" ConstrsSet="constrs_1" Description="Vivado Synthesis Defaults" State="current">
+    <Run Id="synth_1" Type="Ft3:Synth" SrcSet="sources_1" Part="xc7vx485tffg1761-2" ConstrsSet="constrs_1" Description="Vivado Synthesis Defaults" State="current" Dir="$PRUNDIR/synth_1">
       <Strategy Version="1" Minor="2">
         <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2015"/>
         <Step Id="synth_design"/>
       </Strategy>
+      <GeneratedRun Dir="$PRUNDIR" File="gen_run.xml"/>
     </Run>
-    <Run Id="impl_1" Type="Ft2:EntireDesign" Part="xc7vx485tffg1761-2" ConstrsSet="constrs_1" Description="Vivado Implementation Defaults" State="current" Dir="$PRUNDIR/impl_1" SynthRun="synth_1">
+    <Run Id="impl_1" Type="Ft2:EntireDesign" Part="xc7vx485tffg1761-2" ConstrsSet="constrs_1" Description="Vivado Implementation Defaults" State="current" SynthRun="synth_1">
       <Strategy Version="1" Minor="2">
         <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2015"/>
         <Step Id="init_design"/>
@@ -277,7 +278,6 @@
         <Step Id="post_route_phys_opt_design"/>
         <Step Id="write_bitstream"/>
       </Strategy>
-      <GeneratedRun Dir="$PRUNDIR" File="gen_run.xml"/>
     </Run>
   </Runs>
   <MsgRule>

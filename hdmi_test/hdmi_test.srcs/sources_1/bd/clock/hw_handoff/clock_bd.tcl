@@ -147,7 +147,6 @@ proc create_root_design { parentCell } {
 
   # Create ports
   set clk_in1 [ create_bd_port -dir I -type clk clk_in1 ]
-  set_property -dict [ list CONFIG.FREQ_HZ {200000000}  ] $clk_in1
   set clk_out1 [ create_bd_port -dir O -type clk clk_out1 ]
   set clk_out2 [ create_bd_port -dir O -type clk clk_out2 ]
   set reset [ create_bd_port -dir I -type rst reset ]
@@ -155,20 +154,7 @@ proc create_root_design { parentCell } {
 
   # Create instance: clk_wiz_0, and set properties
   set clk_wiz_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:clk_wiz:5.1 clk_wiz_0 ]
-  set_property -dict [ list CONFIG.CLKIN1_JITTER_PS {50.0} \
-CONFIG.CLKOUT1_DRIVES {BUFG} CONFIG.CLKOUT1_JITTER {140.475} \
-CONFIG.CLKOUT1_PHASE_ERROR {103.084} CONFIG.CLKOUT1_REQUESTED_OUT_FREQ {27.027} \
-CONFIG.CLKOUT2_DRIVES {BUFG} CONFIG.CLKOUT2_JITTER {196.698} \
-CONFIG.CLKOUT2_PHASE_ERROR {103.084} CONFIG.CLKOUT2_REQUESTED_OUT_FREQ {5} \
-CONFIG.CLKOUT2_USED {true} CONFIG.CLKOUT3_DRIVES {BUFG} \
-CONFIG.CLKOUT4_DRIVES {BUFG} CONFIG.CLKOUT5_DRIVES {BUFG} \
-CONFIG.CLKOUT6_DRIVES {BUFG} CONFIG.CLKOUT7_DRIVES {BUFG} \
-CONFIG.MMCM_CLKFBOUT_MULT_F {3.125} CONFIG.MMCM_CLKIN1_PERIOD {5.0} \
-CONFIG.MMCM_CLKOUT0_DIVIDE_F {23.125} CONFIG.MMCM_CLKOUT1_DIVIDE {125} \
-CONFIG.MMCM_COMPENSATION {ZHOLD} CONFIG.MMCM_DIVCLK_DIVIDE {1} \
-CONFIG.NUM_OUT_CLKS {2} CONFIG.PRIMITIVE {MMCM} \
-CONFIG.PRIM_IN_FREQ {200.000} CONFIG.USE_LOCKED {false} \
- ] $clk_wiz_0
+  set_property -dict [ list CONFIG.CLKOUT1_JITTER {193.631} CONFIG.CLKOUT1_PHASE_ERROR {128.132} CONFIG.CLKOUT1_REQUESTED_OUT_FREQ {27.027} CONFIG.CLKOUT2_JITTER {270.159} CONFIG.CLKOUT2_PHASE_ERROR {128.132} CONFIG.CLKOUT2_REQUESTED_OUT_FREQ {5} CONFIG.CLKOUT2_USED {true} CONFIG.MMCM_CLKFBOUT_MULT_F {6.250} CONFIG.MMCM_CLKOUT0_DIVIDE_F {23.125} CONFIG.MMCM_CLKOUT1_DIVIDE {125} CONFIG.MMCM_DIVCLK_DIVIDE {1} CONFIG.NUM_OUT_CLKS {2} CONFIG.USE_LOCKED {false}  ] $clk_wiz_0
 
   # Create port connections
   connect_bd_net -net clk_in1_1 [get_bd_ports clk_in1] [get_bd_pins clk_wiz_0/clk_in1]
