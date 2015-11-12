@@ -212,7 +212,7 @@ module ChipInterface(
         
          logic sysclk;  
                   
-         clock_wrapper ck (.clk_in1 (clk), .clk_out1 (HDMI_TX_CLK), .clk_out2 (sysclk), .reset (rst));
+         //clock_wrapper ck (.clk_in1 (clk), .clk_out1 (HDMI_TX_CLK), .clk_out2 (sysclk), .reset (rst));
       
          hdmi encoder (.clk (HDMI_TX_CLK), .rst (rst), .hsync (HDMI_TX_HS), .vsync (HDMI_TX_VS), 
                        .addr (addr), .de (HDMI_TX_DE));
@@ -236,7 +236,7 @@ module ChipInterface(
          assign en_bus = 1'b1;              
          
             
-          /*logic [9:0] [31:0] result;
+         /*logic [9:0] [31:0] result;
          logic done;
           
          //---- TOP LEVEL NEURAL NETWORK MODULE INSTANTIATION -----//                 

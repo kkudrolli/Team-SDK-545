@@ -1,6 +1,10 @@
-#define IMPORT_FILE "networks/best.deep"
+//#define MODE_MNIST
+#define MNIST_TEST_IMAGES 1000
 
-#define MNIST_TEST_IMAGES 10000
+#define IMPORT_FILE "networks/flat.deep"
+
+#define TEST_DIR "./test_imgs/"
+
 
 #define NORMAL    "\033[0m"
 #define RED       "\033[31m"

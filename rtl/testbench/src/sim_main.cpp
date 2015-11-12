@@ -11,9 +11,9 @@ int main (int argc, char **argv) {
   Verilated::commandArgs(argc, argv);
   Vdeep* top = new Vdeep;
 
-  mnist_images_t mnist_data = read_images(1);
+  mnist_images_t mnist_data = read_images(0);
 
-  mnist_labels_t mnist_labels = read_labels(1);
+  mnist_labels_t mnist_labels = read_labels(0);
 
   int time = 0;
 
@@ -43,6 +43,8 @@ int main (int argc, char **argv) {
   
 
   vector_t result = Vector(10);
+
+#ifdef MODE_MNIST
   int correct = 0;
   int mistakes[10][10];
   for (int i = 0; i < 10; i++)
@@ -54,7 +56,7 @@ int main (int argc, char **argv) {
     for (int i = 0; i < 784; i++) {	
       top->image_in[i] = mnist_data->imgs[k]->data[i];
     }
-    
+
     while (true) {
 
       time += 5;
@@ -63,7 +65,7 @@ int main (int argc, char **argv) {
       top->eval();
 
       if (top->done) {
-	for (uint32_t i = 0; i < 10; i++) result->data[i] = top->result[i];
+	for (int i = 0; i < 10; i++) result->data[i] = top->result[i];
 	printf(BOLD "\nTesting image of %d:\n" NORMAL, mnist_labels->labels->data[k]);
 	int classification = classify(result, 0);
 	if (classification == mnist_labels->labels->data[k]) correct++;
@@ -77,7 +79,6 @@ int main (int argc, char **argv) {
     top->rst = 0;
     top->eval();
   }
-  
 
   int err_actual = 0;
   int err_predic = 0;
@@ -90,10 +91,76 @@ int main (int argc, char **argv) {
 	max_err = mistakes[i][j];
       }
 
+  
+  printf(BOLD UNDERLINE "\nError counts: (col: predicted, row: actual)\n" NORMAL);
+  printf(BOLD "[0] [1] [2] [3] [4] [5] [6] [7] [8] [9]\n" NORMAL);
+  for (int i = 0; i < 10; i++) {
+    for (int j = 0; j < 10; j++)
+      printf("%-3d ", mistakes[i][j]);
+    printf(BOLD " [%d]\n" NORMAL, i);
+  }
+
   printf(BOLD UNDERLINE "\n\nFINAL RESULTS: Success rate: %2.1f%% (%d correct, %d incorrect)" NORMAL, 
 	 (float)correct*100 / (float)MNIST_TEST_IMAGES, correct, MNIST_TEST_IMAGES - correct);
   printf(BOLD "\n\nMost common mistake: %d mistaken for a %d (%d times)\n\n" NORMAL, err_actual, 
 	 err_predic, max_err);
+
+#else
+
+  DIR *dir_ptr = Opendir(TEST_DIR);
+  struct dirent *entry_ptr = NULL;
+  if (!dir_ptr) {
+    error_print(BOLD RED "Directory error" NORMAL);
+  }
+
+  
+  while ((entry_ptr = readdir(dir_ptr))) {
+    // Get name of file and append it to directory name
+    char *filename = entry_ptr->d_name;
+    if (filename[0] != '.') {
+      size_t path_len = strlen(filename) + strlen(TEST_DIR) + 1;
+      char full_path[path_len];
+      snprintf(full_path, path_len, "%s%s", TEST_DIR, filename);
+      
+      // Read bitmap data 
+      vector_t image_data = read_bitmap(full_path);
+
+      top->start = 1;
+      for (int i = 0; i < 784; i++) {	
+	top->image_in[i] = image_data->data[i];
+      }
+    
+      while (true) {
+	time += 5;
+
+	top->clk = !(top->clk);
+	top->eval();
+
+	if (top->done) {
+	  for (int i = 0; i < 10; i++) result->data[i] = top->result[i];
+	  printf(BOLD "\nTesting image of %s:\n" NORMAL, full_path);
+	  for (uint32_t j = 0; j < 28; j++) {
+	    for (uint32_t i = 0; i < 28; i++) {
+	      printf("%02x ", image_data->data[i+28*j] >> 9);
+	    }
+	    printf("\n");
+	  }
+	  int classification = classify(result, 0);
+	  break;
+	}
+      }
+
+      top->rst = 1;
+      top->eval();
+      top->rst = 0;
+      top->eval();
+      
+      vector_destroy(image_data);
+    }
+  }
+  Closedir(dir_ptr);  
+  
+#endif
 
   printf("Finished at time %d!\n", time);
   
