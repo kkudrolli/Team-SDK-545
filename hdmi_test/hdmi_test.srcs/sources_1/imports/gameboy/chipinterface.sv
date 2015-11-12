@@ -214,11 +214,11 @@ module ChipInterface(
                   
          clock_wrapper ck (.clk_in1 (clk), .clk_out1 (HDMI_TX_CLK), .clk_out2 (sysclk), .reset (rst));
       
-         //hdmi encoder (.clk (HDMI_TX_CLK), .rst (rst), .hsync (HDMI_TX_HS), .vsync (HDMI_TX_VS), 
-         //              .addr (addr), .de (HDMI_TX_DE));
+         hdmi encoder (.clk (HDMI_TX_CLK), .rst (rst), .hsync (HDMI_TX_HS), .vsync (HDMI_TX_VS), 
+                       .addr (addr), .de (HDMI_TX_DE));
          
-         //video_unit v (.clka(uart_sampling_clk), .clkb (HDMI_TX_CLK), .de (HDMI_TX_DE), .addr_r (addr), .data (HDMI_TX_D), 
-         //              .we (we), .data_in (data_in), .addr_w (addr_w));
+         video_unit v (.clka(uart_sampling_clk), .clkb (HDMI_TX_CLK), .de (HDMI_TX_DE), .addr_r (addr), .data (HDMI_TX_D), 
+                       .we (we), .data_in (data_in), .addr_w (addr_w));
          
          reg [4:0] outA;
          reg       stop;
@@ -236,12 +236,12 @@ module ChipInterface(
          assign en_bus = 1'b1;              
          
             
-         logic [9:0] [31:0] result;
+          /*logic [9:0] [31:0] result;
          logic done;
           
          //---- TOP LEVEL NEURAL NETWORK MODULE INSTANTIATION -----//                 
          //-------------------------------------------------------------------------------------------------------------//
-         deep dp (.clk (clk), .rst (rst), .do_fp (do_fp), .label_in (label_out),  .image_in (image_out), 
+        deep dp (.clk (clk), .rst (rst), .do_fp (do_fp), .label_in (label_out),  .image_in (image_out), 
                   .result (result), .done (done));                                        
          
          logic [31:0] max;
@@ -255,6 +255,6 @@ module ChipInterface(
                     max_result = i;
                 end 
             end
-         end
+         end*/
 
 endmodule: ChipInterface
