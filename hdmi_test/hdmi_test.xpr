@@ -3,7 +3,7 @@
 <!--                                                         -->
 <!-- Copyright 1986-2015 Xilinx, Inc. All Rights Reserved.   -->
 
-<Project Version="7" Minor="5" Path="/afs/ece.cmu.edu/usr/sohils/Private/18545/deep/hdmi_test/hdmi_test.xpr">
+<Project Version="7" Minor="5" Path="/afs/ece.cmu.edu/usr/dongjoop/Private/18545/Team-SDK-545/hdmi_test/hdmi_test.xpr">
   <DefaultLaunch Dir="$PRUNDIR"/>
   <Configuration>
     <Option Name="Id" Val="a9b16b7ac1c3445b8c6c50c6678513ac"/>
@@ -25,12 +25,12 @@
           <Attr Name="UsedIn" Val="implementation"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
-        <CompFileExtendedInfo CompFileName="framebuffer.bd" FileRelPathName="hdl/framebuffer.hwdef"/>
+        <CompFileExtendedInfo CompFileName="framebuffer.bd" FileRelPathName="hdl/framebuffer.v"/>
+        <CompFileExtendedInfo CompFileName="framebuffer.bd" FileRelPathName="ip/framebuffer_blk_mem_gen_1_0/framebuffer_blk_mem_gen_1_0.xci"/>
+        <CompFileExtendedInfo CompFileName="framebuffer.bd" FileRelPathName="framebuffer_ooc.xdc"/>
         <CompFileExtendedInfo CompFileName="framebuffer.bd" FileRelPathName="hw_handoff/framebuffer_bd.tcl"/>
         <CompFileExtendedInfo CompFileName="framebuffer.bd" FileRelPathName="hw_handoff/framebuffer.hwh"/>
-        <CompFileExtendedInfo CompFileName="framebuffer.bd" FileRelPathName="framebuffer_ooc.xdc"/>
-        <CompFileExtendedInfo CompFileName="framebuffer.bd" FileRelPathName="ip/framebuffer_blk_mem_gen_1_0/framebuffer_blk_mem_gen_1_0.xci"/>
-        <CompFileExtendedInfo CompFileName="framebuffer.bd" FileRelPathName="hdl/framebuffer.v"/>
+        <CompFileExtendedInfo CompFileName="framebuffer.bd" FileRelPathName="hdl/framebuffer.hwdef"/>
       </File>
       <File Path="$PSRCDIR/sources_1/new/video_unit.sv">
         <FileInfo>
@@ -193,14 +193,73 @@
           <Attr Name="UsedIn" Val="implementation"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
+        <CompFileExtendedInfo CompFileName="clock.bd" FileRelPathName="hdl/clock.v"/>
         <CompFileExtendedInfo CompFileName="clock.bd" FileRelPathName="ip/clock_clk_wiz_0_0/clock_clk_wiz_0_0.xci"/>
         <CompFileExtendedInfo CompFileName="clock.bd" FileRelPathName="clock_ooc.xdc"/>
-        <CompFileExtendedInfo CompFileName="clock.bd" FileRelPathName="hw_handoff/clock_bd.tcl"/>
         <CompFileExtendedInfo CompFileName="clock.bd" FileRelPathName="hw_handoff/clock.hwh"/>
+        <CompFileExtendedInfo CompFileName="clock.bd" FileRelPathName="hw_handoff/clock_bd.tcl"/>
         <CompFileExtendedInfo CompFileName="clock.bd" FileRelPathName="hdl/clock.hwdef"/>
-        <CompFileExtendedInfo CompFileName="clock.bd" FileRelPathName="hdl/clock.v"/>
       </File>
       <File Path="$PSRCDIR/sources_1/bd/clock/hdl/clock_wrapper.v">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PSRCDIR/sources_1/bd/weights_0/weights_0.bd">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+        <CompFileExtendedInfo CompFileName="weights_0.bd" FileRelPathName="ip/weights_0_blk_mem_gen_0_0/weights_0_blk_mem_gen_0_0.xci"/>
+        <CompFileExtendedInfo CompFileName="weights_0.bd" FileRelPathName="weights_0_ooc.xdc"/>
+        <CompFileExtendedInfo CompFileName="weights_0.bd" FileRelPathName="hdl/weights_0.v"/>
+        <CompFileExtendedInfo CompFileName="weights_0.bd" FileRelPathName="hdl/weights_0.hwdef"/>
+        <CompFileExtendedInfo CompFileName="weights_0.bd" FileRelPathName="hw_handoff/weights_0.hwh"/>
+        <CompFileExtendedInfo CompFileName="weights_0.bd" FileRelPathName="hw_handoff/weights_0_bd.tcl"/>
+      </File>
+      <File Path="$PSRCDIR/sources_1/bd/weights_1/weights_1.bd">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+        <CompFileExtendedInfo CompFileName="weights_1.bd" FileRelPathName="ip/weights_1_blk_mem_gen_0_0/weights_1_blk_mem_gen_0_0.xci"/>
+        <CompFileExtendedInfo CompFileName="weights_1.bd" FileRelPathName="hdl/weights_1.v"/>
+        <CompFileExtendedInfo CompFileName="weights_1.bd" FileRelPathName="hw_handoff/weights_1_bd.tcl"/>
+        <CompFileExtendedInfo CompFileName="weights_1.bd" FileRelPathName="weights_1_ooc.xdc"/>
+        <CompFileExtendedInfo CompFileName="weights_1.bd" FileRelPathName="hw_handoff/weights_1.hwh"/>
+        <CompFileExtendedInfo CompFileName="weights_1.bd" FileRelPathName="hdl/weights_1.hwdef"/>
+      </File>
+      <File Path="$PPRDIR/4096.coe">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PPRDIR/320.coe">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PSRCDIR/sources_1/bd/weights_0/hdl/weights_0_wrapper.v">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PSRCDIR/sources_1/bd/weights_1/hdl/weights_1_wrapper.v">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PSRCDIR/sources_1/new/weights.sv">
         <FileInfo>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="implementation"/>
@@ -231,8 +290,8 @@
         <Option Name="DesignMode" Val="RTL"/>
         <Option Name="TopModule" Val="test"/>
         <Option Name="TopLib" Val="xil_defaultlib"/>
-        <Option Name="SimMode" Val="post-implementation"/>
         <Option Name="SrcSet" Val="sources_1"/>
+        <Option Name="xsim.simulate.runtime" Val="1000000ns"/>
       </Config>
     </FileSet>
   </FileSets>
@@ -258,12 +317,11 @@
     </Simulator>
   </Simulators>
   <Runs Version="1" Minor="9">
-    <Run Id="synth_1" Type="Ft3:Synth" SrcSet="sources_1" Part="xc7vx485tffg1761-2" ConstrsSet="constrs_1" Description="Vivado Synthesis Defaults" State="current" Dir="$PRUNDIR/synth_1">
+    <Run Id="synth_1" Type="Ft3:Synth" SrcSet="sources_1" Part="xc7vx485tffg1761-2" ConstrsSet="constrs_1" Description="Vivado Synthesis Defaults" State="current">
       <Strategy Version="1" Minor="2">
         <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2015"/>
         <Step Id="synth_design"/>
       </Strategy>
-      <GeneratedRun Dir="$PRUNDIR" File="gen_run.xml"/>
     </Run>
     <Run Id="impl_1" Type="Ft2:EntireDesign" Part="xc7vx485tffg1761-2" ConstrsSet="constrs_1" Description="Vivado Implementation Defaults" State="current" SynthRun="synth_1">
       <Strategy Version="1" Minor="2">
