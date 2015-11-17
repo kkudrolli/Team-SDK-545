@@ -14,11 +14,11 @@
 #define PSTART  0xff
 #define PTRAIN  0xf0
 #define PTEST   0x0f
-#define PSTOP   0xf0
+//#define PSTOP   0xff
 #define PACK    0xaa
 #define PRESEND 0xcc
 
-#define SLOW
+//#define SLOW
 
 static const char *serial_port =  "/dev/ttyUSB0";
 
@@ -47,7 +47,7 @@ int main()
     //specs.c_iflag &= ~(IGNBRK | BRKINT | PARMRK | ISTRIP 
     //                 | INLCR | IGNCR | ICRNL | IXON);
     specs.c_iflag |= IGNBRK; // Ignore breaks
-    //specs.c_iflag |= IGNPAR; // Ignore parity and frame errors
+    specs.c_iflag |= IGNPAR; // Ignore parity and frame errors
     //specs.c_iflag |= IXON;
     specs.c_iflag |= IXOFF; // Turn sw handshaking off
 
@@ -118,7 +118,7 @@ int main()
     typeset_imgs[9] = read_bitmap("../../sim/digits/9.bmp");
     uint32_t typeset_lbls[10] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
 
-    transfer(m_imgs->imgs, m_lbls->labels->data, port, 1, 30);
+    transfer(m_imgs->imgs, m_lbls->labels->data, port, 1, 100);
     //transfer(typeset_imgs, typeset_lbls, port, 1, 10);
 
     // MNIST TEST END
@@ -176,21 +176,6 @@ void transfer(vector_t *images, uint32_t *labels, int port, int train, size_t nu
             write_byte(port, PTEST);
         }
 
-        // DATA 784 times        
-#ifdef SLOW
-        printf("Press ENTER to send data\n");
-        getchar();
-#endif
- 
-        printf("DATA\n");
-        for (size_t j = 0; j < length; j++) {
-            printf("Press ENTER to send data %u, byte: %x\n", j, bytes[j]);
-//            getchar();
-            write_byte(port, bytes[j]);
-            // Add up bytes with 1's complement addition to get checksum
-            checksum = ones_comp_add(checksum, bytes[j]);
-        }
-  
 #ifdef SLOW
         printf("Press ENTER to send label: %x\n", label);
         getchar();
@@ -200,12 +185,30 @@ void transfer(vector_t *images, uint32_t *labels, int port, int train, size_t nu
         write_byte(port, label);
         checksum = ones_comp_add(checksum, label);
 
+
+        // DATA 784 times        
+#ifdef SLOW
+        printf("Press ENTER to send data\n");
+        getchar();
+#endif
+ 
+        printf("DATA\n");
+        for (size_t j = 0; j < length; j++) {
+            if (bytes[j] == 0xff) bytes[j] -= 1; // Enforce unique start byte
+            printf("Press ENTER to send data %u, byte: %x\n", j, bytes[j]);
+//          getchar();
+
+            write_byte(port, bytes[j]);
+            // Add up bytes with 1's complement addition to get checksum
+            checksum = ones_comp_add(checksum, bytes[j]);
+        }
+
 #ifdef SLOW
         printf("Press ENTER to send checksum: %x\n", checksum);
         getchar();
 #endif
         // CHECKSUM
-        printf("CHECKSUM\n");
+        printf("CHECKSUM: 0x%x\n", checksum);
         write_byte(port, checksum);
 
         printf("Before RESEND check\n");
@@ -221,12 +224,12 @@ void transfer(vector_t *images, uint32_t *labels, int port, int train, size_t nu
         }*/
 
         // STOP
-#ifdef SLOW
+/*#ifdef SLOW
         printf("Press ENTER to send stop\n");
         getchar();
 #endif
         printf("STOP\n");
-        write_byte(port, PSTOP);
+        write_byte(port, PSTOP);*/
 
         // Wait for an ACK
         /*printf("Waiting for an ACK...");
@@ -239,7 +242,7 @@ void transfer(vector_t *images, uint32_t *labels, int port, int train, size_t nu
         //Free(bytes);
         resent = 0;
         i++;
-        //sleep(2);
+        //sleep(1);
     }
 
     return;

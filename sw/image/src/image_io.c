@@ -124,8 +124,13 @@ vector_t read_bitmap(char *filename)
     uint32_t *vector_data = (uint32_t*) Calloc(num_bytes / NUM_BYTES_IN_PIX, 
                                               sizeof(uint32_t));
     /* Copy over image data into vectro data and set the vector's data */
-    for (uint32_t i = 0; i < num_bytes / NUM_BYTES_IN_PIX; i++) {
-        vector_data[i] = (uint32_t) reduced_image[i];
+    uint32_t row = 28;
+    uint32_t col = 28;
+    /* Flip the image vertically over x-axis */
+    for (uint32_t i = 0; i < row; i++) {
+        for (int32_t j = col-1; j >= 0; j--) { 
+            vector_data[i*row+j] = (uint32_t) reduced_image[(row-i)*col+j];
+        }
     }
     assert(vec);
     vec->data = vector_data;

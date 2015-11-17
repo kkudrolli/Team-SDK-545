@@ -34,7 +34,7 @@ module uart_recv(
                     state <= (bit_count == 4'd9) ? S_STOP : S_READ;
                     sample_count <= sample_count + 1;
                     bit_count <= (sample_count == 4'd0) ? bit_count + 1 : bit_count;
-                    uart_byte <= (sample_count == 4'd0) ? {uart_byte[6:0], USB_RX} :
+                    uart_byte <= (sample_count == 4'd0) ? {USB_RX, uart_byte[7:1]} :
                                                           uart_byte;
                     USB_CTS <= 1'b0;
                 end

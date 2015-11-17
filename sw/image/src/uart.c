@@ -19,7 +19,7 @@ int configure_port(void)
     //specs.c_iflag &= ~(IGNBRK | BRKINT | PARMRK | ISTRIP 
     //                 | INLCR | IGNCR | ICRNL | IXON);
     specs.c_iflag |= IGNBRK; // Ignore breaks
-    //specs.c_iflag |= IGNPAR; // Ignore parity and frame errors
+    specs.c_iflag |= IGNPAR; // Ignore parity and frame errors
     //specs.c_iflag |= IXON;
     specs.c_iflag |= IXOFF; // Turn sw handshaking off
 
@@ -33,7 +33,7 @@ int configure_port(void)
     //specs.c_oflag = (OPOST | CR3);
 
     // Set Baud Rate to 921600 bps
-    if ((ret = cfsetospeed(&specs, B9600)) == -1){
+    if ((ret = cfsetospeed(&specs, B921600)) == -1){
         printf("Error in setting baud rate\n");
     }
 
@@ -69,6 +69,7 @@ void transfer(vector_t *images, uint32_t *labels, int port, int train, size_t nu
         uint8_t checksum = 0;
     
         vector_t img = images[i];
+        img = center(img);
         size_t length = img->length;
         uint32_t *data = img->data; 
         uint32_t label = labels[i];
@@ -83,7 +84,7 @@ void transfer(vector_t *images, uint32_t *labels, int port, int train, size_t nu
         }
         
         // Write bytes to serial port byte by byte as per the defined UART protocol:
-        // START-TRAIN/TEST-DATA-...-DATA-LABEL-CHECKSUM-STOP
+        // START-TRAIN/TEST-LABEL-DATA-...-DATA-CHECKSUM
 
         // START
 #ifdef SLOW
@@ -107,23 +108,6 @@ void transfer(vector_t *images, uint32_t *labels, int port, int train, size_t nu
             write_byte(port, PTEST);
         }
 
-        // DATA 784 times        
-#ifdef SLOW
-        printf("Press ENTER to send data\n");
-        getchar();
-#endif
- 
-        printf("DATA\n");
-        for (size_t j = 0; j < length; j++) {
-#ifdef UART_DBG
-            printf("Press ENTER to send data %zu, byte: %x\n", j, bytes[j]);
-//            getchar();
-#endif
-            write_byte(port, bytes[j]);
-            // Add up bytes with 1's complement addition to get checksum
-            checksum = ones_comp_add(checksum, bytes[j]);
-        }
-  
 #ifdef SLOW
         printf("Press ENTER to send label: %x\n", label);
         getchar();
@@ -133,6 +117,24 @@ void transfer(vector_t *images, uint32_t *labels, int port, int train, size_t nu
         write_byte(port, label);
         checksum = ones_comp_add(checksum, label);
 
+        // DATA 784 times        
+#ifdef SLOW
+        printf("Press ENTER to send data\n");
+        getchar();
+#endif
+ 
+        printf("DATA\n");
+        for (size_t j = 0; j < length; j++) {
+            if (bytes[j] == 0xff) bytes[j] -= 1; // Enforce unique start byte
+#ifdef UART_DBG
+            printf("Press ENTER to send data %zu, byte: %x\n", j, bytes[j]);
+            getchar();
+#endif
+            write_byte(port, bytes[j]);
+            // Add up bytes with 1's complement addition to get checksum
+            checksum = ones_comp_add(checksum, bytes[j]);
+        }
+  
 #ifdef SLOW
         printf("Press ENTER to send checksum: %x\n", checksum);
         getchar();
@@ -154,13 +156,14 @@ void transfer(vector_t *images, uint32_t *labels, int port, int train, size_t nu
         }*/
 
         // STOP
+/*
 #ifdef SLOW
         printf("Press ENTER to send stop\n");
         getchar();
 #endif
         printf("STOP\n");
         write_byte(port, PSTOP);
-
+*/
         // Wait for an ACK
         /*printf("Waiting for an ACK...");
         uint32_t ack_buf = 0;
@@ -172,7 +175,8 @@ void transfer(vector_t *images, uint32_t *labels, int port, int train, size_t nu
         //Free(bytes);
         resent = 0;
         i++;
-        //sleep(2);
+        usleep(11000); // Needs a tinyyyy bit of sleep
+                       // 11000 experimentally determined
     }
 
     return;
