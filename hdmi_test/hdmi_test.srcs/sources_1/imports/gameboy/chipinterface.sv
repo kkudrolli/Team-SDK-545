@@ -11,7 +11,7 @@ module ChipInterface(
     output logic       USB_TX, USB_CTS,
     
     output logic         en_bus,
-       
+           
     // hdmi
     output logic            I2C_SCL,
     inout tri               I2C_SDA,
@@ -150,7 +150,7 @@ module ChipInterface(
             else begin
                 if(draw_image) begin
                     processingPixel <= 1;
-                    data_in <= image_shift_buf[7:0];
+                    data_in <= {image_shift_buf[7:0], image_shift_buf[7:0], image_shift_buf[7:0]};
                     we <= 1;
                     side = (flip) ? ~side : side;
                     flip <= 0;
@@ -206,24 +206,24 @@ module ChipInterface(
                     flip <= 1;
                     shift_image <= 1;
                     shift_count <= (shift_count == 10'd784) ? shift_count: shift_count + 10'd1;
-                end
-            end
-        end
+                 end
+             end
+         end
         
-         logic sysclk;  
-                  
-         //clock_wrapper ck (.clk_in1 (clk), .clk_out1 (HDMI_TX_CLK), .clk_out2 (sysclk), .reset (rst));
+         logic sysclk;
+
+         clock ck (.clk_in1 (clk), .clk_out1 (HDMI_TX_CLK), .clk_out2 (sysclk), .reset (rst));
       
          hdmi encoder (.clk (HDMI_TX_CLK), .rst (rst), .hsync (HDMI_TX_HS), .vsync (HDMI_TX_VS), 
                        .addr (addr), .de (HDMI_TX_DE));
          
          video_unit v (.clka(uart_sampling_clk), .clkb (HDMI_TX_CLK), .de (HDMI_TX_DE), .addr_r (addr), .data (HDMI_TX_D), 
-                       .we (we), .data_in (data_in), .addr_w (addr_w));
+                      .we (we), .data_in (data_in), .addr_w (addr_w));
          
          reg [4:0] outA;
          reg       stop;
          reg       _ack;
-      
+         
          reg [4:0] counter;
          reg          clk_reduced;
          // Divide 5 MHz clk by 20 to give 250 kHz I2C logic driver. 
@@ -233,16 +233,14 @@ module ChipInterface(
          end
          i2c bus(.stop (stop), .clk (clk_reduced), .rst (rst), .outA (outA), .SDA (I2C_SDA), .SCL (I2C_SCL), .ACK (_ack));
                  
-         assign en_bus = 1'b1;              
-         
-                     
-         logic [9:0] [31:0] result;
+         assign en_bus = 1'b1;
+
+         logic [10] [31:0] result;
          logic done;
-          
-         //---- TOP LEVEL NEURAL NETWORK MODULE INSTANTIATION -----//                 
+         
+         //---- TOP LEVEL NEURAL NETWORK MODULE INSTANTIATION -----//
          //-------------------------------------------------------------------------------------------------------------//
-         deep dp (.clk (clk), .rst (rst), .do_fp (do_fp), .label_in (label_out),  .image_in (image_out), 
-                  .result (result), .done (done));                                        
+         deep dp (.clk, .rst, .do_fp, .label_in (label_out), .image_in (image_out), .result, .done);
          
          logic [31:0] max;
          integer i;

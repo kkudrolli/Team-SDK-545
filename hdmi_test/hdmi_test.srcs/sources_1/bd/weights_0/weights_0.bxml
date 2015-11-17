@@ -2,8 +2,8 @@
 <Root MajorVersion="0" MinorVersion="32">
   <CompositeFile CompositeFileTopName="weights_0" CanBeSetAsTop="true" CanDisplayChildGraph="true">
     <Description>Composite Fileset</Description>
-    <Generation Name="SYNTHESIS" State="STALE"/>
-    <Generation Name="IMPLEMENTATION" State="STALE"/>
+    <Generation Name="SYNTHESIS" State="GENERATED"/>
+    <Generation Name="IMPLEMENTATION" State="GENERATED"/>
     <Generation Name="SIMULATION" State="GENERATED"/>
     <FileCollection Name="SOURCES" Type="SOURCES">
       <File Name="ip/weights_0_blk_mem_gen_0_0/weights_0_blk_mem_gen_0_0.xci" Type="IP">

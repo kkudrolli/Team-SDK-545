@@ -5,6 +5,7 @@
 #include "image_io.h"
 #include "err_wrappers.h"
 #include "classify.h"
+#include "center.h"
 
 int main (int argc, char **argv) {
 
@@ -55,6 +56,14 @@ int main (int argc, char **argv) {
     top->start = 1;
     for (int i = 0; i < 784; i++) {	
       top->image_in[i] = mnist_data->imgs[k]->data[i];
+    }
+
+    for (uint32_t j = 0; j < 28; j++) {
+      for (uint32_t i = 0; i < 28; i++) {
+	if (top->image_in[i+28*j] >> 9 > 20) printf(GREEN BOLD "%02x " NORMAL, top->image_in[i+28*j] >> 9);
+	else printf("%02x ", top->image_in[i+28*j] >> 9);
+      }
+      printf("\n");
     }
 
     while (true) {
@@ -124,7 +133,8 @@ int main (int argc, char **argv) {
       
       // Read bitmap data 
       vector_t image_data = read_bitmap(full_path);
-
+      image_data = center(image_data);
+	  
       top->start = 1;
       for (int i = 0; i < 784; i++) {	
 	top->image_in[i] = image_data->data[i];
@@ -138,10 +148,11 @@ int main (int argc, char **argv) {
 
 	if (top->done) {
 	  for (int i = 0; i < 10; i++) result->data[i] = top->result[i];
-	  printf(BOLD "\nTesting image of %s:\n" NORMAL, full_path);
+	  printf(BOLD "\nTesting centered image of %s:\n" NORMAL, full_path);
 	  for (uint32_t j = 0; j < 28; j++) {
 	    for (uint32_t i = 0; i < 28; i++) {
-	      printf("%02x ", image_data->data[i+28*j] >> 9);
+	      if (image_data->data[i+28*j] >> 9 > 20) printf(GREEN BOLD "%02x " NORMAL, image_data->data[i+28*j] >> 9);
+	      else printf("%02x ", image_data->data[i+28*j] >> 9);
 	    }
 	    printf("\n");
 	  }

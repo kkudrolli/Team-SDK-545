@@ -150,24 +150,24 @@ proc create_root_design { parentCell } {
   set addrb [ create_bd_port -dir I -from 18 -to 0 addrb ]
   set clka [ create_bd_port -dir I clka ]
   set clkb [ create_bd_port -dir I clkb ]
-  set dina [ create_bd_port -dir I -from 7 -to 0 dina ]
-  set doutb [ create_bd_port -dir O -from 7 -to 0 doutb ]
+  set dina [ create_bd_port -dir I -from 23 -to 0 dina ]
+  set doutb [ create_bd_port -dir O -from 23 -to 0 doutb ]
   set enb [ create_bd_port -dir I enb ]
   set wea [ create_bd_port -dir I -from 0 -to 0 wea ]
 
   # Create instance: blk_mem_gen_1, and set properties
   set blk_mem_gen_1 [ create_bd_cell -type ip -vlnv xilinx.com:ip:blk_mem_gen:8.2 blk_mem_gen_1 ]
   set_property -dict [ list CONFIG.Byte_Size {9} \
-CONFIG.Coe_File {../../../../../../random.coe} CONFIG.Enable_32bit_Address {false} \
+CONFIG.Coe_File {../../../../../../foobar.coe} CONFIG.Enable_32bit_Address {false} \
 CONFIG.Enable_A {Always_Enabled} CONFIG.Enable_B {Use_ENB_Pin} \
 CONFIG.Fill_Remaining_Memory_Locations {true} CONFIG.Load_Init_File {true} \
 CONFIG.Memory_Type {Simple_Dual_Port_RAM} CONFIG.Operating_Mode_A {NO_CHANGE} \
 CONFIG.Port_B_Clock {100} CONFIG.Port_B_Enable_Rate {100} \
-CONFIG.Read_Width_A {8} CONFIG.Read_Width_B {8} \
+CONFIG.Read_Width_A {24} CONFIG.Read_Width_B {24} \
 CONFIG.Register_PortA_Output_of_Memory_Primitives {false} CONFIG.Register_PortB_Output_of_Memory_Primitives {true} \
 CONFIG.Remaining_Memory_Locations {AB} CONFIG.Use_Byte_Write_Enable {false} \
 CONFIG.Use_RSTA_Pin {false} CONFIG.Write_Depth_A {345600} \
-CONFIG.Write_Width_A {8} CONFIG.Write_Width_B {8} \
+CONFIG.Write_Width_A {24} CONFIG.Write_Width_B {24} \
 CONFIG.use_bram_block {Stand_Alone}  ] $blk_mem_gen_1
 
   # Create port connections

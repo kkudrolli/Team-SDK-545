@@ -1,8 +1,8 @@
 //Copyright 1986-2015 Xilinx, Inc. All Rights Reserved.
 //--------------------------------------------------------------------------------
 //Tool Version: Vivado v.2015.2 (lin64) Build 1266856 Fri Jun 26 16:35:25 MDT 2015
-//Date        : Mon Nov 16 16:58:01 2015
-//Host        : horizon.andrew.cmu.edu running 64-bit Red Hat Enterprise Linux Server release 7.1 (Maipo)
+//Date        : Mon Nov 16 23:24:28 2015
+//Host        : savage.andrew.cmu.edu running 64-bit Red Hat Enterprise Linux Server release 7.1 (Maipo)
 //Command     : generate_target framebuffer.bd
 //Design      : framebuffer
 //Purpose     : IP block netlist
@@ -23,17 +23,17 @@ module framebuffer
   input [18:0]addrb;
   input clka;
   input clkb;
-  input [7:0]dina;
-  output [7:0]doutb;
+  input [23:0]dina;
+  output [23:0]doutb;
   input enb;
   input [0:0]wea;
 
   wire [18:0]addra_1;
   wire [18:0]addrb_1;
-  wire [7:0]blk_mem_gen_1_doutb;
+  wire [23:0]blk_mem_gen_1_doutb;
   wire clka_1;
   wire clkb_1;
-  wire [7:0]dina_1;
+  wire [23:0]dina_1;
   wire enb_1;
   wire [0:0]wea_1;
 
@@ -41,8 +41,8 @@ module framebuffer
   assign addrb_1 = addrb[18:0];
   assign clka_1 = clka;
   assign clkb_1 = clkb;
-  assign dina_1 = dina[7:0];
-  assign doutb[7:0] = blk_mem_gen_1_doutb;
+  assign dina_1 = dina[23:0];
+  assign doutb[23:0] = blk_mem_gen_1_doutb;
   assign enb_1 = enb;
   assign wea_1 = wea[0];
   framebuffer_blk_mem_gen_1_0 blk_mem_gen_1

@@ -1,8 +1,8 @@
 //Copyright 1986-2015 Xilinx, Inc. All Rights Reserved.
 //--------------------------------------------------------------------------------
 //Tool Version: Vivado v.2015.2 (lin64) Build 1266856 Fri Jun 26 16:35:25 MDT 2015
-//Date        : Mon Nov 16 16:58:01 2015
-//Host        : horizon.andrew.cmu.edu running 64-bit Red Hat Enterprise Linux Server release 7.1 (Maipo)
+//Date        : Mon Nov 16 23:24:28 2015
+//Host        : savage.andrew.cmu.edu running 64-bit Red Hat Enterprise Linux Server release 7.1 (Maipo)
 //Command     : generate_target framebuffer_wrapper.bd
 //Design      : framebuffer_wrapper
 //Purpose     : IP block netlist
@@ -22,8 +22,8 @@ module framebuffer_wrapper
   input [18:0]addrb;
   input clka;
   input clkb;
-  input [7:0]dina;
-  output [7:0]doutb;
+  input [23:0]dina;
+  output [23:0]doutb;
   input enb;
   input [0:0]wea;
 
@@ -31,8 +31,8 @@ module framebuffer_wrapper
   wire [18:0]addrb;
   wire clka;
   wire clkb;
-  wire [7:0]dina;
-  wire [7:0]doutb;
+  wire [23:0]dina;
+  wire [23:0]doutb;
   wire enb;
   wire [0:0]wea;
 

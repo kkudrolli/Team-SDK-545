@@ -54,6 +54,15 @@ module piecewise_sigmoid(input [31:0] in,
 endmodule: piecewise_sigmoid
 */
 
+
+module linear_fn(input [31:0] in,
+                 output logic [31:0] out);
+
+    assign out = in >> 5;
+    
+endmodule: linear_fn
+
+
 module sigmoid_approx_fn(input [31:0] in,
                          output logic [31:0] out);
 
@@ -67,13 +76,13 @@ module sigmoid_approx_fn(input [31:0] in,
 	endfunction
 
 	function logic [31:0] piecewise_sigmoid(logic [31:0] in);
-			if(in>=`FIXED_5) 
+			/*if(in>=`FIXED_5) 
 				piecewise_sigmoid = `FIXED_1;
 			else if ((in >= `FIXED_2_375) && (in < `FIXED_5)) 
 				piecewise_sigmoid = fixed_mult(`FIXED_0_03125, in) + `FIXED_0_84375;
 			else if ((in >= `FIXED_1) && (in < `FIXED_2_375))
 				piecewise_sigmoid = fixed_mult(`FIXED_0_125, in) + `FIXED_0_625;
-			else 
+			else */
 				piecewise_sigmoid = fixed_mult(`FIXED_0_25, in) + `FIXED_0_5;
 	endfunction
 

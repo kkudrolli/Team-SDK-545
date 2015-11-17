@@ -1,5 +1,5 @@
 //#define MODE_MNIST
-#define MNIST_TEST_IMAGES 1000
+#define MNIST_TEST_IMAGES 20
 
 #define IMPORT_FILE "networks/flat.deep"
 

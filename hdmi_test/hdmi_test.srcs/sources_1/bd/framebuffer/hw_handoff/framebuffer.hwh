@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
-<EDKSYSTEM EDWVERSION="1.2" TIMESTAMP="Mon Nov 16 16:58:40 2015" VIVADOVERSION="2015.2">
+<EDKSYSTEM EDWVERSION="1.2" TIMESTAMP="Mon Nov 16 23:24:28 2015" VIVADOVERSION="2015.2">
 
   <SYSTEMINFO ARCH="virtex7" BOARD="xilinx.com:vc707:part0:1.2" DEVICE="7vx485t" NAME="framebuffer" PACKAGE="ffg1761" SPEEDGRADE="-2"/>
 
@@ -34,14 +34,14 @@
         <CONNECTION INSTANCE="blk_mem_gen_1" PORT="addrb"/>
       </CONNECTIONS>
     </PORT>
-    <PORT DIR="O" LEFT="7" NAME="doutb" RIGHT="0" SIGIS="undef" SIGNAME="blk_mem_gen_1_doutb">
-      <CONNECTIONS>
-        <CONNECTION INSTANCE="blk_mem_gen_1" PORT="doutb"/>
-      </CONNECTIONS>
-    </PORT>
-    <PORT DIR="I" LEFT="7" NAME="dina" RIGHT="0" SIGIS="undef" SIGNAME="External_Ports_dina">
+    <PORT DIR="I" LEFT="23" NAME="dina" RIGHT="0" SIGIS="undef" SIGNAME="External_Ports_dina">
       <CONNECTIONS>
         <CONNECTION INSTANCE="blk_mem_gen_1" PORT="dina"/>
+      </CONNECTIONS>
+    </PORT>
+    <PORT DIR="O" LEFT="23" NAME="doutb" RIGHT="0" SIGIS="undef" SIGNAME="blk_mem_gen_1_doutb">
+      <CONNECTIONS>
+        <CONNECTION INSTANCE="blk_mem_gen_1" PORT="doutb"/>
       </CONNECTIONS>
     </PORT>
   </EXTERNALPORTS>
@@ -83,8 +83,8 @@
         <PARAMETER NAME="C_USE_BYTE_WEA" VALUE="0"/>
         <PARAMETER NAME="C_WEA_WIDTH" VALUE="1"/>
         <PARAMETER NAME="C_WRITE_MODE_A" VALUE="NO_CHANGE"/>
-        <PARAMETER NAME="C_WRITE_WIDTH_A" VALUE="8"/>
-        <PARAMETER NAME="C_READ_WIDTH_A" VALUE="8"/>
+        <PARAMETER NAME="C_WRITE_WIDTH_A" VALUE="24"/>
+        <PARAMETER NAME="C_READ_WIDTH_A" VALUE="24"/>
         <PARAMETER NAME="C_WRITE_DEPTH_A" VALUE="345600"/>
         <PARAMETER NAME="C_READ_DEPTH_A" VALUE="345600"/>
         <PARAMETER NAME="C_ADDRA_WIDTH" VALUE="19"/>
@@ -97,8 +97,8 @@
         <PARAMETER NAME="C_USE_BYTE_WEB" VALUE="0"/>
         <PARAMETER NAME="C_WEB_WIDTH" VALUE="1"/>
         <PARAMETER NAME="C_WRITE_MODE_B" VALUE="WRITE_FIRST"/>
-        <PARAMETER NAME="C_WRITE_WIDTH_B" VALUE="8"/>
-        <PARAMETER NAME="C_READ_WIDTH_B" VALUE="8"/>
+        <PARAMETER NAME="C_WRITE_WIDTH_B" VALUE="24"/>
+        <PARAMETER NAME="C_READ_WIDTH_B" VALUE="24"/>
         <PARAMETER NAME="C_WRITE_DEPTH_B" VALUE="345600"/>
         <PARAMETER NAME="C_READ_DEPTH_B" VALUE="345600"/>
         <PARAMETER NAME="C_ADDRB_WIDTH" VALUE="19"/>
@@ -123,9 +123,9 @@
         <PARAMETER NAME="C_EN_DEEPSLEEP_PIN" VALUE="0"/>
         <PARAMETER NAME="C_EN_SHUTDOWN_PIN" VALUE="0"/>
         <PARAMETER NAME="C_DISABLE_WARN_BHV_RANGE" VALUE="0"/>
-        <PARAMETER NAME="C_COUNT_36K_BRAM" VALUE="84"/>
-        <PARAMETER NAME="C_COUNT_18K_BRAM" VALUE="1"/>
-        <PARAMETER NAME="C_EST_POWER_SUMMARY" VALUE="Estimated Power for IP     :     4.525379 mW"/>
+        <PARAMETER NAME="C_COUNT_36K_BRAM" VALUE="229"/>
+        <PARAMETER NAME="C_COUNT_18K_BRAM" VALUE="8"/>
+        <PARAMETER NAME="C_EST_POWER_SUMMARY" VALUE="Estimated Power for IP     :     33.50947 mW"/>
         <PARAMETER NAME="Component_Name" VALUE="framebuffer_blk_mem_gen_1_0"/>
         <PARAMETER NAME="Interface_Type" VALUE="Native"/>
         <PARAMETER NAME="AXI_Type" VALUE="AXI4_Full"/>
@@ -151,13 +151,13 @@
         <PARAMETER NAME="Algorithm" VALUE="Minimum_Area"/>
         <PARAMETER NAME="Primitive" VALUE="8kx2"/>
         <PARAMETER NAME="Assume_Synchronous_Clk" VALUE="false"/>
-        <PARAMETER NAME="Write_Width_A" VALUE="8"/>
+        <PARAMETER NAME="Write_Width_A" VALUE="24"/>
         <PARAMETER NAME="Write_Depth_A" VALUE="345600"/>
-        <PARAMETER NAME="Read_Width_A" VALUE="8"/>
+        <PARAMETER NAME="Read_Width_A" VALUE="24"/>
         <PARAMETER NAME="Operating_Mode_A" VALUE="NO_CHANGE"/>
         <PARAMETER NAME="Enable_A" VALUE="Always_Enabled"/>
-        <PARAMETER NAME="Write_Width_B" VALUE="8"/>
-        <PARAMETER NAME="Read_Width_B" VALUE="8"/>
+        <PARAMETER NAME="Write_Width_B" VALUE="24"/>
+        <PARAMETER NAME="Read_Width_B" VALUE="24"/>
         <PARAMETER NAME="Operating_Mode_B" VALUE="WRITE_FIRST"/>
         <PARAMETER NAME="Enable_B" VALUE="Use_ENB_Pin"/>
         <PARAMETER NAME="Register_PortA_Output_of_Memory_Primitives" VALUE="false"/>
@@ -170,7 +170,7 @@
         <PARAMETER NAME="register_portb_output_of_softecc" VALUE="false"/>
         <PARAMETER NAME="Pipeline_Stages" VALUE="0"/>
         <PARAMETER NAME="Load_Init_File" VALUE="true"/>
-        <PARAMETER NAME="Coe_File" VALUE="../../../../../../random.coe"/>
+        <PARAMETER NAME="Coe_File" VALUE="../../../../../../foobar.coe"/>
         <PARAMETER NAME="Fill_Remaining_Memory_Locations" VALUE="true"/>
         <PARAMETER NAME="Remaining_Memory_Locations" VALUE="AB"/>
         <PARAMETER NAME="Use_RSTA_Pin" VALUE="false"/>
@@ -213,7 +213,7 @@
             <CONNECTION INSTANCE="External_Ports" PORT="addra"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="I" LEFT="7" NAME="dina" RIGHT="0" SIGIS="undef" SIGNAME="External_Ports_dina">
+        <PORT DIR="I" LEFT="23" NAME="dina" RIGHT="0" SIGIS="undef" SIGNAME="External_Ports_dina">
           <CONNECTIONS>
             <CONNECTION INSTANCE="External_Ports" PORT="dina"/>
           </CONNECTIONS>
@@ -233,7 +233,7 @@
             <CONNECTION INSTANCE="External_Ports" PORT="addrb"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="O" LEFT="7" NAME="doutb" RIGHT="0" SIGIS="undef" SIGNAME="blk_mem_gen_1_doutb">
+        <PORT DIR="O" LEFT="23" NAME="doutb" RIGHT="0" SIGIS="undef" SIGNAME="blk_mem_gen_1_doutb">
           <CONNECTIONS>
             <CONNECTION INSTANCE="External_Ports" PORT="doutb"/>
           </CONNECTIONS>

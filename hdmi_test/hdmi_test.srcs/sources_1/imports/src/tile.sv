@@ -9,25 +9,25 @@ module tile
    // Inputs
    input logic clk, rst;
    input logic start;
-   input logic [IMG_SZ-1:0] [31:0] image;
-   input logic [NUM_NEURONS-1:0] [31:0] weights0;
-   input logic [OUTPUT_SZ-1:0] [31:0] 	weights1;   
+   input logic [IMG_SZ] [31:0] image;
+   input logic [NUM_NEURONS] [31:0] weights0;
+   input logic [OUTPUT_SZ] [31:0] 	weights1;   
    
    // Outputs
    output logic 			done;
    output logic 			get_weights0, get_weights1;
-   output logic [OUTPUT_SZ-1:0] [31:0] 	result;
+   output logic [OUTPUT_SZ] [31:0] 	result;
    
    
-   logic [IMG_SZ-1:0] [31:0] 		image_reg;
+   logic [IMG_SZ] [31:0] 		image_reg;
    
    logic 				clear;
-   logic [NUM_NEURONS-1:0] [31:0] 	acc_lay0;
-   logic [NUM_NEURONS-1:0] [31:0] 	hidden;
-   logic [OUTPUT_SZ-1:0]   [31:0] 	acc_lay1;
+   logic [NUM_NEURONS] [31:0] 	acc_lay0;
+   logic [NUM_NEURONS] [31:0] 	hidden;
+   logic [OUTPUT_SZ]   [31:0] 	acc_lay1;
    
-   logic [$clog2(IMG_SZ)-1:0] 		lay0_idx;
-   logic [$clog2(NUM_NEURONS)-1:0] 	lay1_idx;
+   logic [$clog2(IMG_SZ)] 		lay0_idx;
+   logic [$clog2(NUM_NEURONS)] 	lay1_idx;
 
    logic 				enable_0, enable_1;
    
@@ -55,7 +55,22 @@ module tile
 	 sigmoid_approx_fn act_lay1(.in (acc_lay1[i]), .out (result[i]));
       end
    endgenerate
-
+/*
+   generate
+      genvar i;
+      for (i = 0; i < NUM_NEURONS; i++) begin
+	 neuron layer0 (.clk, .rst, .clear, .en (enable_0), .weight (weights0[i]), 
+			.data (image_reg[lay0_idx]), .accum (acc_lay0[i]));
+	 linear_fn act_lay0(.in (acc_lay0[i]), .out (hidden[i]));
+      end
+      for (i = 0; i < OUTPUT_SZ; i++) begin
+	 neuron layer1 (.clk, .rst, .clear, .en (enable_1), .weight (weights1[i]),
+			.data (hidden[lay1_idx]), .accum (acc_lay1[i]));
+	 linear_fn act_lay1(.in (acc_lay1[i]), .out (result[i]));
+      end
+   endgenerate
+   */
+   
    integer j;
    always_comb begin
       done = 1'b0;
