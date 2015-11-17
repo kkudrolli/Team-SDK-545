@@ -13,7 +13,6 @@ module uart_clock_divider(
             clock_divider <= 11'd0;
         end
         else begin
-            // UART sampling clock is 13x slower
             uart_sampling_clk <= (clock_divider == `BAUD_COUNT(`BAUDRATE)/2 || 
                                   clock_divider == `BAUD_COUNT(`BAUDRATE)) ?
                                   ~uart_sampling_clk : uart_sampling_clk;

@@ -16,7 +16,7 @@ module ChipInterface(
     output logic            I2C_SCL,
     inout tri               I2C_SDA,
     output logic [35:0]     HDMI_TX_D,
-    output logic            HDMI_TX_CLK,
+    output logic            HDMI_TX_CLK,   
     output logic            HDMI_TX_DE,
     output logic            HDMI_TX_HS,
     output logic            HDMI_TX_VS
@@ -53,14 +53,14 @@ module ChipInterface(
     assign rx_probe = USB_RX;
     
     // Divide system clk to get slower uart_sampling_clk
-    uart_clock_divider div(.clk(clk), .rst(rst), .uart_sampling_clk(uart_sampling_clk));
+    //uart_clock_divider div(.clk(clk), .rst(rst), .uart_sampling_clk(uart_sampling_clk));
     
     always_comb begin
         case (sel)
             2'b00: LEDS = {recv_state[1:0], draw_image, cs_ctrl[1:0], cs[2:0]};
-            2'b01: LEDS = max_result;
+            2'b01: LEDS = data_count[9:2];
             2'b10: LEDS = {trans_ack_buf, trans_resend_buf, cs_trans[1:0], data_count[1:0], byte_ready, led_out[0]};
-            2'b11: LEDS = uart_byte;
+            2'b11: LEDS = max_result;
         endcase
     end
     
@@ -204,15 +204,16 @@ module ChipInterface(
                     col_counter_large <= 0;
                     row_counter_large <= 0;              
                     flip <= 1;
-                    shift_image <= 1;
+                    //shift_image <= 1;
                     shift_count <= (shift_count == 10'd784) ? shift_count: shift_count + 10'd1;
                  end
              end
          end
         
-         logic sysclk;
-
-         clock ck (.clk_in1 (clk), .clk_out1 (HDMI_TX_CLK), .clk_out2 (sysclk), .reset (rst));
+         logic sysclk;  
+                  
+         clock ck (.clk_in1 (clk), .clk_out1 (HDMI_TX_CLK), .clk_out2 (sysclk), .clk_out3(uart_sampling_clk),
+                           .reset (rst));
       
          hdmi encoder (.clk (HDMI_TX_CLK), .rst (rst), .hsync (HDMI_TX_HS), .vsync (HDMI_TX_VS), 
                        .addr (addr), .de (HDMI_TX_DE));
@@ -236,23 +237,25 @@ module ChipInterface(
          assign en_bus = 1'b1;
 
          logic [10] [31:0] result;
+         
          logic done;
          
          //---- TOP LEVEL NEURAL NETWORK MODULE INSTANTIATION -----//
          //-------------------------------------------------------------------------------------------------------------//
-         deep dp (.clk, .rst, .do_fp, .label_in (label_out), .image_in (image_out), .result, .done);
-         
-         logic [31:0] max;
-         integer i;
-         always_comb begin
-            max = result[0];
-            max_result = 0;
-            for (i = 1; i < 10; i++) begin
-                if (result[i] > max) begin
-                    max = result[i];
-                    max_result = i;
-                end 
-            end
-         end
-
+   deep dp (.clk (clk), .rst (rst), .do_fp (do_fp), .label_in (label_out),  .image_in (image_out), 
+            .result (result), .done (done));                                        
+   
+   logic [31:0] max;
+   integer 	i;
+   always_comb begin
+      max = result[0];
+      max_result = 0;
+      for (i = 1; i < 10; i++) begin
+         if (result[i] > max) begin
+            max = result[i];
+            max_result = i;
+         end 
+      end
+   end
+   
 endmodule: ChipInterface
