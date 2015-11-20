@@ -55,6 +55,7 @@ module tile
 	 sigmoid_approx_fn act_lay1(.in (acc_lay1[i]), .out (result[i]));
       end
    endgenerate
+
 /*
    generate
       genvar i;
@@ -69,7 +70,7 @@ module tile
 	 linear_fn act_lay1(.in (acc_lay1[i]), .out (result[i]));
       end
    endgenerate
-   */
+*/
    
    integer j;
    always_comb begin

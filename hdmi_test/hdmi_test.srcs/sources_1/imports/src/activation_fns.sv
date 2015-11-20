@@ -66,24 +66,36 @@ endmodule: linear_fn
 module sigmoid_approx_fn(input [31:0] in,
                          output logic [31:0] out);
 
+    // multplication using shift
+/*    function logic [63:0] mult(logic [63:0] a,b);
+        logic [6:0] i;
+        mult = 0;
+        for(i=0; i<64; i=i+1) begin
+            if((b&1'b1)==1) begin
+                mult = mult + (a<<i);
+            end
+            b = b>>1;
+        end
+    endfunction
+    
 	function logic [31:0] fixed_mult(logic [31:0] a,b);
 		logic [63:0] a_64,b_64,c_64;
 		a_64 = a;
 		b_64 = b;
-		c_64 = a_64*b_64;
+		c_64 = mult(a_64,b_64); // modified 
 		c_64 = (c_64>>16);
 		fixed_mult = c_64[31:0]; 
 	endfunction
-
+*/
 	function logic [31:0] piecewise_sigmoid(logic [31:0] in);
-			/*if(in>=`FIXED_5) 
+			if(in>=`FIXED_5) 
 				piecewise_sigmoid = `FIXED_1;
 			else if ((in >= `FIXED_2_375) && (in < `FIXED_5)) 
-				piecewise_sigmoid = fixed_mult(`FIXED_0_03125, in) + `FIXED_0_84375;
+				piecewise_sigmoid = ((in>>5) + `FIXED_0_84375);
 			else if ((in >= `FIXED_1) && (in < `FIXED_2_375))
-				piecewise_sigmoid = fixed_mult(`FIXED_0_125, in) + `FIXED_0_625;
-			else */
-				piecewise_sigmoid = fixed_mult(`FIXED_0_25, in) + `FIXED_0_5;
+				piecewise_sigmoid = ((in>>3) + `FIXED_0_625);
+			else
+				piecewise_sigmoid = ((in>>2) + `FIXED_0_5);
 	endfunction
 
     logic sign;
