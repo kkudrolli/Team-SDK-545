@@ -47,7 +47,8 @@ module ChipInterface(
     logic processingPixel;
     logic side, flip, rts_probe, rx_probe;
     
-    logic [7:0] max_result;
+    logic [7:0] max_result, max_result_buf;
+    logic done;
     
     assign rts_probe = USB_RTS;
     assign rx_probe = USB_RX;
@@ -60,7 +61,7 @@ module ChipInterface(
             2'b00: LEDS = {recv_state[1:0], draw_image, cs_ctrl[1:0], cs[2:0]};
             2'b01: LEDS = data_count[9:2];
             2'b10: LEDS = {trans_ack_buf, trans_resend_buf, cs_trans[1:0], data_count[1:0], byte_ready, led_out[0]};
-            2'b11: LEDS = max_result;
+            2'b11: LEDS = max_result_buf;
         endcase
     end
     
@@ -91,7 +92,7 @@ module ChipInterface(
 
     // Control unit for neural network
     control_unit #(784<<3) ctrl(.clk(clk), .rst(rst), .train(train_buf), .start(start_buf),
-                                .bp_done(bp_done), .fp_done(fp_done), .drawn(drawn), 
+                                .bp_done(done), .fp_done(done), .drawn(1'b1), 
                                 .label_in(label_buf), .image_in(image_buf), 
                                 .do_fp(do_fp), .do_bp(do_bp), .draw(draw), .ack(ack),
                                 .label_out(label_out), .image_out(image_out), .cs_ctrl(cs_ctrl));
@@ -108,13 +109,6 @@ module ChipInterface(
     uart_trans trans(.uart_sampling_clk(uart_sampling_clk), .rst(rst), .ack(ack_buf),
                      .resend(resend), .USB_RTS(USB_RTS), .USB_TX(USB_TX), .resend_buf(trans_resend_buf),
                      .ack_buf(trans_ack_buf), .cs_trans(cs_trans));
-    
-    ////////////////////////////////
-    // End backward data transfer //
-    ////////////////////////////////
-    
-    image_led #(784<<3) img_led (.clk(clk), .rst(rst), .push(push),
-                         .image(image_buf), .LEDS(led_out));
                          
     // HDMI stuff
 
@@ -157,13 +151,13 @@ module ChipInterface(
                     shift_image <= 0;
                     shift_count <= 10'd0;
                     if (side == 0) 
-                        addr_w <= 72039 + col_counter_large*10 + row_counter_large*6480; // 72040 = 720*100+40
+                        addr_w <= 72060 + col_counter_large*10 + row_counter_large*7200; // 72040 = 720*100+40
                     else
-                        addr_w <= 72399 + col_counter_large*10 + row_counter_large*6480; // 72040 = 720*100+40                                
+                        addr_w <= 72380 + col_counter_large*10 + row_counter_large*7200; // 72040 = 720*100+40                                
                 end
                            
                 // Still same pixel
-                if(processingPixel && row_counter_small<9) begin                
+                if(processingPixel && row_counter_small<10) begin                
                     if(col_counter_small<9) begin
                         col_counter_small <= col_counter_small+1;
                         addr_w <= addr_w+1;
@@ -175,7 +169,7 @@ module ChipInterface(
                     end
                 end
                 // Done with this pixel && still same row_large
-                else if (processingPixel && row_counter_small==9 && col_counter_large<27 && row_counter_large<28) begin
+                else if (processingPixel && row_counter_small==10 && col_counter_large<27 && row_counter_large<28) begin
                     we <= 0;
                     processingPixel <= 0; // wait for new uart_byte_buf
                     col_counter_small <= 0;
@@ -185,7 +179,7 @@ module ChipInterface(
                     shift_count <= (shift_count == 10'd784) ? shift_count: shift_count + 10'd1;
                 end
                 // Need to go to next row_large
-                else if(processingPixel && row_counter_small==9 && col_counter_large==27 && row_counter_large<27) begin
+                else if(processingPixel && row_counter_small==10 && col_counter_large==27 && row_counter_large<27) begin
                     we <= 0;
                     processingPixel <= 0; // wait for new uart_byte_buf
                     col_counter_small <= 0;
@@ -196,14 +190,14 @@ module ChipInterface(
                     shift_count <= (shift_count == 10'd784) ? shift_count: shift_count + 10'd1;
                 end
                 // Done with this digit
-                else if(processingPixel && row_counter_small==9 && col_counter_large==27 && row_counter_large==27) begin
+                else if(processingPixel && row_counter_small==10 && col_counter_large==27 && row_counter_large==27) begin
                     we <= 0;
                     processingPixel <= 0; // wait for new uart_byte_buf
                     col_counter_small <= 0;
                     row_counter_small <= 0;
                     col_counter_large <= 0;
                     row_counter_large <= 0;              
-                    flip <= 1;
+                    //flip <= 1;
                     //shift_image <= 1;
                     shift_count <= (shift_count == 10'd784) ? shift_count: shift_count + 10'd1;
                  end
@@ -216,9 +210,9 @@ module ChipInterface(
                            .reset (rst));
       
          hdmi encoder (.clk (HDMI_TX_CLK), .rst (rst), .hsync (HDMI_TX_HS), .vsync (HDMI_TX_VS), 
-                       .addr (addr), .de (HDMI_TX_DE));
+                       .addr (addr), .de (1'b1));
          
-         video_unit v (.clka(uart_sampling_clk), .clkb (HDMI_TX_CLK), .de (HDMI_TX_DE), .addr_r (addr), .data (HDMI_TX_D), 
+         video_unit v (.clka(uart_sampling_clk), .clkb (HDMI_TX_CLK), .de (1'b1), .addr_r (addr), .data (HDMI_TX_D), 
                       .we (we), .data_in (data_in), .addr_w (addr_w));
          
          reg [4:0] outA;
@@ -238,12 +232,16 @@ module ChipInterface(
 
          logic [10] [31:0] result;
          
-         logic done;
-         
          //---- TOP LEVEL NEURAL NETWORK MODULE INSTANTIATION -----//
          //-------------------------------------------------------------------------------------------------------------//
    deep dp (.clk (clk), .rst (rst), .do_fp (do_fp), .label_in (label_out),  .image_in (image_out), 
             .result (result), .done (done));                                        
+
+   always_ff @(posedge clk) begin
+       if (done) begin
+           max_result_buf <= max_result;
+       end
+   end
    
    logic [31:0] max;
    integer 	i;
