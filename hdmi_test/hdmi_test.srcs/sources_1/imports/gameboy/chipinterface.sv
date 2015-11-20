@@ -157,13 +157,13 @@ module ChipInterface(
                     shift_image <= 0;
                     shift_count <= 10'd0;
                     if (side == 0) 
-                        addr_w <= 72039 + col_counter_large*10 + row_counter_large*6480; // 72040 = 720*100+40
+                        addr_w <= 72059 + col_counter_large*10 + row_counter_large*6480; // 72040 = 720*100+40
                     else
-                        addr_w <= 72399 + col_counter_large*10 + row_counter_large*6480; // 72040 = 720*100+40                                
+                        addr_w <= 72379 + col_counter_large*10 + row_counter_large*6480; // 72040 = 720*100+40                                
                 end
                            
                 // Still same pixel
-                if(processingPixel && row_counter_small<9) begin                
+                if(processingPixel && row_counter_small<10) begin                
                     if(col_counter_small<9) begin
                         col_counter_small <= col_counter_small+1;
                         addr_w <= addr_w+1;
@@ -211,14 +211,14 @@ module ChipInterface(
          end
         
          logic sysclk;  
-                  
+         
          clock ck (.clk_in1 (clk), .clk_out1 (HDMI_TX_CLK), .clk_out2 (sysclk), .clk_out3(uart_sampling_clk),
                            .reset (rst));
       
          hdmi encoder (.clk (HDMI_TX_CLK), .rst (rst), .hsync (HDMI_TX_HS), .vsync (HDMI_TX_VS), 
                        .addr (addr), .de (HDMI_TX_DE));
          
-         video_unit v (.clka(uart_sampling_clk), .clkb (HDMI_TX_CLK), .de (HDMI_TX_DE), .addr_r (addr), .data (HDMI_TX_D), 
+         video_unit v (.clka(uart_sampling_clk), .clkb (HDMI_TX_CLK), .de (1'b1), .addr_r (addr), .data (HDMI_TX_D), 
                       .we (we), .data_in (data_in), .addr_w (addr_w));
          
          reg [4:0] outA;
@@ -242,20 +242,20 @@ module ChipInterface(
          
          //---- TOP LEVEL NEURAL NETWORK MODULE INSTANTIATION -----//
          //-------------------------------------------------------------------------------------------------------------//
-   deep dp (.clk (clk), .rst (rst), .do_fp (do_fp), .label_in (label_out),  .image_in (image_out), 
-            .result (result), .done (done));                                        
+         deep dp (.clk (uart_sampling_clk), .rst (rst), .do_fp (do_fp), .label_in (label_out),  .image_in (image_out), 
+                  .result (result), .done (done));                                        
    
-   logic [31:0] max;
-   integer 	i;
-   always_comb begin
-      max = result[0];
-      max_result = 0;
-      for (i = 1; i < 10; i++) begin
-         if (result[i] > max) begin
-            max = result[i];
-            max_result = i;
-         end 
-      end
-   end
-   
+       logic [31:0] max;
+       integer 	i;
+       always_comb begin
+          max = result[0];
+          max_result = 0;
+          for (i = 1; i < 10; i++) begin
+             if (result[i] > max) begin
+                max = result[i];
+                max_result = i;
+             end 
+          end
+       end
+
 endmodule: ChipInterface

@@ -1,0 +1,16 @@
+Copyright 1986-2015 Xilinx, Inc. All Rights Reserved.
+-----------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2015.2 (lin64) Build 1266856 Fri Jun 26 16:35:25 MDT 2015
+| Date         : Mon Nov 16 21:17:57 2015
+| Host         : horizon.andrew.cmu.edu running 64-bit Red Hat Enterprise Linux Server release 7.1 (Maipo)
+| Command      : upgrade_ip
+| Device       : xc7vx485tffg1761-2
+-----------------------------------------------------------------------------------------------------------
+
+Upgrade Log for IP 'clock_clk_wiz_0_0'
+
+1. Summary
+----------
+
+SUCCESS in the update of clock_clk_wiz_0_0 (xilinx.com:ip:clk_wiz:5.1 (Rev. 7)) to current project options.
+

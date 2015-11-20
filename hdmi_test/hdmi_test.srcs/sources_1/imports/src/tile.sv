@@ -41,22 +41,21 @@ module tile
    always_ff @(posedge clk)
      if (start) image_reg <= image;   
    
-
    generate
       genvar i;
       for (i = 0; i < NUM_NEURONS; i++) begin
 	 neuron layer0 (.clk, .rst, .clear, .en (enable_0), .weight (weights0[i]), 
 			.data (image_reg[lay0_idx]), .accum (acc_lay0[i]));
-	 sigmoid_approx_fn act_lay0(.in (acc_lay0[i]), .out (hidden[i]));
+	 sigmoid_approx_fn act_lay0(.clk, .rst, .in (acc_lay0[i]), .out (hidden[i]));
       end
       for (i = 0; i < OUTPUT_SZ; i++) begin
 	 neuron layer1 (.clk, .rst, .clear, .en (enable_1), .weight (weights1[i]),
 			.data (hidden[lay1_idx]), .accum (acc_lay1[i]));
-	 sigmoid_approx_fn act_lay1(.in (acc_lay1[i]), .out (result[i]));
+	 sigmoid_approx_fn act_lay1(.clk, .rst, .in (acc_lay1[i]), .out (result[i]));
       end
    endgenerate
-/*
-   generate
+
+   /*generate
       genvar i;
       for (i = 0; i < NUM_NEURONS; i++) begin
 	 neuron layer0 (.clk, .rst, .clear, .en (enable_0), .weight (weights0[i]), 
@@ -68,8 +67,7 @@ module tile
 			.data (hidden[lay1_idx]), .accum (acc_lay1[i]));
 	 linear_fn act_lay1(.in (acc_lay1[i]), .out (result[i]));
       end
-   endgenerate
-   */
+   endgenerate*/
    
    integer j;
    always_comb begin
