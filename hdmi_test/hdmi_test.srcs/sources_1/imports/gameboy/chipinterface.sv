@@ -125,69 +125,46 @@ module ChipInterface(
     
     assign draw_image = (start || shift_image) && shift_count != 10'd784;
     
-    
-    // write FSM
-        always_ff @(posedge uart_sampling_clk, posedge rst) begin
-            if (rst) begin
-                we <= 1'b0;
-                addr_w <= 19'd0;
-                row_counter_small <= 0;
-                col_counter_small <= 0;
-                row_counter_large <= 0;
-                col_counter_large <= 0;
-                processingPixel <= 0;
-                side <= 0;
+    //write FSM
+    always_ff @(posedge uart_sampling_clk, posedge rst) begin
+        if (rst) begin
+            we <= 1'b0;
+            addr_w <= 19'd0;
+            row_counter_small <= 0;
+            col_counter_small <= 0;
+            row_counter_large <= 0;
+            col_counter_large <= 0;
+            processingPixel <= 0;
+            side <= 0;
+            flip <= 0;
+            shift_image <= 0;
+            shift_count <= 10'd0;
+        end
+        else begin
+            if(draw_image) begin
+                processingPixel <= 1;
+                data_in <= {image_shift_buf[7:0], image_shift_buf[7:0], image_shift_buf[7:0]};
+                we <= 1;
+                side = (flip) ? ~side : side;
                 flip <= 0;
                 shift_image <= 0;
                 shift_count <= 10'd0;
+                if (side == 0) 
+                    addr_w <= 72060 + col_counter_large*10 + row_counter_large*7200; // 72040 = 720*100+40
+                else
+                    addr_w <= 72380 + col_counter_large*10 + row_counter_large*7200; // 72040 = 720*100+40                                
             end
-            else begin
-                if(draw_image) begin
-                    processingPixel <= 1;
-                    data_in <= {image_shift_buf[7:0], image_shift_buf[7:0], image_shift_buf[7:0]};
-                    we <= 1;
-                    side = (flip) ? ~side : side;
-                    flip <= 0;
-                    shift_image <= 0;
-                    shift_count <= 10'd0;
-                    if (side == 0) 
-                        addr_w <= 72060 + col_counter_large*10 + row_counter_large*7200; // 72040 = 720*100+40
-                    else
-                        addr_w <= 72380 + col_counter_large*10 + row_counter_large*7200; // 72040 = 720*100+40                                
+                       
+            // Still same pixel
+            if(processingPixel && row_counter_small<10) begin                
+                if(col_counter_small<9) begin
+                    col_counter_small <= col_counter_small+1;
+                    addr_w <= addr_w+1;
                 end
-                           
-                // Still same pixel
-                if(processingPixel && row_counter_small<10) begin                
-                    if(col_counter_small<9) begin
-                        col_counter_small <= col_counter_small+1;
-                        addr_w <= addr_w+1;
-                    end
-                    else begin // col_counter_small==10
-                        col_counter_small <= 0;
-                        addr_w <= addr_w+711;
-                        row_counter_small <= row_counter_small+1;
-                    end
-                end
-                // Done with this pixel && still same row_large
-                else if (processingPixel && row_counter_small==10 && col_counter_large<27 && row_counter_large<28) begin
-                    we <= 0;
-                    processingPixel <= 0; // wait for new uart_byte_buf
+                else begin // col_counter_small==10
                     col_counter_small <= 0;
-                    row_counter_small <= 0;
-                    col_counter_large <= col_counter_large+1;
-                    shift_image <= 1;
-                    shift_count <= (shift_count == 10'd784) ? shift_count: shift_count + 10'd1;
-                end
-                // Need to go to next row_large
-                else if(processingPixel && row_counter_small==10 && col_counter_large==27 && row_counter_large<27) begin
-                    we <= 0;
-                    processingPixel <= 0; // wait for new uart_byte_buf
-                    col_counter_small <= 0;
-                    row_counter_small <= 0;
-                    col_counter_large <= 0;
-                    row_counter_large <= row_counter_large+1;
-                    shift_image <= 1;
-                    shift_count <= (shift_count == 10'd784) ? shift_count: shift_count + 10'd1;
+                    addr_w <= addr_w+711;
+                    row_counter_small <= row_counter_small+1;
                 end
                 // Done with this digit
                 else if(processingPixel && row_counter_small==10 && col_counter_large==27 && row_counter_large==27) begin
@@ -203,7 +180,9 @@ module ChipInterface(
                  end
              end
          end
-        
+     end
+
+
          logic sysclk;  
                   
          clock ck (.clk_in1 (clk), .clk_out1 (HDMI_TX_CLK), .clk_out2 (sysclk), .clk_out3(uart_sampling_clk),
@@ -239,6 +218,12 @@ module ChipInterface(
 
    always_ff @(posedge clk) begin
        if (done) begin
+           max_result_buf <= max_result;
+       end
+   end
+   
+   always_ff @(posedge clk) begin
+       if(done) begin
            max_result_buf <= max_result;
        end
    end

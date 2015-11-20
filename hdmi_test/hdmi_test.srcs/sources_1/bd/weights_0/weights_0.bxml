@@ -6,7 +6,7 @@
     <Generation Name="IMPLEMENTATION" State="GENERATED"/>
     <Generation Name="SIMULATION" State="STALE"/>
     <FileCollection Name="SOURCES" Type="SOURCES">
-      <File Name="ip/weights_0_blk_mem_gen_0_0/weights_0_blk_mem_gen_0_0.xci" Type="IP">
+      <File Name="ip/weights_0_blk_mem_gen_0_0_1/weights_0_blk_mem_gen_0_0.xci" Type="IP">
         <Instance HierarchyPath="blk_mem_gen_0"/>
         <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="true" IsStatusTracked="true"/>
         <Library Name="xil_defaultlib"/>

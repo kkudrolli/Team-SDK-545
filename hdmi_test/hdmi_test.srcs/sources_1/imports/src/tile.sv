@@ -41,7 +41,7 @@ module tile
    always_ff @(posedge clk)
      if (start) image_reg <= image;   
    
-/*
+
    generate
       genvar i;
       for (i = 0; i < NUM_NEURONS; i++) begin
@@ -55,7 +55,8 @@ module tile
 	 sigmoid_approx_fn act_lay1(.in (acc_lay1[i]), .out (result[i]));
       end
    endgenerate
-*/
+
+/*
    generate
       genvar i;
       for (i = 0; i < NUM_NEURONS; i++) begin
@@ -69,7 +70,7 @@ module tile
 	 linear_fn act_lay1(.in (acc_lay1[i]), .out (result[i]));
       end
    endgenerate
-   
+*/
    
    integer j;
    always_comb begin
