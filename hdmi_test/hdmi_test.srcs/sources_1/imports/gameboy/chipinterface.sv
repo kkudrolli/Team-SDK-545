@@ -238,58 +238,35 @@ module ChipInterface(
      end
 
 
-         logic sysclk;  
-                  
-         clock ck (.clk_in1 (clk), .clk_out1 (HDMI_TX_CLK), .clk_out2 (sysclk), .clk_out3(uart_sampling_clk),
-                           .reset (rst));
-      
-         hdmi encoder (.clk (HDMI_TX_CLK), .rst (rst), .hsync (HDMI_TX_HS), .vsync (HDMI_TX_VS), 
-                       .addr (addr), .de (1'b1));
-         
-         video_unit v (.clka(uart_sampling_clk), .clkb (HDMI_TX_CLK), .de (1'b1), .addr_r (addr), .data (HDMI_TX_D), 
-                      .we (we), .data_in (data_in), .addr_w (addr_w));
-         
-         reg [4:0] outA;
-         reg       stop;
-         reg       _ack;
-         
-         reg [4:0] counter;
-         reg          clk_reduced;
-         // Divide 5 MHz clk by 20 to give 250 kHz I2C logic driver. 
-         always @(posedge sysclk) begin
-            counter = (counter == 5'd20) ? 5'd0 : counter + 5'h1;
-            clk_reduced = (stop) ? 1'b0 : ((counter == 5'h0) ? ~clk_reduced : clk_reduced);
-         end
-         i2c bus(.stop (stop), .clk (clk_reduced), .rst (rst), .outA (outA), .SDA (I2C_SDA), .SCL (I2C_SCL), .ACK (_ack));
-                 
-         assign en_bus = 1'b1;
+     logic sysclk;  
+              
+     clock ck (.clk_in1 (clk), .clk_out1 (HDMI_TX_CLK), .clk_out2 (sysclk), .clk_out3(uart_sampling_clk),
+                       .reset (rst));
+  
+     hdmi encoder (.clk (HDMI_TX_CLK), .rst (rst), .hsync (HDMI_TX_HS), .vsync (HDMI_TX_VS), 
+                   .addr (addr), .de (1'b1));
+     
+     video_unit v (.clka(uart_sampling_clk), .clkb (HDMI_TX_CLK), .de (1'b1), .addr_r (addr), .data (HDMI_TX_D), 
+                  .we (we), .data_in (data_in), .addr_w (addr_w));
+     
+     reg [4:0] outA;
+     reg       stop;
+     reg       _ack;
+     
+     reg [4:0] counter;
+     reg          clk_reduced;
+     // Divide 5 MHz clk by 20 to give 250 kHz I2C logic driver. 
+     always @(posedge sysclk) begin
+        counter = (counter == 5'd20) ? 5'd0 : counter + 5'h1;
+        clk_reduced = (stop) ? 1'b0 : ((counter == 5'h0) ? ~clk_reduced : clk_reduced);
+     end
+     i2c bus(.stop (stop), .clk (clk_reduced), .rst (rst), .outA (outA), .SDA (I2C_SDA), .SCL (I2C_SCL), .ACK (_ack));
+             
+     assign en_bus = 1'b1;
 
-    logic sysclk;  
-    
-    clock ck (.clk_in1 (clk), .clk_out1 (HDMI_TX_CLK), .clk_out2 (sysclk), .clk_out3(uart_sampling_clk),
-                   .reset (rst));
-    
-    hdmi encoder (.clk (HDMI_TX_CLK), .rst (rst), .hsync (HDMI_TX_HS), .vsync (HDMI_TX_VS), 
-               .addr (addr), .de (HDMI_TX_DE));
-    
-    video_unit v (.clka(uart_sampling_clk), .clkb (HDMI_TX_CLK), .de (1'b1), .addr_r (addr), .data (HDMI_TX_D), 
-              .we (we), .data_in (data_in), .addr_w (addr_w));
-    
-    reg [4:0] outA;
-    reg       stop;
-    reg       _ack;
-    
-    reg [4:0] counter;
-    reg          clk_reduced;
-    // Divide 5 MHz clk by 20 to give 250 kHz I2C logic driver. 
-    always @(posedge sysclk) begin
-    counter = (counter == 5'd20) ? 5'd0 : counter + 5'h1;
-    clk_reduced = (stop) ? 1'b0 : ((counter == 5'h0) ? ~clk_reduced : clk_reduced);
-    end
-    i2c bus(.stop (stop), .clk (clk_reduced), .rst (rst), .outA (outA), .SDA (I2C_SDA), .SCL (I2C_SCL), .ACK (_ack));
          
-         //---- TOP LEVEL NEURAL NETWORK MODULE INSTANTIATION -----//
-         //-------------------------------------------------------------------------------------------------------------//
+   //---- TOP LEVEL NEURAL NETWORK MODULE INSTANTIATION -----//
+   //-------------------------------------------------------------------------------------------------------------//
    deep dp (.clk (clk), .rst (rst), .do_fp (do_fp), .label_in (label_out),  .image_in (image_out), 
             .result (result), .done (done));                                        
 

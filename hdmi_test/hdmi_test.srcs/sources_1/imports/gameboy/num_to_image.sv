@@ -15,16 +15,16 @@ module num_to_image(
 
     always_comb begin
         case (num)
-            4'd0: image = NUM0; 
-            4'd1: image = NUM1;
-            4'd2: image = NUM2;
-            4'd3: image = NUM3;
-            4'd4: image = NUM4;
-            4'd5: image = NUM5;
-            4'd6: image = NUM6;
-            4'd7: image = NUM7;
-            4'd8: image = NUM8;
-            4'd9: image = NUM9;
+            4'd0: image = `NUM0; 
+            4'd1: image = `NUM1;
+            4'd2: image = `NUM2;
+            4'd3: image = `NUM3;
+            4'd4: image = `NUM4;
+            4'd5: image = `NUM5;
+            4'd6: image = `NUM6;
+            4'd7: image = `NUM7;
+            4'd8: image = `NUM8;
+            4'd9: image = `NUM9;
             default: image = 'd0;
         endcase
     end
