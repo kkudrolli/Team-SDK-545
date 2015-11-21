@@ -50,6 +50,8 @@ module ChipInterface(
     logic [7:0] max_result, max_result_buf;
     logic done;
     
+    logic [10][31:0] result;
+    
     assign rts_probe = USB_RTS;
     assign rx_probe = USB_RX;
     
