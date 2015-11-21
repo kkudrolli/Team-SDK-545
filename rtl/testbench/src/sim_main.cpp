@@ -82,7 +82,7 @@ int main (int argc, char **argv) {
 	break;
       }
     }
-
+    
     top->rst = 1;
     top->eval();
     top->rst = 0;
@@ -145,6 +145,7 @@ int main (int argc, char **argv) {
 
 	top->clk = !(top->clk);
 	top->eval();
+	top->start = 0;
 
 	if (top->done) {
 	  for (int i = 0; i < 10; i++) result->data[i] = top->result[i];
@@ -161,11 +162,6 @@ int main (int argc, char **argv) {
 	}
       }
 
-      top->rst = 1;
-      top->eval();
-      top->rst = 0;
-      top->eval();
-      
       vector_destroy(image_data);
     }
   }

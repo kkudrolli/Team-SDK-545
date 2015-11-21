@@ -41,37 +41,20 @@ module tile
    always_ff @(posedge clk)
      if (start) image_reg <= image;   
    
-
    generate
       genvar i;
       for (i = 0; i < NUM_NEURONS; i++) begin
-	 neuron layer0 (.clk, .rst, .clear, .en (enable_0), .weight (weights0[i]), 
-			.data (image_reg[lay0_idx]), .accum (acc_lay0[i]));
-	 sigmoid_approx_fn act_lay0(.in (acc_lay0[i]), .out (hidden[i]));
+         neuron layer0 (.clk, .rst, .clear, .en (enable_0), .weight (weights0[i]), 
+                .data (image_reg[lay0_idx]), .accum (acc_lay0[i]));
+         sigmoid_approx_fn act_lay0(.clk, .rst, .in (acc_lay0[i]), .out (hidden[i]));
       end
       for (i = 0; i < OUTPUT_SZ; i++) begin
-	 neuron layer1 (.clk, .rst, .clear, .en (enable_1), .weight (weights1[i]),
-			.data (hidden[lay1_idx]), .accum (acc_lay1[i]));
-	 sigmoid_approx_fn act_lay1(.in (acc_lay1[i]), .out (result[i]));
+         neuron layer1 (.clk, .rst, .clear, .en (enable_1), .weight (weights1[i]),
+                .data (hidden[lay1_idx]), .accum (acc_lay1[i]));
+         sigmoid_approx_fn act_lay1(.clk, .rst, .in (acc_lay1[i]), .out (result[i]));
       end
    endgenerate
 
-/*
-   generate
-      genvar i;
-      for (i = 0; i < NUM_NEURONS; i++) begin
-	 neuron layer0 (.clk, .rst, .clear, .en (enable_0), .weight (weights0[i]), 
-			.data (image_reg[lay0_idx]), .accum (acc_lay0[i]));
-	 linear_fn act_lay0(.in (acc_lay0[i]), .out (hidden[i]));
-      end
-      for (i = 0; i < OUTPUT_SZ; i++) begin
-	 neuron layer1 (.clk, .rst, .clear, .en (enable_1), .weight (weights1[i]),
-			.data (hidden[lay1_idx]), .accum (acc_lay1[i]));
-	 linear_fn act_lay1(.in (acc_lay1[i]), .out (result[i]));
-      end
-   endgenerate
-*/
-   
    integer j;
    always_comb begin
       done = 1'b0;
@@ -81,30 +64,30 @@ module tile
       get_weights0 = 1'b0;
       get_weights1 = 1'b0;
       case (cs)
-	S_IDLE: begin
-	   clear = start;
-	   ns = start ? S_PROP_LAYER1 : S_IDLE;
-	   get_weights0 = start;
-	end
+        S_IDLE: begin
+           clear = start;
+           ns = start ? S_PROP_LAYER1 : S_IDLE;
+           get_weights0 = start;
+        end
 
-	S_PROP_LAYER1: begin
-	   ns = lay0_idx < IMG_SZ-1 ? S_PROP_LAYER1 : S_PROP_LAYER2;
-	   get_weights1 = lay0_idx >= IMG_SZ-1;
-	   enable_0 = 1;
-	end
-
-	S_PROP_LAYER2: begin
-	   enable_1 = 1;
-	   ns = lay1_idx < NUM_NEURONS-1 ? S_PROP_LAYER2 : S_DONE;
-	end
-
-	S_DONE: begin
-	   done = 1'b1;
-	   ns = S_IDLE;
-	end
-
-	default: ns = S_IDLE;	 
-      endcase
+        S_PROP_LAYER1: begin
+           ns = lay0_idx < IMG_SZ-1 ? S_PROP_LAYER1 : S_PROP_LAYER2;
+           get_weights1 = lay0_idx >= IMG_SZ-1;
+           enable_0 = 1;
+        end
+    
+        S_PROP_LAYER2: begin
+           enable_1 = 1;
+           ns = lay1_idx < NUM_NEURONS-1 ? S_PROP_LAYER2 : S_DONE;
+        end
+    
+        S_DONE: begin
+           done = 1'b1;
+           ns = S_IDLE;
+        end
+    
+        default: ns = S_IDLE;	 
+     endcase
    end
 
    always_ff @(posedge clk, posedge rst) begin
@@ -113,22 +96,22 @@ module tile
 	 lay1_idx <= '0;
       end
       else begin
-	 case (cs)
-	   S_IDLE, S_DONE: begin
-	      lay0_idx <= '0;
-	      lay1_idx <= '0;
-	   end
-	   
-	   S_PROP_LAYER1: begin
-	      lay0_idx <= lay0_idx + 1;
-	   end
-	   
-	   S_PROP_LAYER2: begin	      
-	      lay1_idx <= lay1_idx + 1;
-	   end
-
-	   default: ; // Do nothing
-	 endcase
+         case (cs)
+           S_IDLE, S_DONE: begin
+              lay0_idx <= '0;
+              lay1_idx <= '0;
+           end
+           
+           S_PROP_LAYER1: begin
+              lay0_idx <= lay0_idx + 1;
+           end
+           
+           S_PROP_LAYER2: begin	      
+              lay1_idx <= lay1_idx + 1;
+           end
+    
+           default: ; // Do nothing
+         endcase
       end
    end
    

@@ -26,8 +26,8 @@ module tile
    logic [NUM_NEURONS-1:0] [31:0] 	hidden;
    logic [OUTPUT_SZ-1:0]   [31:0] 	acc_lay1;
    
-   logic [$clog2(IMG_SZ)-1:0] 		lay0_idx;
-   logic [$clog2(NUM_NEURONS)-1:0] 	lay1_idx;
+   logic [$clog2(IMG_SZ):0] 		lay0_idx;
+   logic [$clog2(NUM_NEURONS):0] 	lay1_idx;
 
    logic 				enable_0, enable_1;
    
@@ -47,12 +47,12 @@ module tile
       for (i = 0; i < NUM_NEURONS; i++) begin
 	 neuron layer0 (.clk, .rst, .clear, .en (enable_0), .weight (weights0[i]), 
 			.data (image_reg[lay0_idx]), .accum (acc_lay0[i]));
-	 sigmoid_approx_fn act_lay0(.in (acc_lay0[i]), .out (hidden[i]));
+	 sigmoid_approx_fn act_lay0(.clk, .rst, .in (acc_lay0[i]), .out (hidden[i]));
       end
       for (i = 0; i < OUTPUT_SZ; i++) begin
 	 neuron layer1 (.clk, .rst, .clear, .en (enable_1), .weight (weights1[i]),
 			.data (hidden[lay1_idx]), .accum (acc_lay1[i]));
-	 sigmoid_approx_fn act_lay1(.in (acc_lay1[i]), .out (result[i]));
+	 sigmoid_approx_fn act_lay1(.clk, .rst, .in (acc_lay1[i]), .out (result[i]));
       end
    endgenerate
 
@@ -72,14 +72,14 @@ module tile
 	end
 
 	S_PROP_LAYER1: begin
-	   ns = lay0_idx < IMG_SZ-1 ? S_PROP_LAYER1 : S_PROP_LAYER2;
-	   get_weights1 = lay0_idx >= IMG_SZ-1;
+	   ns = lay0_idx < IMG_SZ ? S_PROP_LAYER1 : S_PROP_LAYER2;
+	   get_weights1 = lay0_idx >= IMG_SZ;
 	   enable_0 = 1;
 	end
 
 	S_PROP_LAYER2: begin
 	   enable_1 = 1;
-	   ns = lay1_idx < NUM_NEURONS-1 ? S_PROP_LAYER2 : S_DONE;
+	   ns = lay1_idx < NUM_NEURONS ? S_PROP_LAYER2 : S_DONE;
 	end
 
 	S_DONE: begin
