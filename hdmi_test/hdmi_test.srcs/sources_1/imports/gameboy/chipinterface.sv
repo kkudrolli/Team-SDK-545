@@ -29,23 +29,23 @@ module ChipInterface(
    
     logic                uart_sampling_clk, byte_ready, start, train, resend,
                          start_buf, train_buf, ack, ack_buf, do_fp, do_bp, draw,
-                         trans_ack_buf, trans_resend_buf, draw_image;
+                         trans_ack_buf, trans_resend_buf, draw_image, draw_pred;
     logic [7:0]          uart_byte, label, label_buf, label_out, led_out;
     logic [2:0]          cs;
     logic [1:0]          recv_state, cs_ctrl, cs_trans;
-    logic [(784<<3)-1:0] image, image_buf, image_out, image_shift_buf;
+    logic [(784<<3)-1:0] image, image_buf, image_out, image_shift_buf, pred_image, pred_image_buf;
     
     logic [18:0] addr, addr_w;
     logic [31:0] data_in;
     logic [3:0]  we;
     
-    logic shift_image;
-    logic [9:0] shift_count, data_count;
+    logic shift_image, shift_pred;
+    logic [9:0] shift_count, data_count, shift_pred_count;
     
     logic [3:0] col_counter_small,row_counter_small;
     logic [4:0] col_counter_large, row_counter_large;
     logic processingPixel;
-    logic side, flip, rts_probe, rx_probe;
+    logic side, rts_probe, rx_probe;
     
     logic [7:0] max_result, max_result_buf;
     logic done;
@@ -115,15 +115,21 @@ module ChipInterface(
     always_ff @(posedge uart_sampling_clk, posedge rst) begin
         if (rst) begin
             image_shift_buf <= 'd0;
+            pred_image_buf <= 'd0;
         end
         else begin
             image_shift_buf <= (start) ? image :
-                               ((shift_image) ? {image_shift_buf[7:0], image_shift_buf[(784<<3)-1:8]} : image_shift_buf);
+                               ((shift_image) ? {image_shift_buf[7:0], image_shift_buf[(784<<3)-1:8]} : 
+                                              image_shift_buf);
+            pred_image_buf <= (done) ? pred_image :
+                               ((shift_pred) ? {pred_image_buf[7:0], pred_image_buf[(784<<3)-1:8]} : 
+                                               pred_image_buf);
         end 
     end
     
     
     assign draw_image = (start || shift_image) && shift_count != 10'd784;
+    assign draw_pred = (done || shift_pred) && shift_pred_count != 10'd784;
     
     //write FSM
     always_ff @(posedge uart_sampling_clk, posedge rst) begin
@@ -136,25 +142,33 @@ module ChipInterface(
             col_counter_large <= 0;
             processingPixel <= 0;
             side <= 0;
-            flip <= 0;
             shift_image <= 0;
             shift_count <= 10'd0;
+            shift_pred <= 0;
+            shift_pred_count <= 10'd0;
         end
         else begin
+            // Start drawing sent image
             if(draw_image) begin
                 processingPixel <= 1;
                 data_in <= {image_shift_buf[7:0], image_shift_buf[7:0], image_shift_buf[7:0]};
                 we <= 1;
-                side = (flip) ? ~side : side;
-                flip <= 0;
+                side <= 0;
                 shift_image <= 0;
                 shift_count <= 10'd0;
-                if (side == 0) 
-                    addr_w <= 72060 + col_counter_large*10 + row_counter_large*7200; // 72040 = 720*100+40
-                else
-                    addr_w <= 72380 + col_counter_large*10 + row_counter_large*7200; // 72040 = 720*100+40                                
+                addr_w <= 72060 + col_counter_large*10 + row_counter_large*7200; // 72040 = 720*100+40
             end
-                       
+            // Start drawing prediction image
+            else if (draw_pred) begin
+                processingPixel <= 1;
+                data_in <= {pred_image_buf[7:0], pred_image_buf[7:0], pred_image_buf[7:0]};
+                we <= 1;
+                side <= 1;
+                shift_pred <= 0;
+                shift_pred_count <= 10'd0;
+                addr_w <= 72380 + col_counter_large*10 + row_counter_large*7200; // 72040 = 720*100+40                                
+            end
+
             // Still same pixel
             if(processingPixel && row_counter_small<10) begin                
                 if(col_counter_small<9) begin
@@ -166,20 +180,57 @@ module ChipInterface(
                     addr_w <= addr_w+711;
                     row_counter_small <= row_counter_small+1;
                 end
-                // Done with this digit
-                else if(processingPixel && row_counter_small==10 && col_counter_large==27 && row_counter_large==27) begin
-                    we <= 0;
-                    processingPixel <= 0; // wait for new uart_byte_buf
-                    col_counter_small <= 0;
-                    row_counter_small <= 0;
-                    col_counter_large <= 0;
-                    row_counter_large <= 0;              
-                    //flip <= 1;
-                    //shift_image <= 1;
+            end
+
+            // Done with this pixel && still same row_large
+            else if (processingPixel && row_counter_small==10 && col_counter_large<27 && row_counter_large<28) begin
+                we <= 0;
+                processingPixel <= 0; // wait for new uart_byte_buf
+                col_counter_small <= 0;
+                row_counter_small <= 0;
+                col_counter_large <= col_counter_large+1;
+                if (~side) begin 
+                    shift_image <= 1;
                     shift_count <= (shift_count == 10'd784) ? shift_count: shift_count + 10'd1;
-                 end
-             end
-         end
+                end else begin
+                    shift_pred <= 1;
+                    shift_pred_count <= (shift_pred_count == 10'd784) ? shift_pred_count: shift_pred_count + 10'd1;
+                end
+            end
+
+            // Need to go to next row_large
+            else if(processingPixel && row_counter_small==10 && col_counter_large==27 && row_counter_large<27) begin
+                we <= 0;
+                processingPixel <= 0; // wait for new uart_byte_buf
+                col_counter_small <= 0;
+                row_counter_small <= 0;
+                col_counter_large <= 0;
+                row_counter_large <= row_counter_large+1;
+                if (~side) begin 
+                    shift_image <= 1;
+                    shift_count <= (shift_count == 10'd784) ? shift_count: shift_count + 10'd1;
+                end else begin
+                    shift_pred <= 1;
+                    shift_pred_count <= (shift_pred_count == 10'd784) ? shift_pred_count: shift_pred_count + 10'd1;
+                end
+            end
+
+            // Done with this digit
+            else if(processingPixel && row_counter_small==10 && col_counter_large==27 && row_counter_large==27) begin
+                we <= 0;
+                processingPixel <= 0; // wait for new uart_byte_buf
+                col_counter_small <= 0;
+                row_counter_small <= 0;
+                col_counter_large <= 0;
+                row_counter_large <= 0;              
+                //shift_image <= 1;
+                if (~side) begin 
+                    shift_count <= (shift_count == 10'd784) ? shift_count: shift_count + 10'd1;
+                end else begin
+                    shift_pred_count <= (shift_pred_count == 10'd784) ? shift_pred_count: shift_pred_count + 10'd1;
+                end
+            end
+        end
      end
 
 
@@ -215,6 +266,8 @@ module ChipInterface(
          //-------------------------------------------------------------------------------------------------------------//
    deep dp (.clk (clk), .rst (rst), .do_fp (do_fp), .label_in (label_out),  .image_in (image_out), 
             .result (result), .done (done));                                        
+
+   num_to_image n2i (.num(max_result[3:0]), .image(pred_image));
 
    always_ff @(posedge clk) begin
        if (done) begin
