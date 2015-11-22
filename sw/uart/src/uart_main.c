@@ -118,7 +118,7 @@ int main()
     typeset_imgs[9] = read_bitmap("../../sim/digits/9.bmp");
     uint32_t typeset_lbls[10] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
 
-    transfer(m_imgs->imgs, m_lbls->labels->data, port, 1, 100);
+    transfer(m_imgs->imgs, m_lbls->labels->data, port, 0, 1);
     //transfer(typeset_imgs, typeset_lbls, port, 1, 10);
 
     // MNIST TEST END

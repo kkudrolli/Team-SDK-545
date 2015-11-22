@@ -246,7 +246,7 @@ module ChipInterface(
                        .reset (rst));
   
      hdmi encoder (.clk (HDMI_TX_CLK), .rst (rst), .hsync (HDMI_TX_HS), .vsync (HDMI_TX_VS), 
-                   .addr (addr), .de (1'b1));
+                   .addr (addr), .de (HDMI_TX_DE));
      
      video_unit v (.clka(uart_sampling_clk), .clkb (HDMI_TX_CLK), .de (1'b1), .addr_r (addr), .data (HDMI_TX_D), 
                   .we (we), .data_in (data_in), .addr_w (addr_w));
@@ -279,12 +279,6 @@ module ChipInterface(
            max_result_buf <= max_result;
        end
    end
-   
-   always_ff @(posedge clk) begin
-       if(done) begin
-           max_result_buf <= max_result;
-       end
-    end
     
     logic [31:0] max;
     integer 	i;
