@@ -3,7 +3,7 @@
 <!--                                                         -->
 <!-- Copyright 1986-2015 Xilinx, Inc. All Rights Reserved.   -->
 
-<Project Version="7" Minor="5" Path="/afs/ece.cmu.edu/usr/kkudroll/Private/class/18-545/Team-SDK-545/hdmi_test/hdmi_test.xpr">
+<Project Version="7" Minor="5" Path="/afs/ece.cmu.edu/usr/sohils/Private/18545/deep/hdmi_test/hdmi_test.xpr">
   <DefaultLaunch Dir="$PRUNDIR"/>
   <Configuration>
     <Option Name="Id" Val="a9b16b7ac1c3445b8c6c50c6678513ac"/>
@@ -25,12 +25,12 @@
           <Attr Name="UsedIn" Val="implementation"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
-        <CompFileExtendedInfo CompFileName="framebuffer.bd" FileRelPathName="hdl/framebuffer.v"/>
-        <CompFileExtendedInfo CompFileName="framebuffer.bd" FileRelPathName="ip/framebuffer_blk_mem_gen_1_0/framebuffer_blk_mem_gen_1_0.xci"/>
-        <CompFileExtendedInfo CompFileName="framebuffer.bd" FileRelPathName="framebuffer_ooc.xdc"/>
-        <CompFileExtendedInfo CompFileName="framebuffer.bd" FileRelPathName="hw_handoff/framebuffer.hwh"/>
-        <CompFileExtendedInfo CompFileName="framebuffer.bd" FileRelPathName="hw_handoff/framebuffer_bd.tcl"/>
         <CompFileExtendedInfo CompFileName="framebuffer.bd" FileRelPathName="hdl/framebuffer.hwdef"/>
+        <CompFileExtendedInfo CompFileName="framebuffer.bd" FileRelPathName="hw_handoff/framebuffer_bd.tcl"/>
+        <CompFileExtendedInfo CompFileName="framebuffer.bd" FileRelPathName="hw_handoff/framebuffer.hwh"/>
+        <CompFileExtendedInfo CompFileName="framebuffer.bd" FileRelPathName="framebuffer_ooc.xdc"/>
+        <CompFileExtendedInfo CompFileName="framebuffer.bd" FileRelPathName="ip/framebuffer_blk_mem_gen_1_0/framebuffer_blk_mem_gen_1_0.xci"/>
+        <CompFileExtendedInfo CompFileName="framebuffer.bd" FileRelPathName="hdl/framebuffer.v"/>
       </File>
       <File Path="$PSRCDIR/sources_1/new/video_unit.sv">
         <FileInfo>
@@ -185,12 +185,12 @@
           <Attr Name="UsedIn" Val="implementation"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
-        <CompFileExtendedInfo CompFileName="weights_0.bd" FileRelPathName="hdl/weights_0.hwdef"/>
-        <CompFileExtendedInfo CompFileName="weights_0.bd" FileRelPathName="hw_handoff/weights_0_bd.tcl"/>
-        <CompFileExtendedInfo CompFileName="weights_0.bd" FileRelPathName="hw_handoff/weights_0.hwh"/>
         <CompFileExtendedInfo CompFileName="weights_0.bd" FileRelPathName="weights_0_ooc.xdc"/>
         <CompFileExtendedInfo CompFileName="weights_0.bd" FileRelPathName="hdl/weights_0.v"/>
         <CompFileExtendedInfo CompFileName="weights_0.bd" FileRelPathName="ip/weights_0_blk_mem_gen_0_0_1/weights_0_blk_mem_gen_0_0.xci"/>
+        <CompFileExtendedInfo CompFileName="weights_0.bd" FileRelPathName="hdl/weights_0.hwdef"/>
+        <CompFileExtendedInfo CompFileName="weights_0.bd" FileRelPathName="hw_handoff/weights_0_bd.tcl"/>
+        <CompFileExtendedInfo CompFileName="weights_0.bd" FileRelPathName="hw_handoff/weights_0.hwh"/>
       </File>
       <File Path="$PSRCDIR/sources_1/bd/weights_1/weights_1.bd">
         <FileInfo>
@@ -259,25 +259,18 @@
           <Attr Name="UsedIn" Val="implementation"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
+        <CompFileExtendedInfo CompFileName="clock.bd" FileRelPathName="hdl/clock.hwdef"/>
         <CompFileExtendedInfo CompFileName="clock.bd" FileRelPathName="hw_handoff/clock_bd.tcl"/>
         <CompFileExtendedInfo CompFileName="clock.bd" FileRelPathName="hw_handoff/clock.hwh"/>
         <CompFileExtendedInfo CompFileName="clock.bd" FileRelPathName="clock_ooc.xdc"/>
         <CompFileExtendedInfo CompFileName="clock.bd" FileRelPathName="hdl/clock.v"/>
         <CompFileExtendedInfo CompFileName="clock.bd" FileRelPathName="ip/clock_clk_wiz_0_0/clock_clk_wiz_0_0.xci"/>
-        <CompFileExtendedInfo CompFileName="clock.bd" FileRelPathName="hdl/clock.hwdef"/>
       </File>
       <File Path="$PSRCDIR/sources_1/imports/gameboy/num_to_image.sv">
         <FileInfo>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="implementation"/>
           <Attr Name="UsedIn" Val="simulation"/>
-        </FileInfo>
-      </File>
-      <File Path="$PSRCDIR/num_to_image/new/num_to_image_ooc.xdc">
-        <FileInfo>
-          <Attr Name="UsedIn" Val="synthesis"/>
-          <Attr Name="UsedIn" Val="implementation"/>
-          <Attr Name="UsedIn" Val="out_of_context"/>
         </FileInfo>
       </File>
       <Config>
@@ -338,7 +331,7 @@
       </Strategy>
       <GeneratedRun Dir="$PRUNDIR" File="gen_run.xml"/>
     </Run>
-    <Run Id="impl_1" Type="Ft2:EntireDesign" Part="xc7vx485tffg1761-2" ConstrsSet="constrs_1" Description="Vivado Implementation Defaults" State="current" SynthRun="synth_1">
+    <Run Id="impl_1" Type="Ft2:EntireDesign" Part="xc7vx485tffg1761-2" ConstrsSet="constrs_1" Description="Vivado Implementation Defaults" State="current" Dir="$PRUNDIR/impl_1" SynthRun="synth_1">
       <Strategy Version="1" Minor="2">
         <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2015"/>
         <Step Id="init_design"/>
@@ -351,6 +344,7 @@
         <Step Id="post_route_phys_opt_design"/>
         <Step Id="write_bitstream"/>
       </Strategy>
+      <GeneratedRun Dir="$PRUNDIR" File="gen_run.xml"/>
     </Run>
   </Runs>
   <MsgRule>

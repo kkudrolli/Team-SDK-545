@@ -56,7 +56,6 @@ module tile
       end
    endgenerate
 
-   integer j;
    always_comb begin
       done = 1'b0;
       clear = 1'b0;
@@ -72,14 +71,14 @@ module tile
 	end
 
 	S_PROP_LAYER1: begin
-	   ns = lay0_idx < IMG_SZ ? S_PROP_LAYER1 : S_PROP_LAYER2;
-	   get_weights1 = lay0_idx >= IMG_SZ;
+	   ns = lay0_idx < IMG_SZ-1 ? S_PROP_LAYER1 : S_PROP_LAYER2;
+	   get_weights1 = lay0_idx >= IMG_SZ-1;
 	   enable_0 = 1;
 	end
 
 	S_PROP_LAYER2: begin
 	   enable_1 = 1;
-	   ns = lay1_idx < NUM_NEURONS ? S_PROP_LAYER2 : S_DONE;
+	   ns = lay1_idx < NUM_NEURONS-1 ? S_PROP_LAYER2 : S_DONE;
 	end
 
 	S_DONE: begin

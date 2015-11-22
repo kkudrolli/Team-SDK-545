@@ -11,7 +11,7 @@
 
 module num_to_image(
     input  logic [3:0]        num,
-    output logic [(784<<3)-1] image);
+    output logic [(784<<3)] image);
 
     always_comb begin
         case (num)
