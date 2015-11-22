@@ -92,15 +92,18 @@ module sigmoid_approx_fn(input logic clk, input logic rst,
 
    
    logic [31:0] 			     temp1, temp2, result;
+   logic sign;  
    always_ff @(posedge clk, posedge rst) begin
       if (rst) begin
-	 temp1 <= 32'b0;
-	 temp2 <= 32'b0;
-	 result <= 32'b0;
+         temp1 <= 32'b0;
+         temp2 <= 32'b0;
+         result <= 32'b0;
+         sign <= 1'b0;
       end else begin
-	 temp1 <= in[31] ? `FIXED_1 - piecewise_sig_stage1(-in) : piecewise_sig_stage1(in);
-	 temp2 <= in[31] ? -in : in;
-	 result <= piecewise_sig_stage2(temp2, temp1);
+         temp1 <= in[31] ? piecewise_sig_stage1(~in+1) : piecewise_sig_stage1(in);
+         temp2 <= in[31] ? ~in+1 : in;
+         sign <= in[31];
+         result <= sign ? `FIXED_1 - piecewise_sig_stage2(temp2, temp1) : piecewise_sig_stage2(temp2, temp1);
       end
    end
 
