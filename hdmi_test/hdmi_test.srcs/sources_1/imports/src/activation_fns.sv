@@ -98,8 +98,8 @@ module sigmoid_approx_fn(input logic clk, input logic rst,
 	 temp2 <= 32'b0;
 	 result <= 32'b0;
       end else begin
-	 temp1 <= piecewise_sig_stage1(in);
-	 temp2 <= in;
+	 temp1 <= in[31] ? `FIXED_1 - piecewise_sig_stage1(-in) : piecewise_sig_stage1(in);
+	 temp2 <= in[31] ? -in : in;
 	 result <= piecewise_sig_stage2(temp2, temp1);
       end
    end

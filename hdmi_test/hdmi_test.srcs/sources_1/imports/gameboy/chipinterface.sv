@@ -159,7 +159,7 @@ module ChipInterface(
                 processingPixel <= 1;
                 data_in <= {image_shift_buf[7:0], image_shift_buf[7:0], image_shift_buf[7:0]};
                 we <= 1;
-                side <= 0;
+                side <= 1;
                 shift_image <= 0;
                 shift_count <= 10'd0;
                 addr_w <= 72060 + col_counter_large*10 + row_counter_large*7200; // 72040 = 720*100+40
@@ -169,10 +169,10 @@ module ChipInterface(
                 processingPixel <= 1;
                 data_in <= {pred_image_buf[7:0], pred_image_buf[7:0], pred_image_buf[7:0]};
                 we <= 1;
-                side <= 1;
+                side <= 0;
                 shift_pred <= 0;
                 shift_pred_count <= 10'd0;
-                addr_w <= 72380 + col_counter_large*10 + row_counter_large*7200; // 72040 = 720*100+40                                
+                addr_w <= 72379 + col_counter_large*10 + row_counter_large*7200; // 72040 = 720*100+40                                
             end
 
             // Still same pixel
@@ -195,7 +195,7 @@ module ChipInterface(
                 col_counter_small <= 0;
                 row_counter_small <= 0;
                 col_counter_large <= col_counter_large+1;
-                if (~side) begin 
+                if (side) begin 
                     shift_image <= 1;
                     shift_count <= (shift_count == 10'd784) ? shift_count: shift_count + 10'd1;
                 end else begin
@@ -212,7 +212,7 @@ module ChipInterface(
                 row_counter_small <= 0;
                 col_counter_large <= 0;
                 row_counter_large <= row_counter_large+1;
-                if (~side) begin 
+                if (side) begin 
                     shift_image <= 1;
                     shift_count <= (shift_count == 10'd784) ? shift_count: shift_count + 10'd1;
                 end else begin
@@ -230,7 +230,7 @@ module ChipInterface(
                 col_counter_large <= 0;
                 row_counter_large <= 0;              
                 //shift_image <= 1;
-                if (~side) begin 
+                if (side) begin 
                     shift_count <= (shift_count == 10'd784) ? shift_count: shift_count + 10'd1;
                 end else begin
                     shift_pred_count <= (shift_pred_count == 10'd784) ? shift_pred_count: shift_pred_count + 10'd1;
@@ -279,12 +279,6 @@ module ChipInterface(
            max_result_buf <= max_result;
        end
    end
-   
-   always_ff @(posedge clk) begin
-       if(done) begin
-           max_result_buf <= max_result;
-       end
-    end
     
     logic [31:0] max;
     integer 	i;
