@@ -26,8 +26,8 @@ module tile
    logic [NUM_NEURONS] [31:0] 	hidden;
    logic [OUTPUT_SZ]   [31:0] 	acc_lay1;
    
-   logic [$clog2(IMG_SZ)] 		lay0_idx;
-   logic [$clog2(NUM_NEURONS)] 	lay1_idx;
+   logic [$clog2(IMG_SZ):0] 		lay0_idx;
+   logic [$clog2(NUM_NEURONS):0] 	lay1_idx;
 
    logic 				enable_0, enable_1;
    
@@ -71,14 +71,14 @@ module tile
         end
 
         S_PROP_LAYER1: begin
-           ns = lay0_idx < IMG_SZ-1 ? S_PROP_LAYER1 : S_PROP_LAYER2;
-           get_weights1 = lay0_idx >= IMG_SZ-1;
+           ns = lay0_idx < IMG_SZ ? S_PROP_LAYER1 : S_PROP_LAYER2;
+           get_weights1 = lay0_idx >= IMG_SZ;
            enable_0 = 1;
         end
     
         S_PROP_LAYER2: begin
            enable_1 = 1;
-           ns = lay1_idx < NUM_NEURONS-1 ? S_PROP_LAYER2 : S_DONE;
+           ns = lay1_idx < NUM_NEURONS ? S_PROP_LAYER2 : S_DONE;
         end
     
         S_DONE: begin
