@@ -48,7 +48,7 @@ module ChipInterface(
     logic side, rts_probe, rx_probe;
     
     logic [7:0] max_result, max_result_buf;
-    logic done;
+    logic done, clr_done, done_reg;
     
     logic [10][31:0] result;
     
@@ -136,7 +136,8 @@ module ChipInterface(
     
     
     assign draw_image = (start || shift_image) && shift_count != 10'd784;
-    assign draw_pred = (done || shift_pred) && shift_pred_count != 10'd784;
+    assign draw_pred = (done_reg || shift_pred) && shift_pred_count != 10'd784;
+    assign clr_done = (shift_pred_count == 10'd0) ? 1'b1 : 1'b0;
     
     //write FSM
     always_ff @(posedge uart_sampling_clk, posedge rst) begin
@@ -173,7 +174,7 @@ module ChipInterface(
                 side <= 0;
                 shift_pred <= 0;
                 shift_pred_count <= 10'd0;
-                addr_w <= 72379 + col_counter_large*10 + row_counter_large*7200; // 72040 = 720*100+40                                
+                addr_w <= 72379 + col_counter_large*10 + row_counter_large*7200; // 72040 = 720*100+40                           
             end
 
             // Still same pixel
@@ -273,11 +274,18 @@ module ChipInterface(
    deep dp (.clk (clk), .rst (rst), .do_fp (do_fp), .label_in (label_out),  .image_in (image_out), 
             .result (result), .done (done));                                        
 
-   num_to_image n2i (.num(max_result[3:0]), .image(pred_image));
+   num_to_image n2i (.num(max_result_buf[3:0]), .image(pred_image));
 
-   always_ff @(posedge clk) begin
-       if (done) begin
+   always_ff @(posedge clk, negedge rst) begin
+       if (rst) begin
+           done_reg <= 1'b0;
+           max_result_buf <= 'd0;
+       end
+       else if (done) begin
            max_result_buf <= max_result;
+           done_reg <= 1'b1;
+       end else begin
+           done_reg <= (clr_done) ? 1'b0 : done_reg;
        end
    end
     

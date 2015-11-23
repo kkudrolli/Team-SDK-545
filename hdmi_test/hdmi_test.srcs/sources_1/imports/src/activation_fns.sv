@@ -92,7 +92,7 @@ module sigmoid_approx_fn(input logic clk, input logic rst,
 
    
    logic [31:0] 			     temp1, temp2, result;
-   logic 				     sign;
+   logic 				     sign;  
    always_ff @(posedge clk, posedge rst) begin
       if (rst) begin
          temp1 <= 32'b0;
