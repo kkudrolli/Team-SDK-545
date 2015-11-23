@@ -42,7 +42,7 @@ def bmp_to_bin(bmp_name):
         if (len(byte_str) == 1):
             byte_str = "0" + byte_str
         if (i % 3 == 0):
-            hex_string += byte_str
+            hex_string = byte_str + hex_string
 
     bmp_file.close()
     return hex_string
@@ -53,7 +53,7 @@ if __name__ == "__main__":
 
     for i in xrange(0, 10):
         hex_string = bmp_to_bin("./" + str(i) + ".bmp")
-        hex_file.write("Number: " + str(i) + "\n" + hex_string + "\n")
+        hex_file.write("`define NUM" + str(i) + " 'h" + hex_string + "\n")
 
     hex_file.close() 
 

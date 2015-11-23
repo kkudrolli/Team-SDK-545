@@ -62,9 +62,9 @@ module linear_fn(input [31:0] in,
     
 endmodule: linear_fn
 
-
 module sigmoid_approx_fn(input logic clk, input logic rst,
-			 input logic [31:0]  in,
+                         input logic enable,
+			             input logic [31:0]  in,
                          output logic [31:0] out);
 
    function logic [31:0] piecewise_sig_stage1(logic [31:0] in);
@@ -92,14 +92,14 @@ module sigmoid_approx_fn(input logic clk, input logic rst,
 
    
    logic [31:0] 			     temp1, temp2, result;
-   logic sign;  
+   logic 				     sign;  
    always_ff @(posedge clk, posedge rst) begin
       if (rst) begin
          temp1 <= 32'b0;
          temp2 <= 32'b0;
          result <= 32'b0;
          sign <= 1'b0;
-      end else begin
+      end else if (enable) begin
          temp1 <= in[31] ? piecewise_sig_stage1(~in+1) : piecewise_sig_stage1(in);
          temp2 <= in[31] ? ~in+1 : in;
          sign <= in[31];
@@ -113,7 +113,6 @@ module sigmoid_approx_fn(input logic clk, input logic rst,
    end
 
 endmodule: sigmoid_approx_fn
-
 
 /*
 module sigmoid_approx_fn(input [31:0] in,

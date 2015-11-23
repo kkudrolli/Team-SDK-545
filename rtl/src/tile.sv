@@ -56,7 +56,6 @@ module tile
       end
    endgenerate
 
-   integer j;
    always_comb begin
       done = 1'b0;
       clear = 1'b0;

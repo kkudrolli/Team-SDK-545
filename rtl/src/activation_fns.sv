@@ -83,15 +83,18 @@ module sigmoid_approx_fn(input logic clk, input logic rst,
 
    
    logic [31:0] 			     temp1, temp2, result;
+   logic 				     sign;
    always_ff @(posedge clk, posedge rst) begin
       if (rst) begin
 	 temp1 <= 32'b0;
 	 temp2 <= 32'b0;
 	 result <= 32'b0;
+	 sign <= 1'b0;
       end else begin
-	 temp1 <= piecewise_sig_stage1(in);
-	 temp2 <= in;
-	 result <= piecewise_sig_stage2(temp2, temp1);
+	 temp1 <= in[31] ? piecewise_sig_stage1(~in+1) : piecewise_sig_stage1(in);
+	 temp2 <= in[31] ? ~in+1 : in;
+	 sign <= in[31];
+	 result <= sign ? `FIXED_1 - piecewise_sig_stage2(temp2, temp1) : piecewise_sig_stage2(temp2, temp1);
       end
    end
 
@@ -101,6 +104,44 @@ module sigmoid_approx_fn(input logic clk, input logic rst,
    end
 
 endmodule: sigmoid_approx_fn
+
+
+/*
+module sigmoid_approx_fn(input logic clk, input logic rst, input [31:0] in,
+                         output logic [31:0] out);
+
+   function logic [31:0] fixed_mult(logic [31:0] a,b);
+      logic [63:0] 			     a_64,b_64,c_64;
+      a_64 = a;
+      b_64 = b;
+      c_64 = a_64*b_64;
+      c_64 = (c_64>>16);
+      fixed_mult = c_64[31:0]; 
+   endfunction
+
+   function logic [31:0] piecewise_sigmoid(logic [31:0] in);
+      if(in>=`FIXED_5) 
+	piecewise_sigmoid = `FIXED_1;
+      else if ((in >= `FIXED_2_375) && (in < `FIXED_5)) 
+	piecewise_sigmoid = fixed_mult(`FIXED_0_03125, in) + `FIXED_0_84375;
+      else if ((in >= `FIXED_1) && (in < `FIXED_2_375))
+	piecewise_sigmoid = fixed_mult(`FIXED_0_125, in) + `FIXED_0_625;
+      else 
+	piecewise_sigmoid = fixed_mult(`FIXED_0_25, in) + `FIXED_0_5;
+   endfunction
+
+   logic 				     sign;
+
+   always_comb begin
+      sign = in[31];
+      if(sign) out = `FIXED_1 - piecewise_sigmoid(~in+1);
+      else out = piecewise_sigmoid(in);
+      if(out==0) out = 1;
+      else out = out;
+   end
+
+endmodule: sigmoid_approx_fn
+*/
 
 module sigmoid_approx_drv(input [31:0] in,
                           output logic [31:0] out);

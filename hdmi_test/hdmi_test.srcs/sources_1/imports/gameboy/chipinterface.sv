@@ -20,7 +20,7 @@ module ChipInterface(
     output logic            HDMI_TX_DE,
     output logic            HDMI_TX_HS,
     output logic            HDMI_TX_VS
-    ); 
+    );
 
     logic clk; // 200 MHz clock because it just uses the board clock
    
@@ -127,8 +127,9 @@ module ChipInterface(
             image_shift_buf <= (start) ? image :
                                ((shift_image) ? {image_shift_buf[7:0], image_shift_buf[(784<<3)-1:8]} : 
                                               image_shift_buf);
+            // Shifts top to bottom bc image is reversed
             pred_image_buf <= (done) ? pred_image :
-                               ((shift_pred) ? {pred_image_buf[7:0], pred_image_buf[(784<<3)-1:8]} : 
+                               ((shift_pred) ? {pred_image_buf[(784<<3)-9:0], pred_image_buf[(784<<3)-1:(784<<3)-8]} : 
                                                pred_image_buf);
         end 
     end
@@ -168,7 +169,7 @@ module ChipInterface(
             // Start drawing prediction image
             else if (draw_pred) begin
                 processingPixel <= 1;
-                data_in <= {pred_image_buf[7:0], pred_image_buf[7:0], pred_image_buf[7:0]};
+                data_in <= {pred_image_buf[(784<<3)-1:(784<<3)-8], pred_image_buf[(784<<3)-1:(784<<3)-8], pred_image_buf[(784<<3)-1:(784<<3)-8]};
                 we <= 1;
                 side <= 0;
                 shift_pred <= 0;
@@ -267,7 +268,7 @@ module ChipInterface(
              
      assign en_bus = 1'b1;
 
-         
+
    //---- TOP LEVEL NEURAL NETWORK MODULE INSTANTIATION -----//
    //-------------------------------------------------------------------------------------------------------------//
    deep dp (.clk (clk), .rst (rst), .do_fp (do_fp), .label_in (label_out),  .image_in (image_out), 

@@ -74,6 +74,7 @@ int main (int argc, char **argv) {
       top->eval();
 
       if (top->done) {
+	top->start = 0;
 	for (int i = 0; i < 10; i++) result->data[i] = top->result[i];
 	printf(BOLD "\nTesting image of %d:\n" NORMAL, mnist_labels->labels->data[k]);
 	int classification = classify(result, 0);
@@ -82,11 +83,9 @@ int main (int argc, char **argv) {
 	break;
       }
     }
-    
-    top->rst = 1;
-    top->eval();
-    top->rst = 0;
-    top->eval();
+
+    top->clk = !(top->clk);
+    top->eval();    
   }
 
   int err_actual = 0;
@@ -145,9 +144,9 @@ int main (int argc, char **argv) {
 
 	top->clk = !(top->clk);
 	top->eval();
-	top->start = 0;
 
 	if (top->done) {
+	  top->start = 0;
 	  for (int i = 0; i < 10; i++) result->data[i] = top->result[i];
 	  printf(BOLD "\nTesting centered image of %s:\n" NORMAL, full_path);
 	  for (uint32_t j = 0; j < 28; j++) {
