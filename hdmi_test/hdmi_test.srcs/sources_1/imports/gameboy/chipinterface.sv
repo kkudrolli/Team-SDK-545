@@ -48,7 +48,7 @@ module ChipInterface(
     logic side, rts_probe, rx_probe;
     
     logic [7:0] max_result, max_result_buf;
-    logic done, clr_done, done_reg;
+    logic done, done_reg, start_reg;
     
     logic [10][31:0] result;
     
@@ -135,9 +135,8 @@ module ChipInterface(
     end
     
     
-    assign draw_image = (start || shift_image) && shift_count != 10'd784;
-    assign draw_pred = (done_reg || shift_pred) && shift_pred_count != 10'd784;
-    assign clr_done = (shift_pred_count == 10'd0) ? 1'b1 : 1'b0;
+    assign draw_image = (start || start_reg) && shift_count != 10'd784;
+    assign draw_pred = (done || done_reg) && shift_pred_count != 10'd784;
     
     //write FSM
     always_ff @(posedge uart_sampling_clk, posedge rst) begin
@@ -153,9 +152,19 @@ module ChipInterface(
             shift_image <= 0;
             shift_count <= 10'd0;
             shift_pred <= 0;
-            shift_pred_count <= 10'd0;
+            shift_pred_count <= 10'd0
+            done_reg <= 1'b0;
+            start_reg <= 1'b0;
         end
         else begin
+            // Buffer start and done signals, deassert at end of drawing the image
+            if (start) begin
+                start_reg <= 1'b1;
+            end
+            if (done) begin
+                done_reg <= 1'b1;
+            end
+            
             // Start drawing sent image
             if(draw_image) begin
                 processingPixel <= 1;
@@ -234,8 +243,10 @@ module ChipInterface(
                 //shift_image <= 1;
                 if (side) begin 
                     shift_count <= (shift_count == 10'd784) ? shift_count: shift_count + 10'd1;
+                    start_reg <= (shift_count == 10'd784) ? 1'b0 : start_reg;
                 end else begin
                     shift_pred_count <= (shift_pred_count == 10'd784) ? shift_pred_count: shift_pred_count + 10'd1;
+                    done_reg <= (shift_pred_count == 10'd784) ? 1'b0 : done_reg;
                 end
             end
         end
@@ -278,14 +289,10 @@ module ChipInterface(
 
    always_ff @(posedge clk, negedge rst) begin
        if (rst) begin
-           done_reg <= 1'b0;
            max_result_buf <= 'd0;
        end
        else if (done) begin
            max_result_buf <= max_result;
-           done_reg <= 1'b1;
-       end else begin
-           done_reg <= (clr_done) ? 1'b0 : done_reg;
        end
    end
     
