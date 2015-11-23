@@ -23,11 +23,11 @@ module deep
    logic [4095:0]             values_0;
    logic [319:0] 	          values_1;
    
-   logic [128] [31:0]         weights0;
-   logic [10] [31:0]          weights1;
+   logic [127:0] [31:0]         weights0;
+   logic [9:0] [31:0]          weights1;
 
-   logic [784] [31:0]         image;
-   logic [784] [7:0]          img_tmp;
+   logic [783:0] [31:0]         image;
+   logic [783:0] [7:0]          img_tmp;
 
    assign weights0 = values_0;
    assign weights1 = values_1;

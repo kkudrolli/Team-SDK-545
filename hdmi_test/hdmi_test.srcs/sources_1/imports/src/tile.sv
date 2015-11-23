@@ -9,22 +9,22 @@ module tile
    // Inputs
    input logic clk, rst;
    input logic start;
-   input logic [IMG_SZ] [31:0] image;
-   input logic [NUM_NEURONS] [31:0] weights0;
-   input logic [OUTPUT_SZ] [31:0] 	weights1;   
+   input logic [IMG_SZ-1:0] [31:0] image;
+   input logic [NUM_NEURONS-1:0] [31:0] weights0;
+   input logic [OUTPUT_SZ-1:0] [31:0] 	weights1;   
    
    // Outputs
    output logic 			done;
    output logic 			get_weights0, get_weights1;
-   output logic [OUTPUT_SZ] [31:0] 	result;
+   output logic [OUTPUT_SZ-1:0] [31:0] 	result;
    
    
-   logic [IMG_SZ] [31:0] 		image_reg;
+   logic [IMG_SZ-1:0] [31:0] 		image_reg;
    
    logic 				clear;
-   logic [NUM_NEURONS] [31:0] 	acc_lay0;
-   logic [NUM_NEURONS] [31:0] 	hidden;
-   logic [OUTPUT_SZ]   [31:0] 	acc_lay1;
+   logic [NUM_NEURONS-1:0] [31:0] 	acc_lay0;
+   logic [NUM_NEURONS-1:0] [31:0] 	hidden;
+   logic [OUTPUT_SZ-1:0]   [31:0] 	acc_lay1;
    
    logic [$clog2(IMG_SZ):0] 		lay0_idx;
    logic [$clog2(NUM_NEURONS):0] 	lay1_idx;

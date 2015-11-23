@@ -50,7 +50,7 @@ module ChipInterface(
     logic [7:0] max_result, max_result_buf;
     logic done, done_reg, start_reg;
     
-    logic [10][31:0] result;
+    logic [9:0][31:0] result;
     
     assign rts_probe = USB_RTS;
     assign rx_probe = USB_RX;
@@ -152,7 +152,7 @@ module ChipInterface(
             shift_image <= 0;
             shift_count <= 10'd0;
             shift_pred <= 0;
-            shift_pred_count <= 10'd0
+            shift_pred_count <= 10'd0;
             done_reg <= 1'b0;
             start_reg <= 1'b0;
         end
