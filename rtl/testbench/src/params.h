@@ -1,5 +1,5 @@
 #define MODE_MNIST
-#define MNIST_TEST_IMAGES 1000
+#define MNIST_TEST_IMAGES 1
 
 #define IMPORT_FILE "networks/best.deep"
 
@@ -20,4 +20,8 @@
 #define KILL_LINE      "\033[K"
 #define SAVE_CURSOR    "\033[s"
 #define RESTORE_CURSOR "\033[u"
+
+
+
+
 

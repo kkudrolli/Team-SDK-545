@@ -34,9 +34,18 @@ module tile
    enum logic [2:0] {S_IDLE, S_PROP_LAYER1, S_PROP_LAYER2, S_DONE} cs, ns;   
 
 
+   logic [4:0] done_count;
+   logic inc_dcnt;
+
    always_ff @(posedge clk, posedge rst)
-     if (rst) cs <= S_IDLE;
-     else cs <= ns;
+     if (rst) begin
+         cs <= S_IDLE;
+         done_count <= 'd0;
+     end
+     else begin
+         cs <= ns;
+         done_count <= (inc_dcnt) ? done_count + 5'd1 : done_count;
+     end
 
    always_ff @(posedge clk)
      if (start) image_reg <= image;   
@@ -46,12 +55,12 @@ module tile
       for (i = 0; i < NUM_NEURONS; i++) begin
          neuron layer0 (.clk, .rst, .clear, .en (enable_0), .weight (weights0[i]), 
                 .data (image_reg[lay0_idx]), .accum (acc_lay0[i]));
-         sigmoid_approx_fn act_lay0(.clk, .rst, .in (acc_lay0[i]), .out (hidden[i]));
+         sigmoid_approx_fn act_lay0(.clk, .rst, .enable(enable_0), .in (acc_lay0[i]), .out (hidden[i]));
       end
       for (i = 0; i < OUTPUT_SZ; i++) begin
          neuron layer1 (.clk, .rst, .clear, .en (enable_1), .weight (weights1[i]),
                 .data (hidden[lay1_idx]), .accum (acc_lay1[i]));
-         sigmoid_approx_fn act_lay1(.clk, .rst, .in (acc_lay1[i]), .out (result[i]));
+         sigmoid_approx_fn act_lay1(.clk, .rst, .enable(enable_1), .in (acc_lay1[i]), .out (result[i]));
       end
    endgenerate
 
@@ -63,6 +72,7 @@ module tile
       enable_1 = 1'b0;
       get_weights0 = 1'b0;
       get_weights1 = 1'b0;
+      inc_dcnt = 1'b0;
       case (cs)
         S_IDLE: begin
            clear = start;
@@ -83,7 +93,8 @@ module tile
     
         S_DONE: begin
            done = 1'b1;
-           ns = S_IDLE;
+           inc_dcnt = 1'b1;
+           ns = (done_count == 5'd31) ? S_IDLE : S_DONE;
         end
     
         default: ns = S_IDLE;	 

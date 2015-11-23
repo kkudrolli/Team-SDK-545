@@ -68,7 +68,7 @@ module deep
    logic [9:0] [31:0] 	      weights1;
 
    assign done = fp_done;
-   
+
    control_unit cu (.clk, .rst, .start, .train (1'b0), .bp_done (1'b0), .fp_done, 
 		    .drawn (1'b1), .label_in (), .image_in (), .do_fp, .do_bp, 
 		    .draw, .ack, .label_out (), .image_out ());
