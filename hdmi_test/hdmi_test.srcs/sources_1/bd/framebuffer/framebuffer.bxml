@@ -4,7 +4,7 @@
     <Description>Composite Fileset</Description>
     <Generation Name="SYNTHESIS" State="GENERATED"/>
     <Generation Name="IMPLEMENTATION" State="GENERATED"/>
-    <Generation Name="SIMULATION" State="STALE"/>
+    <Generation Name="SIMULATION" State="GENERATED"/>
     <FileCollection Name="SOURCES" Type="SOURCES">
       <File Name="hdl/framebuffer.v" Type="Verilog">
         <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="false" IsStatusTracked="false"/>

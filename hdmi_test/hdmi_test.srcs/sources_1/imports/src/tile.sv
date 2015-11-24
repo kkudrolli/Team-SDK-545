@@ -31,7 +31,7 @@ module tile
 
    logic 				enable_0, enable_1;
    
-   enum logic [2:0] {S_IDLE, S_PROP_LAYER1, S_PROP_LAYER2, S_DONE} cs, ns;   
+   enum logic [2:0] {S_IDLE, S_PROP_LAYER1, S_PROP_LAYER2, S_DELAY1, S_DELAY2, S_DONE} cs, ns;   
 
 
    logic [4:0] done_count;
@@ -76,15 +76,19 @@ module tile
       case (cs)
         S_IDLE: begin
            clear = start;
-           ns = start ? S_PROP_LAYER1 : S_IDLE;
+           ns = start ? S_DELAY1 : S_IDLE;
            get_weights0 = start;
         end
 
+        S_DELAY1: ns = S_PROP_LAYER1;
+
         S_PROP_LAYER1: begin
-           ns = lay0_idx < IMG_SZ ? S_PROP_LAYER1 : S_PROP_LAYER2;
+           ns = lay0_idx < IMG_SZ ? S_PROP_LAYER1 : S_DELAY2;
            get_weights1 = lay0_idx >= IMG_SZ;
            enable_0 = 1;
         end
+    
+        S_DELAY2: ns = S_PROP_LAYER2;
     
         S_PROP_LAYER2: begin
            enable_1 = 1;

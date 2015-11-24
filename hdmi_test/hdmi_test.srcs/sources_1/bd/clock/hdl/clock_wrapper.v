@@ -1,8 +1,8 @@
 //Copyright 1986-2015 Xilinx, Inc. All Rights Reserved.
 //--------------------------------------------------------------------------------
 //Tool Version: Vivado v.2015.2 (lin64) Build 1266856 Fri Jun 26 16:35:25 MDT 2015
-//Date        : Tue Nov 17 14:26:51 2015
-//Host        : horizon.andrew.cmu.edu running 64-bit Red Hat Enterprise Linux Server release 7.1 (Maipo)
+//Date        : Mon Nov 23 22:46:37 2015
+//Host        : horizon.andrew.cmu.edu running 64-bit Red Hat Enterprise Linux Server release 7.2 (Maipo)
 //Command     : generate_target clock_wrapper.bd
 //Design      : clock_wrapper
 //Purpose     : IP block netlist

@@ -138,9 +138,6 @@ set_property IOSTANDARD LVCMOS18 [get_ports {sel[0]}]
 set_property PACKAGE_PIN BA32 [get_ports {sel[0]}]
 set_property PACKAGE_PIN AW30 [get_ports {sel[1]}]
 
-set_property MARK_DEBUG true [get_nets dp/do_fp]
-set_property MARK_DEBUG true [get_nets dp/get_weights0]
-set_property MARK_DEBUG true [get_nets dp/get_weights1]
 set_property MARK_DEBUG false [get_nets {dp/E[0]}]
 set_property MARK_DEBUG false [get_nets dp/clk_BUFG]
 set_property MARK_DEBUG false [get_nets {dp/max_result_buf_reg[3][0]}]
@@ -159,10 +156,6 @@ set_property MARK_DEBUG true [get_nets done]
 set_property MARK_DEBUG true [get_nets do_fp]
 
 
-set_property MARK_DEBUG true [get_nets dp/done]
-set_property MARK_DEBUG true [get_nets ctrl/start]
-set_property MARK_DEBUG true [get_nets ctrl/started]
-set_property MARK_DEBUG true [get_nets ctrl/do_fp]
 set_property MARK_DEBUG true [get_nets {ctrl/cs_ctrl[1]}]
 set_property MARK_DEBUG true [get_nets {ctrl/cs_ctrl[0]}]
 connect_debug_port u_ila_0_0/probe0 [get_nets [list {ctrl/cs_ctrl[0]} {ctrl/cs_ctrl[1]}]]
@@ -173,23 +166,33 @@ set_property MARK_DEBUG false [get_nets {max_result_buf[4]}]
 set_property MARK_DEBUG false [get_nets {max_result_buf[5]}]
 set_property MARK_DEBUG false [get_nets {max_result_buf[6]}]
 set_property MARK_DEBUG false [get_nets {max_result_buf[7]}]
-set_property MARK_DEBUG true [get_nets shift_image_reg_n_0]
 
-set_property MARK_DEBUG true [get_nets dp/wf/start_0]
-set_property MARK_DEBUG true [get_nets dp/wf/start_1]
-set_property MARK_DEBUG true [get_nets {dp/t/lay0_idx[0]_i_1_n_0}]
-set_property MARK_DEBUG true [get_nets {dp/t/lay0_idx[10]_i_1_n_0}]
-set_property MARK_DEBUG true [get_nets {dp/t/lay0_idx[1]_i_1_n_0}]
-set_property MARK_DEBUG true [get_nets {dp/t/lay0_idx[2]_i_1_n_0}]
-set_property MARK_DEBUG true [get_nets {dp/t/lay0_idx[3]_i_1_n_0}]
-set_property MARK_DEBUG true [get_nets {dp/t/lay0_idx[4]_i_1_n_0}]
-set_property MARK_DEBUG true [get_nets {dp/t/lay0_idx[5]_i_1_n_0}]
-set_property MARK_DEBUG true [get_nets {dp/t/lay0_idx[6]_i_1_n_0}]
-set_property MARK_DEBUG true [get_nets {dp/t/lay0_idx[7]_i_1_n_0}]
-set_property MARK_DEBUG true [get_nets {dp/t/lay0_idx[8]_i_1_n_0}]
-set_property MARK_DEBUG true [get_nets {dp/t/lay0_idx[9]_i_1_n_0}]
-set_property MARK_DEBUG true [get_nets {dp/t/lay1_idx[0]_i_1_n_0}]
 
+
+set_property MARK_DEBUG false [get_nets shift_image_reg_n_0]
+set_property MARK_DEBUG false [get_nets {dp/t/lay0_idx[0]_i_1_n_0}]
+set_property MARK_DEBUG false [get_nets {dp/t/lay0_idx[10]_i_1_n_0}]
+set_property MARK_DEBUG false [get_nets {dp/t/lay0_idx[1]_i_1_n_0}]
+set_property MARK_DEBUG false [get_nets {dp/t/lay0_idx[2]_i_1_n_0}]
+set_property MARK_DEBUG false [get_nets {dp/t/lay0_idx[3]_i_1_n_0}]
+set_property MARK_DEBUG false [get_nets {dp/t/lay0_idx[4]_i_1_n_0}]
+set_property MARK_DEBUG false [get_nets {dp/t/lay0_idx[5]_i_1_n_0}]
+set_property MARK_DEBUG false [get_nets {dp/t/lay0_idx[6]_i_1_n_0}]
+set_property MARK_DEBUG false [get_nets {dp/t/lay0_idx[7]_i_1_n_0}]
+set_property MARK_DEBUG false [get_nets {dp/t/lay0_idx[8]_i_1_n_0}]
+set_property MARK_DEBUG false [get_nets {dp/t/lay0_idx[9]_i_1_n_0}]
+set_property MARK_DEBUG false [get_nets {dp/t/lay1_idx[0]_i_1_n_0}]
+set_property MARK_DEBUG false [get_nets ctrl/start]
+set_property MARK_DEBUG false [get_nets ctrl/started]
+set_property MARK_DEBUG false [get_nets dp/get_weights0]
+set_property MARK_DEBUG false [get_nets dp/get_weights1]
+set_property MARK_DEBUG false [get_nets dp/wf/start_0]
+set_property MARK_DEBUG false [get_nets dp/wf/start_1]
+set_property MARK_DEBUG false [get_nets dp/done]
+set_property MARK_DEBUG false [get_nets ctrl/do_fp]
+set_property MARK_DEBUG false [get_nets dp/do_fp]
+set_property MARK_DEBUG false [get_nets {ctrl/cs[0]}]
+set_property MARK_DEBUG false [get_nets {ctrl/cs[1]}]
 set_property MARK_DEBUG true [get_nets {dp/result[0]}]
 set_property MARK_DEBUG true [get_nets {dp/result[100]}]
 set_property MARK_DEBUG true [get_nets {dp/result[101]}]
@@ -510,128 +513,28 @@ set_property MARK_DEBUG true [get_nets {dp/result[97]}]
 set_property MARK_DEBUG true [get_nets {dp/result[98]}]
 set_property MARK_DEBUG true [get_nets {dp/result[99]}]
 set_property MARK_DEBUG true [get_nets {dp/result[9]}]
-create_debug_core u_ila_0_0 ila
-set_property ALL_PROBE_SAME_MU true [get_debug_cores u_ila_0_0]
-set_property ALL_PROBE_SAME_MU_CNT 1 [get_debug_cores u_ila_0_0]
-set_property C_ADV_TRIGGER false [get_debug_cores u_ila_0_0]
-set_property C_DATA_DEPTH 4096 [get_debug_cores u_ila_0_0]
-set_property C_EN_STRG_QUAL false [get_debug_cores u_ila_0_0]
-set_property C_INPUT_PIPE_STAGES 0 [get_debug_cores u_ila_0_0]
-set_property C_TRIGIN_EN false [get_debug_cores u_ila_0_0]
-set_property C_TRIGOUT_EN false [get_debug_cores u_ila_0_0]
-set_property port_width 1 [get_debug_ports u_ila_0_0/clk]
-connect_debug_port u_ila_0_0/clk [get_nets [list clk_BUFG]]
-set_property port_width 320 [get_debug_ports u_ila_0_0/probe0]
-connect_debug_port u_ila_0_0/probe0 [get_nets [list {dp/wf/values_1[0]} {dp/wf/values_1[1]} {dp/wf/values_1[2]} {dp/wf/values_1[3]} {dp/wf/values_1[4]} {dp/wf/values_1[5]} {dp/wf/values_1[6]} {dp/wf/values_1[7]} {dp/wf/values_1[8]} {dp/wf/values_1[9]} {dp/wf/values_1[10]} {dp/wf/values_1[11]} {dp/wf/values_1[12]} {dp/wf/values_1[13]} {dp/wf/values_1[14]} {dp/wf/values_1[15]} {dp/wf/values_1[16]} {dp/wf/values_1[17]} {dp/wf/values_1[18]} {dp/wf/values_1[19]} {dp/wf/values_1[20]} {dp/wf/values_1[21]} {dp/wf/values_1[22]} {dp/wf/values_1[23]} {dp/wf/values_1[24]} {dp/wf/values_1[25]} {dp/wf/values_1[26]} {dp/wf/values_1[27]} {dp/wf/values_1[28]} {dp/wf/values_1[29]} {dp/wf/values_1[30]} {dp/wf/values_1[31]} {dp/wf/values_1[32]} {dp/wf/values_1[33]} {dp/wf/values_1[34]} {dp/wf/values_1[35]} {dp/wf/values_1[36]} {dp/wf/values_1[37]} {dp/wf/values_1[38]} {dp/wf/values_1[39]} {dp/wf/values_1[40]} {dp/wf/values_1[41]} {dp/wf/values_1[42]} {dp/wf/values_1[43]} {dp/wf/values_1[44]} {dp/wf/values_1[45]} {dp/wf/values_1[46]} {dp/wf/values_1[47]} {dp/wf/values_1[48]} {dp/wf/values_1[49]} {dp/wf/values_1[50]} {dp/wf/values_1[51]} {dp/wf/values_1[52]} {dp/wf/values_1[53]} {dp/wf/values_1[54]} {dp/wf/values_1[55]} {dp/wf/values_1[56]} {dp/wf/values_1[57]} {dp/wf/values_1[58]} {dp/wf/values_1[59]} {dp/wf/values_1[60]} {dp/wf/values_1[61]} {dp/wf/values_1[62]} {dp/wf/values_1[63]} {dp/wf/values_1[64]} {dp/wf/values_1[65]} {dp/wf/values_1[66]} {dp/wf/values_1[67]} {dp/wf/values_1[68]} {dp/wf/values_1[69]} {dp/wf/values_1[70]} {dp/wf/values_1[71]} {dp/wf/values_1[72]} {dp/wf/values_1[73]} {dp/wf/values_1[74]} {dp/wf/values_1[75]} {dp/wf/values_1[76]} {dp/wf/values_1[77]} {dp/wf/values_1[78]} {dp/wf/values_1[79]} {dp/wf/values_1[80]} {dp/wf/values_1[81]} {dp/wf/values_1[82]} {dp/wf/values_1[83]} {dp/wf/values_1[84]} {dp/wf/values_1[85]} {dp/wf/values_1[86]} {dp/wf/values_1[87]} {dp/wf/values_1[88]} {dp/wf/values_1[89]} {dp/wf/values_1[90]} {dp/wf/values_1[91]} {dp/wf/values_1[92]} {dp/wf/values_1[93]} {dp/wf/values_1[94]} {dp/wf/values_1[95]} {dp/wf/values_1[96]} {dp/wf/values_1[97]} {dp/wf/values_1[98]} {dp/wf/values_1[99]} {dp/wf/values_1[100]} {dp/wf/values_1[101]} {dp/wf/values_1[102]} {dp/wf/values_1[103]} {dp/wf/values_1[104]} {dp/wf/values_1[105]} {dp/wf/values_1[106]} {dp/wf/values_1[107]} {dp/wf/values_1[108]} {dp/wf/values_1[109]} {dp/wf/values_1[110]} {dp/wf/values_1[111]} {dp/wf/values_1[112]} {dp/wf/values_1[113]} {dp/wf/values_1[114]} {dp/wf/values_1[115]} {dp/wf/values_1[116]} {dp/wf/values_1[117]} {dp/wf/values_1[118]} {dp/wf/values_1[119]} {dp/wf/values_1[120]} {dp/wf/values_1[121]} {dp/wf/values_1[122]} {dp/wf/values_1[123]} {dp/wf/values_1[124]} {dp/wf/values_1[125]} {dp/wf/values_1[126]} {dp/wf/values_1[127]} {dp/wf/values_1[128]} {dp/wf/values_1[129]} {dp/wf/values_1[130]} {dp/wf/values_1[131]} {dp/wf/values_1[132]} {dp/wf/values_1[133]} {dp/wf/values_1[134]} {dp/wf/values_1[135]} {dp/wf/values_1[136]} {dp/wf/values_1[137]} {dp/wf/values_1[138]} {dp/wf/values_1[139]} {dp/wf/values_1[140]} {dp/wf/values_1[141]} {dp/wf/values_1[142]} {dp/wf/values_1[143]} {dp/wf/values_1[144]} {dp/wf/values_1[145]} {dp/wf/values_1[146]} {dp/wf/values_1[147]} {dp/wf/values_1[148]} {dp/wf/values_1[149]} {dp/wf/values_1[150]} {dp/wf/values_1[151]} {dp/wf/values_1[152]} {dp/wf/values_1[153]} {dp/wf/values_1[154]} {dp/wf/values_1[155]} {dp/wf/values_1[156]} {dp/wf/values_1[157]} {dp/wf/values_1[158]} {dp/wf/values_1[159]} {dp/wf/values_1[160]} {dp/wf/values_1[161]} {dp/wf/values_1[162]} {dp/wf/values_1[163]} {dp/wf/values_1[164]} {dp/wf/values_1[165]} {dp/wf/values_1[166]} {dp/wf/values_1[167]} {dp/wf/values_1[168]} {dp/wf/values_1[169]} {dp/wf/values_1[170]} {dp/wf/values_1[171]} {dp/wf/values_1[172]} {dp/wf/values_1[173]} {dp/wf/values_1[174]} {dp/wf/values_1[175]} {dp/wf/values_1[176]} {dp/wf/values_1[177]} {dp/wf/values_1[178]} {dp/wf/values_1[179]} {dp/wf/values_1[180]} {dp/wf/values_1[181]} {dp/wf/values_1[182]} {dp/wf/values_1[183]} {dp/wf/values_1[184]} {dp/wf/values_1[185]} {dp/wf/values_1[186]} {dp/wf/values_1[187]} {dp/wf/values_1[188]} {dp/wf/values_1[189]} {dp/wf/values_1[190]} {dp/wf/values_1[191]} {dp/wf/values_1[192]} {dp/wf/values_1[193]} {dp/wf/values_1[194]} {dp/wf/values_1[195]} {dp/wf/values_1[196]} {dp/wf/values_1[197]} {dp/wf/values_1[198]} {dp/wf/values_1[199]} {dp/wf/values_1[200]} {dp/wf/values_1[201]} {dp/wf/values_1[202]} {dp/wf/values_1[203]} {dp/wf/values_1[204]} {dp/wf/values_1[205]} {dp/wf/values_1[206]} {dp/wf/values_1[207]} {dp/wf/values_1[208]} {dp/wf/values_1[209]} {dp/wf/values_1[210]} {dp/wf/values_1[211]} {dp/wf/values_1[212]} {dp/wf/values_1[213]} {dp/wf/values_1[214]} {dp/wf/values_1[215]} {dp/wf/values_1[216]} {dp/wf/values_1[217]} {dp/wf/values_1[218]} {dp/wf/values_1[219]} {dp/wf/values_1[220]} {dp/wf/values_1[221]} {dp/wf/values_1[222]} {dp/wf/values_1[223]} {dp/wf/values_1[224]} {dp/wf/values_1[225]} {dp/wf/values_1[226]} {dp/wf/values_1[227]} {dp/wf/values_1[228]} {dp/wf/values_1[229]} {dp/wf/values_1[230]} {dp/wf/values_1[231]} {dp/wf/values_1[232]} {dp/wf/values_1[233]} {dp/wf/values_1[234]} {dp/wf/values_1[235]} {dp/wf/values_1[236]} {dp/wf/values_1[237]} {dp/wf/values_1[238]} {dp/wf/values_1[239]} {dp/wf/values_1[240]} {dp/wf/values_1[241]} {dp/wf/values_1[242]} {dp/wf/values_1[243]} {dp/wf/values_1[244]} {dp/wf/values_1[245]} {dp/wf/values_1[246]} {dp/wf/values_1[247]} {dp/wf/values_1[248]} {dp/wf/values_1[249]} {dp/wf/values_1[250]} {dp/wf/values_1[251]} {dp/wf/values_1[252]} {dp/wf/values_1[253]} {dp/wf/values_1[254]} {dp/wf/values_1[255]} {dp/wf/values_1[256]} {dp/wf/values_1[257]} {dp/wf/values_1[258]} {dp/wf/values_1[259]} {dp/wf/values_1[260]} {dp/wf/values_1[261]} {dp/wf/values_1[262]} {dp/wf/values_1[263]} {dp/wf/values_1[264]} {dp/wf/values_1[265]} {dp/wf/values_1[266]} {dp/wf/values_1[267]} {dp/wf/values_1[268]} {dp/wf/values_1[269]} {dp/wf/values_1[270]} {dp/wf/values_1[271]} {dp/wf/values_1[272]} {dp/wf/values_1[273]} {dp/wf/values_1[274]} {dp/wf/values_1[275]} {dp/wf/values_1[276]} {dp/wf/values_1[277]} {dp/wf/values_1[278]} {dp/wf/values_1[279]} {dp/wf/values_1[280]} {dp/wf/values_1[281]} {dp/wf/values_1[282]} {dp/wf/values_1[283]} {dp/wf/values_1[284]} {dp/wf/values_1[285]} {dp/wf/values_1[286]} {dp/wf/values_1[287]} {dp/wf/values_1[288]} {dp/wf/values_1[289]} {dp/wf/values_1[290]} {dp/wf/values_1[291]} {dp/wf/values_1[292]} {dp/wf/values_1[293]} {dp/wf/values_1[294]} {dp/wf/values_1[295]} {dp/wf/values_1[296]} {dp/wf/values_1[297]} {dp/wf/values_1[298]} {dp/wf/values_1[299]} {dp/wf/values_1[300]} {dp/wf/values_1[301]} {dp/wf/values_1[302]} {dp/wf/values_1[303]} {dp/wf/values_1[304]} {dp/wf/values_1[305]} {dp/wf/values_1[306]} {dp/wf/values_1[307]} {dp/wf/values_1[308]} {dp/wf/values_1[309]} {dp/wf/values_1[310]} {dp/wf/values_1[311]} {dp/wf/values_1[312]} {dp/wf/values_1[313]} {dp/wf/values_1[314]} {dp/wf/values_1[315]} {dp/wf/values_1[316]} {dp/wf/values_1[317]} {dp/wf/values_1[318]} {dp/wf/values_1[319]}]]
-create_debug_core u_ila_1_0 ila
-set_property ALL_PROBE_SAME_MU true [get_debug_cores u_ila_1_0]
-set_property ALL_PROBE_SAME_MU_CNT 1 [get_debug_cores u_ila_1_0]
-set_property C_ADV_TRIGGER false [get_debug_cores u_ila_1_0]
-set_property C_DATA_DEPTH 4096 [get_debug_cores u_ila_1_0]
-set_property C_EN_STRG_QUAL false [get_debug_cores u_ila_1_0]
-set_property C_INPUT_PIPE_STAGES 0 [get_debug_cores u_ila_1_0]
-set_property C_TRIGIN_EN false [get_debug_cores u_ila_1_0]
-set_property C_TRIGOUT_EN false [get_debug_cores u_ila_1_0]
-set_property port_width 1 [get_debug_ports u_ila_1_0/clk]
-connect_debug_port u_ila_1_0/clk [get_nets [list ck/clk_wiz_0/inst/clk_out3]]
-set_property port_width 1 [get_debug_ports u_ila_1_0/probe0]
-connect_debug_port u_ila_1_0/probe0 [get_nets [list shift_image_reg_n_0]]
-create_debug_port u_ila_0_0 probe
-set_property port_width 2 [get_debug_ports u_ila_0_0/probe1]
-connect_debug_port u_ila_0_0/probe1 [get_nets [list {ctrl/cs[0]} {ctrl/cs[1]}]]
-create_debug_port u_ila_0_0 probe
-set_property port_width 4 [get_debug_ports u_ila_0_0/probe2]
-connect_debug_port u_ila_0_0/probe2 [get_nets [list {max_result_buf[0]} {max_result_buf[1]} {max_result_buf[2]} {max_result_buf[3]}]]
-create_debug_port u_ila_0_0 probe
-set_property port_width 1 [get_debug_ports u_ila_0_0/probe3]
-connect_debug_port u_ila_0_0/probe3 [get_nets [list dp/do_fp]]
-create_debug_port u_ila_0_0 probe
-set_property port_width 1 [get_debug_ports u_ila_0_0/probe4]
-connect_debug_port u_ila_0_0/probe4 [get_nets [list ctrl/do_fp]]
-create_debug_port u_ila_0_0 probe
-set_property port_width 1 [get_debug_ports u_ila_0_0/probe5]
-connect_debug_port u_ila_0_0/probe5 [get_nets [list do_fp]]
-create_debug_port u_ila_0_0 probe
-set_property port_width 1 [get_debug_ports u_ila_0_0/probe6]
-connect_debug_port u_ila_0_0/probe6 [get_nets [list dp/done]]
-create_debug_port u_ila_0_0 probe
-set_property port_width 1 [get_debug_ports u_ila_0_0/probe7]
-connect_debug_port u_ila_0_0/probe7 [get_nets [list done]]
-create_debug_port u_ila_0_0 probe
-set_property port_width 1 [get_debug_ports u_ila_0_0/probe8]
-connect_debug_port u_ila_0_0/probe8 [get_nets [list dp/get_weights0]]
-create_debug_port u_ila_0_0 probe
-set_property port_width 1 [get_debug_ports u_ila_0_0/probe9]
-connect_debug_port u_ila_0_0/probe9 [get_nets [list dp/get_weights1]]
-create_debug_port u_ila_0_0 probe
-set_property port_width 1 [get_debug_ports u_ila_0_0/probe10]
-connect_debug_port u_ila_0_0/probe10 [get_nets [list {dp/t/lay0_idx[0]_i_1_n_0}]]
-create_debug_port u_ila_0_0 probe
-set_property port_width 1 [get_debug_ports u_ila_0_0/probe11]
-connect_debug_port u_ila_0_0/probe11 [get_nets [list {dp/t/lay0_idx[1]_i_1_n_0}]]
-create_debug_port u_ila_0_0 probe
-set_property port_width 1 [get_debug_ports u_ila_0_0/probe12]
-connect_debug_port u_ila_0_0/probe12 [get_nets [list {dp/t/lay0_idx[2]_i_1_n_0}]]
-create_debug_port u_ila_0_0 probe
-set_property port_width 1 [get_debug_ports u_ila_0_0/probe13]
-connect_debug_port u_ila_0_0/probe13 [get_nets [list {dp/t/lay0_idx[3]_i_1_n_0}]]
-create_debug_port u_ila_0_0 probe
-set_property port_width 1 [get_debug_ports u_ila_0_0/probe14]
-connect_debug_port u_ila_0_0/probe14 [get_nets [list {dp/t/lay0_idx[4]_i_1_n_0}]]
-create_debug_port u_ila_0_0 probe
-set_property port_width 1 [get_debug_ports u_ila_0_0/probe15]
-connect_debug_port u_ila_0_0/probe15 [get_nets [list {dp/t/lay0_idx[5]_i_1_n_0}]]
-create_debug_port u_ila_0_0 probe
-set_property port_width 1 [get_debug_ports u_ila_0_0/probe16]
-connect_debug_port u_ila_0_0/probe16 [get_nets [list {dp/t/lay0_idx[6]_i_1_n_0}]]
-create_debug_port u_ila_0_0 probe
-set_property port_width 1 [get_debug_ports u_ila_0_0/probe17]
-connect_debug_port u_ila_0_0/probe17 [get_nets [list {dp/t/lay0_idx[7]_i_1_n_0}]]
-create_debug_port u_ila_0_0 probe
-set_property port_width 1 [get_debug_ports u_ila_0_0/probe18]
-connect_debug_port u_ila_0_0/probe18 [get_nets [list {dp/t/lay0_idx[8]_i_1_n_0}]]
-create_debug_port u_ila_0_0 probe
-set_property port_width 1 [get_debug_ports u_ila_0_0/probe19]
-connect_debug_port u_ila_0_0/probe19 [get_nets [list {dp/t/lay0_idx[9]_i_1_n_0}]]
-create_debug_port u_ila_0_0 probe
-set_property port_width 1 [get_debug_ports u_ila_0_0/probe20]
-connect_debug_port u_ila_0_0/probe20 [get_nets [list {dp/t/lay0_idx[10]_i_1_n_0}]]
-create_debug_port u_ila_0_0 probe
-set_property port_width 1 [get_debug_ports u_ila_0_0/probe21]
-connect_debug_port u_ila_0_0/probe21 [get_nets [list {dp/t/lay1_idx[0]_i_1_n_0}]]
-create_debug_port u_ila_0_0 probe
-set_property port_width 1 [get_debug_ports u_ila_0_0/probe22]
-connect_debug_port u_ila_0_0/probe22 [get_nets [list {dp/t/lay1_idx[1]_i_1_n_0}]]
-create_debug_port u_ila_0_0 probe
-set_property port_width 1 [get_debug_ports u_ila_0_0/probe23]
-connect_debug_port u_ila_0_0/probe23 [get_nets [list {dp/t/lay1_idx[2]_i_1_n_0}]]
-create_debug_port u_ila_0_0 probe
-set_property port_width 1 [get_debug_ports u_ila_0_0/probe24]
-connect_debug_port u_ila_0_0/probe24 [get_nets [list {dp/t/lay1_idx[3]_i_1_n_0}]]
-create_debug_port u_ila_0_0 probe
-set_property port_width 1 [get_debug_ports u_ila_0_0/probe25]
-connect_debug_port u_ila_0_0/probe25 [get_nets [list {dp/t/lay1_idx[4]_i_1_n_0}]]
-create_debug_port u_ila_0_0 probe
-set_property port_width 1 [get_debug_ports u_ila_0_0/probe26]
-connect_debug_port u_ila_0_0/probe26 [get_nets [list {dp/t/lay1_idx[5]_i_1_n_0}]]
-create_debug_port u_ila_0_0 probe
-set_property port_width 1 [get_debug_ports u_ila_0_0/probe27]
-connect_debug_port u_ila_0_0/probe27 [get_nets [list {dp/t/lay1_idx[6]_i_1_n_0}]]
-create_debug_port u_ila_0_0 probe
-set_property port_width 1 [get_debug_ports u_ila_0_0/probe28]
-connect_debug_port u_ila_0_0/probe28 [get_nets [list {dp/t/lay1_idx[7]_i_1_n_0}]]
-create_debug_port u_ila_0_0 probe
-set_property port_width 1 [get_debug_ports u_ila_0_0/probe29]
-connect_debug_port u_ila_0_0/probe29 [get_nets [list ctrl/start]]
-create_debug_port u_ila_0_0 probe
-set_property port_width 1 [get_debug_ports u_ila_0_0/probe30]
-connect_debug_port u_ila_0_0/probe30 [get_nets [list dp/wf/start_0]]
-create_debug_port u_ila_0_0 probe
-set_property port_width 1 [get_debug_ports u_ila_0_0/probe31]
-connect_debug_port u_ila_0_0/probe31 [get_nets [list dp/wf/start_1]]
-create_debug_port u_ila_0_0 probe
-set_property port_width 1 [get_debug_ports u_ila_0_0/probe32]
-connect_debug_port u_ila_0_0/probe32 [get_nets [list ctrl/started]]
+create_debug_core u_ila_0 ila
+set_property ALL_PROBE_SAME_MU true [get_debug_cores u_ila_0]
+set_property ALL_PROBE_SAME_MU_CNT 1 [get_debug_cores u_ila_0]
+set_property C_ADV_TRIGGER false [get_debug_cores u_ila_0]
+set_property C_DATA_DEPTH 4096 [get_debug_cores u_ila_0]
+set_property C_EN_STRG_QUAL false [get_debug_cores u_ila_0]
+set_property C_INPUT_PIPE_STAGES 0 [get_debug_cores u_ila_0]
+set_property C_TRIGIN_EN false [get_debug_cores u_ila_0]
+set_property C_TRIGOUT_EN false [get_debug_cores u_ila_0]
+set_property port_width 1 [get_debug_ports u_ila_0/clk]
+connect_debug_port u_ila_0/clk [get_nets [list clk_BUFG]]
+set_property port_width 320 [get_debug_ports u_ila_0/probe0]
+connect_debug_port u_ila_0/probe0 [get_nets [list {dp/result[0]} {dp/result[1]} {dp/result[2]} {dp/result[3]} {dp/result[4]} {dp/result[5]} {dp/result[6]} {dp/result[7]} {dp/result[8]} {dp/result[9]} {dp/result[10]} {dp/result[11]} {dp/result[12]} {dp/result[13]} {dp/result[14]} {dp/result[15]} {dp/result[16]} {dp/result[17]} {dp/result[18]} {dp/result[19]} {dp/result[20]} {dp/result[21]} {dp/result[22]} {dp/result[23]} {dp/result[24]} {dp/result[25]} {dp/result[26]} {dp/result[27]} {dp/result[28]} {dp/result[29]} {dp/result[30]} {dp/result[31]} {dp/result[32]} {dp/result[33]} {dp/result[34]} {dp/result[35]} {dp/result[36]} {dp/result[37]} {dp/result[38]} {dp/result[39]} {dp/result[40]} {dp/result[41]} {dp/result[42]} {dp/result[43]} {dp/result[44]} {dp/result[45]} {dp/result[46]} {dp/result[47]} {dp/result[48]} {dp/result[49]} {dp/result[50]} {dp/result[51]} {dp/result[52]} {dp/result[53]} {dp/result[54]} {dp/result[55]} {dp/result[56]} {dp/result[57]} {dp/result[58]} {dp/result[59]} {dp/result[60]} {dp/result[61]} {dp/result[62]} {dp/result[63]} {dp/result[64]} {dp/result[65]} {dp/result[66]} {dp/result[67]} {dp/result[68]} {dp/result[69]} {dp/result[70]} {dp/result[71]} {dp/result[72]} {dp/result[73]} {dp/result[74]} {dp/result[75]} {dp/result[76]} {dp/result[77]} {dp/result[78]} {dp/result[79]} {dp/result[80]} {dp/result[81]} {dp/result[82]} {dp/result[83]} {dp/result[84]} {dp/result[85]} {dp/result[86]} {dp/result[87]} {dp/result[88]} {dp/result[89]} {dp/result[90]} {dp/result[91]} {dp/result[92]} {dp/result[93]} {dp/result[94]} {dp/result[95]} {dp/result[96]} {dp/result[97]} {dp/result[98]} {dp/result[99]} {dp/result[100]} {dp/result[101]} {dp/result[102]} {dp/result[103]} {dp/result[104]} {dp/result[105]} {dp/result[106]} {dp/result[107]} {dp/result[108]} {dp/result[109]} {dp/result[110]} {dp/result[111]} {dp/result[112]} {dp/result[113]} {dp/result[114]} {dp/result[115]} {dp/result[116]} {dp/result[117]} {dp/result[118]} {dp/result[119]} {dp/result[120]} {dp/result[121]} {dp/result[122]} {dp/result[123]} {dp/result[124]} {dp/result[125]} {dp/result[126]} {dp/result[127]} {dp/result[128]} {dp/result[129]} {dp/result[130]} {dp/result[131]} {dp/result[132]} {dp/result[133]} {dp/result[134]} {dp/result[135]} {dp/result[136]} {dp/result[137]} {dp/result[138]} {dp/result[139]} {dp/result[140]} {dp/result[141]} {dp/result[142]} {dp/result[143]} {dp/result[144]} {dp/result[145]} {dp/result[146]} {dp/result[147]} {dp/result[148]} {dp/result[149]} {dp/result[150]} {dp/result[151]} {dp/result[152]} {dp/result[153]} {dp/result[154]} {dp/result[155]} {dp/result[156]} {dp/result[157]} {dp/result[158]} {dp/result[159]} {dp/result[160]} {dp/result[161]} {dp/result[162]} {dp/result[163]} {dp/result[164]} {dp/result[165]} {dp/result[166]} {dp/result[167]} {dp/result[168]} {dp/result[169]} {dp/result[170]} {dp/result[171]} {dp/result[172]} {dp/result[173]} {dp/result[174]} {dp/result[175]} {dp/result[176]} {dp/result[177]} {dp/result[178]} {dp/result[179]} {dp/result[180]} {dp/result[181]} {dp/result[182]} {dp/result[183]} {dp/result[184]} {dp/result[185]} {dp/result[186]} {dp/result[187]} {dp/result[188]} {dp/result[189]} {dp/result[190]} {dp/result[191]} {dp/result[192]} {dp/result[193]} {dp/result[194]} {dp/result[195]} {dp/result[196]} {dp/result[197]} {dp/result[198]} {dp/result[199]} {dp/result[200]} {dp/result[201]} {dp/result[202]} {dp/result[203]} {dp/result[204]} {dp/result[205]} {dp/result[206]} {dp/result[207]} {dp/result[208]} {dp/result[209]} {dp/result[210]} {dp/result[211]} {dp/result[212]} {dp/result[213]} {dp/result[214]} {dp/result[215]} {dp/result[216]} {dp/result[217]} {dp/result[218]} {dp/result[219]} {dp/result[220]} {dp/result[221]} {dp/result[222]} {dp/result[223]} {dp/result[224]} {dp/result[225]} {dp/result[226]} {dp/result[227]} {dp/result[228]} {dp/result[229]} {dp/result[230]} {dp/result[231]} {dp/result[232]} {dp/result[233]} {dp/result[234]} {dp/result[235]} {dp/result[236]} {dp/result[237]} {dp/result[238]} {dp/result[239]} {dp/result[240]} {dp/result[241]} {dp/result[242]} {dp/result[243]} {dp/result[244]} {dp/result[245]} {dp/result[246]} {dp/result[247]} {dp/result[248]} {dp/result[249]} {dp/result[250]} {dp/result[251]} {dp/result[252]} {dp/result[253]} {dp/result[254]} {dp/result[255]} {dp/result[256]} {dp/result[257]} {dp/result[258]} {dp/result[259]} {dp/result[260]} {dp/result[261]} {dp/result[262]} {dp/result[263]} {dp/result[264]} {dp/result[265]} {dp/result[266]} {dp/result[267]} {dp/result[268]} {dp/result[269]} {dp/result[270]} {dp/result[271]} {dp/result[272]} {dp/result[273]} {dp/result[274]} {dp/result[275]} {dp/result[276]} {dp/result[277]} {dp/result[278]} {dp/result[279]} {dp/result[280]} {dp/result[281]} {dp/result[282]} {dp/result[283]} {dp/result[284]} {dp/result[285]} {dp/result[286]} {dp/result[287]} {dp/result[288]} {dp/result[289]} {dp/result[290]} {dp/result[291]} {dp/result[292]} {dp/result[293]} {dp/result[294]} {dp/result[295]} {dp/result[296]} {dp/result[297]} {dp/result[298]} {dp/result[299]} {dp/result[300]} {dp/result[301]} {dp/result[302]} {dp/result[303]} {dp/result[304]} {dp/result[305]} {dp/result[306]} {dp/result[307]} {dp/result[308]} {dp/result[309]} {dp/result[310]} {dp/result[311]} {dp/result[312]} {dp/result[313]} {dp/result[314]} {dp/result[315]} {dp/result[316]} {dp/result[317]} {dp/result[318]} {dp/result[319]}]]
+create_debug_port u_ila_0 probe
+set_property port_width 4 [get_debug_ports u_ila_0/probe1]
+connect_debug_port u_ila_0/probe1 [get_nets [list {max_result_buf[0]} {max_result_buf[1]} {max_result_buf[2]} {max_result_buf[3]}]]
+create_debug_port u_ila_0 probe
+set_property port_width 1 [get_debug_ports u_ila_0/probe2]
+connect_debug_port u_ila_0/probe2 [get_nets [list do_fp]]
+create_debug_port u_ila_0 probe
+set_property port_width 1 [get_debug_ports u_ila_0/probe3]
+connect_debug_port u_ila_0/probe3 [get_nets [list done]]
 set_property C_CLK_INPUT_FREQ_HZ 300000000 [get_debug_cores dbg_hub]
 set_property C_ENABLE_CLK_DIVIDER false [get_debug_cores dbg_hub]
 set_property C_USER_SCAN_CHAIN 1 [get_debug_cores dbg_hub]
