@@ -25,12 +25,12 @@
           <Attr Name="UsedIn" Val="implementation"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
-        <CompFileExtendedInfo CompFileName="framebuffer.bd" FileRelPathName="hdl/framebuffer.v"/>
-        <CompFileExtendedInfo CompFileName="framebuffer.bd" FileRelPathName="hdl/framebuffer.hwdef"/>
         <CompFileExtendedInfo CompFileName="framebuffer.bd" FileRelPathName="hw_handoff/framebuffer_bd.tcl"/>
         <CompFileExtendedInfo CompFileName="framebuffer.bd" FileRelPathName="hw_handoff/framebuffer.hwh"/>
         <CompFileExtendedInfo CompFileName="framebuffer.bd" FileRelPathName="framebuffer_ooc.xdc"/>
         <CompFileExtendedInfo CompFileName="framebuffer.bd" FileRelPathName="ip/framebuffer_blk_mem_gen_1_0/framebuffer_blk_mem_gen_1_0.xci"/>
+        <CompFileExtendedInfo CompFileName="framebuffer.bd" FileRelPathName="hdl/framebuffer.v"/>
+        <CompFileExtendedInfo CompFileName="framebuffer.bd" FileRelPathName="hdl/framebuffer.hwdef"/>
       </File>
       <File Path="$PSRCDIR/sources_1/new/video_unit.sv">
         <FileInfo>
@@ -198,12 +198,12 @@
           <Attr Name="UsedIn" Val="implementation"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
-        <CompFileExtendedInfo CompFileName="weights_1.bd" FileRelPathName="hdl/weights_1.v"/>
-        <CompFileExtendedInfo CompFileName="weights_1.bd" FileRelPathName="ip/weights_1_blk_mem_gen_0_0_1/weights_1_blk_mem_gen_0_0.xci"/>
         <CompFileExtendedInfo CompFileName="weights_1.bd" FileRelPathName="hdl/weights_1.hwdef"/>
         <CompFileExtendedInfo CompFileName="weights_1.bd" FileRelPathName="hw_handoff/weights_1_bd.tcl"/>
         <CompFileExtendedInfo CompFileName="weights_1.bd" FileRelPathName="hw_handoff/weights_1.hwh"/>
         <CompFileExtendedInfo CompFileName="weights_1.bd" FileRelPathName="weights_1_ooc.xdc"/>
+        <CompFileExtendedInfo CompFileName="weights_1.bd" FileRelPathName="hdl/weights_1.v"/>
+        <CompFileExtendedInfo CompFileName="weights_1.bd" FileRelPathName="ip/weights_1_blk_mem_gen_0_0_1/weights_1_blk_mem_gen_0_0.xci"/>
       </File>
       <File Path="$PSRCDIR/sources_1/imports/src/neuron.sv">
         <FileInfo>
@@ -338,7 +338,7 @@
       </Strategy>
       <GeneratedRun Dir="$PRUNDIR" File="gen_run.xml"/>
     </Run>
-    <Run Id="impl_1" Type="Ft2:EntireDesign" Part="xc7vx485tffg1761-2" ConstrsSet="constrs_1" Description="Vivado Implementation Defaults" State="current" SynthRun="synth_1">
+    <Run Id="impl_1" Type="Ft2:EntireDesign" Part="xc7vx485tffg1761-2" ConstrsSet="constrs_1" Description="Vivado Implementation Defaults" State="current" Dir="$PRUNDIR/impl_1" SynthRun="synth_1">
       <Strategy Version="1" Minor="2">
         <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2015"/>
         <Step Id="init_design"/>
@@ -351,6 +351,7 @@
         <Step Id="post_route_phys_opt_design"/>
         <Step Id="write_bitstream"/>
       </Strategy>
+      <GeneratedRun Dir="$PRUNDIR" File="gen_run.xml"/>
     </Run>
   </Runs>
   <MsgRule>
