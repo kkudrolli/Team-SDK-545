@@ -135,8 +135,8 @@ module ChipInterface(
     end
     
     
-    assign draw_image = (start || start_reg) && shift_count != 10'd784;
-    assign draw_pred = (done || done_reg) && shift_pred_count != 10'd784;
+    assign draw_image = (start || start_reg) && shift_count < 10'd784;
+    assign draw_pred = (done || done_reg) && shift_pred_count < 10'd784;
     
     //write FSM
     always_ff @(posedge uart_sampling_clk, posedge rst) begin
@@ -243,10 +243,10 @@ module ChipInterface(
                 //shift_image <= 1;
                 if (side) begin 
                     shift_count <= (shift_count == 10'd784) ? shift_count: shift_count + 10'd1;
-                    start_reg <= (shift_count == 10'd784) ? 1'b0 : start_reg;
+                    start_reg <= 1'b0;
                 end else begin
                     shift_pred_count <= (shift_pred_count == 10'd784) ? shift_pred_count: shift_pred_count + 10'd1;
-                    done_reg <= (shift_pred_count == 10'd784) ? 1'b0 : done_reg;
+                    done_reg <= 1'b0;
                 end
             end
         end

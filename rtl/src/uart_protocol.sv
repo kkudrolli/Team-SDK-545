@@ -67,7 +67,7 @@ module uart_protocol
         inc_data = 1'b0;
         clr_data = 1'b0;
         clr_image = 1'b0;
-
+        ns = s_start;
         case (cs)
             s_start: begin
                 ns = (data_rdy && uart_byte == `START) ? s_train : s_start;
