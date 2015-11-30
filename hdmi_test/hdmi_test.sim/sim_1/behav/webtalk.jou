@@ -2,9 +2,9 @@
 # Webtalk v2015.2 (64-bit)
 # SW Build 1266856 on Fri Jun 26 16:35:25 MDT 2015
 # IP Build 1264090 on Wed Jun 24 14:22:01 MDT 2015
-# Start of session at: Mon Nov 16 17:00:22 2015
-# Process ID: 10815
-# Log file: /afs/ece.cmu.edu/usr/dongjoop/Private/18545/Team-SDK-545/hdmi_test/hdmi_test.sim/sim_1/behav/webtalk.log
-# Journal file: /afs/ece.cmu.edu/usr/dongjoop/Private/18545/Team-SDK-545/hdmi_test/hdmi_test.sim/sim_1/behav/webtalk.jou
+# Start of session at: Mon Nov 23 23:53:48 2015
+# Process ID: 4667
+# Log file: /afs/ece.cmu.edu/usr/sohils/Private/18545/deep/hdmi_test/hdmi_test.sim/sim_1/behav/webtalk.log
+# Journal file: /afs/ece.cmu.edu/usr/sohils/Private/18545/deep/hdmi_test/hdmi_test.sim/sim_1/behav/webtalk.jou
 #-----------------------------------------------------------
-source /afs/ece.cmu.edu/usr/dongjoop/Private/18545/Team-SDK-545/hdmi_test/hdmi_test.sim/sim_1/behav/xsim.dir/test_behav/webtalk/xsim_webtalk.tcl -notrace
+source /afs/ece.cmu.edu/usr/sohils/Private/18545/deep/hdmi_test/hdmi_test.sim/sim_1/behav/xsim.dir/testbench_behav/webtalk/xsim_webtalk.tcl -notrace
