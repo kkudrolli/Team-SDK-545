@@ -59,12 +59,12 @@ module tile
    generate
       genvar i;
       for (i = 0; i < NUM_NEURONS; i++) begin
-         neuron layer0 (.clk(clk), .rst(rst), .clear(clear), .en (enable_0), .weight (weights0[i]), 
+         neuron layer0 (.clk(clk), .rst(rst), .clear(clear), .en (enable_0), .weight (weights0[NUM_NEURONS-i-1]), 
                 .data (image_reg[lay0_idx]), .accum (acc_lay0[i]));
          sigmoid_approx_fn act_lay0(.clk(clk), .rst(rst), .enable(enable_0), .in (acc_lay0[i]), .out (hidden[i]));
       end
       for (i = 0; i < OUTPUT_SZ; i++) begin
-         neuron layer1 (.clk(clk), .rst(rst), .clear(clear), .en (enable_1), .weight (weights1[i]),
+         neuron layer1 (.clk(clk), .rst(rst), .clear(clear), .en (enable_1), .weight (weights1[OUTPUT_SZ-i-1]),
                 .data (hidden[lay1_idx]), .accum (acc_lay1[i]));
          sigmoid_approx_fn act_lay1(.clk(clk), .rst(rst), .enable(enable_1), .in (acc_lay1[i]), .out (result[i]));
       end

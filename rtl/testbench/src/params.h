@@ -1,7 +1,7 @@
 #define MODE_MNIST
 #define MNIST_TEST_IMAGES 1
 
-#define IMPORT_FILE "networks/best.deep"
+#define IMPORT_FILE "networks/ideal.deep"
 
 #define TEST_DIR "./test_imgs/"
 
