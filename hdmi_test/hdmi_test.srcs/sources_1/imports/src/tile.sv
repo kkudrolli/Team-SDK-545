@@ -81,30 +81,31 @@ module tile
       inc_dcnt = 1'b0;
       case (cs)
         S_IDLE: begin
-           clear = start;
-           ns = start ? S_DELAY1 : S_IDLE;
-           get_weights0 = start;
+           clear = (start) ? 1'b1 : 1'b0;
+           ns = (start) ? S_DELAY1 : S_IDLE;
+           get_weights0 = (start) ? 1'b1 : 1'b0;
         end
 
         S_DELAY1: ns = S_PROP_LAYER1;
 
         S_PROP_LAYER1: begin
-           ns = lay0_idx < IMG_SZ ? S_PROP_LAYER1 : S_DELAY2;
-           get_weights1 = lay0_idx >= IMG_SZ;
-           enable_0 = 1;
+           ns = (lay0_idx < IMG_SZ) ? S_PROP_LAYER1 : S_DELAY2;
+           get_weights1 = (lay0_idx >= IMG_SZ) ? 1'b1 : 1'b0;
+           enable_0 = 1'b1;
         end
     
         S_DELAY2: ns = S_PROP_LAYER2;
     
         S_PROP_LAYER2: begin
-           enable_1 = 1;
-           ns = lay1_idx < NUM_NEURONS ? S_PROP_LAYER2 : S_DONE;
+           enable_1 = 1'b1;
+           ns = (lay1_idx < NUM_NEURONS) ? S_PROP_LAYER2 : S_DONE;
         end
     
         S_DONE: begin
            done = 1'b1;
            inc_dcnt = 1'b1;
            ns = (done_count == 5'd31) ? S_IDLE : S_DONE;
+           clear = (done_count == 5'd31) ? 1'b1 : 1'b0;
         end
     
         default: ns = S_IDLE;	 

@@ -50,7 +50,7 @@ module deep
 endmodule: deep
 
 
-module testbench();
+/*module testbench();
 
     // Inputs
     logic                clk, rst;
@@ -99,5 +99,5 @@ module testbench();
         $finish;
     end
 
-endmodule
+endmodule*/
 

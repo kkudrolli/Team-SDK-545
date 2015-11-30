@@ -22,10 +22,10 @@ module ChipInterface(
     output logic            HDMI_TX_VS
     );
 
-    logic clk; // 200 MHz clock because it just uses the board clock
+    logic clk_200MHz, clk; // 200 MHz clock because it just uses the board clock
    
     IBUFDS #(.DIFF_TERM("TRUE"), .IBUF_LOW_PWR("TRUE"), .IOSTANDARD("DEFAULT"))
-             clk_ibufds (.O(clk), .I(SYSCLK_P), .IB(SYSCLK_N));
+             clk_ibufds (.O(clk_200MHz), .I(SYSCLK_P), .IB(SYSCLK_N));
    
     logic                uart_sampling_clk, byte_ready, start, train, resend,
                          start_buf, train_buf, ack, ack_buf, do_fp, do_bp, draw,
@@ -252,8 +252,8 @@ module ChipInterface(
 
      logic sysclk;  
               
-     clock ck (.clk_in1 (clk), .clk_out1 (HDMI_TX_CLK), .clk_out2 (sysclk), .clk_out3(uart_sampling_clk),
-                       .reset (rst));
+     clock ck (.clk_in1 (clk_200MHz), .clk_out1 (HDMI_TX_CLK), .clk_out2 (sysclk), .clk_out3(uart_sampling_clk),
+               .clk_out4(clk), .reset (rst));
   
      hdmi encoder (.clk (HDMI_TX_CLK), .rst (rst), .hsync (HDMI_TX_HS), .vsync (HDMI_TX_VS), 
                    .addr (addr), .de (HDMI_TX_DE));
