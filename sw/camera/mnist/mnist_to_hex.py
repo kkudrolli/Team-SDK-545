@@ -36,7 +36,7 @@ def print_num(hex_string):
 def mnist_to_bin(mnist_name):
     mnist_file = open(mnist_name, FILE_MODE);
     header = mnist_file.read(IMAGE_HEADER_SIZE)
-    for i in header: print format(ord(i), 'x')
+    #for i in header: print format(ord(i), 'x')
 
     num_images = ord(header[NUM_ITEMS_OFFSET:NUM_ITEMS_OFFSET+1])
     #print num_images

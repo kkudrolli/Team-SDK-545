@@ -33,9 +33,14 @@ module weights(input clka, rst,
                         .BRAM_PORTA_dout(douta_1),
                         .BRAM_PORTA_we(1'b0));
 
-    always_ff @(posedge clka) begin // processingPrev is the value of processing signal one cycle before
-        processingPrev_0 <= processing_0;
-        processingPrev_1 <= processing_1;
+    always_ff @(posedge clka, posedge rst) begin // processingPrev is the value of processing signal one cycle before
+        if (rst) begin
+            processingPrev_0 <= 1'b0;
+            processingPrev_1 <= 1'b0;
+        end else begin
+            processingPrev_0 <= processing_0;
+            processingPrev_1 <= processing_1;
+        end
     end
 
     integer i;
@@ -56,7 +61,7 @@ module weights(input clka, rst,
     end
 
     // READING
-    always_ff @(posedge clka or posedge rst) begin
+    always_ff @(posedge clka, posedge rst) begin
         if(rst) begin
             addra_0 <= 0;
             addra_1 <= 0;
@@ -67,7 +72,7 @@ module weights(input clka, rst,
         end
         else begin
             if(processing_0) begin // processing weight request for layer 0, 784 cycles long
-                if (counter_0<784) begin
+                if (counter_0 < 784) begin
                     addra_0 <= addra_0 + 1;
                     counter_0 <= counter_0 + 1;
                 end
@@ -82,7 +87,7 @@ module weights(input clka, rst,
                 counter_0 <= counter_0 + 1;
             end            
             if(processing_1) begin // processing weight request for layer 1, 128 cycles long
-                if (counter_1<128) begin
+                if (counter_1 < 128) begin
                     addra_1 <= addra_1 + 1;
                     counter_1 <= counter_1 + 1;
                 end

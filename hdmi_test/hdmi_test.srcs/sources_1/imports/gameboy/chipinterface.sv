@@ -55,9 +55,6 @@ module ChipInterface(
     assign rts_probe = USB_RTS;
     assign rx_probe = USB_RX;
     
-    // Divide system clk to get slower uart_sampling_clk
-    //uart_clock_divider div(.clk(clk), .rst(rst), .uart_sampling_clk(uart_sampling_clk));
-    
     always_comb begin
         case (sel)
             2'b00: LEDS = {recv_state[1:0], draw_image, cs_ctrl[1:0], cs[2:0]};

@@ -47,20 +47,26 @@ module tile
          done_count <= (inc_dcnt) ? done_count + 5'd1 : done_count;
      end
 
-   always_ff @(posedge clk)
-     if (start) image_reg <= image;   
+   // Register the image because it might change later
+   always_ff @(posedge clk, posedge rst) begin
+       if (rst) begin
+           image_reg <= 'd0;
+       end else if (start) begin
+           image_reg <= image;
+       end   
+   end
    
    generate
       genvar i;
       for (i = 0; i < NUM_NEURONS; i++) begin
-         neuron layer0 (.clk, .rst, .clear, .en (enable_0), .weight (weights0[i]), 
+         neuron layer0 (.clk(clk), .rst(rst), .clear(clear), .en (enable_0), .weight (weights0[i]), 
                 .data (image_reg[lay0_idx]), .accum (acc_lay0[i]));
-         sigmoid_approx_fn act_lay0(.clk, .rst, .enable(enable_0), .in (acc_lay0[i]), .out (hidden[i]));
+         sigmoid_approx_fn act_lay0(.clk(clk), .rst(rst), .enable(enable_0), .in (acc_lay0[i]), .out (hidden[i]));
       end
       for (i = 0; i < OUTPUT_SZ; i++) begin
-         neuron layer1 (.clk, .rst, .clear, .en (enable_1), .weight (weights1[i]),
+         neuron layer1 (.clk(clk), .rst(rst), .clear(clear), .en (enable_1), .weight (weights1[i]),
                 .data (hidden[lay1_idx]), .accum (acc_lay1[i]));
-         sigmoid_approx_fn act_lay1(.clk, .rst, .enable(enable_1), .in (acc_lay1[i]), .out (result[i]));
+         sigmoid_approx_fn act_lay1(.clk(clk), .rst(rst), .enable(enable_1), .in (acc_lay1[i]), .out (result[i]));
       end
    endgenerate
 
@@ -103,8 +109,8 @@ module tile
 
    always_ff @(posedge clk, posedge rst) begin
       if (rst) begin
-	 lay0_idx <= '0;
-	 lay1_idx <= '0;
+	      lay0_idx <= '0;
+	      lay1_idx <= '0;
       end
       else begin
          case (cs)

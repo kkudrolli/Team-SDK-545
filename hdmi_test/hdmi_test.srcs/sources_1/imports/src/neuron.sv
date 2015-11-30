@@ -35,10 +35,9 @@ module neuron
    assign value = fixed_mult(data, weight);
    
    always_ff @(posedge clk, posedge rst) begin
-      if (rst) accum <= 32'b0;
+      if (rst)        accum <= 32'b0;
       else if (clear) accum <= 32'b0;
-      else if (en)
-	 accum <= accum + value;
+      else if (en)    accum <= accum + value;
    end
    
 endmodule: neuron
