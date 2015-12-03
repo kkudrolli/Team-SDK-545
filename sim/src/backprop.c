@@ -73,9 +73,9 @@ uint32_t backpropogate (network_t network, vector_t image, vector_t ideal) {
 
     vector_destroy(delta);
     vector_t fnet = evaluate_activation(nets[i], network->activation_fn_drv);
-    vector_t err = vmult(weight_t_del, fnet);
-    delta = vmult(err, outputs[i]);
-    vector_destroy(err);
+    delta = vmult(weight_t_del, fnet);
+    //delta = vmult(err, outputs[i]);
+    //vector_destroy(err);
     vector_destroy(fnet);
     vector_destroy(weight_t_del);
   }

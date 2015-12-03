@@ -40,8 +40,9 @@ module tile
 
    always_ff @(posedge clk)
      if (start) image_reg <= image;   
-   
 
+   
+   // Generate Forward Propagation Neurons
    generate
       genvar i;
       for (i = 0; i < NUM_NEURONS; i++) begin
@@ -56,6 +57,19 @@ module tile
       end
    endgenerate
 
+
+   // Generate Backwards Propagation Neurons
+   generate
+      genvar i;
+      for (i = 0; i < NUM_NEURONS; i++) begin
+	 
+      end
+      for (i = 0; i < OUTPUT_SZ; i++) begin
+	 multiplier mult(ideal[i], hidden[i], wout1[i]);
+      end
+   endgenerate
+
+   
    always_comb begin
       done = 1'b0;
       clear = 1'b0;
@@ -70,17 +84,25 @@ module tile
 	   get_weights0 = start;
 	end
 
-	S_PROP_LAYER1: begin
+	S_FPROP_LAYER1: begin
 	   ns = lay0_idx < IMG_SZ ? S_PROP_LAYER1 : S_PROP_LAYER2;
 	   get_weights1 = lay0_idx >= IMG_SZ;
 	   enable_0 = 1;
 	end
 
-	S_PROP_LAYER2: begin
+	S_FPROP_LAYER2: begin
 	   enable_1 = 1;
 	   ns = lay1_idx < NUM_NEURONS ? S_PROP_LAYER2 : S_DONE;
 	end
 
+	S_BPROP_LAYER2: begin
+
+	end
+
+	S_BPROP_LAYER1: begin
+
+	end
+	
 	S_DONE: begin
 	   done = 1'b1;
 	   ns = S_IDLE;

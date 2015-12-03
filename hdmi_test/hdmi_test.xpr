@@ -25,12 +25,6 @@
           <Attr Name="UsedIn" Val="implementation"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
-        <CompFileExtendedInfo CompFileName="framebuffer.bd" FileRelPathName="ip/framebuffer_blk_mem_gen_1_0/framebuffer_blk_mem_gen_1_0.xci"/>
-        <CompFileExtendedInfo CompFileName="framebuffer.bd" FileRelPathName="hdl/framebuffer.v"/>
-        <CompFileExtendedInfo CompFileName="framebuffer.bd" FileRelPathName="hdl/framebuffer.hwdef"/>
-        <CompFileExtendedInfo CompFileName="framebuffer.bd" FileRelPathName="hw_handoff/framebuffer_bd.tcl"/>
-        <CompFileExtendedInfo CompFileName="framebuffer.bd" FileRelPathName="hw_handoff/framebuffer.hwh"/>
-        <CompFileExtendedInfo CompFileName="framebuffer.bd" FileRelPathName="framebuffer_ooc.xdc"/>
       </File>
       <File Path="$PSRCDIR/sources_1/new/video_unit.sv">
         <FileInfo>
@@ -185,12 +179,6 @@
           <Attr Name="UsedIn" Val="implementation"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
-        <CompFileExtendedInfo CompFileName="weights_0.bd" FileRelPathName="hdl/weights_0.hwdef"/>
-        <CompFileExtendedInfo CompFileName="weights_0.bd" FileRelPathName="hw_handoff/weights_0_bd.tcl"/>
-        <CompFileExtendedInfo CompFileName="weights_0.bd" FileRelPathName="hw_handoff/weights_0.hwh"/>
-        <CompFileExtendedInfo CompFileName="weights_0.bd" FileRelPathName="weights_0_ooc.xdc"/>
-        <CompFileExtendedInfo CompFileName="weights_0.bd" FileRelPathName="hdl/weights_0.v"/>
-        <CompFileExtendedInfo CompFileName="weights_0.bd" FileRelPathName="ip/weights_0_blk_mem_gen_0_0_1/weights_0_blk_mem_gen_0_0.xci"/>
       </File>
       <File Path="$PSRCDIR/sources_1/bd/weights_1/weights_1.bd">
         <FileInfo>
@@ -198,12 +186,6 @@
           <Attr Name="UsedIn" Val="implementation"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
-        <CompFileExtendedInfo CompFileName="weights_1.bd" FileRelPathName="hw_handoff/weights_1.hwh"/>
-        <CompFileExtendedInfo CompFileName="weights_1.bd" FileRelPathName="weights_1_ooc.xdc"/>
-        <CompFileExtendedInfo CompFileName="weights_1.bd" FileRelPathName="hdl/weights_1.v"/>
-        <CompFileExtendedInfo CompFileName="weights_1.bd" FileRelPathName="ip/weights_1_blk_mem_gen_0_0_1/weights_1_blk_mem_gen_0_0.xci"/>
-        <CompFileExtendedInfo CompFileName="weights_1.bd" FileRelPathName="hdl/weights_1.hwdef"/>
-        <CompFileExtendedInfo CompFileName="weights_1.bd" FileRelPathName="hw_handoff/weights_1_bd.tcl"/>
       </File>
       <File Path="$PSRCDIR/sources_1/imports/src/neuron.sv">
         <FileInfo>
@@ -273,7 +255,6 @@
           <Attr Name="UsedIn" Val="implementation"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
-        <CompFileExtendedInfo CompFileName="clock.bd" FileRelPathName="ip/clock_clk_wiz_0_0/clock_clk_wiz_0_0.xci"/>
       </File>
       <Config>
         <Option Name="DesignMode" Val="RTL"/>
