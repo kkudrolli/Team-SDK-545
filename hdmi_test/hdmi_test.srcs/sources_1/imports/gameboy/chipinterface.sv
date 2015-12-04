@@ -35,9 +35,9 @@ module ChipInterface(
     logic [1:0]          recv_state, cs_ctrl, cs_trans;
     logic [(784<<3)-1:0] image, image_buf, image_out, image_shift_buf, pred_image, pred_image_buf;
     
-    logic [18:0] addr, addr_w;
-    logic [31:0] data_in;
-    logic [3:0]  we;
+    logic [18:0] addr, addr_w, addr_w_mux, addr_w_graph;
+    logic [31:0] data_in, data_in_mux, data_in_graph;
+    logic [3:0]  we, we_mux, we_graph;
     
     logic shift_image, shift_pred;
     logic [9:0] shift_count, data_count, shift_pred_count;
@@ -49,6 +49,9 @@ module ChipInterface(
     
     logic [7:0] max_result, max_result_buf;
     logic done, done_reg, start_reg;
+
+    logic start_graph, graphing;
+    logic [7:0] second, third;
     
     logic [9:0][31:0] result;
     
@@ -132,8 +135,8 @@ module ChipInterface(
     end
     
     
-    assign draw_image = (start || start_reg) && shift_count < 10'd784;
-    assign draw_pred = (done || done_reg) && shift_pred_count < 10'd784;
+    assign draw_image = (start || start_reg) && (shift_count < 10'd784) && (~graphing);
+    assign draw_pred = (done || done_reg) && (shift_pred_count < 10'd784) && (~graphing);
     
     //write FSM
     always_ff @(posedge uart_sampling_clk, posedge rst) begin
@@ -154,6 +157,8 @@ module ChipInterface(
             start_reg <= 1'b0;
         end
         else begin
+            start_graph <= 1'b0;
+
             // Buffer start and done signals, deassert at end of drawing the image
             if (start) begin
                 start_reg <= 1'b1;
@@ -244,6 +249,7 @@ module ChipInterface(
                 end else begin
                     shift_pred_count <= (shift_pred_count == 10'd784) ? shift_pred_count: shift_pred_count + 10'd1;
                     done_reg <= 1'b0;
+                    start_graph <= 1'b1;
                 end
             end
         end
@@ -259,7 +265,7 @@ module ChipInterface(
                    .addr (addr), .de (HDMI_TX_DE));
      
      video_unit v (.clka(uart_sampling_clk), .clkb (HDMI_TX_CLK), .de (1'b1), .addr_r (addr), .data (HDMI_TX_D), 
-                  .we (we), .data_in (data_in), .addr_w (addr_w));
+                  .we (we_mux), .data_in (data_in_mux), .addr_w (addr_w_mux));
      
      reg [4:0] outA;
      reg       stop;
@@ -293,17 +299,38 @@ module ChipInterface(
        end
    end
     
+    // Mux hdmi signals so bar graph and write fsm don't conflict
+    assign addr_w_mux = (graphing) ? addr_w_graph : addr_w;
+    assign data_in_mux = (graphing) ? data_in_graph : data_in;
+    assign we_mux = (graphing) ? we_graph : we;
+
     logic [31:0] max;
     integer 	i;
     always_comb begin
       max = result[0];
       max_result = 0;
+      second = 0;
+      third = 0;
       for (i = 1; i < 10; i++) begin
          if (result[i] > max) begin
             max = result[i];
+            third = second;
+            second = max_result;
             max_result = i;
          end 
+         else if (result[i] > second) begin
+             third = second;
+             second = i;
+         end
+         else if (result[i] > third) begin
+             third = i;
+         end
       end
     end
+
+    bar_graph bar (.clk(uart_sampling_clk), .rst(rst), .start_graph(start_graph), .done(done), 
+                   .first(max_result), .second(second), .third(third), .result(result), 
+                   .graphing(graphing),
+                   .we(we_graph), .addr_w(addr_w_graph), .data_in(data_in_graph));
 
 endmodule: ChipInterface
