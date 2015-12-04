@@ -21,7 +21,7 @@ module ChipInterface(
     output logic            HDMI_TX_HS,
     output logic            HDMI_TX_VS
     );
-
+    
     logic clk_200MHz, clk; // 200 MHz clock because it just uses the board clock
    
     IBUFDS #(.DIFF_TERM("TRUE"), .IBUF_LOW_PWR("TRUE"), .IOSTANDARD("DEFAULT"))
@@ -190,11 +190,11 @@ module ChipInterface(
 
             // Still same pixel
             if(processingPixel && row_counter_small<10) begin                
-                if(col_counter_small<9) begin
+                if (row_counter_small == 9) we <= 0;
+                if (col_counter_small<9) begin
                     col_counter_small <= col_counter_small+1;
                     addr_w <= addr_w+1;
-                end
-                else begin // col_counter_small==10
+                end else begin // col_counter_small==10
                     col_counter_small <= 0;
                     addr_w <= addr_w+711;
                     row_counter_small <= row_counter_small+1;
@@ -203,7 +203,6 @@ module ChipInterface(
 
             // Done with this pixel && still same row_large
             else if (processingPixel && row_counter_small==10 && col_counter_large<27 && row_counter_large<28) begin
-                we <= 0;
                 processingPixel <= 0; // wait for new uart_byte_buf
                 col_counter_small <= 0;
                 row_counter_small <= 0;
@@ -219,7 +218,6 @@ module ChipInterface(
 
             // Need to go to next row_large
             else if(processingPixel && row_counter_small==10 && col_counter_large==27 && row_counter_large<27) begin
-                we <= 0;
                 processingPixel <= 0; // wait for new uart_byte_buf
                 col_counter_small <= 0;
                 row_counter_small <= 0;
@@ -236,7 +234,6 @@ module ChipInterface(
 
             // Done with this digit
             else if(processingPixel && row_counter_small==10 && col_counter_large==27 && row_counter_large==27) begin
-                we <= 0;
                 processingPixel <= 0; // wait for new uart_byte_buf
                 col_counter_small <= 0;
                 row_counter_small <= 0;
