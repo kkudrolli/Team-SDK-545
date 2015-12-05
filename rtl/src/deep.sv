@@ -67,16 +67,22 @@ module deep
    logic [127:0] [31:0]       weights0;
    logic [9:0] [31:0] 	      weights1;
 
+   logic [127:0] [31:0]       wchange0;
+   logic [9:0] [31:0] 	      wchange1;
+
+   logic 		      update0, update1;   
+   
    assign done = fp_done;
 
    control_unit cu (.clk, .rst, .start, .train (1'b0), .bp_done (1'b0), .fp_done, 
 		    .drawn (1'b1), .label_in (), .image_in (), .do_fp, .do_bp, 
 		    .draw, .ack, .label_out (), .image_out ());
    
-   tile t (.clk, .rst, .start (do_fp), .done (fp_done), .get_weights0, .get_weights1, 
-	   .image (image_in), .weights0, .weights1, .result);
+   tile t (.clk, .rst, .start_fp (do_fp), .start_bp (do_bp), .done (fp_done), .get_weights0, 
+	   .get_weights1, .image (image_in), .weights0, .weights1, .result, .wchange0, .wchange1);
    
    weights wf (.clka (clk), .rst, .start_0 (get_weights0), .start_1 (get_weights1), 
-	      .values_0 (weights0), .values_1 (weights1));
+	      .values_0 (weights0), .values_1 (weights1), .update_0 (update0), 
+	       .update_1 (update1), .deltaWeights_0 (wchange0), .deltaWeights_1 (wchange1));
    
 endmodule: deep
