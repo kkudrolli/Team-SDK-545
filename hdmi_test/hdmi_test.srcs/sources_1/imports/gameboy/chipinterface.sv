@@ -190,7 +190,7 @@ module ChipInterface(
 
             // Still same pixel
             if(processingPixel && row_counter_small<10) begin                
-                if (row_counter_small == 9) we <= 0;
+                //if (row_counter_small == 9) we <= 0;
                 if (col_counter_small<9) begin
                     col_counter_small <= col_counter_small+1;
                     addr_w <= addr_w+1;
@@ -207,6 +207,7 @@ module ChipInterface(
                 col_counter_small <= 0;
                 row_counter_small <= 0;
                 col_counter_large <= col_counter_large+1;
+                we <= 0;
                 if (side) begin 
                     shift_image <= 1;
                     shift_count <= (shift_count == 10'd784) ? shift_count: shift_count + 10'd1;
@@ -223,6 +224,7 @@ module ChipInterface(
                 row_counter_small <= 0;
                 col_counter_large <= 0;
                 row_counter_large <= row_counter_large+1;
+                we <= 0;
                 if (side) begin 
                     shift_image <= 1;
                     shift_count <= (shift_count == 10'd784) ? shift_count: shift_count + 10'd1;
@@ -238,8 +240,8 @@ module ChipInterface(
                 col_counter_small <= 0;
                 row_counter_small <= 0;
                 col_counter_large <= 0;
-                row_counter_large <= 0;              
-                //shift_image <= 1;
+                row_counter_large <= 0;
+                we <= 0;
                 if (side) begin 
                     shift_count <= (shift_count == 10'd784) ? shift_count: shift_count + 10'd1;
                     start_reg <= 1'b0;
