@@ -18,7 +18,7 @@ class bcolors:
     UNDERLINE = '\033[4m'
 
 FILE_MODE = "rb"
-HDR_SZ = 122
+HDR_SZ = 54
 IMG_SZ = 784
 
 def print_num(hex_string):
@@ -39,7 +39,7 @@ def bmp_to_bin(bmp_name):
     hex_string = ""
     for i in xrange(0, IMG_SZ*3):
         byte = bmp_file.read(1)
-        #print ("_" + byte + "_"),
+        #print (str(i) + "_" + byte + "_"),
         byte_str = format(ord(byte), 'x')
         if (len(byte_str) == 1):
             byte_str = "0" + byte_str

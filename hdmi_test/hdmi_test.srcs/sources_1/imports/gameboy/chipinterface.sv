@@ -52,7 +52,7 @@ module ChipInterface(
 
     logic start_graph, graphing;
     
-    logic [9:0][31:0] result;
+    logic [9:0][31:0] result, result_buf;
     
     assign rts_probe = USB_RTS;
     assign rx_probe = USB_RX;
@@ -127,8 +127,11 @@ module ChipInterface(
                                ((shift_image) ? {image_shift_buf[7:0], image_shift_buf[(784<<3)-1:8]} : 
                                               image_shift_buf);
             // Shifts top to bottom bc image is reversed
-            pred_image_buf <= (done) ? pred_image :
+            /*pred_image_buf <= (done) ? pred_image :
                                ((shift_pred) ? {pred_image_buf[(784<<3)-9:0], pred_image_buf[(784<<3)-1:(784<<3)-8]} : 
+                                               pred_image_buf);*/
+            pred_image_buf <= (done) ? pred_image :
+                              ((shift_pred) ? {pred_image_buf[7:0], pred_image_buf[(784<<3)-1:8]} : 
                                                pred_image_buf);
         end 
     end
@@ -179,7 +182,8 @@ module ChipInterface(
             // Start drawing prediction image
             else if (draw_pred) begin
                 processingPixel <= 1;
-                data_in <= {pred_image_buf[(784<<3)-1:(784<<3)-8], pred_image_buf[(784<<3)-1:(784<<3)-8], pred_image_buf[(784<<3)-1:(784<<3)-8]};
+                //data_in <= {pred_image_buf[(784<<3)-1:(784<<3)-8], pred_image_buf[(784<<3)-1:(784<<3)-8], pred_image_buf[(784<<3)-1:(784<<3)-8]};
+                data_in <= {pred_image_buf[7:0], pred_image_buf[7:0], pred_image_buf[7:0]};
                 we <= 1;
                 side <= 0;
                 shift_pred <= 0;
@@ -284,16 +288,26 @@ module ChipInterface(
    //---- TOP LEVEL NEURAL NETWORK MODULE INSTANTIATION -----//
    //-------------------------------------------------------------------------------------------------------------//
    deep dp (.clk (clk), .rst (rst), .do_fp (do_fp), .label_in (label_out),  .image_in (image_out), 
-            .result (result), .done (done_net));                                        
+            .result (result), .done (done));                                        
 
    num_to_image n2i (.num(max_result_buf[3:0]), .image(pred_image));
-
+    
+   //logic buffed;
    always_ff @(posedge clk, posedge rst) begin
        if (rst) begin
            max_result_buf <= 'd0;
+           result_buf <='d0;
+           //buffed <= 1'b0;
        end
-       else if (done) begin
-           max_result_buf <= max_result;
+       else begin 
+           if (done) begin
+               max_result_buf <= max_result;
+               //buffed <= 1'b0;
+           end
+           /*if (done_net & ~buffed) begin
+               result_buf <= result;
+               buffed <= 1'b1;
+           end*/
        end
    end
     
@@ -301,9 +315,45 @@ module ChipInterface(
     assign addr_w_mux = (graphing) ? addr_w_graph : addr_w;
     assign data_in_mux = (graphing) ? data_in_graph : data_in;
     assign we_mux = (graphing) ? we_graph : we;
+    
+    logic [31:0] max, second, third; // The actual activation, result is the digit
+    integer     i;
+    always_comb begin
+      max = result[0];
+      max_result = 0;
+      //second = 0;
+      //second_result = 0;
+      //third = 0;
+      //third_result = 0;
+      for (i = 1; i < 10; i++) begin
+         if (result[i] > max) begin
+            //third = second;
+            //third_result = second_result;
+            //second = max;
+            //second_result = max_result;
+            max_result = i;
+            max = result[i];
+         end 
+         /*else if (result[i] > second_result) begin
+             third = second;
+             third_result = second_result;
+             second_result = i;
+             second = result[i];
+         end
+         else if (result[i] > third_result) begin
+             third = result[i];
+             third_result = i;
+         end*/
+      end
+    end
+    
+    bar_graph bar (.clk(uart_sampling_clk), .rst(rst), .start_graph(start_graph), .done(done), 
+                   .first(max_result), .second(second_result), .third(third_result), .result(result), 
+                   .graphing(graphing),
+                   .we(we_graph), .addr_w(addr_w_graph), .data_in(data_in_graph));
 
     // Pipeline the max calculation
-    logic [31:0] max, second, third; // The actual activation, result is the digit
+    /*logic [31:0] max, second, third; // The actual activation, result is the digit
     logic [3:0]  i;
     always_ff @(posedge clk, posedge rst) begin
         if (rst) begin
@@ -318,8 +368,8 @@ module ChipInterface(
         
             i <= (i == 9) ? 4'd0 : i + 4'd1;
             
-            if (result[i] > max) begin
-                max <= result[i];
+            if (result_buf[i] > max) begin
+                max <= result_buf[i];
                 max_result <= i;
                 second <= max;
                 second_result <= max_result;
@@ -356,11 +406,7 @@ module ChipInterface(
             done_pipe[9] <= done_pipe[8];
             done <= done_pipe[9];
         end
-    end
+    end*/
 
-    bar_graph bar (.clk(uart_sampling_clk), .rst(rst), .start_graph(start_graph), .done(done), 
-                   .first(max_result), .second(second_result), .third(third_result), .result(result), 
-                   .graphing(graphing),
-                   .we(we_graph), .addr_w(addr_w_graph), .data_in(data_in_graph));
 
 endmodule: ChipInterface
