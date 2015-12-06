@@ -47,7 +47,7 @@ int main()
    */
   
   
-  mnist_images_t mnist_data = read_images(1);
+  mnist_images_t mnist_data = read_images(0);
   mnist_images_t mnist_test = read_images(0);
 
 #ifdef DEBUG
@@ -58,7 +58,7 @@ int main()
   printf("]\n");
 #endif
   
-  mnist_labels_t mnist_labels = read_labels(1);
+  mnist_labels_t mnist_labels = read_labels(0);
   mnist_labels_t mnist_test_l = read_labels(0);
 
 #ifdef DEBUG
@@ -82,9 +82,11 @@ int main()
 #ifdef IMPORT
   network_t network = import_network(IMPORT_FILE);
 #else
+  network_t network = Network(NUM_LAYERS, 784, 10, ACTIVATION_FN, ACTIVATION_DRV);
+#endif
 
 #ifdef MODE_MNIST
-  network_t network = Network(NUM_LAYERS, 784, 10, ACTIVATION_FN, ACTIVATION_DRV);
+
 
   /* 
    * Loop over entries in directory, read each bitmap file,  and 
@@ -123,8 +125,6 @@ int main()
   }
 
 #else
-
-  network_t network = Network(NUM_LAYERS, 5625, 10, ACTIVATION_FN, ACTIVATION_DRV);
 
   dir_ptr = Opendir(TEST_PICS_DIR);
   if (!dir_ptr) {
@@ -261,7 +261,6 @@ int main()
   vector_destroy(result);
   vector_destroy(image);
 #endif
-#endif
 
 #ifdef MODE_MNIST
   printf(BOLD UNDERLINE "\n\nBackpropogation complete! Testing images...\n" NORMAL);
@@ -274,15 +273,13 @@ int main()
 
   for (int i = 0 ; i < MNIST_TEST_IMAGES; i++) {
     vector_t ideal = gen_target(mnist_test_l->labels->data[i]);
-    for (int j = 0; j < INNER_ITER; j++) {      
-      int test_num = mnist_test_l->labels->data[i];
-      printf("\nTesting image of %d:\n", test_num);
-      vector_t result = evaluate_image(network, mnist_test->imgs[i]);
-      int classification = classify(result, 0);
-      if (classification == test_num) correct++;
-      else mistakes[test_num][classification]++;
-      vector_destroy(result);
-    }
+    int test_num = mnist_test_l->labels->data[i];
+    printf("\nTesting image of %d:\n", test_num);
+    vector_t result = evaluate_image(network, mnist_test->imgs[i]);
+    int classification = classify(result, 0);
+    if (classification == test_num) correct++;
+    else mistakes[test_num][classification]++;
+    vector_destroy(result);
   }
 
   int err_actual = 0;

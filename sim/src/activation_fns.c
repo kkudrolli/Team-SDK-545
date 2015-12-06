@@ -55,11 +55,11 @@ uint32_t piecewise_sigmoid(uint32_t in)
   if (in >= FIXED_5) {
     return FIXED_1;
   } else if ((in >= FIXED_2_375) && (in < FIXED_5)) {
-    return fixed_mult(FIXED_0_03125, in);
+    return fixed_mult(FIXED_0_03125, in) + FIXED_0_84375;
   } else if ((in >= FIXED_1) && (in < FIXED_2_375)) {
-    return fixed_mult(FIXED_0_125, in);
+    return fixed_mult(FIXED_0_125, in) + FIXED_0_625;
   } else {
-    return fixed_mult(FIXED_0_25, in);
+    return fixed_mult(FIXED_0_25, in) + FIXED_0_5;
   }
 }
 

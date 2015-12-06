@@ -57,6 +57,8 @@ vector_t vadd(vector_t v1, vector_t v2);
 uint32_t fmult(uint32_t x, uint32_t y);
 uint32_t fdiv(uint32_t x, uint32_t y);
 
+void vprint(vector_t v);
+
 float fixed_to_float(uint32_t x);
 
 #endif

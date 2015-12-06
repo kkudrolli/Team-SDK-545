@@ -93,14 +93,15 @@ vector_t read_bitmap(char *filename)
         Free(image_data);
         Fclose(image);
         return NULL;
-    }
+    }    
 
 #ifdef IMAGE_IO_DBG
     printf("DATA: \n[ ");
-    for (uint32_t i = 0; i < num_bytes; i++) {
-        printf("%x ", image_data[i]);
+    for (uint32_t i = 0; i < num_bytes; i+=3) {
+      printf("%02x%02x%02x,\n", image_data[i+2], image_data[i+1], image_data[i]);
     }
     printf("]\n");
+    exit(0);
 #endif
 
     // TODO: put this in a function

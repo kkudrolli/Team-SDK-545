@@ -140,7 +140,7 @@ inline void vprint(vector_t v) {
   assert(v);
 
   for (uint32_t i = 0; i < v->length; i++) 
-    printf("v[%u] = %u\n", i, v->data[i]);
+    printf("v[%u] = %08x\n", i, v->data[i]);
 }
 
 /**

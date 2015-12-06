@@ -52,7 +52,7 @@ uint32_t backpropogate (network_t network, vector_t image, vector_t ideal) {
   }
 
   vector_t delta = vsub(ideal, outputs[network->num_layers]);
-
+  
   //epsilon = delta->data[0];
   
   for (uint32_t i = network->num_layers - 1; i > 0; i--) {

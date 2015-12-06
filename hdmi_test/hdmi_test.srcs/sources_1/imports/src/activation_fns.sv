@@ -140,25 +140,26 @@ module sigmoid_approx_fn(input [31:0] in,
 
 endmodule: sigmoid_approx_fn*/
 
-/*
-module sigmoid_approx_drv(input [31:0] in,
+module sigmoid_approx_drv(input logic [31:0] in,
+			  input logic clk, rst, en,
                           output logic [31:0] out);
 
-    logic [31:0] out_saf;
+   logic [31:0] 			      out_saf;
 
-	function logic [31:0] fixed_mult(logic [31:0] a,b);
-		logic [63:0] a_64,b_64,c_64;
-		a_64 = a;
-		b_64 = b;
-		c_64 = a_64*b_64;
-		c_64 = (c_64>>16);
-		fixed_mult = c_64[31:0]; 
-	endfunction
+   function logic [31:0] fixed_mult(logic [31:0] a,b);
+      logic [63:0] 			      a_64,b_64,c_64;
+      a_64 = a;
+      b_64 = b;
+      c_64 = a_64*b_64;
+      c_64 = (c_64>>16);
+      fixed_mult = c_64[31:0]; 
+   endfunction
 
-    sigmoid_approx_fn saf(in,out_saf);
-    assign out = fixed_mult(out_saf,(`FIXED_1-out_saf));
+   sigmoid_approx_fn saf(clk, rst, en, in, out_saf);
+   assign out = fixed_mult(out_saf, (`FIXED_1-out_saf));
 
-endmodule: sigmoid_approx_drv*/
+endmodule: sigmoid_approx_drv
+
 /*
 module test;
     logic [31:0] in, out;
