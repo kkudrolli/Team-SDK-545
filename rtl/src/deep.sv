@@ -47,11 +47,11 @@ endmodule: deep*/
 
 
 module deep
-  (clk, rst, start, label_in, image_in, result, done);
+  (clk, rst, start_fp, start_bp, label_in, image_in, result, done);
    
    // Inputs
    input logic clk, rst;
-   input logic start;
+   input logic start_fp, start_bp;
    input logic [783:0] [31:0] image_in;
    input logic [7:0] 	      label_in;
    
@@ -59,8 +59,12 @@ module deep
    output logic [9:0] [31:0]  result;
    output logic 	      done;
    
-   logic 		      fp_done;
+   logic 		      fp_done, bp_done;
    logic 		      do_fp, do_bp, draw, ack;
+
+   logic [7:0] 		      label;
+   logic [783:0] [31:0]       image_out;
+   logic 		      cs_ctrl;
    
    logic 		      get_weights0, get_weights1;
    
@@ -70,16 +74,18 @@ module deep
    logic [127:0] [31:0]       wchange0;
    logic [9:0] [31:0] 	      wchange1;
 
-   logic 		      update0, update1;   
-   
-   assign done = fp_done;
+   logic 		      update0, update1;
 
-   control_unit cu (.clk, .rst, .start, .train (1'b0), .bp_done (1'b0), .fp_done, 
-		    .drawn (1'b1), .label_in (), .image_in (), .do_fp, .do_bp, 
-		    .draw, .ack, .label_out (), .image_out ());
+ 
+   assign done = fp_done || bp_done;
+
+   control_unit cu (.clk, .rst, .start (start_fp || start_bp), .train (start_bp), .bp_done, 
+		    .fp_done, .drawn (1'b1), .label_in, .image_in, .do_fp, .do_bp, 
+		    .draw, .ack, .label_out (label), .image_out (image_out), .cs_ctrl);
    
    tile t (.clk, .rst, .start_fp (do_fp), .start_bp (do_bp), .done (fp_done), .get_weights0, 
-	   .get_weights1, .image (image_in), .weights0, .weights1, .result, .wchange0, .wchange1);
+	   .get_weights1, .image (image_in), .weights0, .weights1, .result, .wchange0, .wchange1, 
+	   .update0, .update1, .label);
    
    weights wf (.clka (clk), .rst, .start_0 (get_weights0), .start_1 (get_weights1), 
 	      .values_0 (weights0), .values_1 (weights1), .update_0 (update0), 

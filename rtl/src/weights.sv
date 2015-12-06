@@ -15,10 +15,10 @@ module weights(input clka, rst,
     logic [7:0] counter_1;
 
     //32 x 128, for 784 cycles
-    logic [783:0] [4095:0] BRAM_0;
+    logic [783:0] [4095:0] BRAM_0 /* verilator public */;
     // 32 x 10, 128 cycles
-    logic [127:0] [319:0] BRAM_1;
-    
+    logic [127:0] [319:0]  BRAM_1 /* verilator public */;
+
     integer i;
     // READING
     always_ff @(posedge clka or posedge rst) begin
@@ -342,6 +342,8 @@ module weights(input clka, rst,
                     counter_0 <= 0;
                     processing_update_0 <= 0;
                 end
+	       //$display("v[%d] = %h", counter_0-2, BRAM_0[counter_0-2]);
+	        //$display("v[%d] = %h", counter_0-1, BRAM_0[counter_0-1]);	       
             end
             else if(update_0) begin // assume that addr and counter are 0!
                 processing_update_0 <= 1;
@@ -375,7 +377,9 @@ module weights(input clka, rst,
                     BRAM_1[counter_1-1][319:288] <= BRAM_1[counter_1-1][319:288] + deltaWeights_1[319:288];
                     counter_1 <= 0;
                     processing_update_1 <= 0;
-                end            
+                end
+	        //$display("v[%d] = %h", counter_1-2, BRAM_1[counter_1-2]);
+	        //$display("v[%d] = %h", counter_1-1, BRAM_1[counter_1-1]);
             end
             else if(update_1) begin // assume that addr and counter are 0!
                 processing_update_1 <= 1;

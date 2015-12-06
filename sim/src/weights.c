@@ -130,10 +130,12 @@ void updateWeightfile(weightfile_t weightfile, uint32_t layer, vector_t* deltaWe
     numNeurons_dest  = weightfile->param->data[layer+1];
 
     for(j=0; j<numNeurons_dest; j++){
-        weights = getWeights(weightfile,layer,j);
-        newWeights = vadd(weights,deltaWeights_l[j]);
-        setWeights(weightfile,layer,j,newWeights);
-        vector_destroy(newWeights);
+      weights = getWeights(weightfile,layer,j);
+      newWeights = vadd(weights,deltaWeights_l[j]);
+      //      if (layer == 0 && j == 7) vprint(weights);
+      setWeights(weightfile,layer,j,newWeights);
+      //     if (layer == 0 && j == 7) vprint(weights);
+      vector_destroy(newWeights);
     }
 }
 

@@ -282,7 +282,7 @@ module ChipInterface(
 
    //---- TOP LEVEL NEURAL NETWORK MODULE INSTANTIATION -----//
    //-------------------------------------------------------------------------------------------------------------//
-   deep dp (.clk (clk), .rst (rst), .do_fp (do_fp), .label_in (label_out),  .image_in (image_out), 
+   deep dp (.clk (clk), .rst (rst), .do_fp (do_fp), .do_bp (do_bp), .label_in (label_out),  .image_in (image_out), 
             .result (result), .done (done));                                        
 
    num_to_image n2i (.num(max_result_buf[3:0]), .image(pred_image));

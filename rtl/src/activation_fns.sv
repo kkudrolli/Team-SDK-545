@@ -1,3 +1,5 @@
+/* verilator lint_off DECLFILENAME */
+
 `define FIXED_5       (5<<16)
 `define FIXED_1       (1<<16)
 `define FIXED_2_375   32'h26000
@@ -55,6 +57,7 @@
  */
 
 module sigmoid_approx_fn(input logic clk, input logic rst,
+                         input logic 	     enable,
 			 input logic [31:0]  in,
                          output logic [31:0] out);
 
@@ -78,23 +81,22 @@ module sigmoid_approx_fn(input logic clk, input logic rst,
 	piecewise_sig_stage2 = temp + `FIXED_0_625;
       else 
 	piecewise_sig_stage2 = temp + `FIXED_0_5;
-      if (in[31]) piecewise_sig_stage2 = `FIXED_1 - piecewise_sig_stage2;
    endfunction
 
    
    logic [31:0] 			     temp1, temp2, result;
-   logic 				     sign;
+   logic 				     sign;  
    always_ff @(posedge clk, posedge rst) begin
       if (rst) begin
-	 temp1 <= 32'b0;
-	 temp2 <= 32'b0;
-	 result <= 32'b0;
-	 sign <= 1'b0;
-      end else begin
-	 temp1 <= in[31] ? piecewise_sig_stage1(~in+1) : piecewise_sig_stage1(in);
-	 temp2 <= in[31] ? ~in+1 : in;
-	 sign <= in[31];
-	 result <= sign ? `FIXED_1 - piecewise_sig_stage2(temp2, temp1) : piecewise_sig_stage2(temp2, temp1);
+         temp1 <= 32'b0;
+         temp2 <= 32'b0;
+         result <= 32'b0;
+         sign <= 1'b0;
+      end else if (enable) begin
+         temp1 <= in[31] ? piecewise_sig_stage1(~in+1) : piecewise_sig_stage1(in);
+         temp2 <= in[31] ? ~in+1 : in;
+         sign <= in[31];
+         result <= sign ? `FIXED_1 - piecewise_sig_stage2(temp2, temp1) : piecewise_sig_stage2(temp2, temp1);
       end
    end
 
@@ -143,7 +145,8 @@ module sigmoid_approx_fn(input logic clk, input logic rst, input [31:0] in,
 endmodule: sigmoid_approx_fn
 */
 
-module sigmoid_approx_drv(input [31:0] in,
+module sigmoid_approx_drv(input logic [31:0] in,
+			  input logic clk, rst, en,
                           output logic [31:0] out);
 
    logic [31:0] 			      out_saf;
@@ -157,8 +160,8 @@ module sigmoid_approx_drv(input [31:0] in,
       fixed_mult = c_64[31:0]; 
    endfunction
 
-   sigmoid_approx_fn saf(in,out_saf);
-   assign out = fixed_mult(out_saf,(`FIXED_1-out_saf));
+   sigmoid_approx_fn saf(clk, rst, en, in, out_saf);
+   assign out = fixed_mult(out_saf, (`FIXED_1-out_saf));
 
 endmodule: sigmoid_approx_drv
 /*
@@ -238,3 +241,5 @@ endmodule: sigmoid_approx_drv
 
  endmodule: test
  */
+
+/* verilator lint_on DECLFILENAME */

@@ -26,7 +26,7 @@ int main (int argc, char **argv) {
   top->rst = 0;
   top->eval();
 
-
+  
   // Initialize weights file
   FILE *weight_vals;
   
@@ -34,17 +34,58 @@ int main (int argc, char **argv) {
 
   for (uint32_t i = 0; i < 128; i++)
     for (uint32_t j = 0; j < 784; j++)
-      fread(&(top->v->wf->douta_0[i + 128*j]), sizeof(uint32_t), 1, weight_vals); // initialize weight_0
+      fread(&(top->v->wf->BRAM_0[i + 128*j]), sizeof(uint32_t), 1, weight_vals); // initialize weight_0
   
   for (uint32_t i = 0; i < 10; i++)
     for (uint32_t j = 0; j < 128; j++)
-      fread(&(top->v->wf->douta_1[i + 10*j]), sizeof(uint32_t), 1, weight_vals); // initialize weight_1
+      fread(&(top->v->wf->BRAM_1[i + 10*j]), sizeof(uint32_t), 1, weight_vals); // initialize weight_1
 
   fclose(weight_vals);
-  
+
 
   vector_t result = Vector(10);
 
+
+#ifdef MODE_TRAIN
+  for (int o = 0; o < OUTER_ITER; o++) {
+    for (int k = 0; k < MNIST_TRAIN_IMAGES; k++) {
+      top->start_bp = 1;
+      for (int i = 0; i < 784; i++) {	
+	top->image_in[i] = mnist_data->imgs[k]->data[i];
+      }
+      top->label_in = mnist_labels->labels->data[k];
+
+      for (uint32_t j = 0; j < 28; j++) {
+	for (uint32_t i = 0; i < 28; i++) {
+	  if (top->image_in[i+28*j] >> 9 > 20) printf(GREEN BOLD "%02x " NORMAL, top->image_in[i+28*j] >> 9);
+	  else printf("%02x ", top->image_in[i+28*j] >> 9);
+	}
+	printf("\n");
+      }
+
+      while (true) {
+
+	time += 5;
+
+	top->clk = !(top->clk);
+	top->eval();
+
+	if (top->done) {
+	  top->start_bp = 0;
+	  for (int i = 0; i < 10; i++) result->data[i] = top->result[i];
+	  printf(BOLD "\nTraining image of %d:\n" NORMAL, mnist_labels->labels->data[k]);
+	  break;
+	}
+      }
+
+      top->clk = !(top->clk);
+      top->eval();    
+    }
+  }
+#endif
+
+
+  
 #ifdef MODE_MNIST
   int correct = 0;
   int mistakes[10][10];
@@ -53,7 +94,7 @@ int main (int argc, char **argv) {
       mistakes[i][j] = 0;
   
   for (int k = 0; k < MNIST_TEST_IMAGES; k++) {
-    top->start = 1;
+    top->start_fp = 1;
     for (int i = 0; i < 784; i++) {	
       top->image_in[i] = mnist_data->imgs[k]->data[i];
     }
@@ -74,7 +115,7 @@ int main (int argc, char **argv) {
       top->eval();
 
       if (top->done) {
-	top->start = 0;
+	top->start_fp = 0;
 	for (int i = 0; i < 10; i++) result->data[i] = top->result[i];
 	printf(BOLD "\nTesting image of %d:\n" NORMAL, mnist_labels->labels->data[k]);
 	int classification = classify(result, 0);
@@ -134,7 +175,7 @@ int main (int argc, char **argv) {
       vector_t image_data = read_bitmap(full_path);
       image_data = center(image_data);
 	  
-      top->start = 1;
+      top->start_fp = 1;
       for (int i = 0; i < 784; i++) {	
 	top->image_in[i] = image_data->data[i];
       }
@@ -146,7 +187,7 @@ int main (int argc, char **argv) {
 	top->eval();
 
 	if (top->done) {
-	  top->start = 0;
+	  top->start_fp = 0;
 	  for (int i = 0; i < 10; i++) result->data[i] = top->result[i];
 	  printf(BOLD "\nTesting centered image of %s:\n" NORMAL, full_path);
 	  for (uint32_t j = 0; j < 28; j++) {

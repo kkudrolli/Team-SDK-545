@@ -1,5 +1,9 @@
 #define MODE_MNIST
-#define MNIST_TEST_IMAGES 1000
+#define MNIST_TEST_IMAGES 100
+
+#define MODE_TRAIN
+#define MNIST_TRAIN_IMAGES 5
+#define OUTER_ITER 80
 
 #define IMPORT_FILE "networks/ideal.deep"
 
@@ -20,8 +24,3 @@
 #define KILL_LINE      "\033[K"
 #define SAVE_CURSOR    "\033[s"
 #define RESTORE_CURSOR "\033[u"
-
-
-
-
-
