@@ -1,4 +1,4 @@
-`define MAX_ROWS  75
+`define MAX_ROWS  60
 /*`define GRAY      32'h00a0a0a0
 `define RED       32'h00d00000
 `define GREEN     32'h0000cc33
@@ -106,52 +106,52 @@ module bar_graph(
     always_comb begin
         if (cur_result < 32'd2) begin
             num_rows = 'd1;
-            color = 32'h00ccccff;
+            color = 32'h00ffffff;
         end else if (cur_result < 32'd4400)  begin
-            num_rows = 'd5;
-            color = 32'h009999ff;
+            num_rows = 'd4;
+            color = 32'h00fff9ef;
         end else if (cur_result < 32'd8800)  begin 
-            num_rows = 'd10;
-            color = 32'h006666ff;
+            num_rows = 'd8;
+            color = 32'h00fff2cc;
         end else if (cur_result < 32'd13200) begin 
-            num_rows = 'd15;
-            color = 32'h003333ff;
+            num_rows = 'd12;
+            color = 32'h00ffecb3;
         end else if (cur_result < 32'd17600) begin 
-            num_rows = 'd20;
-            color = 32'h000000ff;
+            num_rows = 'd16;
+            color = 32'h00ffe699;
         end else if (cur_result < 32'd22000) begin
-            num_rows = 'd25;
-            color = 32'h000000e6;
+            num_rows = 'd20;
+            color = 32'h00ffdf80;
         end else if (cur_result < 32'd26400) begin 
-            num_rows = 'd30;
-            color = 32'h000000cc;
+            num_rows = 'd24;
+            color = 32'h00ffd966;
         end else if (cur_result < 32'd30800) begin 
-            num_rows = 'd35;
-            color = 32'h000000b3;
+            num_rows = 'd28;
+            color = 32'h00ffd580;
         end else if (cur_result < 32'd35200) begin 
-            num_rows = 'd40;
-            color = 32'h00000099;
+            num_rows = 'd32;
+            color = 32'h00ffd24d;
         end else if (cur_result < 32'd39600) begin 
-            num_rows = 'd45;
-            color = 32'h00000080;
+            num_rows = 'd36;
+            color = 32'h00ffd012;
         end else if (cur_result < 32'd44000) begin 
-            num_rows = 'd50;
-            color = 32'h00000066;
+            num_rows = 'd40;
+            color = 32'h00ffcc33;
         end else if (cur_result < 32'd48400) begin 
-            num_rows = 'd55;
-            color = 32'h0000004d;
+            num_rows = 'd44;
+            color = 32'h00ffca00;
         end else if (cur_result < 32'd52800) begin 
-            num_rows = 'd60;
-            color = 32'h00000033;
+            num_rows = 'd48;
+            color = 32'h00ffc61a;
         end else if (cur_result < 32'd57200) begin
-            num_rows = 'd65;
-            color = 32'h0000001a;
+            num_rows = 'd52;
+            color = 32'h00ffc416;
         end else if (cur_result < 32'd61600) begin 
-            num_rows = 'd70;
-            color = 32'h0000000a;
+            num_rows = 'd56;
+            color = 32'h00ffc107;
         end else begin
-            num_rows = 'd75;
-            color = 32'h00000005;
+            num_rows = 'd60;
+            color = 32'h00ffbf00;
         end
     end
 

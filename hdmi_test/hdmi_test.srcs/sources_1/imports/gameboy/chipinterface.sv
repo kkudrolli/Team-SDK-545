@@ -47,11 +47,10 @@ module ChipInterface(
     logic processingPixel;
     logic side, rts_probe, rx_probe;
     
-    logic [7:0] max_result, max_result_buf;
-    logic done, done_reg, start_reg;
+    logic [7:0] max_result, max_result_buf, second_result, third_result;
+    logic done, done_reg, done_net, start_reg;
 
     logic start_graph, graphing;
-    logic [7:0] second, third;
     
     logic [9:0][31:0] result;
     
@@ -285,11 +284,11 @@ module ChipInterface(
    //---- TOP LEVEL NEURAL NETWORK MODULE INSTANTIATION -----//
    //-------------------------------------------------------------------------------------------------------------//
    deep dp (.clk (clk), .rst (rst), .do_fp (do_fp), .label_in (label_out),  .image_in (image_out), 
-            .result (result), .done (done));                                        
+            .result (result), .done (done_net));                                        
 
    num_to_image n2i (.num(max_result_buf[3:0]), .image(pred_image));
 
-   always_ff @(posedge clk, negedge rst) begin
+   always_ff @(posedge clk, posedge rst) begin
        if (rst) begin
            max_result_buf <= 'd0;
        end
@@ -303,32 +302,64 @@ module ChipInterface(
     assign data_in_mux = (graphing) ? data_in_graph : data_in;
     assign we_mux = (graphing) ? we_graph : we;
 
-    logic [31:0] max;
-    integer 	i;
-    always_comb begin
-      max = result[0];
-      max_result = 0;
-      second = 0;
-      third = 0;
-      for (i = 1; i < 10; i++) begin
-         if (result[i] > max) begin
-            max = result[i];
-            third = second;
-            second = max_result;
-            max_result = i;
-         end 
-         else if (result[i] > second) begin
-             third = second;
-             second = i;
-         end
-         else if (result[i] > third) begin
-             third = i;
-         end
-      end
+    // Pipeline the max calculation
+    logic [31:0] max, second, third; // The actual activation, result is the digit
+    logic [3:0]  i;
+    always_ff @(posedge clk, posedge rst) begin
+        if (rst) begin
+            max_result <= 'd0;
+            second_result <= 'd0;
+            third_result <= 'd0;
+            max <= 'd0;
+            second <= 'd0;
+            third <= 'd0;
+            i <= 4'd0;
+        end else begin
+        
+            i <= (i == 9) ? 4'd0 : i + 4'd1;
+            
+            if (result[i] > max) begin
+                max <= result[i];
+                max_result <= i;
+                second <= max;
+                second_result <= max_result;
+                third <= second;
+                third <= second_result;
+            end else if (result[i] > second) begin
+                second <= result[i];
+                second_result <= i;
+                third <= second;
+                third_result <= second_result;
+            end else if (result[i] > third) begin
+                third <= result[i];
+                third_result <= i;
+            end
+        end 
+    end
+    
+    // Pipeline the done
+    logic [9:0] done_pipe;
+    always_ff @(posedge clk, posedge rst) begin
+        if (rst) begin
+            done <= 1'b0;
+            done_pipe <= 10'd0;
+        end else begin
+            done_pipe[0] <= done_net;
+            done_pipe[1] <= done_pipe[0];
+            done_pipe[2] <= done_pipe[1];
+            done_pipe[3] <= done_pipe[2];
+            done_pipe[4] <= done_pipe[3];
+            done_pipe[5] <= done_pipe[4];
+            done_pipe[6] <= done_pipe[5];
+            done_pipe[7] <= done_pipe[6];
+            done_pipe[8] <= done_pipe[7];
+            done_pipe[9] <= done_pipe[8];
+            done <= done_pipe[9];
+        end
     end
 
     bar_graph bar (.clk(uart_sampling_clk), .rst(rst), .start_graph(start_graph), .done(done), 
-                   .first(max_result), .second(second), .third(third), .result(result), 
+                   .first(max_result), .second(second_result), .third(third_result), .result(result), 
                    .graphing(graphing),
                    .we(we_graph), .addr_w(addr_w_graph), .data_in(data_in_graph));
 

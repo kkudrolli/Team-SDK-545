@@ -27,6 +27,10 @@
         </FileInfo>
         <CompFileExtendedInfo CompFileName="framebuffer.bd" FileRelPathName="ip/framebuffer_blk_mem_gen_1_0/framebuffer_blk_mem_gen_1_0.xci"/>
         <CompFileExtendedInfo CompFileName="framebuffer.bd" FileRelPathName="hdl/framebuffer.v"/>
+        <CompFileExtendedInfo CompFileName="framebuffer.bd" FileRelPathName="framebuffer_ooc.xdc"/>
+        <CompFileExtendedInfo CompFileName="framebuffer.bd" FileRelPathName="hw_handoff/framebuffer_bd.tcl"/>
+        <CompFileExtendedInfo CompFileName="framebuffer.bd" FileRelPathName="hw_handoff/framebuffer.hwh"/>
+        <CompFileExtendedInfo CompFileName="framebuffer.bd" FileRelPathName="hdl/framebuffer.hwdef"/>
       </File>
       <File Path="$PSRCDIR/sources_1/new/video_unit.sv">
         <FileInfo>
