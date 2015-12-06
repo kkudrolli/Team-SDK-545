@@ -12,12 +12,12 @@
 #include <string.h>
 #include "mnist.h"
 #include "image_io.h"
+#include "center.h"
 
 // UART Protocol Bytes
 #define PSTART  0xff
 #define PTRAIN  0xf0
 #define PTEST   0x0f
-#define PSTOP   0xf0
 #define PACK    0xaa
 #define PRESEND 0xcc
 

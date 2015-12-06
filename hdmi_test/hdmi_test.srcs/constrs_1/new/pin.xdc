@@ -1,3 +1,4 @@
+
 set_property PACKAGE_PIN AU23 [get_ports HDMI_TX_CLK]
 set_property IOSTANDARD LVCMOS18 [get_ports HDMI_TX_CLK]
 set_property PACKAGE_PIN AP21 [get_ports HDMI_TX_DE]
@@ -136,4 +137,3 @@ set_property IOSTANDARD LVCMOS18 [get_ports {sel[0]}]
 
 set_property PACKAGE_PIN BA32 [get_ports {sel[0]}]
 set_property PACKAGE_PIN AW30 [get_ports {sel[1]}]
-

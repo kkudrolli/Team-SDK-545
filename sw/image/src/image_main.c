@@ -37,11 +37,13 @@ int main(int argc, char *argv[])
             print_image(img);
 #ifdef TRANSFER
             transfer(&img, &label, port, 1, num_imgs);
+            transfer(&img, &label, port, 1, num_imgs);
 #endif
         } else if (strncmp(train_test, "test", 4) == 0) { // test 
             printf("Sending camera test!\n");
             print_image(img);
 #ifdef TRANSFER
+            transfer(&img, &label, port, 0, num_imgs);
             transfer(&img, &label, port, 0, num_imgs);
 #endif
         } else {

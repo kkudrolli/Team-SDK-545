@@ -2,14 +2,15 @@
 Author: Kais Kudrolli
 Andrew ID: kkudroll
 
-Description: Script that uses OpenCV to display webcam feed, take a snapshot,
-and store it as a greyscaled image.
+Description: Script that uses OpenCV to take a webcam feed. Can send images from
+the webcam or from MNIST over serial UART.
 
 """
 
 import time
 import cv2
 from subprocess import call
+from time import sleep
 
 # Constants so that setup can be easily configured
 WEBCAM_CAMERA_NUM = 0
@@ -25,12 +26,13 @@ CAPTURE_KEY = ' '
 QUIT_KEY = 'q'
 CAM_TRAIN_KEY = 'j'
 CAM_TEST_KEY = 'i'
-MNIST_TRAIN_KEY = 'n'
-MNIST_TEST_KEY = 'm'
+MNIST_TRAIN_KEY = 'm'
+MNIST_TEST_KEY = 'n'
 NORM_MIN = 0
 NORM_MAX = 255
-#DOWN_AMOUNT = 5 # Manually tuned 
 THRESH = 100
+MNIST_IMG_NUM = "2"
+
 
 """
 get_video: Reads a frame of video input from the camera and returns it.
@@ -92,17 +94,9 @@ def manipulate(frame):
     cv2.normalize(gray, gray, 0, 255, cv2.NORM_MINMAX)
 
     # Snaps colors to white or black
-    (thresh, im_bw) = cv2.threshold(gray, 100, 255, cv2.THRESH_BINARY_INV);
+    (thresh, im_bw) = cv2.threshold(gray, 85, 255, cv2.THRESH_BINARY_INV);
 
-    # Downsize the image, using image pyramids, this function has 
-    # anti-aliasing built in
-    # TODO: resize so that number is recognizable
-    """"
-    resized = cv2.pyrDown(gray)
-    for i in xrange(0, DOWN_AMOUNT - 1):
-        resized = cv2.pyrDown(resized)
-        i += 1
-        """
+    # Downsize the image to 28x28 
     resized = cv2.resize(im_bw, (28, 28))
     return resized
 
@@ -120,7 +114,7 @@ def capture(frame, cap_dir):
     timestr = time.strftime(DEF_TIME_STR)
     man_frame = manipulate(frame) 
     filename = IMAGE_NAME + timestr + IMAGE_TYPE
-    cv2.imwrite(cap_dir+ filename, man_frame)
+    cv2.imwrite(cap_dir + filename, man_frame)
     print "Image written!"
     return filename
     
@@ -148,14 +142,20 @@ def get_key(original, cap_dir):
         filename = capture(original, cap_dir)
         call([UART_DIR + "send_image", "-i", "test", UART_CAP_DIR + filename])
     elif (wait == ord(MNIST_TRAIN_KEY)):
-        call([UART_DIR + "send_image", "-m", "train", "1"])
+        call([UART_DIR + "send_image", "-m", "train", MNIST_IMG_NUM])
     elif (wait == ord(MNIST_TEST_KEY)): 
-        call([UART_DIR + "send_image", "-m", "test", "1"])
+        call([UART_DIR + "send_image", "-m", "test", MNIST_IMG_NUM])
     elif (wait == ord(QUIT_KEY)):
         return True
     else:
         return False
       
+def sendSerial(cap, cap_dir):
+    man_frame = manipulate(cap) 
+    filename = IMAGE_NAME + IMAGE_TYPE
+    cv2.imwrite(cap_dir + filename, man_frame)
+    call([UART_DIR + "send_image", "-i", "test", UART_CAP_DIR + filename])
+
 """
 feed: Function that runs a feed loop to continuously capture and display
       video frames.
@@ -169,6 +169,9 @@ Return value:
 """
 def feed(video_capture, cap_dir):
     while (True):
+
+        sleep(0.0050)
+
         video = get_video(video_capture)
         # Capture image must be flipped otherwise display is mirrored
         #flipped = cv2.flip(video, VERTICAL_FLIP)        
@@ -179,7 +182,9 @@ def feed(video_capture, cap_dir):
         # Display the video feed - grayscaled image displayed will
         # be slightly different from what is stored to disk
         cv2.imshow("Video", im_bw)
-        
+
+        sendSerial(video, cap_dir)
+
         # Capture the keys pressed and quit if get_key returns True
         if (get_key(video, cap_dir)): 
             break

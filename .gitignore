@@ -4,4 +4,16 @@ deep_sim
 *.swp
 exec_usb
 exec_uart
+hdmi_test/hdmi_test.cache/*
+hdmi_test/hdmi_test.hw/hw_1/layout/
+hdmi_test/hdmi_test.hw/hw_1/wave/
+hdmi_test/hdmi_test.hw/webtalk/*
+hdmi_test/hdmi_test.runs/*
+hdmi_test/hdmi_test.srcs/sources_1/bd/*
+hdmi_test/hdmi_test.hw/hw_1/*
+rtl/src/tb/csrc/*
+rtl/src/tb/simv
+rtl/src/tb/simv.daidir/*
+rtl/src/tb/ucli.key
+
 

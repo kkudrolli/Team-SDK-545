@@ -147,19 +147,42 @@ proc create_root_design { parentCell } {
 
   # Create ports
   set clk_in1 [ create_bd_port -dir I -type clk clk_in1 ]
+  set_property -dict [ list CONFIG.FREQ_HZ {200000000}  ] $clk_in1
   set clk_out1 [ create_bd_port -dir O -type clk clk_out1 ]
   set clk_out2 [ create_bd_port -dir O -type clk clk_out2 ]
+  set clk_out3 [ create_bd_port -dir O -type clk clk_out3 ]
+  set clk_out4 [ create_bd_port -dir O -type clk clk_out4 ]
   set reset [ create_bd_port -dir I -type rst reset ]
   set_property -dict [ list CONFIG.POLARITY {ACTIVE_HIGH}  ] $reset
 
   # Create instance: clk_wiz_0, and set properties
   set clk_wiz_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:clk_wiz:5.1 clk_wiz_0 ]
-  set_property -dict [ list CONFIG.CLKOUT1_JITTER {193.631} CONFIG.CLKOUT1_PHASE_ERROR {128.132} CONFIG.CLKOUT1_REQUESTED_OUT_FREQ {27.027} CONFIG.CLKOUT2_JITTER {270.159} CONFIG.CLKOUT2_PHASE_ERROR {128.132} CONFIG.CLKOUT2_REQUESTED_OUT_FREQ {5} CONFIG.CLKOUT2_USED {true} CONFIG.MMCM_CLKFBOUT_MULT_F {6.250} CONFIG.MMCM_CLKOUT0_DIVIDE_F {23.125} CONFIG.MMCM_CLKOUT1_DIVIDE {125} CONFIG.MMCM_DIVCLK_DIVIDE {1} CONFIG.NUM_OUT_CLKS {2} CONFIG.USE_LOCKED {false}  ] $clk_wiz_0
+  set_property -dict [ list CONFIG.CLKIN1_JITTER_PS {50.0} \
+CONFIG.CLKOUT1_DRIVES {BUFG} CONFIG.CLKOUT1_JITTER {693.241} \
+CONFIG.CLKOUT1_PHASE_ERROR {699.797} CONFIG.CLKOUT1_REQUESTED_OUT_FREQ {27.027} \
+CONFIG.CLKOUT2_DRIVES {BUFG} CONFIG.CLKOUT2_JITTER {881.996} \
+CONFIG.CLKOUT2_PHASE_ERROR {699.797} CONFIG.CLKOUT2_REQUESTED_OUT_FREQ {5} \
+CONFIG.CLKOUT2_USED {true} CONFIG.CLKOUT3_DRIVES {BUFG} \
+CONFIG.CLKOUT3_JITTER {756.680} CONFIG.CLKOUT3_PHASE_ERROR {699.797} \
+CONFIG.CLKOUT3_REQUESTED_OUT_FREQ {14.7456} CONFIG.CLKOUT3_USED {true} \
+CONFIG.CLKOUT4_DRIVES {BUFG} CONFIG.CLKOUT4_JITTER {633.686} \
+CONFIG.CLKOUT4_PHASE_ERROR {699.797} CONFIG.CLKOUT4_REQUESTED_OUT_FREQ {50} \
+CONFIG.CLKOUT4_USED {true} CONFIG.CLKOUT5_DRIVES {BUFG} \
+CONFIG.CLKOUT6_DRIVES {BUFG} CONFIG.CLKOUT7_DRIVES {BUFG} \
+CONFIG.MMCM_CLKFBOUT_MULT_F {54.125} CONFIG.MMCM_CLKIN1_PERIOD {5.0} \
+CONFIG.MMCM_CLKOUT0_DIVIDE_F {22.250} CONFIG.MMCM_CLKOUT1_DIVIDE {120} \
+CONFIG.MMCM_CLKOUT2_DIVIDE {41} CONFIG.MMCM_CLKOUT3_DIVIDE {12} \
+CONFIG.MMCM_COMPENSATION {ZHOLD} CONFIG.MMCM_DIVCLK_DIVIDE {18} \
+CONFIG.NUM_OUT_CLKS {4} CONFIG.PRIMITIVE {MMCM} \
+CONFIG.PRIM_IN_FREQ {200.000} CONFIG.USE_LOCKED {false} \
+ ] $clk_wiz_0
 
   # Create port connections
   connect_bd_net -net clk_in1_1 [get_bd_ports clk_in1] [get_bd_pins clk_wiz_0/clk_in1]
   connect_bd_net -net clk_wiz_0_clk_out1 [get_bd_ports clk_out1] [get_bd_pins clk_wiz_0/clk_out1]
   connect_bd_net -net clk_wiz_0_clk_out2 [get_bd_ports clk_out2] [get_bd_pins clk_wiz_0/clk_out2]
+  connect_bd_net -net clk_wiz_0_clk_out3 [get_bd_ports clk_out3] [get_bd_pins clk_wiz_0/clk_out3]
+  connect_bd_net -net clk_wiz_0_clk_out4 [get_bd_ports clk_out4] [get_bd_pins clk_wiz_0/clk_out4]
   connect_bd_net -net reset_1 [get_bd_ports reset] [get_bd_pins clk_wiz_0/reset]
 
   # Create address segments

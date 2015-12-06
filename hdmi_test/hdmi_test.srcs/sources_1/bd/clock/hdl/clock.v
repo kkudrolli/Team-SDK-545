@@ -1,8 +1,8 @@
 //Copyright 1986-2015 Xilinx, Inc. All Rights Reserved.
 //--------------------------------------------------------------------------------
 //Tool Version: Vivado v.2015.2 (lin64) Build 1266856 Fri Jun 26 16:35:25 MDT 2015
-//Date        : Tue Nov 10 16:06:50 2015
-//Host        : graces.andrew.local.cmu.edu running 64-bit Red Hat Enterprise Linux Server release 7.1 (Maipo)
+//Date        : Mon Nov 30 15:22:29 2015
+//Host        : horizon.andrew.cmu.edu running 64-bit Red Hat Enterprise Linux Server release 7.2 (Maipo)
 //Command     : generate_target clock.bd
 //Design      : clock
 //Purpose     : IP block netlist
@@ -14,24 +14,34 @@ module clock
    (clk_in1,
     clk_out1,
     clk_out2,
+    clk_out3,
+    clk_out4,
     reset);
   input clk_in1;
   output clk_out1;
   output clk_out2;
+  output clk_out3;
+  output clk_out4;
   input reset;
 
   wire clk_in1_1;
   wire clk_wiz_0_clk_out1;
   wire clk_wiz_0_clk_out2;
+  wire clk_wiz_0_clk_out3;
+  wire clk_wiz_0_clk_out4;
   wire reset_1;
 
   assign clk_in1_1 = clk_in1;
   assign clk_out1 = clk_wiz_0_clk_out1;
   assign clk_out2 = clk_wiz_0_clk_out2;
+  assign clk_out3 = clk_wiz_0_clk_out3;
+  assign clk_out4 = clk_wiz_0_clk_out4;
   assign reset_1 = reset;
   clock_clk_wiz_0_0 clk_wiz_0
        (.clk_in1(clk_in1_1),
         .clk_out1(clk_wiz_0_clk_out1),
         .clk_out2(clk_wiz_0_clk_out2),
+        .clk_out3(clk_wiz_0_clk_out3),
+        .clk_out4(clk_wiz_0_clk_out4),
         .reset(reset_1));
 endmodule

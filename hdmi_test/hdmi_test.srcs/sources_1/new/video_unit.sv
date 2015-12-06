@@ -27,15 +27,15 @@ module video_unit
    input logic [18:0]  addr_w,
    input logic [18:0]  addr_r,
    output logic [35:0] data,
-   input logic [7:0]  data_in 
+   input logic [23:0]  data_in 
    );
    
-   logic [7:0]        dout;
+   logic [23:0]        dout;
    // 524888? what is this magig number in bram generator?
    framebuffer_wrapper fb(.addra (addr_w), .addrb (addr_r), .clka (clka), .clkb (clkb), .dina (data_in), 
                           .doutb (dout), .wea (we), .enb (de));
 
-   assign data = {{dout, 4'h0}, {dout, 4'h0}, {dout, 4'h0}};
+   assign data = {{dout[23:16], 4'h0}, {dout[15:8], 4'h0}, {dout[7:0], 4'h0}};
    
 endmodule
 /*

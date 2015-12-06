@@ -63,7 +63,8 @@ module control_unit
                 ns = (start | started) ? fwd_prop : idle;
             end
             fwd_prop: begin
-                do_fp = (fp_done) ? 0 : 1;
+                // Only want do_fp for 1 cycle
+                //do_fp = (fp_done) ? 0 : 1;
                 do_bp = (fp_done & (train | train_reg)) ? 1 : 0;
                 draw = (fp_done & ~(train | train_reg)) ? 1 : 0;
                 ns = (fp_done) ? ((train | train_reg) ? back_prop : display) : fwd_prop;

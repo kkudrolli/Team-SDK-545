@@ -12,14 +12,14 @@
 #define MNIST_TRAIN_IMAGES 60000
 #define MNIST_TEST_IMAGES 10000
 
-#define OUTER_ITER 400
+#define OUTER_ITER 120
 #define INNER_ITER 1
 #define NUM_LAYERS 2
 #define NEURONS_PER_TILE 128
-#define LEARNING_RATE (1 << 13)
+#define LEARNING_RATE (1 << 11)
 
 #define ENABLE_TARGET_BIAS
-#define TARGET_BIAS_OFFSET 6
+#define TARGET_BIAS_OFFSET 5
 
 #define ACTIVATION_FN sigmoid_approx_fn
 #define ACTIVATION_DRV sigmoid_approx_drv
