@@ -32,12 +32,14 @@ def print_num(hex_string):
         print "\n",
 
 def bmp_to_bin(bmp_name):
+    print bmp_name
     bmp_file = open(bmp_name, FILE_MODE);
     header = bmp_file.read(HDR_SZ)
 
     hex_string = ""
     for i in xrange(0, IMG_SZ*3):
         byte = bmp_file.read(1)
+        print ("_" + byte + "_"),
         byte_str = format(ord(byte), 'x')
         if (len(byte_str) == 1):
             byte_str = "0" + byte_str
