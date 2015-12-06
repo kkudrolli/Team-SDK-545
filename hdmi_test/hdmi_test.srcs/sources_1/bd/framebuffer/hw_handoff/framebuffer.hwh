@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
-<EDKSYSTEM EDWVERSION="1.2" TIMESTAMP="Mon Nov 23 22:39:18 2015" VIVADOVERSION="2015.2">
+<EDKSYSTEM EDWVERSION="1.2" TIMESTAMP="Sat Dec  5 17:46:52 2015" VIVADOVERSION="2015.2">
 
   <SYSTEMINFO ARCH="virtex7" BOARD="xilinx.com:vc707:part0:1.2" DEVICE="7vx485t" NAME="framebuffer" PACKAGE="ffg1761" SPEEDGRADE="-2"/>
 
@@ -170,7 +170,7 @@
         <PARAMETER NAME="register_portb_output_of_softecc" VALUE="false"/>
         <PARAMETER NAME="Pipeline_Stages" VALUE="0"/>
         <PARAMETER NAME="Load_Init_File" VALUE="true"/>
-        <PARAMETER NAME="Coe_File" VALUE="../../../../../../foobar.coe"/>
+        <PARAMETER NAME="Coe_File" VALUE="../../../../../../foo.coe"/>
         <PARAMETER NAME="Fill_Remaining_Memory_Locations" VALUE="true"/>
         <PARAMETER NAME="Remaining_Memory_Locations" VALUE="AB"/>
         <PARAMETER NAME="Use_RSTA_Pin" VALUE="false"/>
