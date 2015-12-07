@@ -311,17 +311,15 @@ module ChipInterface(
       for (i = 1; i < 10; i++) begin
          if (result[i] > max) begin
             max = result[i];
-            third = second;
-            second = max_result;
             max_result = i;
-         end 
+         end /*
          else if (result[i] > second) begin
              third = second;
              second = i;
          end
          else if (result[i] > third) begin
              third = i;
-         end
+         end*/
       end
     end
 

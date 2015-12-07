@@ -158,7 +158,7 @@ proc create_root_design { parentCell } {
   # Create instance: blk_mem_gen_1, and set properties
   set blk_mem_gen_1 [ create_bd_cell -type ip -vlnv xilinx.com:ip:blk_mem_gen:8.2 blk_mem_gen_1 ]
   set_property -dict [ list CONFIG.Byte_Size {9} \
-CONFIG.Coe_File {../../../../../../foobar.coe} CONFIG.Enable_32bit_Address {false} \
+CONFIG.Coe_File {../../../../../../foo.coe} CONFIG.Enable_32bit_Address {false} \
 CONFIG.Enable_A {Always_Enabled} CONFIG.Enable_B {Use_ENB_Pin} \
 CONFIG.Fill_Remaining_Memory_Locations {true} CONFIG.Load_Init_File {true} \
 CONFIG.Memory_Type {Simple_Dual_Port_RAM} CONFIG.Operating_Mode_A {NO_CHANGE} \

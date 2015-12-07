@@ -3,7 +3,7 @@
 `define RED       32'h00d00000
 `define GREEN     32'h0000cc33
 `define BLUE      32'h003366ff
-`define PURPLE    32'h005f001b
+`define PURPLE    32'h001976d2
 `define BAR_WIDTH 5'd24
 `define BASE      (720*460)+379
 
@@ -96,9 +96,9 @@ module bar_graph(
 
     // Get the color of the current number being drawn
     always_comb begin
-        if      (bar_count == first_buf[3:0])  color = `BLUE;
-        else if (bar_count == second_buf[3:0]) color = `GREEN;
-        else if (bar_count == third_buf[3:0])  color = `RED;
+        if      (bar_count == first_buf[3:0])  color = `GREEN;
+        //else if (bar_count == second_buf[3:0]) color = `GREEN;
+        //else if (bar_count == third_buf[3:0])  color = `RED;
         else                                   color = `GRAY;
     end
 
@@ -123,19 +123,3 @@ module bar_graph(
     end
 
 endmodule: bar_graph
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

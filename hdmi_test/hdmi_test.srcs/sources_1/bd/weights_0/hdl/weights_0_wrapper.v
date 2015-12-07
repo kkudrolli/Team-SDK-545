@@ -1,7 +1,7 @@
 //Copyright 1986-2015 Xilinx, Inc. All Rights Reserved.
 //--------------------------------------------------------------------------------
 //Tool Version: Vivado v.2015.2 (lin64) Build 1266856 Fri Jun 26 16:35:25 MDT 2015
-//Date        : Mon Nov 30 12:27:59 2015
+//Date        : Sun Dec  6 16:30:40 2015
 //Host        : savage.andrew.cmu.edu running 64-bit Red Hat Enterprise Linux Server release 7.2 (Maipo)
 //Command     : generate_target weights_0_wrapper.bd
 //Design      : weights_0_wrapper
@@ -14,23 +14,43 @@ module weights_0_wrapper
     BRAM_PORTA_clk,
     BRAM_PORTA_din,
     BRAM_PORTA_dout,
-    BRAM_PORTA_we);
+    BRAM_PORTA_we,
+    BRAM_PORTB_addr,
+    BRAM_PORTB_clk,
+    BRAM_PORTB_din,
+    BRAM_PORTB_dout,
+    BRAM_PORTB_we);
   input [9:0]BRAM_PORTA_addr;
   input BRAM_PORTA_clk;
   input [4095:0]BRAM_PORTA_din;
   output [4095:0]BRAM_PORTA_dout;
   input [0:0]BRAM_PORTA_we;
+  input [9:0]BRAM_PORTB_addr;
+  input BRAM_PORTB_clk;
+  input [4095:0]BRAM_PORTB_din;
+  output [4095:0]BRAM_PORTB_dout;
+  input [0:0]BRAM_PORTB_we;
 
   wire [9:0]BRAM_PORTA_addr;
   wire BRAM_PORTA_clk;
   wire [4095:0]BRAM_PORTA_din;
   wire [4095:0]BRAM_PORTA_dout;
   wire [0:0]BRAM_PORTA_we;
+  wire [9:0]BRAM_PORTB_addr;
+  wire BRAM_PORTB_clk;
+  wire [4095:0]BRAM_PORTB_din;
+  wire [4095:0]BRAM_PORTB_dout;
+  wire [0:0]BRAM_PORTB_we;
 
   weights_0 weights_0_i
        (.BRAM_PORTA_addr(BRAM_PORTA_addr),
         .BRAM_PORTA_clk(BRAM_PORTA_clk),
         .BRAM_PORTA_din(BRAM_PORTA_din),
         .BRAM_PORTA_dout(BRAM_PORTA_dout),
-        .BRAM_PORTA_we(BRAM_PORTA_we));
+        .BRAM_PORTA_we(BRAM_PORTA_we),
+        .BRAM_PORTB_addr(BRAM_PORTB_addr),
+        .BRAM_PORTB_clk(BRAM_PORTB_clk),
+        .BRAM_PORTB_din(BRAM_PORTB_din),
+        .BRAM_PORTB_dout(BRAM_PORTB_dout),
+        .BRAM_PORTB_we(BRAM_PORTB_we));
 endmodule
