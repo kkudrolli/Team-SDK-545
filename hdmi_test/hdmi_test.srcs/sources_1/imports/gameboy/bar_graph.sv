@@ -1,11 +1,11 @@
-`define MAX_ROWS  75
-`define GRAY      32'h00a0a0a0
+`define MAX_ROWS  60
+/*`define GRAY      32'h00a0a0a0
 `define RED       32'h00d00000
 `define GREEN     32'h0000cc33
-`define BLUE      32'h003366ff
-`define PURPLE    32'h001976d2
+`define BLUE      32'h003366ff*/
+`define BG_COLOR  32'h001976d2
 `define BAR_WIDTH 5'd24
-`define BASE      (720*460)+379
+`define BASE      (720*449)+379
 
 module bar_graph(
     input  logic             clk, rst, start_graph, done, 
@@ -83,7 +83,7 @@ module bar_graph(
                     pix_count <= pix_count + 5'd1;
                     we <= 4'd1;
                     addr_w <= `BASE + 2 + (bar_count*28) + pix_count - (row_count*720);
-                    data_in <= (row_count > num_rows) ? `PURPLE : color;
+                    data_in <= (row_count > num_rows) ? `BG_COLOR : color;
                 end
 
                 default: state <= s_idle;
@@ -95,31 +95,80 @@ module bar_graph(
     assign cur_result = result_buf[bar_count];
 
     // Get the color of the current number being drawn
-    always_comb begin
-        if      (bar_count == first_buf[3:0])  color = `GREEN;
-        //else if (bar_count == second_buf[3:0]) color = `GREEN;
-        //else if (bar_count == third_buf[3:0])  color = `RED;
+    /*always_comb begin
+        if      (bar_count == first_buf[3:0])  color = `BLUE;
+        else if (bar_count == second_buf[3:0]) color = `GREEN;
+        else if (bar_count == third_buf[3:0])  color = `RED;
         else                                   color = `GRAY;
-    end
+    end*/
 
     // Get the number of rows to draw for the number being graphed
     always_comb begin
-        if      (cur_result < 32'd2)     num_rows = 'd1;
-        else if (cur_result < 32'd4400)  num_rows = 'd5;
-        else if (cur_result < 32'd8800)  num_rows = 'd10;
-        else if (cur_result < 32'd13200) num_rows = 'd15;
-        else if (cur_result < 32'd17600) num_rows = 'd20;
-        else if (cur_result < 32'd22000) num_rows = 'd25;
-        else if (cur_result < 32'd26400) num_rows = 'd30;
-        else if (cur_result < 32'd30800) num_rows = 'd35;
-        else if (cur_result < 32'd35200) num_rows = 'd40;
-        else if (cur_result < 32'd39600) num_rows = 'd45;
-        else if (cur_result < 32'd44000) num_rows = 'd50;
-        else if (cur_result < 32'd48400) num_rows = 'd55;
-        else if (cur_result < 32'd52800) num_rows = 'd60;
-        else if (cur_result < 32'd57200) num_rows = 'd65;
-        else if (cur_result < 32'd61600) num_rows = 'd70;
-        else                             num_rows = 'd75;
+        if (cur_result < 32'd2) begin
+            num_rows = 'd1;
+            color = 32'h00ffffff;
+        end else if (cur_result < 32'd4400)  begin
+            num_rows = 'd4;
+            color = 32'h00fff9ef;
+        end else if (cur_result < 32'd8800)  begin 
+            num_rows = 'd8;
+            color = 32'h00fff2cc;
+        end else if (cur_result < 32'd13200) begin 
+            num_rows = 'd12;
+            color = 32'h00ffecb3;
+        end else if (cur_result < 32'd17600) begin 
+            num_rows = 'd16;
+            color = 32'h00ffe699;
+        end else if (cur_result < 32'd22000) begin
+            num_rows = 'd20;
+            color = 32'h00ffdf80;
+        end else if (cur_result < 32'd26400) begin 
+            num_rows = 'd24;
+            color = 32'h00ffd966;
+        end else if (cur_result < 32'd30800) begin 
+            num_rows = 'd28;
+            color = 32'h00ffd580;
+        end else if (cur_result < 32'd35200) begin 
+            num_rows = 'd32;
+            color = 32'h00ffd24d;
+        end else if (cur_result < 32'd39600) begin 
+            num_rows = 'd36;
+            color = 32'h00ffd012;
+        end else if (cur_result < 32'd44000) begin 
+            num_rows = 'd40;
+            color = 32'h00ffcc33;
+        end else if (cur_result < 32'd48400) begin 
+            num_rows = 'd44;
+            color = 32'h00ffca00;
+        end else if (cur_result < 32'd52800) begin 
+            num_rows = 'd48;
+            color = 32'h00ffc61a;
+        end else if (cur_result < 32'd57200) begin
+            num_rows = 'd52;
+            color = 32'h00ffc416;
+        end else if (cur_result < 32'd61600) begin 
+            num_rows = 'd56;
+            color = 32'h00ffc107;
+        end else begin
+            num_rows = 'd60;
+            color = 32'h00ffbf00;
+        end
     end
 
 endmodule: bar_graph
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
