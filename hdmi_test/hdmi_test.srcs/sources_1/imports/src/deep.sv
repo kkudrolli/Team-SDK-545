@@ -45,22 +45,20 @@ module deep
             image[i] = {15'd0, img_tmp[i], 9'd0};
    end
       
-   tile t (.clk, .rst, .start_fp (do_fp), .start_bp (do_bp), .done (done), .get_weights0, 
-           .get_weights1, .image (image), .weights0, .weights1, .result, .wchange0, .wchange1, 
-           .update0, .update1, .label (label_in));
+   tile t (.clk, .rst, .start (do_fp), .done (done), .get_weights0, 
+           .get_weights1, .image (image), .weights0, .weights1, .result);
                
    weights wf (.clka (clk), .rst, .start_0 (get_weights0), .start_1 (get_weights1), 
-               .values_0 (weights0), .values_1 (weights1), .update_0 (update0), 
-               .update_1 (update1), .deltaWeights_0 (wchange0), .deltaWeights_1 (wchange1));
+               .values_0 (values_0), .values_1 (values_1));
 
 endmodule: deep
 
-
-/*module testbench();
+/*
+module testbench();
 
     // Inputs
     logic                clk, rst;
-    logic                do_fp;
+    logic                do_fp, do_bp;
     logic [7:0]          label_in;
     logic [6271:0]       image_in;
     

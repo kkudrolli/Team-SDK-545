@@ -1,9 +1,0 @@
-Vivado Simulator 2015.2
-Time resolution is 1 ps
- Block Memory Generator module loading initial data...
- Block Memory Generator data initialization complete.
-Block Memory Generator module testbench.DUT.wf.w0.weights_0_i.blk_mem_gen_0.inst.native_mem_module.blk_mem_gen_v8_2_inst is using a behavioral model for simulation which will not precisely model memory collision behavior.
- Block Memory Generator module loading initial data...
- Block Memory Generator data initialization complete.
-Block Memory Generator module testbench.DUT.wf.w1.weights_1_i.blk_mem_gen_0.inst.native_mem_module.blk_mem_gen_v8_2_inst is using a behavioral model for simulation which will not precisely model memory collision behavior.
-$finish called at time : 9325 ns : File "/afs/ece.cmu.edu/usr/sohils/Private/18545/deep/hdmi_test/hdmi_test.srcs/sources_1/imports/src/deep.sv" Line 99

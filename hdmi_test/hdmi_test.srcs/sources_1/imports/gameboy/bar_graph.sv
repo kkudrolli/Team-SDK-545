@@ -3,7 +3,7 @@
 `define RED       32'h00d00000
 `define GREEN     32'h0000cc33
 `define BLUE      32'h003366ff*/
-`define BG_COLOR  32'h002080c0
+`define BG_COLOR  32'h001976d2
 `define BAR_WIDTH 5'd24
 `define BASE      (720*449)+379
 

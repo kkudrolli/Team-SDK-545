@@ -1,4 +1,4 @@
-module tile
+/*module tile
   (clk, rst, start_fp, start_bp, done, get_weights0, get_weights1, image, 
    weights0, weights1, result, label, wchange1, wchange0, update0, update1);
    
@@ -209,8 +209,8 @@ module tile
    end
    
 endmodule: tile
+*/
 
-/*
 module tile
   (clk, rst, start, done, get_weights0, get_weights1, image, 
    weights0, weights1, result);
@@ -351,4 +351,3 @@ module tile
    end
    
 endmodule: tile
-*/
