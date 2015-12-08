@@ -62,6 +62,7 @@ void transfer(vector_t *images, uint32_t *labels, int port, int train, size_t nu
     getchar();
 #endif
 
+    //printf("In transfer, numimgs: %zu\n", num_images);
     size_t i = 0;
     uint32_t resent = 0;
     while (i < num_images) {
