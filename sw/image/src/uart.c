@@ -1,4 +1,5 @@
 #include "uart.h"
+#include <stdlib.h>
 
 int configure_port(void)
 {
