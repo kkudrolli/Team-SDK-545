@@ -1,8 +1,8 @@
 //Copyright 1986-2015 Xilinx, Inc. All Rights Reserved.
 //--------------------------------------------------------------------------------
 //Tool Version: Vivado v.2015.2 (lin64) Build 1266856 Fri Jun 26 16:35:25 MDT 2015
-//Date        : Mon Nov 30 12:27:59 2015
-//Host        : savage.andrew.cmu.edu running 64-bit Red Hat Enterprise Linux Server release 7.2 (Maipo)
+//Date        : Mon Dec  7 15:25:49 2015
+//Host        : horizon.andrew.cmu.edu running 64-bit Red Hat Enterprise Linux Server release 7.2 (Maipo)
 //Command     : generate_target weights_0.bd
 //Design      : weights_0
 //Purpose     : IP block netlist
@@ -15,28 +15,53 @@ module weights_0
     BRAM_PORTA_clk,
     BRAM_PORTA_din,
     BRAM_PORTA_dout,
-    BRAM_PORTA_we);
+    BRAM_PORTA_we,
+    BRAM_PORTB_addr,
+    BRAM_PORTB_clk,
+    BRAM_PORTB_din,
+    BRAM_PORTB_dout,
+    BRAM_PORTB_we);
   input [9:0]BRAM_PORTA_addr;
   input BRAM_PORTA_clk;
   input [4095:0]BRAM_PORTA_din;
   output [4095:0]BRAM_PORTA_dout;
   input [0:0]BRAM_PORTA_we;
+  input [9:0]BRAM_PORTB_addr;
+  input BRAM_PORTB_clk;
+  input [4095:0]BRAM_PORTB_din;
+  output [4095:0]BRAM_PORTB_dout;
+  input [0:0]BRAM_PORTB_we;
 
   wire [9:0]BRAM_PORTA_1_ADDR;
   wire BRAM_PORTA_1_CLK;
   wire [4095:0]BRAM_PORTA_1_DIN;
   wire [4095:0]BRAM_PORTA_1_DOUT;
   wire [0:0]BRAM_PORTA_1_WE;
+  wire [9:0]BRAM_PORTB_1_ADDR;
+  wire BRAM_PORTB_1_CLK;
+  wire [4095:0]BRAM_PORTB_1_DIN;
+  wire [4095:0]BRAM_PORTB_1_DOUT;
+  wire [0:0]BRAM_PORTB_1_WE;
 
   assign BRAM_PORTA_1_ADDR = BRAM_PORTA_addr[9:0];
   assign BRAM_PORTA_1_CLK = BRAM_PORTA_clk;
   assign BRAM_PORTA_1_DIN = BRAM_PORTA_din[4095:0];
   assign BRAM_PORTA_1_WE = BRAM_PORTA_we[0];
   assign BRAM_PORTA_dout[4095:0] = BRAM_PORTA_1_DOUT;
+  assign BRAM_PORTB_1_ADDR = BRAM_PORTB_addr[9:0];
+  assign BRAM_PORTB_1_CLK = BRAM_PORTB_clk;
+  assign BRAM_PORTB_1_DIN = BRAM_PORTB_din[4095:0];
+  assign BRAM_PORTB_1_WE = BRAM_PORTB_we[0];
+  assign BRAM_PORTB_dout[4095:0] = BRAM_PORTB_1_DOUT;
   weights_0_blk_mem_gen_0_0 blk_mem_gen_0
        (.addra(BRAM_PORTA_1_ADDR),
+        .addrb(BRAM_PORTB_1_ADDR),
         .clka(BRAM_PORTA_1_CLK),
+        .clkb(BRAM_PORTB_1_CLK),
         .dina(BRAM_PORTA_1_DIN),
+        .dinb(BRAM_PORTB_1_DIN),
         .douta(BRAM_PORTA_1_DOUT),
-        .wea(BRAM_PORTA_1_WE));
+        .doutb(BRAM_PORTB_1_DOUT),
+        .wea(BRAM_PORTA_1_WE),
+        .web(BRAM_PORTB_1_WE));
 endmodule

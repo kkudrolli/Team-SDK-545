@@ -176,7 +176,7 @@ void transfer(vector_t *images, uint32_t *labels, int port, int train, size_t nu
         //Free(bytes);
         resent = 0;
         i++;
-        usleep(11000); // Needs a tinyyyy bit of sleep
+        usleep(13000); // Needs a tinyyyy bit of sleep
                        // 11000 experimentally determined
     }
 

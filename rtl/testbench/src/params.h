@@ -1,11 +1,11 @@
 #define MODE_MNIST
-#define MNIST_TEST_IMAGES 100
+#define MNIST_TEST_IMAGES 20
 
 #define MODE_TRAIN
-#define MNIST_TRAIN_IMAGES 5
-#define OUTER_ITER 80
+#define MNIST_TRAIN_IMAGES 20
+#define OUTER_ITER 10
 
-#define IMPORT_FILE "networks/ideal.deep"
+#define IMPORT_FILE "networks/blank.deep"
 
 #define TEST_DIR "./test_imgs/"
 

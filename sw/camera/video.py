@@ -30,7 +30,7 @@ MNIST_TRAIN_KEY = 'm'
 MNIST_TEST_KEY = 'n'
 NORM_MIN = 0
 NORM_MAX = 255
-THRESH = 100
+THRESH = 65
 MNIST_IMG_NUM = "2"
 
 
@@ -94,7 +94,7 @@ def manipulate(frame):
     cv2.normalize(gray, gray, 0, 255, cv2.NORM_MINMAX)
 
     # Snaps colors to white or black
-    (thresh, im_bw) = cv2.threshold(gray, 85, 255, cv2.THRESH_BINARY_INV);
+    (thresh, im_bw) = cv2.threshold(gray, THRESH, 255, cv2.THRESH_BINARY_INV);
 
     # Downsize the image to 28x28 
     resized = cv2.resize(im_bw, (28, 28))

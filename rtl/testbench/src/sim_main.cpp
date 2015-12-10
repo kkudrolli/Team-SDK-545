@@ -18,7 +18,7 @@ int main (int argc, char **argv) {
 
   int time = 0;
 
-  top->clk = 1;
+  top->clk = 0;
   top->rst = 0;
   top->eval();
   top->rst = 1;
@@ -26,7 +26,9 @@ int main (int argc, char **argv) {
   top->rst = 0;
   top->eval();
 
-  
+  top->start_fp = 0;
+  top->start_bp = 0;
+
   // Initialize weights file
   FILE *weight_vals;
   
