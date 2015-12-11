@@ -17,8 +17,10 @@ vector_t evaluate_activation (vector_t input, uint32_t (*activation_fn)(uint32_t
 }
 
 vector_t *evaluate_weight_change (vector_t delta, vector_t prev_output) {
-  smult(delta, LEARNING_RATE);
-  return vouter(prev_output, delta);
+  vector_t delta_scale = smult(delta, LEARNING_RATE);
+  vector_t *out = vouter(prev_output, delta_scale);
+  vector_destroy(delta_scale);
+  return out;
 }
 
 uint32_t backpropogate (network_t network, vector_t image, vector_t ideal) {
@@ -74,8 +76,6 @@ uint32_t backpropogate (network_t network, vector_t image, vector_t ideal) {
     vector_destroy(delta);
     vector_t fnet = evaluate_activation(nets[i], network->activation_fn_drv);
     delta = vmult(weight_t_del, fnet);
-    //delta = vmult(err, outputs[i]);
-    //vector_destroy(err);
     vector_destroy(fnet);
     vector_destroy(weight_t_del);
   }

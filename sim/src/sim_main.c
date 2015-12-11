@@ -47,7 +47,7 @@ int main()
    */
   
   
-  mnist_images_t mnist_data = read_images(0);
+  mnist_images_t mnist_data = read_images(1);
   mnist_images_t mnist_test = read_images(0);
 
 #ifdef DEBUG
@@ -58,7 +58,7 @@ int main()
   printf("]\n");
 #endif
   
-  mnist_labels_t mnist_labels = read_labels(0);
+  mnist_labels_t mnist_labels = read_labels(1);
   mnist_labels_t mnist_test_l = read_labels(0);
 
 #ifdef DEBUG

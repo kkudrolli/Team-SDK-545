@@ -34,10 +34,12 @@ void vector_destroy(vector_t vector) {
 /**
  * Multiply by a scalar
  */
-void smult(vector_t v, uint32_t scale) {
+vector_t smult(vector_t v, uint32_t scale) {
+  vector_t v2 = Vector(v->length);
   for (size_t i = 0; i < v->length; ++i) {
-    v->data[i] = fmult(v->data[i], scale);
+    v2->data[i] = fmult(v->data[i], scale);
   }
+  return v2;
 }
 
 /**
@@ -100,7 +102,7 @@ uint32_t vmad(vector_t v1, vector_t v2) {
   for (size_t i = 0; i < v1->length; ++i) {
     sum += fmult(v1->data[i], v2->data[i]);
   }
-  
+
   return sum;
 }
 

@@ -11,8 +11,6 @@ import time
 import cv2
 from subprocess import call
 from time import sleep
-import numpy as np
-from subprocess import Popen, PIPE, STDOUT
 
 # Constants so that setup can be easily configured
 WEBCAM_CAMERA_NUM = 0
@@ -32,7 +30,7 @@ MNIST_TRAIN_KEY = 'm'
 MNIST_TEST_KEY = 'n'
 NORM_MIN = 0
 NORM_MAX = 255
-THRESH = 70
+THRESH = 65
 MNIST_IMG_NUM = "2"
 
 
@@ -152,26 +150,8 @@ def get_key(original, cap_dir):
     else:
         return False
       
-"""
-def flatten3d(a):
-    ret = []
-    
-    for x in a:
-        for y in x:
-            ret.extend([str(chr(y[0])), str(chr(0)), str(chr(0))])
-    return ret
-"""
-
 def sendSerial(cap, cap_dir):
     man_frame = manipulate(cap) 
-    #print man_frame.tolist()
-    #flat = flatten3d(man_frame.tolist())
-    #flat = "".join(flat)
-    #print flat
-    #cproc = Popen([UART_DIR + "send_image", "-i", "test", "cap.bmp"], stdin=PIPE, stdout=PIPE, stderr=STDOUT)
-    #out, err = cproc.communicate(flat)
-    #print out
-    #print err
     filename = IMAGE_NAME + IMAGE_TYPE
     cv2.imwrite(cap_dir + filename, man_frame)
     call([UART_DIR + "send_image", "-i", "test", UART_CAP_DIR + filename])
@@ -190,7 +170,7 @@ Return value:
 def feed(video_capture, cap_dir):
     while (True):
 
-        #sleep(0.0050)
+        sleep(0.0050)
 
         video = get_video(video_capture)
         # Capture image must be flipped otherwise display is mirrored

@@ -14,7 +14,7 @@
 #include "params.h"
 
 
-#define BETA 10 // Can play around with this
+#define BETA 5 // Can play around with this
                         // to handle larger numbers
 
 /* 

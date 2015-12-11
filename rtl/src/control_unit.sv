@@ -59,13 +59,12 @@ module control_unit
 
         case (cs) 
             idle: begin
-                do_fp = (start | started) ? 1 : 0;
-                ns = (start | started) ? fwd_prop : idle;
+                do_fp = (start & ~train) ? 1 : 0;
+                ns = (start | started) ? ((train) ? back_prop : fwd_prop) : idle;
             end
             fwd_prop: begin
                 // Only want do_fp for 1 cycle
                 //do_fp = (fp_done) ? 0 : 1;
-                do_bp = (fp_done & (train | train_reg)) ? 1 : 0;
                 draw = (fp_done & ~(train | train_reg)) ? 1 : 0;
                 ns = (fp_done) ? ((train | train_reg) ? back_prop : display) : fwd_prop;
             end

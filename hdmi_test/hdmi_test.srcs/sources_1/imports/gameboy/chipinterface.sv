@@ -11,7 +11,7 @@ module ChipInterface(
     output logic       USB_TX, USB_CTS,
     
     output logic         en_bus,
-           
+
     // hdmi
     output logic            I2C_SCL,
     inout tri               I2C_SDA,
@@ -47,7 +47,7 @@ module ChipInterface(
     logic processingPixel;
     logic side, rts_probe, rx_probe;
     
-    logic [7:0] max_result, max_result_buf, second_result, third_result;
+    logic [7:0] max_result, second_result, third_result;
     logic done, done_reg, done_net, start_reg;
 
     logic start_graph, graphing;
@@ -62,7 +62,7 @@ module ChipInterface(
             2'b00: LEDS = {recv_state[1:0], draw_image, cs_ctrl[1:0], cs[2:0]};
             2'b01: LEDS = data_count[9:2];
             2'b10: LEDS = {trans_ack_buf, trans_resend_buf, cs_trans[1:0], data_count[1:0], byte_ready, led_out[0]};
-            2'b11: LEDS = max_result_buf;
+            2'b11: LEDS = max_result;
         endcase
     end
     
@@ -81,7 +81,7 @@ module ChipInterface(
                                  .label(label), .cs_out(cs), .data_count(data_count), .image(image));
 
     // Synchronizes data going from uart protocol fsm to control unit
-    uart_control_synch #(784<<3) uc_syn(.clk(clk), .uart_sampling_clk(uart_sampling_clk),
+    uart_control_synch #(784<<3) uc_syn(.clk(uart_sampling_clk), .uart_sampling_clk(uart_sampling_clk),
                                         .rst(rst), .start(start), .train(train), 
                                         .label(label), .image(image), 
                                         .start_out(start_buf), .train_out(train_buf),
@@ -92,7 +92,7 @@ module ChipInterface(
     ///////////////////////////////
 
     // Control unit for neural network
-    control_unit #(784<<3) ctrl(.clk(clk), .rst(rst), .train(train_buf), .start(start_buf),
+    control_unit #(784<<3) ctrl(.clk(uart_sampling_clk), .rst(rst), .train(train_buf), .start(start_buf),
                                 .bp_done(done), .fp_done(done), .drawn(1'b1), 
                                 .label_in(label_buf), .image_in(image_buf), 
                                 .do_fp(do_fp), .do_bp(do_bp), .draw(draw), .ack(ack),
@@ -103,7 +103,7 @@ module ChipInterface(
     //////////////////////////////////
 
     // Synchronizes ACK signal from control unit to uart
-    control_trans_synch ct_syn(.clk(clk), .uart_sampling_clk(uart_sampling_clk),
+    control_trans_synch ct_syn(.clk(uart_sampling_clk), .uart_sampling_clk(uart_sampling_clk),
                                .rst(rst), .ack(ack), .ack_out(ack_buf));
 
     // Handles transfer of ACKs and retries to sw over serial uart
@@ -170,7 +170,7 @@ module ChipInterface(
             end
             
             // Start drawing sent image
-            if(draw_image) begin
+            if(!processingPixel && draw_image) begin
                 processingPixel <= 1;
                 data_in <= {image_shift_buf[7:0], image_shift_buf[7:0], image_shift_buf[7:0]};
                 we <= 1;
@@ -180,7 +180,7 @@ module ChipInterface(
                 addr_w <= 72060 + col_counter_large*10 + row_counter_large*7200; // 72040 = 720*100+40
             end
             // Start drawing prediction image
-            else if (draw_pred) begin
+            else if (!processingPixel && draw_pred) begin
                 processingPixel <= 1;
                 //data_in <= {pred_image_buf[(784<<3)-1:(784<<3)-8], pred_image_buf[(784<<3)-1:(784<<3)-8], pred_image_buf[(784<<3)-1:(784<<3)-8]};
                 data_in <= {pred_image_buf[7:0], pred_image_buf[7:0], pred_image_buf[7:0]};
@@ -192,7 +192,7 @@ module ChipInterface(
             end
 
             // Still same pixel
-            if(processingPixel && row_counter_small<10) begin                
+            else if(processingPixel && row_counter_small<10) begin                
                 if (col_counter_small<9) begin
                     col_counter_small <= col_counter_small+1;
                     addr_w <= addr_w+1;
@@ -261,7 +261,7 @@ module ChipInterface(
      logic sysclk;  
               
      clock ck (.clk_in1 (clk_200MHz), .clk_out1 (HDMI_TX_CLK), .clk_out2 (sysclk), .clk_out3(uart_sampling_clk),
-               .clk_out4(clk), .reset (rst));
+               .clk_out4 (), .reset (rst));
   
      hdmi encoder (.clk (HDMI_TX_CLK), .rst (rst), .hsync (HDMI_TX_HS), .vsync (HDMI_TX_VS), 
                    .addr (addr), .de (HDMI_TX_DE));
@@ -287,30 +287,11 @@ module ChipInterface(
 
    //---- TOP LEVEL NEURAL NETWORK MODULE INSTANTIATION -----//
    //-------------------------------------------------------------------------------------------------------------//
-   deep dp (.clk (clk), .rst (rst), .do_fp (do_fp), .do_bp (do_bp), .label_in (label_out),  .image_in (image_out), 
+   deep dp (.clk (uart_sampling_clk), .rst (rst), .do_fp (do_fp), .do_bp (do_bp), .label_in (label_out),  .image_in (image_out), 
             .result (result), .done (done));                                        
 
-   num_to_image n2i (.num(max_result_buf[3:0]), .image(pred_image));
-    
-   //logic buffed;
-   always_ff @(posedge clk, posedge rst) begin
-       if (rst) begin
-           max_result_buf <= 'd0;
-           result_buf <='d0;
-           //buffed <= 1'b0;
-       end
-       else begin 
-           if (done) begin
-               max_result_buf <= max_result;
-               //buffed <= 1'b0;
-           end
-           /*if (done_net & ~buffed) begin
-               result_buf <= result;
-               buffed <= 1'b1;
-           end*/
-       end
-   end
-    
+   num_to_image n2i (.num(max_result[3:0]), .image(pred_image));
+       
     // Mux hdmi signals so bar graph and write fsm don't conflict
     assign addr_w_mux = (graphing) ? addr_w_graph : addr_w;
     assign data_in_mux = (graphing) ? data_in_graph : data_in;

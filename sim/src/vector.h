@@ -40,7 +40,7 @@ void vector_destroy(vector_t vector);
 /**
  * Basic operations with vectors. 
  */
-void smult(vector_t v, uint32_t scale);
+vector_t smult(vector_t v, uint32_t scale);
 /** Vector dot product */
 vector_t vmult(vector_t v1, vector_t v2);
 void vdiv(vector_t v, int factor);
