@@ -3,7 +3,7 @@
 #define IMPORT
 #define IMPORT_FILE "networks/blank.deep"
 
-#define MODE_MNIST
+//#define MODE_MNIST
 #define INPUT_SIZE 28
 
 #define TEST_PICS_DIR "test/"

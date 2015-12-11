@@ -193,11 +193,11 @@ module ChipInterface(
 
             // Still same pixel
             if(processingPixel && row_counter_small<10) begin                
-                //if (row_counter_small == 9) we <= 0;
                 if (col_counter_small<9) begin
                     col_counter_small <= col_counter_small+1;
                     addr_w <= addr_w+1;
                 end else begin // col_counter_small==10
+                    if (row_counter_small == 9) we <= 0;
                     col_counter_small <= 0;
                     addr_w <= addr_w+711;
                     row_counter_small <= row_counter_small+1;

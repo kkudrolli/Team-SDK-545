@@ -342,7 +342,7 @@ module weights(input clka, rst,
                     counter_0 <= 0;
                     processing_update_0 <= 0;
                 end
-	       //$display("v[%d] = %h", counter_0-2, BRAM_0[counter_0-2]);
+	        //$display("v[%d] = %h", counter_0-2, BRAM_0[counter_0-2]);
 	        //$display("v[%d] = %h", counter_0-1, BRAM_0[counter_0-1]);	       
             end
             else if(update_0) begin // assume that addr and counter are 0!

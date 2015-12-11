@@ -49,9 +49,9 @@
 
    logic 				 bp;
    
-   enum 				 logic [2:0] {S_IDLE, S_FPROP_LAYER1, S_FPROP_LAYER2, 
+   enum 				 logic [3:0] {S_IDLE, S_FPROP_LAYER1, S_FPROP_LAYER2, 
 						      S_BPROP_LAYER1, S_BPROP_LAYER2, 
-						      S_BPROP_CALCDELTA, S_DONE} cs, ns;
+						      S_BPROP_CALCDELTA, S_DELAY1, S_DELAY2, S_DONE} cs, ns;
    
 
    always_ff @(posedge clk, posedge rst)
@@ -73,7 +73,7 @@
       ideal[label] = 1 << 16;
       
       for (j = 0; j < OUTPUT_SZ; j++)
-	delta_target[j] = ideal[j] - result[j];
+	    delta_target[j] = ideal[j] - result[j];
    end
    
 
@@ -106,13 +106,14 @@
    endgenerate
 
    logic [31:0] sum;
+   integer k;
    always_ff @(posedge clk, posedge rst) begin
       if (rst) weight_matrix <= '0;
       else if (clear) weight_matrix <= '0;
       else if (enable_delta) begin
-	 sum = '0;
-	 for (j = 0; j < OUTPUT_SZ; j++) sum += mult[j];
-	 weight_matrix[lay1_idx] <= sum;
+	    sum = '0;
+	  for (k = 0; k < OUTPUT_SZ; k++) sum += mult[k];
+	    weight_matrix[lay1_idx] <= sum;
       end
    end
    
@@ -127,84 +128,88 @@
       update0 = 1'b0;
       update1 = 1'b0;
       case (cs)
-	S_IDLE: begin
-	   clear = start_fp || start_bp;
-	   ns = (start_fp || start_bp) ? S_FPROP_LAYER1 : S_IDLE;
-	   get_weights0 = start_fp || start_bp;
-	end
+        S_IDLE: begin
+           clear = (start_fp || start_bp) ? 1'b1 : 1'b0;
+           ns = (start_fp || start_bp) ? S_DELAY1 : S_IDLE;
+           get_weights0 = (start_fp || start_bp) ? 1'b1 : 1'b0;
+        end
 
-	S_FPROP_LAYER1: begin
-	   ns = lay0_idx < IMG_SZ ? S_FPROP_LAYER1 : S_FPROP_LAYER2;
-	   get_weights1 = lay0_idx >= IMG_SZ;
-	   enable_0 = 1;
-	end
+        S_DELAY1: ns = S_FPROP_LAYER1;
 
-	S_FPROP_LAYER2: begin
-	   enable_1 = 1;
-	   ns = lay1_idx < NUM_NEURONS ? S_FPROP_LAYER2 : (bp ? S_BPROP_LAYER2 : S_DONE);
-	   update1 = bp && (lay1_idx >= NUM_NEURONS);
-	end
-	
-	S_BPROP_LAYER2: begin
-	   ns = lay1_idx < NUM_NEURONS-1 ? S_BPROP_LAYER2 : S_BPROP_CALCDELTA;
-	   get_weights1 = lay1_idx >= NUM_NEURONS-1;
-	end
-
-	S_BPROP_CALCDELTA: begin
-	   ns = lay1_idx < NUM_NEURONS-1 ? S_BPROP_CALCDELTA : S_BPROP_LAYER1;
-	   enable_delta = 1;
-	   update0 = lay1_idx >= NUM_NEURONS-1;
-	end
-	
-	S_BPROP_LAYER1: begin
-	   ns = lay0_idx < IMG_SZ ? S_BPROP_LAYER1 : S_DONE;
-	end
-	
-	S_DONE: begin
-	   done = 1'b1;
-	   ns = S_IDLE;
-	end
-
-	default: ns = S_IDLE;	 
+        S_FPROP_LAYER1: begin
+           ns = (lay0_idx < IMG_SZ) ? S_FPROP_LAYER1 : S_DELAY2;
+           get_weights1 = (lay0_idx >= IMG_SZ) ? 1'b1 : 1'b0;
+           enable_0 = 1'b1;
+        end
+    
+        S_DELAY2: ns = S_FPROP_LAYER2;
+        
+        S_FPROP_LAYER2: begin
+           enable_1 = 1;
+           ns = lay1_idx < NUM_NEURONS ? S_FPROP_LAYER2 : (bp ? S_BPROP_LAYER2 : S_DONE);
+           update1 = bp && (lay1_idx >= NUM_NEURONS);
+        end
+        
+        S_BPROP_LAYER2: begin
+           ns = lay1_idx < NUM_NEURONS-1 ? S_BPROP_LAYER2 : S_BPROP_CALCDELTA;
+           get_weights1 = lay1_idx >= NUM_NEURONS-1;
+        end
+    
+        S_BPROP_CALCDELTA: begin
+           ns = lay1_idx < NUM_NEURONS-1 ? S_BPROP_CALCDELTA : S_BPROP_LAYER1;
+           enable_delta = 1;
+           update0 = lay1_idx >= NUM_NEURONS-1;
+        end
+        
+        S_BPROP_LAYER1: begin
+           ns = lay0_idx < IMG_SZ ? S_BPROP_LAYER1 : S_DONE;
+        end
+        
+        S_DONE: begin
+           done = 1'b1;
+           ns = S_IDLE;
+        end
+    
+        default: ns = S_IDLE;	 
       endcase
    end
 
    always_ff @(posedge clk, posedge rst) begin
       if (rst) begin
-	 lay0_idx <= '0;
-	 lay1_idx <= '0;
-	 act_idx <= '0;
+         lay0_idx <= '0;
+         lay1_idx <= '0;
+         act_idx <= '0;
       end
       else begin
-	 case (cs)
-	   S_IDLE, S_DONE: begin
-	      lay0_idx <= '0;
-	      lay1_idx <= '0;
-	   end
-	   
-	   S_FPROP_LAYER1: begin
-	      lay0_idx <= lay0_idx + 1;
-	   end
-	   
-	   S_FPROP_LAYER2: begin
-	      lay0_idx <= '0;
-	      lay1_idx <= lay1_idx < NUM_NEURONS ? lay1_idx + 1 : '0;
-	   end
-
-	   S_BPROP_LAYER2: begin
-	      lay1_idx <= lay1_idx < NUM_NEURONS-1 ? lay1_idx + 1 : '0;
-	   end
-
-	   S_BPROP_CALCDELTA: begin
-	      lay1_idx <= lay1_idx + 1;
-	   end
-	   
-	   S_BPROP_LAYER1: begin
-	      lay0_idx <= lay0_idx + 1;
-	   end
-	   
-	   default: ; // Do nothing
-	 endcase
+         case (cs)
+           S_IDLE, S_DONE: begin
+              lay0_idx <= '0;
+              lay1_idx <= '0;
+           end
+           
+           S_FPROP_LAYER1: begin
+              lay0_idx <= lay0_idx + 1;
+           end
+           
+           S_FPROP_LAYER2: begin
+              lay0_idx <= '0;
+              lay1_idx <= lay1_idx < NUM_NEURONS ? lay1_idx + 1 : '0;
+           end
+    
+           S_BPROP_LAYER2: begin
+              lay1_idx <= lay1_idx < NUM_NEURONS-1 ? lay1_idx + 1 : '0;
+           end
+    
+           S_BPROP_CALCDELTA: begin
+              lay1_idx <= lay1_idx + 1;
+           end
+           
+           S_BPROP_LAYER1: begin
+              lay0_idx <= lay0_idx + 1;
+           end
+           
+           default: ; // Do nothing
+         endcase
       end
    end
    
