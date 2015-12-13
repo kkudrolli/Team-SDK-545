@@ -16,20 +16,21 @@ This project was developed using Xilinx Vivado. The Vivado project file (.xpr) i
 The top-level module is located at:
 `hdmi_test/hdmi_test.srcs/sources_1/imports/gameboy/chipinterface.sv`
 RTL module are located in:
-`hdmi_test/hdmi_test.srcs/sources_1/imports/gameboy/`__
-`hdmi_test/hdmi_test.srcs/sources_1/imports/src/`__
-`hdmi_test/hdmi_test.srcs/sources_1/new/`__
-`hdmi_test/rtl/src/`__
+`hdmi_test/hdmi_test.srcs/sources_1/imports/gameboy/`<br />
+`hdmi_test/hdmi_test.srcs/sources_1/imports/src/`<br />
+`hdmi_test/hdmi_test.srcs/sources_1/new/`<br />
+`hdmi_test/rtl/src/`<br />
+
 Software layer code is located in:
-`sw/camera/`__
-`sw/image/`__
+`sw/camera/`<br />
+`sw/image/`<br />
 `sw/uart/`
 
 ## Running the System
 DISCLAIMER: This has only been tested using Python 2.7, Xilinx VC707 (Virtex 7) FPGA board, Xilinx Vivado, our 18-545 lab machines, and our webcam. So, no guarantees are provided that it will work if any of these components are changed. Use at your own risk.
 
-1) Connect the webcam to the host machine, UART-to-USB cable between the host machine and FPGA board, and HDMI cable to the HDMI monitor.__
-2) Install OpenCV 3.0.0 and Virtual COM Port drivers for CP210x Silicon Labs USB-to-UART bridge.__
-3) Synthesize, implement, and program the bitstream for hdmi\_test.xpr.__
-4) Open a terminal and change your directory to `sw/camera/`. Run `python video.py`.__
+1) Connect the webcam to the host machine, UART-to-USB cable between the host machine and FPGA board, and HDMI cable to the HDMI monitor.<br />
+2) Install OpenCV 3.0.0 and Virtual COM Port drivers for CP210x Silicon Labs USB-to-UART bridge.<br />
+3) Synthesize, implement, and program the bitstream for hdmi\_test.xpr.<br />
+4) Open a terminal and change your directory to `sw/camera/`. Run `python video.py`.<br />
 5) If all has gone well, a window should open with the camera feed. You should should the camera feed on the HDMI monitor, and prediction should occur.
