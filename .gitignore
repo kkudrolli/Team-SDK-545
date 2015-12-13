@@ -15,5 +15,8 @@ rtl/src/tb/csrc/*
 rtl/src/tb/simv
 rtl/src/tb/simv.daidir/*
 rtl/src/tb/ucli.key
+*.jou
+*.log
+*.str
 
 
