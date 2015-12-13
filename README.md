@@ -16,14 +16,14 @@ This project was developed using Xilinx Vivado. The Vivado project file (.xpr) i
 The top-level module is located at: <br />
 `hdmi_test/hdmi_test.srcs/sources_1/imports/gameboy/chipinterface.sv` <br />
 RTL module are located in: <br />
-`hdmi_test/hdmi_test.srcs/sources_1/imports/gameboy/<br />
-hdmi_test/hdmi_test.srcs/sources_1/imports/src/<br />
-hdmi_test/hdmi_test.srcs/sources_1/new/<br />
-hdmi_test/rtl/src/`<br />
+`hdmi_test/hdmi_test.srcs/sources_1/imports/gameboy/`<br />
+`hdmi_test/hdmi_test.srcs/sources_1/imports/src/`<br />
+`hdmi_test/hdmi_test.srcs/sources_1/new/`<br />
+`hdmi_test/rtl/src/`<br />
 Software layer code is located in: <br />
-`sw/camera/<br />
-sw/image/<br />
-sw/uart/`
+`sw/camera/`<br />
+`sw/image/`<br />
+`sw/uart/`
 
 ## Running the System
 DISCLAIMER: This has only been tested using Python 2.7, Xilinx VC707 (Virtex 7) FPGA board, Xilinx Vivado, our 18-545 lab machines, and our webcam. So, no guarantees are provided that it will work if any of these components are changed. Use at your own risk.
