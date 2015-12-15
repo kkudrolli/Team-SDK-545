@@ -3,9 +3,9 @@
 This is the repository for our capstone design project in 18-545: Advanced Digital Design at Carnegie Mellon University.
 
 ## Team Members
+ - Kais Kudrolli
  - DongJoon Park
  - Sohil Shah
- - Kais Kudrolli
 
 ## Project Overview
 We designed a system using a Xilinx Virtex 7 FPGA that can classify the handwritten digits 0-9 when they are written in different styles and with varying sloppiness. The FPGA implements an artificial neural network that performs classification/prediction in hardware. Training can be done in software and syntheized with the network or it can be done dynamically in hardware itself. The final system worked by pointing a camera at a digit written on a whiteboard. This image would be manipulated by a software stack and would then be transferred across UART to the FPGA. Here, prediction and training would occur. The resulting prediction would be displayed on an HDMI monitor along with confidence estimates. Our final demo worked without any major issues. The prediction accuracy varied with the amount of time the network was trained, and sometimes predictions were skewed due to changes in lighting or position of the camera.
