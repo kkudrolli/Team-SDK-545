@@ -33,3 +33,8 @@ DISCLAIMER: This has only been tested using Python 2.7, Xilinx VC707 (Virtex 7) 
 3) Synthesize, implement, and program the bitstream for hdmi\_test.xpr.<br />
 4) Open a terminal and change your directory to `sw/camera/`. Run `python video.py`.<br />
 5) If all has gone well, a window should open with the camera feed. You should should the camera feed on the HDMI monitor, and prediction should occur.
+
+## Demo Images
+
+Our system setup:
+![SystemSetup](https://user-images.githubusercontent.com/6314341/33359953-0f078a78-d497-11e7-85c4-20e810f2bc75.JPG)
