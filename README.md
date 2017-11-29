@@ -36,19 +36,19 @@ DISCLAIMER: This has only been tested using Python 2.7, Xilinx VC707 (Virtex 7) 
 
 ## Demo Videos and Images
 
-Here are a few videos showing our neural network in action!
-[Predicting an 8](https://youtu.be/tFqGyZiZLp0)
-[Predicting a 3](https://youtu.be/yY6XIArAm80)
-[Predicting a 7 and 6](https://youtu.be/TedDdXtzL0g)
+Here are a few videos showing our neural network in action!<br />
+[Predicting an 8](https://youtu.be/tFqGyZiZLp0)<br />
+[Predicting a 3](https://youtu.be/yY6XIArAm80)<br />
+[Predicting a 7 and 6](https://youtu.be/TedDdXtzL0g)<br />
 
-Our system setup:
+Our system setup:<br />
 ![SystemSetup](https://user-images.githubusercontent.com/6314341/33359953-0f078a78-d497-11e7-85c4-20e810f2bc75.JPG)
 
-Another view of the setup:
+Another view of the setup:<br />
 ![SystemSetup2](https://user-images.githubusercontent.com/6314341/33360078-b5046fea-d497-11e7-921d-62ba7e0fce1b.JPG)
 
-System correctly predicting a 4:
+System correctly predicting a 4:<br />
 ![Prediction4](https://user-images.githubusercontent.com/6314341/33360129-f1453778-d497-11e7-906b-f54d9e146b8a.JPG)
 
-System correctly predicting a 3, even with the box drawn around it:
+System correctly predicting a 3, even with the box drawn around it:<br />
 ![NoisyPrediction3](https://user-images.githubusercontent.com/6314341/33360159-2b4a787a-d498-11e7-85d0-a0ee91c31f55.JPG)
