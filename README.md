@@ -12,18 +12,18 @@ We designed a system using a Xilinx Virtex 7 FPGA that can classify the handwrit
 
 ## Repository Structure 
 This project was developed using Xilinx Vivado. The Vivado project file (.xpr) is located at: <br />
-`hdmi_test/hdmi_test.xpr` <br />
+ - `hdmi_test/hdmi_test.xpr` <br />
 The top-level module is located at: <br />
-`hdmi_test/hdmi_test.srcs/sources_1/imports/gameboy/chipinterface.sv` <br />
+ - `hdmi_test/hdmi_test.srcs/sources_1/imports/gameboy/chipinterface.sv` <br />
 RTL module are located in: <br />
-`hdmi_test/hdmi_test.srcs/sources_1/imports/gameboy/`<br />
-`hdmi_test/hdmi_test.srcs/sources_1/imports/src/`<br />
-`hdmi_test/hdmi_test.srcs/sources_1/new/`<br />
-`hdmi_test/rtl/src/`<br />
+ - `hdmi_test/hdmi_test.srcs/sources_1/imports/gameboy/`<br />
+ - `hdmi_test/hdmi_test.srcs/sources_1/imports/src/`<br />
+ - `hdmi_test/hdmi_test.srcs/sources_1/new/`<br />
+ - `hdmi_test/rtl/src/`<br />
 Software layer code is located in: <br />
-`sw/camera/`<br />
-`sw/image/`<br />
-`sw/uart/`
+ - `sw/camera/`<br />
+ - `sw/image/`<br />
+ - `sw/uart/`
 
 ## Running the System
 DISCLAIMER: This has only been tested using Python 2.7, Xilinx VC707 (Virtex 7) FPGA board, Xilinx Vivado, our 18-545 lab machines, and our webcam. So, no guarantees are provided that it will work if any of these components are changed. Use at your own risk.
@@ -32,7 +32,7 @@ DISCLAIMER: This has only been tested using Python 2.7, Xilinx VC707 (Virtex 7) 
 2) Install OpenCV 3.0.0 and Virtual COM Port drivers for CP210x Silicon Labs USB-to-UART bridge.<br />
 3) Synthesize, implement, and program the bitstream for hdmi\_test.xpr.<br />
 4) Open a terminal and change your directory to `sw/camera/`. Run `python video.py`.<br />
-5) If all has gone well, a window should open with the camera feed. You should should the camera feed on the HDMI monitor, and prediction should occur.
+5) If all has gone well, a window should open with the camera feed. You should see the camera feed on the HDMI monitor, and prediction should occur.
 
 ## Demo Videos and Images
 
